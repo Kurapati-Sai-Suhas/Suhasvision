@@ -1,0 +1,14 @@
+# Python & Backend
+venv/
+__pycache__/
+*.sqlite3
+backend/backend/.env
+
+# AI Keys & Secrets (CRITICAL)
+.env
+dataset/.env
+
+# Node & Frontend (Just in case the nested one misses it)
+node_modules/
+dist/
+.DS_Store
