@@ -12,3 +12,8 @@ dataset/.env
 node_modules/
 dist/
 .DS_Store
+# Media and datasets
+dataset/
+backend/backend/media/
+*.log
+
