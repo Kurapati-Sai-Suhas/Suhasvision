@@ -1,149 +1,251 @@
-@import "tailwindcss" source(none);
-@source "../src";
-@import "tw-animate-css";
-
-@custom-variant dark (&:is(.dark *));
-
-@theme inline {
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-ring-offset-background: var(--background);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-
-  /* Semantic factor accents */
-  --color-weakness: var(--weakness);
-  --color-strength: var(--strength);
-  --color-change: var(--change);
-  --color-bonus: var(--bonus);
-}
-
-:root {
-  --radius: 0.75rem;
-
-  /* Slate-900 inspired premium dark */
-  --background: oklch(0.18 0.018 250);
-  --foreground: oklch(0.98 0.005 250);
-
-  --card: oklch(0.22 0.02 250);
-  --card-foreground: oklch(0.98 0.005 250);
-
-  --popover: oklch(0.22 0.02 250);
-  --popover-foreground: oklch(0.98 0.005 250);
-
-  --primary: oklch(0.78 0.16 155);          /* electric pitch green */
-  --primary-foreground: oklch(0.18 0.02 250);
-
-  --secondary: oklch(0.28 0.025 250);
-  --secondary-foreground: oklch(0.98 0.005 250);
-
-  --muted: oklch(0.26 0.022 250);
-  --muted-foreground: oklch(0.7 0.02 250);
-
-  --accent: oklch(0.3 0.04 250);
-  --accent-foreground: oklch(0.98 0.005 250);
-
-  --destructive: oklch(0.62 0.21 25);
-  --destructive-foreground: oklch(0.98 0.005 250);
-
-  --border: oklch(0.3 0.02 250);
-  --input: oklch(0.28 0.02 250);
-  --ring: oklch(0.78 0.16 155);
-
-  --chart-1: oklch(0.78 0.16 155);
-  --chart-2: oklch(0.7 0.15 230);
-  --chart-3: oklch(0.75 0.17 60);
-  --chart-4: oklch(0.65 0.22 15);
-  --chart-5: oklch(0.7 0.2 300);
-
-  /* Factor accents (subtle but readable) */
-  --weakness: oklch(0.65 0.2 22);
-  --strength: oklch(0.75 0.17 150);
-  --change:   oklch(0.78 0.16 75);
-  --bonus:    oklch(0.7 0.18 295);
-
-  --sidebar: oklch(0.16 0.018 250);
-  --sidebar-foreground: oklch(0.95 0.005 250);
-  --sidebar-primary: oklch(0.78 0.16 155);
-  --sidebar-primary-foreground: oklch(0.18 0.02 250);
-  --sidebar-accent: oklch(0.26 0.025 250);
-  --sidebar-accent-foreground: oklch(0.98 0.005 250);
-  --sidebar-border: oklch(0.28 0.02 250);
-  --sidebar-ring: oklch(0.78 0.16 155);
-}
-
-.dark {
-  --background: oklch(0.18 0.018 250);
-  --foreground: oklch(0.98 0.005 250);
-  --card: oklch(0.22 0.02 250);
-  --card-foreground: oklch(0.98 0.005 250);
-  --popover: oklch(0.22 0.02 250);
-  --popover-foreground: oklch(0.98 0.005 250);
-  --primary: oklch(0.78 0.16 155);
-  --primary-foreground: oklch(0.18 0.02 250);
-  --secondary: oklch(0.28 0.025 250);
-  --secondary-foreground: oklch(0.98 0.005 250);
-  --muted: oklch(0.26 0.022 250);
-  --muted-foreground: oklch(0.7 0.02 250);
-  --accent: oklch(0.3 0.04 250);
-  --accent-foreground: oklch(0.98 0.005 250);
-  --destructive: oklch(0.62 0.21 25);
-  --destructive-foreground: oklch(0.98 0.005 250);
-  --border: oklch(0.3 0.02 250);
-  --input: oklch(0.28 0.02 250);
-  --ring: oklch(0.78 0.16 155);
-  --sidebar: oklch(0.16 0.018 250);
-  --sidebar-foreground: oklch(0.95 0.005 250);
-  --sidebar-primary: oklch(0.78 0.16 155);
-  --sidebar-primary-foreground: oklch(0.18 0.02 250);
-  --sidebar-accent: oklch(0.26 0.025 250);
-  --sidebar-accent-foreground: oklch(0.98 0.005 250);
-  --sidebar-border: oklch(0.28 0.02 250);
-  --sidebar-ring: oklch(0.78 0.16 155);
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer base {
-  * { border-color: var(--color-border); }
-  html, body {
-    font-family: var(--font-sans);
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  :root {
+    /* SuhasVision — Deep Navy / Emerald / Gold — Dark Luxury Sports Analytics */
+    --background: 218 55% 4%;
+    --foreground: 210 40% 98%;
+    --card: 220 40% 9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 220 45% 7%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 158 79% 40%;
+    --primary-foreground: 218 55% 4%;
+    --secondary: 43 62% 52%;
+    --secondary-foreground: 218 55% 4%;
+    --muted: 220 30% 14%;
+    --muted-foreground: 215 20% 62%;
+    --accent: 158 60% 22%;
+    --accent-foreground: 158 90% 88%;
+    --destructive: 0 74% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 220 30% 18%;
+    --input: 220 30% 14%;
+    --ring: 158 79% 40%;
+    --chart-1: 158 79% 45%;
+    --chart-2: 43 74% 60%;
+    --chart-3: 199 89% 60%;
+    --chart-4: 280 65% 65%;
+    --chart-5: 340 75% 60%;
+    --radius: 0.9rem;
   }
-  body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: #05080F;
+  color: hsl(var(--foreground));
+  font-family: "DM Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "ss01", "cv01", "cv11";
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-display {
+  font-family: "Albert Sans", "DM Sans", sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.font-mono {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Rich cricket-stadium ambient background layer used behind hero sections */
+.sv-ambient {
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(16, 185, 129, 0.14), transparent 60%),
+    radial-gradient(900px 500px at 100% 10%, rgba(212, 175, 55, 0.10), transparent 60%),
+    radial-gradient(700px 400px at 50% 110%, rgba(16, 185, 129, 0.10), transparent 60%),
+    #05080F;
+}
+
+.sv-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+
+.sv-noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' /%3E%3C/svg%3E");
+}
+
+/* Glass surface used on cards */
+.sv-glass {
+  background: linear-gradient(180deg, rgba(20, 28, 47, 0.85) 0%, rgba(12, 19, 34, 0.7) 100%);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.04) inset,
+    0 20px 60px -20px rgba(0, 0, 0, 0.6);
+}
+
+.sv-glass-strong {
+  background: rgba(12, 19, 34, 0.78);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Emerald "sheen" for hover on premium buttons */
+.sv-sheen {
+  position: relative;
+  overflow: hidden;
+}
+.sv-sheen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.18) 45%, transparent 60%);
+  transform: translateX(-120%);
+  transition: transform 0.7s ease;
+  pointer-events: none;
+}
+.sv-sheen:hover::before {
+  transform: translateX(120%);
+}
+
+/* Underline animation for nav links */
+.sv-link {
+  position: relative;
+}
+.sv-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, #10b981, #d4af37);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.sv-link:hover::after,
+.sv-link[data-active="true"]::after {
+  transform: scaleX(1);
+}
+
+/* Chip / pill helpers */
+.sv-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  color: #94a3b8;
+}
+
+.sv-chip-emerald {
+  border-color: rgba(16, 185, 129, 0.35);
+  background: rgba(16, 185, 129, 0.08);
+  color: #6ee7b7;
+}
+.sv-chip-gold {
+  border-color: rgba(212, 175, 55, 0.35);
+  background: rgba(212, 175, 55, 0.08);
+  color: #f5d982;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(16, 185, 129, 0.35);
+}
+
+/* Selection */
+::selection {
+  background: rgba(16, 185, 129, 0.35);
+  color: #ecfdf5;
+}
+
+/* Ring focus */
+:focus-visible {
+  outline: none;
+}
+
+/* Animated shimmer for skeletons or accent bars */
+@keyframes sv-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
   }
+  50% {
+    opacity: 1;
+  }
+}
+.sv-pulse {
+  animation: sv-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes sv-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.sv-rise {
+  animation: sv-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.sv-rise-1 { animation-delay: 0.05s; }
+.sv-rise-2 { animation-delay: 0.12s; }
+.sv-rise-3 { animation-delay: 0.2s; }
+.sv-rise-4 { animation-delay: 0.28s; }
+.sv-rise-5 { animation-delay: 0.36s; }
+.sv-rise-6 { animation-delay: 0.44s; }
+
+/* Ball trail keyframe animation used on the auth page */
+@keyframes sv-trail {
+  0% {
+    stroke-dashoffset: 400;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Emergent debug wrapper support */
+[data-debug-wrapper="true"] {
+  display: contents !important;
 }

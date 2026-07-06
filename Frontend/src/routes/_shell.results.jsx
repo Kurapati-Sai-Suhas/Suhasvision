@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useLocation } from "@tanstack/react-router";
 import { useState } from "react";
 import { Play, AlertTriangle, ShieldCheck, Wrench, Sparkles, GitCompareArrows } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -7,71 +7,87 @@ export const Route = createFileRoute("/_shell/results")({
   component: ResultsPage,
 });
 
-const FACTORS = [
-  {
-    key: "weakness",
-    label: "Weakness & Vulnerability",
-    icon: AlertTriangle,
-    accent: "weakness",
-    title: "Front pad falls across off-stump",
-    body: "Front foot drifts toward leg-stump on length deliveries, exposing the LBW line. Susceptible to inswing on a 6th-stump line.",
-  },
-  {
-    key: "strength",
-    label: "Strength & Power",
-    icon: ShieldCheck,
-    accent: "strength",
-    title: "Compact base, low centre of gravity",
-    body: "Stance width sits cleanly at 1.05× shoulder width with 64% load on back foot — strong platform for the cut and pull.",
-  },
-  {
-    key: "change",
-    label: "Thing to Change · Drills",
-    icon: Wrench,
-    accent: "change",
-    title: "Open the front shoulder by 6°",
-    body: "Drill: shadow batting against a wall, front shoulder pointing at mid-off. 3 sets × 20 reps, daily for 2 weeks.",
-  },
-  {
-    key: "bonus",
-    label: "Bonus Insight",
-    icon: Sparkles,
-    accent: "bonus",
-    title: "Backlift mirrors Joe Root",
-    body: "Your backlift arc (toward 2nd slip, 38°) closely matches Root's profile — lean into late-cut shot development.",
-  },
-];
-
-const METRICS = [
-  { label: "Balance",   value: 78 },
-  { label: "Power",     value: 84 },
-  { label: "Technique", value: 71 },
-  { label: "Defence",   value: 66 },
-];
-
 function ResultsPage() {
-  const [frame, setFrame] = useState(2);
+  const [frame, setFrame] = useState(0);
+  const location = useLocation();
+  const apiData = location.state?.apiData || null;
+
+  if (!apiData) {
+    return (
+      <div className="px-6 py-20 text-center">
+        <h2 className="text-2xl font-semibold mb-4">No Analysis Data Found</h2>
+        <p className="text-muted-foreground mb-6">Please run a new session from the Analyzer.</p>
+        <Link to="/analyzer">
+          <Button>Go to Analyzer</Button>
+        </Link>
+      </div>
+    );
+  }
+
+  const { scores, frame_urls, session_id } = apiData;
+
+  const dynamicFactors = [
+    {
+      key: "weakness",
+      label: "Weakness & Vulnerability",
+      icon: AlertTriangle,
+      accent: "weakness",
+      title: "Primary Weakness Identified",
+      body: scores.primary_weakness || "None identified.",
+    },
+    {
+      key: "strength",
+      label: "Strength & Power",
+      icon: ShieldCheck,
+      accent: "strength",
+      title: "Primary Strength Identified",
+      body: scores.primary_strength || "None identified.",
+    },
+    {
+      key: "change",
+      label: "Thing to Change · Drills",
+      icon: Wrench,
+      accent: "change",
+      title: "AI Coaching Recommendation",
+      body: "Focus on balancing your weight transfer based on the scores provided above. Work closely with a coach to review this AI feedback.",
+    },
+    {
+      key: "bonus",
+      label: "Bonus Insight",
+      icon: Sparkles,
+      accent: "bonus",
+      title: "Pro Comparison",
+      body: "Your power score indicates strong core rotation, similar to modern T20 power hitters.",
+    },
+  ];
+
+  const dynamicMetrics = [
+    { label: "Balance",   value: scores.balance_score || 0 },
+    { label: "Power",     value: scores.power_score || 0 },
+    { label: "Technique", value: scores.technique_score || 0 },
+    { label: "Defence",   value: scores.defence_score || 0 },
+  ];
 
   return (
     <div className="px-6 lg:px-10 py-8 max-w-[1500px] mx-auto">
       {/* Header */}
       <header className="flex flex-wrap items-center justify-between gap-4 mb-8">
         <div className="flex items-center gap-4">
-          <div className="h-12 w-12 rounded-full bg-muted grid place-items-center text-sm font-semibold">PA</div>
+          <div className="h-12 w-12 rounded-full bg-muted grid place-items-center text-sm font-semibold">P1</div>
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Session · Jun 18, 2025</p>
-            <h1 className="text-2xl lg:text-3xl font-semibold tracking-tight">Player A — Stance Report</h1>
+            <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Session #{session_id}</p>
+            <h1 className="text-2xl lg:text-3xl font-semibold tracking-tight">AI Stance Report</h1>
           </div>
         </div>
 
         <div className="flex items-center gap-4">
           <span className="rounded-full bg-bonus/15 text-bonus text-xs font-medium px-3 py-1.5">
-            Archetype · Anchor
+            Analyzed by Gemini
           </span>
           <div className="text-right">
             <div className="text-xs uppercase tracking-wider text-muted-foreground">Overall</div>
             <div className="flex items-baseline gap-1">
-              <span className="text-5xl font-bold tabular-nums leading-none">82</span>
+              <span className="text-5xl font-bold tabular-nums leading-none">{scores.overall_score || 0}</span>
               <span className="text-sm text-muted-foreground">/100</span>
             </div>
           </div>
@@ -87,33 +103,39 @@ function ResultsPage() {
         {/* Left: Video + frames */}
         <section className="rounded-2xl border border-border bg-card p-5">
           <div className="aspect-video rounded-xl bg-gradient-to-br from-muted to-background border border-border grid place-items-center relative overflow-hidden">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,_oklch(0.78_0.16_155/_0.15),transparent_60%)]" />
-            <button className="relative h-14 w-14 rounded-full bg-primary text-primary-foreground grid place-items-center shadow-xl shadow-primary/30">
-              <Play className="h-6 w-6 ml-0.5" />
-            </button>
-            <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2 text-xs text-muted-foreground">
-              <span className="font-medium">Frame {frame + 1}/7</span>
+            {frame_urls && frame_urls[frame] ? (
+              <img 
+                src={`http://localhost:8000${frame_urls[frame]}`} 
+                alt="Extracted frame" 
+                className="absolute inset-0 w-full h-full object-contain"
+              />
+            ) : (
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,_oklch(0.78_0.16_155/_0.15),transparent_60%)]" />
+            )}
+            
+            <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2 text-xs text-foreground bg-background/60 backdrop-blur-md px-3 py-1.5 rounded-full">
+              <span className="font-medium">Frame {frame + 1}/4</span>
               <div className="flex-1 h-1 bg-muted rounded-full overflow-hidden">
-                <div className="h-full bg-primary" style={{ width: `${((frame + 1) / 7) * 100}%` }} />
+                <div className="h-full bg-primary" style={{ width: `${((frame + 1) / 4) * 100}%` }} />
               </div>
-              <span className="tabular-nums">00:{String((frame + 1) * 6).padStart(2, "0")}</span>
             </div>
           </div>
 
-          <div className="grid grid-cols-7 gap-2 mt-4">
-            {Array.from({ length: 7 }).map((_, k) => {
+          <div className="grid grid-cols-4 gap-2 mt-4">
+            {frame_urls && frame_urls.map((url, k) => {
               const sel = k === frame;
               return (
                 <button
                   key={k}
                   onClick={() => setFrame(k)}
                   className={
-                    "aspect-square rounded-md border bg-gradient-to-br from-muted to-background relative " +
+                    "aspect-square rounded-md border bg-muted relative overflow-hidden " +
                     (sel ? "border-primary ring-2 ring-primary/30" : "border-border hover:border-border/80")
                   }
                 >
-                  <span className="absolute bottom-1 left-1 text-[10px] font-mono text-muted-foreground">
-                    {k + 1}
+                  <img src={`http://localhost:8000${url}`} className="w-full h-full object-cover opacity-80" alt={`Thumbnail ${k+1}`} />
+                  <span className="absolute bottom-1 left-1 text-[10px] font-mono text-white bg-black/50 px-1 rounded">
+                    {["Pre-stance", "Backlift", "Impact", "Follow-through"][k]}
                   </span>
                 </button>
               );
@@ -121,20 +143,20 @@ function ResultsPage() {
           </div>
 
           <p className="text-xs text-muted-foreground mt-4">
-            Key biomechanical frames extracted via pose estimation.
+            Key biomechanical frames extracted by Gemini Flash Timeline Locator.
           </p>
         </section>
 
         {/* Middle: 4 Factors */}
         <section className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {FACTORS.map((f) => <FactorCard key={f.key} {...f} />)}
+          {dynamicFactors.map((f) => <FactorCard key={f.key} {...f} />)}
         </section>
 
         {/* Right: Metrics + heatmap */}
         <section className="rounded-2xl border border-border bg-card p-5">
           <div className="text-xs uppercase tracking-wider text-muted-foreground mb-4">Metrics</div>
           <div className="space-y-4">
-            {METRICS.map((m) => (
+            {dynamicMetrics.map((m) => (
               <div key={m.label}>
                 <div className="flex items-baseline justify-between mb-1.5">
                   <span className="text-sm font-medium">{m.label}</span>

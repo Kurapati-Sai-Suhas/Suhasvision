@@ -1,0 +1,481 @@
+RESEARCH ANALYSIS & IEEE PUBLICATION ROADMAP
+Cricket Stance Analyzer
+AI-Powered Computer Vision Platform for Cricket Biomechanics Coaching
+Document Component
+Details
+Document Title
+Research Gap Analysis & 30-Day IEEE Submission Roadmap
+Project
+Cricket Stance Analyzer
+Target Journal
+IEEE Access (Open Access) — mc.manuscriptcentral.com/access
+Paper Category
+Original Research — Computer Vision / Sports Analytics / Deep Learning
+Research Gaps Covered
+8 Novel Contributions (detailed in Section 2)
+Roadmap Duration
+30 Days — Daily Breakdown with Deliverables
+Version
+1.0 — June 2026
+This document covers: (1) a full survey of existing cricket AI research and its limitations, (2) the 8 specific research gaps your project fills, and (3) a daily 30-day roadmap with concrete tasks to produce and submit an IEEE paper.
+SECTION 1  
+  The Research Landscape
+After a comprehensive review of literature across IEEE Xplore, ACM Digital Library, PubMed/PMC, ResearchGate, Semantic Scholar, and arXiv, existing cricket AI research falls into four distinct clusters. None of these clusters does what your project does.
+Cluster 1 — Shot Classification (Largest Body of Work)
+What they answer: WHAT shot is being played. What they ignore: HOW WELL the stance was executed.
+Paper
+Authors & Year
+Method
+Dataset
+Limitation for Your Work
+CricShotClassify
+Sen, Deb, Dhar, Koshiba (2021) · Sensors
+CNN + GRU hybrid
+CricShot10 — 10 shot types, variable length
+Classifies shot type only. No biomechanical quality score. No coaching feedback.
+Shot-ViT
+Haq et al. (2024) · IJE Journal
+Fine-tuned Vision Transformer (ViT)
+Cricket batting shot images
+Image classification only. No stance geometry, no per-dimension scoring, no drill recommendation.
+Cricket Shot Classification
+IEEE Conference (2024)
+InceptionV3 + VGG19 + SVM ensemble
+5,781 images, 7 shot types
+Designed for commentary assistance and spectator experience — not player coaching.
+Deep Learning Cricket Shot Survey
+Academia / 2024
+Comprehensive survey of CNN, LSTM, LRCN methods
+Multiple public datasets
+Survey confirms no existing work combines shot analysis with stance quality scoring.
+Modern Deep Learning Baselines
+arXiv 2510.09187 (2025)
+VGG16 + CNN-GRU baselines on CricShot10
+CricShot10 benchmark
+Performance benchmarking only. Gap: no stance quality dimension, no feedback loop.
+Cluster 2 — Stroke Prediction and Motion Analysis
+These papers analyse HOW the body moves during a stroke — but still do not score stance quality or recommend drills.
+Paper
+Authors & Year
+Method
+Key Finding
+Limitation for Your Work
+Enhancing Cricket Performance with Pose Estimation
+Kannan et al. (2023) · PMC/Sensors
+MediaPipe + Random Forest, SVM, KNN, LSTM
+99.77% stroke prediction accuracy using RF
+Predicts stroke TYPE from pose — not execution quality. No scoring framework, no web platform.
+Advancing Cricket Biomechanics: Neural Network Motion Prediction
+ScienceDirect (Dec 2025)
+Neural network for future-frame prediction
+Predicts bat angle, footwork, head position within 0.16s window
+Predictive modelling for real-time coaching — not a quality scoring system. No user interface.
+Beyond The Bat: Cricket Technique Emulation
+ACM ICCA 2025
+Data-agnostic framework, CV + ML
+Emulates professional player stances (pull shots, cover drives)
+Emulation-focused (copy a pro), not quality assessment of the user's own technique.
+Deep Learning-Based Ball Delivery Segmentation
+Abbas et al. (2022) · arXiv
+MobileNet + YOLO + RetinaNet
+Segments and classifies full-pitched, good-length, short-pitched deliveries
+Ball tracking only — no batsman pose, no stance analysis.
+Cluster 3 — MoCap Accessibility (Your Closest Prior Work)
+This is the paper that defines your problem space. It identifies the gap — but does not solve it with a deployable system.
+Paper
+Authors & Year
+Core Contribution
+What It Leaves Open
+Accessibility of Motion Capture for Beginner and Intermediate Cricket Players
+Maduwantha et al. (2024) · Sensors 24(11):3386
+Explicitly identifies that the high cost and complexity of MoCap limits its use at grassroots level. Reviews affordable alternatives (CV, MediaPipe). Demonstrates 95% batting shot classification.
+Does not build a complete web-deployable coaching feedback system. Does not score biomechanical dimensions. Does not prescribe drills. Does not use Vision LLMs.
+A Coach's Perspective on Augmented Feedback in Cricket
+Tissera, Orth, Huynh, Benson (2024) · IJSS
+Survey of 200+ cricket coaches on feedback and technology use. Establishes that augmented feedback is pedagogically valuable but adoption is constrained by accessibility.
+No AI/ML system built. Identifies the need — your project delivers the solution.
+Cluster 4 — Multimodal LLMs for Sports (Emerging, No Cricket Work)
+This is the newest frontier. No paper applies a Vision LLM to cricket coaching. This is entirely your territory.
+Paper
+Authors & Year
+What It Does
+Cricket Coaching Gap
+CoachMe: Reference-Based Coaching Instruction Generation
+arXiv 2509.11698 (2025)
+Multimodal model generates coaching instructions for sports by comparing user motion to a reference. Uses HumanML3D and motion caption datasets.
+Not cricket-specific. No biomechanical scoring. No user-facing web platform. No drill prescription.
+COACH: Multi-Agent LLM Framework for Sports Video
+arXiv 2512.01853 (2024)
+Collaborative LLM agents for sports highlight generation and contextual analysis.
+Highlight generation — not coaching. No pose estimation. No technique quality scoring.
+Language and Multimodal Models in Sports: A Survey
+arXiv 2406.12252 (2024)
+Comprehensive survey confirming NLP + multimodal integration in sports is underexplored.
+Explicitly notes the gap: no comprehensive multimodal LLM cricket coaching system exists.
+LLM as Interactive Sports Coach: Half Marathon Study
+arXiv 2509.26593 (2025)
+Single-subject case study of LLM as a long-distance running coach via text interaction.
+Text-only. No video analysis. No pose estimation. No cricket domain.
+Table Tennis Coaching with Multimodal LLM
+JMIR 2025 (cited in evaluation review)
+Table tennis knowledge base + multimodal LLM for stroke coaching.
+Table tennis specific. Not cricket. No public dataset, no open-source platform.
+SECTION 2  
+  Research Gaps Your Project Fills
+Your Cricket Stance Analyzer fills 8 distinct gaps that no existing paper addresses individually — let alone as a unified system. These gaps form the core contribution claims of your IEEE paper.
+Gap 1 — Stance Execution Quality vs. Shot Type Classification
+This is your strongest and most defensible gap. Every existing paper answers 'what shot?'. You answer 'how well?'
+All 15+ cricket ML papers surveyed classify which shot is being played (cover drive, pull, sweep, etc.). None measure the quality of the player's stance and body positioning during execution. Your system is the first to score six simultaneous biomechanical dimensions — Head Position, Foot Placement, Knee Bend, Bat Angle, Hip Rotation, and Weight Distribution — with continuous 0–100 scores per dimension, enabling fine-grained coaching at the dimension level.
+Attribute
+Prior Work (Classification)
+Your Project (Scoring)
+Output type
+Shot type label (e.g., 'Cover Drive')
+6 continuous scores (0–100 per biomechanical dimension)
+Granularity
+Binary per shot type
+Per-dimension quality within each shot type
+Coaching utility
+Tells coach what shot was played
+Tells coach what is wrong with how it was played
+Feedback generation
+None
+Dimension-specific coaching comment + drill prescription
+Gap 2 — First Vision LLM Applied to Cricket Coaching
+Gemini 1.5 Flash and Claude Vision have never been applied to cricket technique analysis in any published paper.
+The Language and Multimodal Models in Sports survey (2024) explicitly confirms no multimodal LLM has been applied to cricket coaching. Your paper is the first to: (1) use a Vision LLM as a zero-shot cricket biomechanics evaluator, (2) engineer a structured prompt that extracts JSON-formatted scores across 6 dimensions, and (3) compare the LLM's scores against human coach ground-truth labels. This is a research first.
+Gap 3 — No Multi-Dimensional Biomechanical Scoring Framework
+Even papers that use MediaPipe (Kannan et al., 2023; Maduwantha et al., 2024) use pose data only for shot classification. No paper defines and implements a multi-dimensional scoring rubric with biomechanical rules for cricket batting. Your six-dimension framework with defined ideal angular ranges (e.g., front knee 150–165 degrees, stance width 80–120% shoulder width) is a novel research contribution.
+Gap 4 — Automated Drill Prescription Linked to Biomechanical Deficits
+Papers detect faults. Yours prescribes solutions. No existing paper closes this loop.
+Existing systems identify that a player's knee bend is poor — but stop there. Your system maps each detected dimension deficit to a targeted drill prescription (title, description, difficulty, duration, YouTube search term). The Tissera et al. (2024) coaching survey establishes that drill prescription is exactly what coaches want from technology. You are the first to automate this mapping.
+Gap 5 — Progressive Hybrid LLM → Custom Model Architecture
+No prior work proposes or evaluates a progressive architecture that begins with a zero-shot Vision LLM (Phase 1) and transitions to a custom MediaPipe-based neural network (Phase 2+) as training data grows — with both backends sharing the same API interface. This design enables immediate deployment before labelled data is available, and provides a natural experimental comparison for the paper (LLM vs rule-based vs custom NN).
+Gap 6 — Browser-Accessible Web Platform for Amateur and Grassroots Players
+Maduwantha et al. (2024) defines the accessibility problem. Your project is the deployed solution.
+Existing AI cricket platforms (CricVision, Advanced Impactor, CrickCoach AI) are priced for academies and professional teams. No published research has deployed a self-serve, browser-accessible cricket coaching platform that amateurs can use with a smartphone video. Your deployment on Railway/Render with no app installation required directly addresses the accessibility gap Maduwantha et al. formally identified.
+Gap 7 — Stance-Context Conditioning Before Analysis
+No prior paper conditions the analysis model on player-declared parameters before running inference. Your system collects batting hand, shot type, grip type, stance width preference, player experience level, and pitch conditions — then conditions the LLM prompt and model on these parameters. This produces contextually appropriate feedback (a beginner defensive stance is scored differently from a professional offensive one), which is novel in the sports AI literature.
+Gap 8 — Longitudinal Progress Tracking for Amateur Players
+Every existing tool produces a one-off analysis report. Your session-based database schema enables longitudinal stance improvement tracking — comparing a player's scores over time, identifying which dimensions improved and which regressed. The proposed coach dashboard with multi-player comparison adds a second novel application layer beyond self-coaching.
+Summary: All 8 Gaps at a Glance
+#
+Research Gap
+Prior Art Status
+Your Claim
+1
+Stance execution quality scoring
+Not addressed by any paper
+FIRST multi-dimensional biomechanical stance quality scorer
+2
+Vision LLM for cricket coaching
+Not addressed — confirmed by 2024 survey
+FIRST Gemini/Claude Vision application to cricket technique
+3
+6-dimension biomechanical framework
+Not defined in any paper
+FIRST angular-rule scoring across 6 simultaneous dimensions
+4
+Drill prescription from deficits
+Detection only — no remediation
+FIRST automated drill mapping to biomechanical scores
+5
+Hybrid LLM → custom model
+No hybrid architecture paper
+FIRST progressive LLM-to-custom-model comparison system
+6
+Web platform for amateurs
+Problem identified, not solved
+FIRST browser-deployed self-serve cricket coaching app
+7
+Context-conditioned analysis
+No prior paper conditions on player params
+FIRST context-aware stance analysis with parameter injection
+8
+Longitudinal progress tracking
+Single-session tools only
+FIRST session-history database for amateur improvement tracking
+SECTION 3  
+  30-Day Daily Roadmap to IEEE Submission
+This roadmap assumes your prototype is partially built (Django/FastAPI backend + React frontend + Gemini integration started). Every day has a concrete deliverable. Follow this in sequence — do not skip ahead.
+Tag
+Meaning
+📚 Literature
+Reading, note-taking, gap analysis, citation work
+⚙️ Implementation
+Writing production code for the prototype
+🗃️ Data
+Video download, frame extraction, labelling, augmentation
+🧠 Training
+Model training, evaluation, ablation experiments
+✍️ Writing
+Drafting paper sections in Overleaf
+🚀 Submission
+GitHub, Zenodo, arXiv, and IEEE manuscript submission tasks
+WEEK 1: 
+Literature & Architecture & Prototype
+Goal: End with a live deployed prototype + Introduction + Related Work sections drafted
+Day 1
+Literature Deep-Dive & Gap Mapping
+Read all 8 key papers in full: Sen 2021, Maduwantha 2024, Kannan 2023, ScienceDirect 2025 biomechanics, ACM 2025 technique emulation, CoachMe 2025, Tissera 2024, Language+Multimodal Sports Survey 2024. Create a comparison table in Notion with columns: paper, method, dataset, metrics, gaps left open.
+📚 Literature
+Day 2
+Overleaf Setup & IEEE Template
+Create Overleaf project, import IEEE Access LaTeX template. Write skeleton: Abstract placeholder, 8 section headers. Start filling Section 2 (Related Work) using your gap table — 1 paragraph per cluster. Target: Related Work section 80% complete today.
+✍️ Writing
+Day 3
+Architecture Decision & Backend Scaffold
+Finalise FastAPI vs Django. If switching, scaffold FastAPI with routers, SQLAlchemy models, Alembic, Pydantic schemas, abstract AIBackend class. Confirm .env with GEMINI_API_KEY. App must boot with uvicorn main:app --reload with no errors.
+⚙️ Implementation
+Day 4
+Video Pipeline End-to-End
+Implement POST /analysis/upload with ffmpeg-python frame extraction (10 frames). Write GET /analysis/{session_id}. Test with a real cricket video via curl. Deliverable: upload video → 10 frames stored → session_id returned → GET returns frames list.
+⚙️ Implementation
+Day 5
+Gemini Vision API Integration
+Implement GeminiBackend(AIBackend). Write and test the structured JSON prompt across 6 dimensions. Pass 10 frames as base64. Validate against AnalysisResult Pydantic schema. Test with 5 real videos — confirm JSON is always valid. Fix all edge cases.
+⚙️ Implementation
+Day 6
+Frontend Results Page + Wizard Fix
+Remove all mock scores. Connect results page to live API. Render: overall score gauge, radar chart, frame strip, drill cards. Fix wizard to send all stance parameters with the video upload. Full flow must work: upload → wizard → real results page.
+⚙️ Implementation
+Day 7
+Deploy Prototype + Write Introduction Section
+Deploy to Railway or Render — get a live public URL (needed for the paper). Write Section 1 (Introduction): 4 paragraphs — cricket global reach + coaching gap, existing AI limitations, your 8 contributions listed explicitly, paper structure. Target: 600–800 words.
+✍️ Writing
+MILESTONE  End of Week 1 — Live prototype deployed + Introduction + Related Work drafted in Overleaf
+WEEK 2: 
+Build & Collect
+Goal: MediaPipe pipeline built, 200+ labelled stances, rule-based scorer complete, Methodology drafted
+Day 8
+MediaPipe Pose Integration
+Install mediapipe and opencv-python on backend. Write pose_extractor.py: takes JPEG frame → returns 33 landmarks (x, y, visibility). Run on all 10 analysis frames. Store pose_data as JSONB in DB. Visualise skeleton overlay on frontend using Canvas API.
+⚙️ Implementation
+Day 9
+Rule-Based Biomechanical Scorer
+Implement rule_scorer.py with angle formulas for all 6 dimensions (law of cosines for knee angle, hip-shoulder separation, nose-shoulder deviation). Wire into backend so results show BOTH Gemini score and rule-based score side by side. This side-by-side comparison is a key paper table.
+⚙️ Implementation
+Day 10
+Dataset Collection — YouTube Batch Download
+Set up yt-dlp to download 50 cricket tutorial videos from: Lord's Cricket Ground, MCC Cricket, Cricket Australia channels. Write batch processor: each video → extract best stance frame (pose confidence > 0.7) → run MediaPipe → store in dataset/raw/. Target: ~150 usable stance frames.
+🗃️ Data
+Day 11
+Build Streamlit Labelling Tool
+Build a Streamlit app: shows stance frame + skeleton overlay + auto rule-based scores + 6 sliders for manual correction. Save corrections to dataset CSV. Invite 1–2 cricket-playing classmates to label 50 frames each. This generates human ground-truth labels and demonstrates a labelling methodology.
+🗃️ Data
+Day 12
+Data Augmentation Pipeline + DVC Setup
+Write augment.py: (1) horizontal flip — mirror x-coords, swap left/right landmarks, update batting hand labels. (2) Gaussian noise N(0, 0.01) on each keypoint. Dataset triples in size. Split: 70% train, 15% val, 15% test. Set up DVC: dvc init && dvc add dataset/ && dvc push to Google Drive.
+🗃️ Data
+Day 13
+Feature Engineering for Dense Model
+Write feature_extractor.py: convert 33 MediaPipe landmarks into a 20-dimensional angular feature vector (knee angles, hip-shoulder separation, head tilt, bat angle proxy, stance width ratio, foot angle, shoulder line angle + 10 derived features). Write unit tests — same input must always give same output.
+🧠 Training
+Day 14
+Write Methodology Section
+Write Section 3 in Overleaf. Subsections: 3.1 System Architecture (pipeline diagram), 3.2 Video Processing, 3.3 LLM Vision Analysis (prompt engineering, JSON schema), 3.4 MediaPipe Pose Extraction, 3.5 Rule-Based Baseline, 3.6 Dense Neural Network Architecture. Target: 1,200–1,500 words.
+✍️ Writing
+MILESTONE  End of Week 2 — MediaPipe running + 200+ labelled stances + rule-based scorer + Methodology drafted
+WEEK 3: 
+Experiments & Results
+Goal: 3-method comparison complete, model trained, results tables ready, user study done
+Day 15
+Dense Neural Network — Train & Evaluate
+Build dense model: Input(20) → Dense(128, relu) → BatchNorm → Dropout(0.3) → Dense(64, relu) → Dropout(0.2) → Dense(6, sigmoid). Train with Adam lr=0.001, MSE loss, EarlyStopping(patience=15). Log to TensorBoard. Evaluate on test split: per-dimension MSE, R², MAE. Save as cricket_stance_dense_v1.keras.
+🧠 Training
+Day 16
+Expand Dataset to 400+ + Write Dataset Section
+Download 50 more cricket videos (include women's cricket, youth cricket, left-handed batters). Run batch processor + augmentation to reach 400+ samples. Write Section 4 (Dataset): composition table, labelling methodology, inter-annotator agreement (compute Cohen's kappa), augmentation breakdown, train/val/test split stats.
+🗃️ Data
+Day 17
+Three-Method Comparison Experiment
+Run the same 50 test-set stances through all 3 methods: (A) Rule-based scorer, (B) Gemini 1.5 Flash, (C) Custom Dense NN. Compare all against human ground-truth labels. Compute Pearson correlation, MAE, MSE for each method × dimension. This 3×6 comparison table is the core contribution table of your paper.
+🧠 Training
+Day 18
+Ablation Study + Error Analysis
+Ablation: (1) with vs without augmentation, (2) raw 99-dim keypoints vs engineered 20-dim angular features. Pick 5 Gemini failure cases and 5 rule-based failure cases — annotate frames for a qualitative figure. These comparisons show you understand your model's strengths and limitations — key for peer review.
+🧠 Training
+Day 19
+Write Results & Discussion Sections
+Write Sections 5 & 6. Results: 3-method table, per-dimension bar chart, latency comparison (Gemini ~8s, rules 0.1s, NN 0.05s), ablation table. Discussion: interpret why Gemini wins on contextual dimensions (head, weight) while rules win on geometric ones (knee angle); explain custom NN as the long-term direction.
+✍️ Writing
+Day 20
+Custom Backend Swap + Latency Benchmarks
+Implement CustomModelBackend(AIBackend) wrapping the .keras model in the AnalysisResult JSON schema. Set AI_BACKEND=custom in .env — full app runs on custom model with no other code changes. Benchmark: measure end-to-end latency for all 3 backends on same video (5 runs each, mean ± std). This is Table 3.
+⚙️ Implementation
+Day 21
+Pilot User Study — 10 Players
+Recruit 10 cricket players (college/local club). Collect: their video, AI scores, SUS usability questionnaire. Ask a cricket coach to rate the same 10 videos independently — compare against your system's scores, compute agreement. This becomes Section 6.3 'User Evaluation' — differentiates you from pure ML papers.
+🗃️ Data
+MILESTONE  End of Week 3 — 3-method comparison done + model trained + Results & Discussion drafted + user study complete
+WEEK 4: 
+Write, Polish & Submit
+Goal: Full paper submitted to IEEE Access + arXiv preprint live + GitHub repo public
+Day 22
+Abstract + Conclusion + Figures
+Write Abstract (250 words max): Problem, Gap, Method, Dataset, Results, Significance. Write Section 8 (Conclusion): what you built, 3 key findings, 3 limitations, 3 future work directions. Create all paper figures: system architecture, annotated cricket player with MediaPipe keypoints, results radar chart, 3-method bar chart. Export at 300 DPI.
+✍️ Writing
+Day 23
+References + Citation Audit
+Compile 30–40 IEEE-format references. Must include: Sen 2021 (CricShotClassify), Maduwantha 2024 (MoCap accessibility), Kannan 2023 (MediaPipe strokes), ScienceDirect 2025 (biomechanics NN), Tissera 2024 (coach feedback), CoachMe 2025, MediaPipe original (Lugaresi 2019), Gemini 1.5 Flash technical report. Use Zotero + BibTeX.
+✍️ Writing
+Day 24
+Full Paper First Complete Draft
+Merge all sections in Overleaf. Full read-through for flow and consistency. Check: abstract matches conclusions, all figures referenced, all tables have captions. Target: 6,000–8,000 words, max 15 pages (IEEE Access limit). Run Grammarly. Send to a peer for readability review.
+✍️ Writing
+Day 25
+Ethics, Reproducibility & Limitations Section
+Add to Discussion: (1) Data Ethics — confirm YouTube downloads were for research/educational use, no personal player data collected. (2) Reproducibility — all code on GitHub, dataset on Kaggle/Zenodo, model weights on HuggingFace. (3) Limitations — small dataset (400 stances), no 3D depth, no bowling analysis, LLM API cost dependency.
+✍️ Writing
+Day 26
+Upload Code + Dataset to GitHub & Zenodo
+Create public GitHub repo: cricket-stance-analyzer with clean README, setup instructions, requirements.txt, demo GIF. Upload labelled dataset CSV + sample frames to Zenodo (free DOI). Upload model weights to HuggingFace. Include DOI links in paper as a Data Availability Statement — IEEE Access rewards open data.
+🚀 Submission
+Day 27
+arXiv Preprint Submission
+Submit to arXiv under cs.CV or cs.LG. This stakes your priority date before IEEE review (which takes 6–10 weeks). Export final Overleaf PDF. Share the arXiv link on LinkedIn and X/Twitter with a short thread explaining the work. This is now standard practice and builds awareness.
+🚀 Submission
+Day 28
+IEEE Access Submission Setup
+Create account at mc.manuscriptcentral.com/access. Article type: Original Research. Subject area: Signal Processing / Machine Learning for Multimedia. Complete all author information. Write the cover letter (1 page): list your 8 contributions explicitly, explain why IEEE Access is the right venue. Upload PDF, figures, cover letter.
+🚀 Submission
+Day 29
+Final Submission + Supplementary Video
+Complete IEEE submission: upload supplementary video (60-second screen recording of the app analysing a real stance — reviewers love this). Complete checklist: funding statement, ethics statement, data availability DOI, competing interests, copyright transfer form. Submit. Record your manuscript number.
+🚀 Submission
+Day 30
+Post-Submission: Prepare for Reviewer Response
+While waiting (6–10 weeks review time): (1) Expand dataset to 600+ stances to address the expected 'small dataset' reviewer critique. (2) Begin LSTM training on 10-frame sequences (strongest technical upgrade). (3) Identify backup journals: Sensors (MDPI), Applied Sciences (MDPI), Pattern Recognition Letters. Prepare a revision response template.
+🚀 Submission
+MILESTONE  FINAL GOAL — IEEE Access manuscript submitted + arXiv preprint live + GitHub repo public + Zenodo dataset DOI registered
+SECTION 4  
+  IEEE Paper Structure & Key Tips
+Recommended Paper Structure
+Section
+Title
+Target Length
+Key Content
+1
+Introduction
+600–800 words
+Cricket global reach, coaching access gap, existing AI limitations, 8 contributions listed, paper overview
+2
+Related Work
+800–1,000 words
+4 clusters — shot classification, motion analysis, MoCap accessibility, multimodal LLMs. End each cluster with your gap.
+3
+Methodology
+1,200–1,500 words
+System architecture, video processing, LLM prompt engineering, MediaPipe integration, rule-based scorer, dense NN architecture
+4
+Dataset
+600–800 words
+Data sources, labelling methodology, inter-annotator agreement, augmentation strategy, split statistics, composition table
+5
+Experiments & Results
+800–1,000 words
+3-method comparison table, per-dimension bar chart, latency table, ablation table. No discussion here — just numbers.
+6
+Discussion
+600–800 words
+Interpret results, explain failure cases, compare to prior work quantitatively, user study findings, SUS score
+7
+Limitations & Future Work
+300–400 words
+Small dataset, no 3D depth, no bowling, LLM API cost, LSTM model (Phase 6), real-time webcam (Phase 8)
+8
+Conclusion
+250–300 words
+Summary of contributions, key numbers, significance for grassroots cricket coaching
+Your Core Contribution Table (What Goes in Section 5)
+This table is what peer reviewers will judge you on. Make it clean, honest, and use a consistent test set for all three methods.
+Dimension
+Rule-Based MAE
+Rule-Based R²
+Gemini 1.5 Flash MAE
+Gemini R²
+Custom NN MAE
+Custom NN R²
+Head Position
+X.XX
+X.XX
+X.XX
+X.XX
+X.XX
+X.XX
+Foot Placement
+X.XX
+X.XX
+X.XX
+X.XX
+X.XX
+X.XX
+Knee Bend
+X.XX
+X.XX
+X.XX
+X.XX
+X.XX
+X.XX
+Bat Angle
+X.XX
+X.XX
+X.XX
+X.XX
+X.XX
+X.XX
+Hip Rotation
+X.XX
+X.XX
+X.XX
+X.XX
+X.XX
+X.XX
+Weight Distribution
+X.XX
+X.XX
+X.XX
+X.XX
+X.XX
+X.XX
+Overall (Mean)
+X.XX
+X.XX
+X.XX
+X.XX
+X.XX
+X.XX
+Fill this table once your experiments are complete on Day 17. This table alone justifies IEEE publication.
+Critical Tips for IEEE Access Acceptance
+Write your cover letter carefully — explicitly list all 8 contributions and explain why IEEE Access (not a conference) is the right venue. Cover letters are read first.
+Ensure reproducibility — link to your GitHub repo, Zenodo dataset DOI, and HuggingFace model weights in the Data Availability Statement. IEEE Access specifically looks for this.
+Submit a supplementary video — a 60-second screen recording of the app analysing a cricket video dramatically increases reviewer confidence in your implementation.
+Address the small dataset proactively in the Limitations section. If you only have 400 stances, acknowledge it and explain your augmentation strategy and future collection plan.
+Compare to human coach scores — even a 10-player pilot study adds real-world validity that pure ML papers lack.
+Put your arXiv preprint live on Day 27 before IEEE submission — this protects your priority date and is considered good research practice.
+Check if your institution (likely a technical college or IIT/NIT/BITS) has an IEEE Transformative Agreement — if so, the Article Processing Charge is waived. Check with your library.
+Backup Journal Targets (In Case of Major Revision)
+Journal
+Publisher
+Turnaround
+Notes
+Sensors
+MDPI (Open Access)
+4–8 weeks
+Highly receptive to cricket + MediaPipe + ML papers. Sen et al. 2021 and Kannan et al. 2023 both published here.
+Applied Sciences
+MDPI (Open Access)
+4–6 weeks
+Strong track record of sports CV applications. Lower prestige than IEEE Access but fast and reliable.
+Pattern Recognition Letters
+Elsevier
+8–12 weeks
+Higher prestige if IEEE rejects. Requires stronger novelty in the pattern recognition methodology.
+Electronics
+MDPI (Open Access)
+4–8 weeks
+Covers AI systems and embedded applications. Good fit for your full-stack deployed system.
+IEEE Transactions on Neural Networks
+IEEE
+12–20 weeks
+Aim here if you complete the LSTM model (Phase 6) and can show significantly stronger ML results.

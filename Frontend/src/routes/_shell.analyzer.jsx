@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { UploadCloud, Check, ChevronRight, Sparkles, Film } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
@@ -20,6 +21,7 @@ const STEPS = [
 function AnalyzerPage() {
   const [step, setStep] = useState(1);
   const [file, setFile] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [data, setData] = useState({
     hand: "right", level: "club",
     foot: "side-on", width: "shoulder", guard: "middle",
@@ -28,6 +30,36 @@ function AnalyzerPage() {
   const navigate = useNavigate();
 
   const set = (k, v) => setData((d) => ({ ...d, [k]: v }));
+
+  const handleAnalyze = async () => {
+    if (!file) return;
+    setIsSubmitting(true);
+    
+    const formData = new FormData();
+    formData.append("video", file);
+    formData.append("player_id", "1");
+    
+    try {
+      const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8000";
+      const token = localStorage.getItem("access_token");
+      const res = await fetch(`${apiUrl}/api/sessions/analyze_stance/`, {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${token}`
+        },
+        body: formData,
+      });
+      
+      const result = await res.json();
+      if (!res.ok) throw new Error(result.error || "Analysis failed");
+      
+      toast.success("Analysis complete!");
+      navigate({ to: "/results", state: { apiData: result } });
+    } catch (err) {
+      toast.error(err.message || "Failed to connect to the backend.");
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="px-6 lg:px-10 py-8 max-w-[1400px] mx-auto">
@@ -152,19 +184,21 @@ function AnalyzerPage() {
           </div>
 
           <div className="mt-6 flex items-center justify-between gap-3">
-            <Button variant="ghost" disabled={step === 1} onClick={() => setStep(step - 1)}>
+            <Button variant="ghost" disabled={step === 1 || isSubmitting} onClick={() => setStep(step - 1)}>
               Back
             </Button>
             {step < 4 ? (
-              <Button onClick={() => setStep(step + 1)} className="gap-1.5">
+              <Button onClick={() => setStep(step + 1)} className="gap-1.5" disabled={isSubmitting}>
                 Continue <ChevronRight className="h-4 w-4" />
               </Button>
             ) : (
               <Button
-                onClick={() => navigate({ to: "/loading" })}
+                onClick={handleAnalyze}
+                disabled={isSubmitting || !file}
                 className="h-12 px-6 text-base gap-2 font-semibold"
               >
-                <Sparkles className="h-4 w-4" /> Analyze Stance
+                <Sparkles className={"h-4 w-4 " + (isSubmitting ? "animate-spin" : "")} /> 
+                {isSubmitting ? "Analyzing..." : "Analyze Stance"}
               </Button>
             )}
           </div>

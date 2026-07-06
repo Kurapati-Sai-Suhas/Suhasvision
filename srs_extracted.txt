@@ -1,0 +1,356 @@
+SOFTWARE REQUIREMENTS SPECIFICATION
+Cricket Batting Stance Analyzer
+AI-Powered Stance Analysis with Video Frame Extraction
+Version
+1.0 — Initial Draft
+Date
+April 2026
+Status
+In Planning
+Author
+Project Team
+Stack
+React + FastAPI + TensorFlow + Claude API
+1. Introduction
+1.1 Purpose
+This document defines the complete software requirements for the Cricket Batting Stance Analyzer — a full-stack AI-powered web application that evaluates a cricketer's batting stance using two data sources: a self-reported stance form and real video frame analysis via the Claude Vision API.
+This SRS is intended as the single source of truth for design, development, and testing decisions throughout the project lifecycle.
+1.2 Project overview
+The system accepts up to 3 batting videos from the user, extracts 10 key frames per video using ffmpeg.wasm in-browser, and sends those frames alongside form parameters (grip, backlift, foot position, head alignment, weight distribution, etc.) to Claude's multimodal AI for a unified stance report. The report includes an overall score, per-dimension scores, visual insights from video, strengths, weaknesses, and drill recommendations.
+1.3 Scope
+In scope
+Web-based React frontend with multi-step stance form
+In-browser video frame extraction using ffmpeg.wasm
+Claude Vision API integration for stance analysis
+FastAPI backend for API key security and request proxying
+Optional: custom deep learning pose model using MobileNet/VGG16 (Phase 2)
+Scoring system across 6 dimensions: balance, power, technique, defence, attack, footwork
+Drill and improvement recommendation engine
+Out of scope (for now)
+Mobile native app (iOS/Android)
+Real-time video streaming / live camera analysis
+Multi-player comparison dashboards
+Coach login / student management portal
+Commercial billing / subscription management
+1.4 Definitions & acronyms
+Term
+Definition
+SRS
+Software Requirements Specification
+ffmpeg.wasm
+WebAssembly port of FFmpeg for in-browser video processing
+Claude Vision API
+Anthropic's multimodal AI API that accepts images alongside text prompts
+MobileNet
+Lightweight CNN architecture — you studied this in your Udemy DL course
+VGG16
+Deep CNN used as a feature extractor for transfer learning — from your Udemy course
+FastAPI
+Python async web framework used to build the backend REST API
+Pose estimation
+Computer vision task of detecting joint positions from an image
+Frame extraction
+Sampling still images from a video at defined intervals
+Transfer learning
+Reusing a pre-trained model for a new task — directly from your Udemy course
+2. System overview
+2.1 Architecture diagram (conceptual)
+The system follows a three-tier architecture. The frontend handles all user interaction and in-browser video processing. The backend secures API keys and routes requests. The AI layer performs the actual analysis.
+TIER 1 — Frontend
+React (Vite)
+Tailwind CSS
+ffmpeg.wasm
+Multi-step stance form
+Video upload + frame preview
+TIER 2 — Backend
+FastAPI (Python)
+Uvicorn ASGI server
+API key management
+Request validation
+Rate limiting (optional)
+TIER 3 — AI Layer
+Claude Vision API
+claude-sonnet-4 model
+Phase 2: TensorFlow pose model
+Phase 2: MobileNet / VGG16
+Phase 2: Custom CNN classifier
+2.2 Data flow
+User fills in stance form (Step 1 & 2 of UI)
+User uploads up to 3 batting videos (Step 3)
+ffmpeg.wasm extracts 10 frames per video in-browser (no server needed for this step)
+Frontend sends form data + base64-encoded frames to FastAPI backend
+Backend validates payload, appends Claude API key, forwards to Anthropic API
+Claude Vision model reads all frames + form data, returns JSON analysis
+Frontend renders the full stance report with scores, video insights, drills
+3. Full tech stack
+3.1 Technology decisions table
+Each technology below was chosen specifically because it connects with what you already know from your TensorFlow/Keras Udemy course, or is the industry standard for that layer.
+Layer
+Technology
+Why we use it
+Your DL course relevance
+Frontend
+React + Vite
+Fast component model, great ecosystem, easy state management for multi-step forms
+Not DL-specific but you'll use React to display your model outputs
+Styling
+Tailwind CSS
+Utility-first CSS, no context switching, great for rapid prototyping
+UI layer — not DL related
+Video processing
+ffmpeg.wasm
+Runs FFmpeg inside the browser via WebAssembly — no server needed for frame extraction
+Frame extraction feeds images into your model/Claude, like preprocessing in Keras
+Backend
+FastAPI (Python)
+Python-native, async, auto-generates API docs, perfect since you already know Python from TF/Keras
+Same language as TensorFlow — no context switch
+AI (Phase 1)
+Claude Vision API
+Handles stance analysis with zero training data needed — gets you to v1 fast
+You can compare Claude's output to your own model's output later
+AI (Phase 2)
+TensorFlow + Keras
+Build your own pose/stance classifier using transfer learning
+DIRECTLY from your course — MobileNet & VGG16 feature extractors
+Pose detection
+MediaPipe (Phase 2)
+Google's pre-built pose landmark detector — 33 body keypoints from a frame
+Feeds joint coordinates into your custom classifier as input features
+Model base
+MobileNet / VGG16
+Transfer learning backbone for your custom stance classifier
+Exactly what you studied — use as feature extractor, train top layers
+Model serving
+TensorFlow Serving or FastAPI
+Expose your trained .h5 / SavedModel as a REST endpoint
+You save the model in Keras, serve it via FastAPI /predict route
+Database
+PostgreSQL (optional)
+Store analysis history, user sessions, improvement tracking over time
+Not DL — but connects to backend tier
+Deployment
+Railway / Render (backend), Vercel (frontend)
+Free tiers, easy GitHub deploys, no DevOps needed to start
+Focus your energy on the model, not infra
+Version control
+Git + GitHub
+Standard — commit your model weights and training notebooks
+Save your Jupyter notebooks here too
+3.2 How your Udemy course maps to this project
+Direct connections from your deep learning course
+CNN architecture → Used to classify stance quality from extracted video frames
+Transfer learning → Use MobileNet or VGG16 as frozen backbone, add custom Dense layers for stance scoring
+MobileNet → Preferred for this project: lightweight, runs fast even on CPU for real-time-ish inference
+VGG16 → Use for offline batch analysis where accuracy matters more than speed
+Activation functions → ReLU in hidden layers, Softmax/Sigmoid in output layer of your stance classifier
+LSTM / RNN basics → Future feature: analyze temporal sequence of frames (swing motion) using LSTM
+Data preprocessing → You already know ImageDataGenerator — use it to augment your stance training images
+Model saving → keras.save_model() → serve via FastAPI, exactly like your course projects
+4. Functional requirements
+4.1 Frontend requirements
+FR-01: Multi-step stance form
+The UI shall present a 4-step wizard: Profile → Stance parameters → Video upload → Analysis
+All form state shall persist across steps without data loss
+Each step shall validate completeness before advancing
+FR-02: Stance parameter capture
+System shall capture: batting hand, playing level, preferred style
+System shall capture: foot position, stance width, guard, head position, knee bend, weight distribution, shoulder alignment
+System shall capture: grip type, backlift direction, bat position at rest
+System shall support multi-select for known trouble areas (short-pitch, spin, swing, etc.)
+FR-03: Video upload and frame extraction
+System shall accept up to 3 video files per session
+Accepted formats: MP4, WebM, MOV — max 150MB per file
+ffmpeg.wasm shall extract exactly 10 frames per video, evenly spaced across the full duration
+Frame thumbnails shall be displayed to the user before analysis is triggered
+Frame extraction shall occur entirely in-browser — no video data shall be sent to the backend
+FR-04: AI analysis
+System shall send all extracted frames (base64 JPEG) + form data to the backend in a single request
+Backend shall forward this to Claude Vision API with a structured cricket coaching prompt
+The response shall include: overallScore (0-100), playerType label, per-dimension scores, videoInsights, strengths list, weaknesses list, improvements list, and a coach note
+Analysis shall work even when no videos are uploaded (form-only mode)
+FR-05: Results display
+Overall score and player type shall be prominently displayed
+Six dimension scores (balance, power, technique, defence, attack, footwork) shall render as metric cards with colour-coded bars
+Video insights section shall only appear when videos were provided
+Drills and improvements shall be numbered and actionable
+User shall be able to re-analyze with the same data after viewing results
+4.2 Backend requirements
+FR-06: API proxy
+FastAPI backend shall expose a POST /analyze endpoint
+The endpoint shall accept: stanceData (JSON object), frames (array of base64 strings), videoCount (integer)
+The Claude API key shall never be exposed to the frontend — stored as an environment variable server-side
+Backend shall validate payload size (max 20MB total) before forwarding to Claude
+FR-07: Error handling
+If Claude API returns an error, backend shall return a structured error response with a human-readable message
+Frame extraction failures shall be gracefully handled — analysis proceeds with available frames
+Oversized video files shall be rejected with a clear message before upload attempt
+5. Non-functional requirements
+5.1 Performance
+ffmpeg.wasm initial load: < 8 seconds on a standard broadband connection
+Frame extraction for a 2-minute video: < 15 seconds after ffmpeg is loaded
+Claude API response time: typically 5–15 seconds depending on frame count
+Frontend shall show progress indicators during all async operations
+5.2 Security
+Claude API key stored only in backend environment variables — never in frontend code or localStorage
+All backend-Claude communication over HTTPS
+No user video data stored server-side — frames are processed in memory and discarded after the API call
+CORS policy on FastAPI backend restricted to the frontend's domain in production
+5.3 Usability
+The application shall be usable without any cricket coaching knowledge to navigate the UI
+All stance option buttons shall use plain English labels (no jargon without explanation)
+Frame thumbnail preview shall give users confidence their video was processed correctly
+Mobile-responsive layout (min width 375px)
+5.4 Maintainability
+Frontend code organised in feature folders: /form, /video, /results, /api
+All Claude prompts stored in a dedicated prompts.js file for easy tuning
+FastAPI routes documented via auto-generated Swagger UI at /docs
+6. Where to start — your learning roadmap
+Given your TensorFlow/Keras background, here is the recommended build order. This gets you a working product fast, then layers in your deep learning knowledge progressively.
+Phase
+What you build
+Skills needed
+Duration
+Phase 0
+Environment setup: Node.js, Python 3.11, Vite, FastAPI, get Claude API key
+Basic terminal knowledge, pip, npm
+1–2 days
+Phase 1
+Build the React multi-step form with all stance parameters
+React useState, component props, event handling
+3–5 days
+Phase 2
+Add FastAPI backend with /analyze route, connect to Claude API (text only first)
+Python, FastAPI, HTTP, requests library, Postman
+3–4 days
+Phase 3
+Integrate ffmpeg.wasm — video upload, frame extraction, thumbnail preview
+JavaScript async/await, WebAssembly basics, base64
+4–6 days
+Phase 4
+Send frames to Claude Vision, render full AI report in frontend
+Multimodal API requests, JSON parsing, React state
+3–4 days
+Phase 5
+Collect & label stance dataset, train custom MobileNet classifier in Keras
+Transfer learning (your course!), ImageDataGenerator, model.fit()
+2–4 weeks
+Phase 6
+Integrate MediaPipe pose estimation, extract joint angles as features
+OpenCV, MediaPipe Python, NumPy, feature engineering
+1–2 weeks
+Phase 7
+Replace / augment Claude with your own model, serve via FastAPI /predict
+TF Serving, SavedModel format, FastAPI, benchmark vs Claude
+1–2 weeks
+Phase 8
+Deploy: Vercel (frontend) + Railway (backend + model)
+Docker basics, env vars, CORS, domain setup
+2–3 days
+6.1 The most important thing to build first
+Start here — in this exact order
+Step 1: Get your Claude API key from console.anthropic.com and test it in Postman
+Step 2: Build the React form (Step 1 only — just Profile) and make sure state works
+Step 3: Wire the form to a hardcoded fetch() call to Claude API (no backend yet)
+Step 4: Display the raw JSON response on screen — you now have a working prototype!
+Step 5: Add the backend to hide your API key — move the fetch() call server-side
+Step 6: Add video upload + ffmpeg.wasm frame extraction
+Step 7: Add frames to the Claude request and display video insights in results
+6.2 The deep learning path (Phase 5 onwards)
+This is where your Udemy course becomes the star. Here's exactly how to connect what you learned:
+Your DL course → this project
+Transfer learning + MobileNet → Use MobileNetV2 as backbone, freeze all layers, add GlobalAveragePooling2D + Dense(256, relu) + Dense(6, sigmoid) to predict 6 stance dimension scores simultaneously
+VGG16 → Use as an alternative heavier backbone when you have more training data (200+ samples per class)
+CNN architecture → Understand what MobileNet is doing under the hood when you fine-tune it
+Data augmentation (ImageDataGenerator) → Flip, rotate, zoom batting images to grow your dataset
+LSTM → Future: pass a sequence of frame feature vectors through an LSTM to model the swing motion over time
+Model saving → model.save('stance_model.h5') → load in FastAPI → serve predictions
+Activation functions → ReLU throughout hidden layers, Sigmoid on the 6 output neurons (each score is 0-1)
+6.3 Dataset strategy
+Since you asked about where to get data — here are your realistic options, in order of effort:
+Source
+How to use it
+Effort
+YouTube cricket videos
+Download with yt-dlp, extract frames with FFmpeg, manually label stances. 100+ videos gives you ~1000 frames.
+Medium
+IPL / international broadcast
+Frame-extract and label. Rich variety of professional stances.
+Medium-High
+Local cricket ground
+Record your own videos from multiple angles. Most controlled dataset.
+Low (if you play)
+Claude API (synthetic labels)
+Send frames to Claude, ask it to label stance quality — use its output as your training labels to bootstrap the dataset.
+Low-Medium
+Roboflow
+Search for existing cricket pose datasets — may find partial datasets to fine-tune on.
+Low (if found)
+MediaPipe keypoints
+Skip raw image classification — extract 33 joint coordinates per frame and train a lightweight classifier on those vectors instead. Far fewer data points needed.
+Low data needed
+Pro tip: The MediaPipe + custom classifier route is the fastest path to a real ML model. Instead of classifying raw images (which needs thousands of samples), you use MediaPipe to extract 33 joint coordinates per frame, then train a small Dense network on those coordinates. You only need ~200–300 labelled examples to get decent accuracy.
+7. Recommended folder structure
+Path
+Purpose
+cricket-analyzer/
+Root monorepo
+  frontend/
+React app (Vite)
+    src/components/form/
+All stance form steps
+    src/components/video/
+Upload, ffmpeg, frame preview
+    src/components/results/
+Score cards, insights, drills
+    src/api/claudeClient.js
+All fetch() calls to backend
+    src/prompts/stancePrompt.js
+Claude system + user prompts
+  backend/
+FastAPI Python app
+    main.py
+FastAPI app entry point
+    routes/analyze.py
+POST /analyze endpoint
+    services/claude.py
+Claude API wrapper
+    .env
+CLAUDE_API_KEY (never commit!)
+  ml_model/
+Your custom DL work (Phase 5+)
+    notebooks/
+Jupyter notebooks for training
+    data/frames/
+Labelled training frames
+    data/keypoints/
+MediaPipe joint coordinate CSVs
+    models/stance_v1.h5
+Saved Keras model
+    train.py
+Training script
+    predict.py
+Inference script called by backend
+8. Risks & mitigations
+Risk
+Severity
+Mitigation
+ffmpeg.wasm fails on older browsers
+Medium
+Detect WebAssembly support on load. Fallback: ask user to upload images instead of video.
+Not enough labelled training data for custom model
+High
+Use MediaPipe keypoints approach — needs far less data. Bootstrap labels using Claude API.
+Claude API costs escalate with many frames
+Medium
+Cap frames at 10 per video (already done). Add backend rate limiting per session.
+Large video files cause browser OOM crash
+Medium
+Validate file size client-side before ffmpeg load. Warn at 100MB, reject at 150MB.
+Custom model accuracy too low for real use
+Medium
+Phase 1 Claude analysis remains the primary engine. Custom model becomes a second opinion layer.
+API key exposed in frontend code
+High (security)
+Always route through FastAPI backend. Never use REACT_APP_CLAUDE_KEY in frontend env.
+End of SRS — Cricket Batting Stance Analyzer v1.0

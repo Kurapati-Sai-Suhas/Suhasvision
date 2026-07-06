@@ -9,6 +9,8 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as LearnerRouteImport } from './routes/learner'
+import { Route as CoachRouteImport } from './routes/coach'
 import { Route as ShellRouteImport } from './routes/_shell'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ShellResultsRouteImport } from './routes/_shell.results'
@@ -17,6 +19,16 @@ import { Route as ShellDashboardRouteImport } from './routes/_shell.dashboard'
 import { Route as ShellCompareRouteImport } from './routes/_shell.compare'
 import { Route as ShellAnalyzerRouteImport } from './routes/_shell.analyzer'
 
+const LearnerRoute = LearnerRouteImport.update({
+  id: '/learner',
+  path: '/learner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoachRoute = CoachRouteImport.update({
+  id: '/coach',
+  path: '/coach',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ShellRoute = ShellRouteImport.update({
   id: '/_shell',
   getParentRoute: () => rootRouteImport,
@@ -54,6 +66,8 @@ const ShellAnalyzerRoute = ShellAnalyzerRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/coach': typeof CoachRoute
+  '/learner': typeof LearnerRoute
   '/analyzer': typeof ShellAnalyzerRoute
   '/compare': typeof ShellCompareRoute
   '/dashboard': typeof ShellDashboardRoute
@@ -62,6 +76,8 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/coach': typeof CoachRoute
+  '/learner': typeof LearnerRoute
   '/analyzer': typeof ShellAnalyzerRoute
   '/compare': typeof ShellCompareRoute
   '/dashboard': typeof ShellDashboardRoute
@@ -72,6 +88,8 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_shell': typeof ShellRouteWithChildren
+  '/coach': typeof CoachRoute
+  '/learner': typeof LearnerRoute
   '/_shell/analyzer': typeof ShellAnalyzerRoute
   '/_shell/compare': typeof ShellCompareRoute
   '/_shell/dashboard': typeof ShellDashboardRoute
@@ -82,17 +100,29 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/coach'
+    | '/learner'
     | '/analyzer'
     | '/compare'
     | '/dashboard'
     | '/loading'
     | '/results'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/analyzer' | '/compare' | '/dashboard' | '/loading' | '/results'
+  to:
+    | '/'
+    | '/coach'
+    | '/learner'
+    | '/analyzer'
+    | '/compare'
+    | '/dashboard'
+    | '/loading'
+    | '/results'
   id:
     | '__root__'
     | '/'
     | '/_shell'
+    | '/coach'
+    | '/learner'
     | '/_shell/analyzer'
     | '/_shell/compare'
     | '/_shell/dashboard'
@@ -103,10 +133,26 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ShellRoute: typeof ShellRouteWithChildren
+  CoachRoute: typeof CoachRoute
+  LearnerRoute: typeof LearnerRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/learner': {
+      id: '/learner'
+      path: '/learner'
+      fullPath: '/learner'
+      preLoaderRoute: typeof LearnerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/coach': {
+      id: '/coach'
+      path: '/coach'
+      fullPath: '/coach'
+      preLoaderRoute: typeof CoachRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_shell': {
       id: '/_shell'
       path: ''
@@ -180,6 +226,8 @@ const ShellRouteWithChildren = ShellRoute._addFileChildren(ShellRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ShellRoute: ShellRouteWithChildren,
+  CoachRoute: CoachRoute,
+  LearnerRoute: LearnerRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
