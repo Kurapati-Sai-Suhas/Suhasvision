@@ -30,6 +30,8 @@ class PlayerProfile(models.Model):
 # 3. The Video Analysis Session (A player can have multiple sessions for comparison)
 class AnalysisSession(models.Model):
     player = models.ForeignKey(PlayerProfile, related_name='sessions', on_delete=models.CASCADE)
+    title = models.CharField(max_length=200, default="Practice Session")
+    status = models.CharField(max_length=50, default="PENDING") # PENDING, ANALYZING, COMPLETED, FAILED
     video_url = models.URLField(max_length=500, blank=True, null=True) # Will point to your Azure Blob!
     date_analyzed = models.DateTimeField(auto_now_add=True)
     

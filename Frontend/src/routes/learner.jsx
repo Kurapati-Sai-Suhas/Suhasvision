@@ -1,4 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
+import { fetchWithAuth } from "@/lib/api";
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import {
   ArrowRight,
@@ -35,13 +37,13 @@ import {
   YAxis,
 } from "recharts";
 import AppShell from "@/components/AppShell";
-import {
-  BADGES,
-  CURRENT_LEARNER,
-  FEEDBACK_INBOX,
-  LEARNER_UPLOADS,
-  PROGRESS_TIMELINE,
-} from "@/lib/mockData";
+
+
+
+import { createContext, useContext } from 'react';
+const LearnerContext = createContext(null);
+
+const useLearner = () => useContext(LearnerContext);
 
 const iconFor = (name) => {
   const map = { trophy: Trophy, shield: Shield, sparkles: Sparkles, flame: Flame, zap: Zap, award: Award };
@@ -69,8 +71,9 @@ const Section = ({ eyebrow, title, subtitle, action, children }) => (
 
 /* ------------------------------ OVERVIEW ------------------------------ */
 const OverviewSection = ({ onNavigate }) => {
+  const { learner, learnerUploads } = useLearner();
   const nextGoal = 92;
-  const pct = Math.round((CURRENT_LEARNER.tierProgress / 100) * 100);
+  const pct = Math.round((learner.tierProgress / 100) * 100);
   return (
     <div className="flex flex-col gap-10">
       <div className="relative overflow-hidden rounded-3xl border border-white/5 sv-glass p-6 md:p-10">
@@ -85,12 +88,12 @@ const OverviewSection = ({ onNavigate }) => {
             <h1 className="mt-4 font-display text-3xl font-bold tracking-tight text-slate-50 sm:text-4xl lg:text-5xl">
               Ready to raise your game today,{" "}
               <span className="bg-gradient-to-r from-emerald-300 to-[#f5d982] bg-clip-text text-transparent">
-                {CURRENT_LEARNER.name.split(" ")[0]}?
+                {learner.name.split(" ")[0]}?
               </span>
             </h1>
             <p className="mt-3 max-w-xl text-base text-slate-400">
               You're 3 points away from a peak score of {nextGoal}. Log today's session to keep your{" "}
-              <span className="font-semibold text-[#f5d982]">{CURRENT_LEARNER.streak}-day streak</span> alive.
+              <span className="font-semibold text-[#f5d982]">{learner.streak}-day streak</span> alive.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-3">
               <button
@@ -116,7 +119,7 @@ const OverviewSection = ({ onNavigate }) => {
             <div className="flex items-center justify-between text-[10px] font-semibold uppercase tracking-[0.24em] text-slate-400">
               <span>Season tier</span>
               <span className="rounded-full bg-emerald-500/15 px-2 py-0.5 text-emerald-200">
-                #{CURRENT_LEARNER.rank} academy
+                #{learner.rank} academy
               </span>
             </div>
             <div className="relative mt-6 flex items-center justify-center">
@@ -143,9 +146,9 @@ const OverviewSection = ({ onNavigate }) => {
                 <div className="text-[10px] font-semibold uppercase tracking-[0.24em] text-slate-500">
                   Current
                 </div>
-                <div className="font-display text-2xl font-bold text-slate-50">{CURRENT_LEARNER.currentTier}</div>
+                <div className="font-display text-2xl font-bold text-slate-50">{learner.currentTier}</div>
                 <div className="mt-1 text-[10px] text-slate-500">
-                  {CURRENT_LEARNER.tierProgress}% → {CURRENT_LEARNER.nextTier}
+                  {learner.tierProgress}% → {learner.nextTier}
                 </div>
               </div>
             </div>
@@ -154,13 +157,13 @@ const OverviewSection = ({ onNavigate }) => {
                 <div className="text-[10px] uppercase tracking-[0.2em] text-slate-500">Streak</div>
                 <div className="mt-1 flex items-center gap-1.5 font-display text-lg font-bold text-[#f5d982]">
                   <Flame className="h-4 w-4" />
-                  {CURRENT_LEARNER.streak}d
+                  {learner.streak}d
                 </div>
               </div>
               <div className="rounded-xl border border-white/5 bg-white/[0.02] p-3">
                 <div className="text-[10px] uppercase tracking-[0.2em] text-slate-500">Points</div>
                 <div className="mt-1 font-display text-lg font-bold text-emerald-300">
-                  {CURRENT_LEARNER.totalPoints.toLocaleString()}
+                  {learner.totalPoints.toLocaleString()}
                 </div>
               </div>
             </div>
@@ -174,7 +177,7 @@ const OverviewSection = ({ onNavigate }) => {
           { label: "Peak AI score", value: 89, sub: "+7 vs last month", tone: "emerald", testId: "stat-peak" },
           { label: "Total sessions", value: 96, sub: "4 this week", tone: "emerald", testId: "stat-sessions" },
           { label: "Badges", value: 4, sub: "2 in progress", tone: "gold", testId: "stat-badges" },
-          { label: "Weekly goal", value: `${CURRENT_LEARNER.weeklyProgress}/${CURRENT_LEARNER.weeklyGoal}`, sub: "1 more to go", tone: "muted", testId: "stat-goal" },
+          { label: "Weekly goal", value: `${learner.weeklyProgress}/${learner.weeklyGoal}`, sub: "1 more to go", tone: "muted", testId: "stat-goal" },
         ].map((s, i) => (
           <div
             key={s.label}
@@ -218,7 +221,7 @@ const OverviewSection = ({ onNavigate }) => {
         }
       >
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {LEARNER_UPLOADS.map((u, i) => (
+          {learnerUploads.map((u, i) => (
             <div
               key={u.id}
               data-testid={`upload-card-${u.id}`}
@@ -278,30 +281,37 @@ const OverviewSection = ({ onNavigate }) => {
 
 /* ------------------------------ UPLOAD CENTER ------------------------------ */
 const UploadSection = () => {
+  const { learner, refetch } = useLearner();
   const [dragOver, setDragOver] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [uploadedName, setUploadedName] = useState(null);
   const inputRef = useRef(null);
 
-  const startUpload = (file) => {
+  const startUpload = async (file) => {
     setUploadedName(file?.name || "batting_session.mp4");
     setUploading(true);
-    setProgress(0);
-    const iv = setInterval(() => {
-      setProgress((p) => {
-        const next = p + Math.random() * 12 + 4;
-        if (next >= 100) {
-          clearInterval(iv);
-          setUploading(false);
-          toast.success("Video queued for AI analysis", {
-            description: "You'll get your biomechanics report in under 60 seconds.",
-          });
-          return 100;
-        }
-        return next;
+    setProgress(10);
+    
+    const formData = new FormData();
+    formData.append("video", file);
+    formData.append("title", file?.name || "Practice Session");
+    
+    try {
+      const res = await fetchWithAuth("/sessions/analyze_stance/", {
+        method: "POST",
+        body: formData,
       });
-    }, 240);
+      setProgress(100);
+      toast.success("Video analyzed successfully!", {
+        description: "Your biomechanics report is ready.",
+      });
+      refetch();
+    } catch (e) {
+      toast.error("Upload failed", { description: e.message });
+    } finally {
+      setUploading(false);
+    }
   };
 
   const onDrop = useCallback((e) => {
@@ -425,7 +435,7 @@ const UploadSection = () => {
               <div>
                 <div className="font-display font-semibold text-slate-50">Weekly goal</div>
                 <div className="text-xs text-slate-400">
-                  {CURRENT_LEARNER.weeklyProgress} of {CURRENT_LEARNER.weeklyGoal} sessions logged
+                  {learner.weeklyProgress} of {learner.weeklyGoal} sessions logged
                 </div>
               </div>
             </div>
@@ -433,7 +443,7 @@ const UploadSection = () => {
               <div
                 className="h-full rounded-full bg-gradient-to-r from-emerald-300 to-[#D4AF37]"
                 style={{
-                  width: `${(CURRENT_LEARNER.weeklyProgress / CURRENT_LEARNER.weeklyGoal) * 100}%`,
+                  width: `${(learner.weeklyProgress / learner.weeklyGoal) * 100}%`,
                 }}
               />
             </div>
@@ -446,8 +456,9 @@ const UploadSection = () => {
 
 /* ------------------------------ PROGRESS TIMELINE ------------------------------ */
 const ProgressSection = () => {
+  const { progressTimeline } = useLearner();
   const [range, setRange] = useState("12w");
-  const data = PROGRESS_TIMELINE;
+  const data = progressTimeline;
 
   return (
     <Section
@@ -582,6 +593,7 @@ const ProgressSection = () => {
 
 /* ------------------------------ GAMIFICATION ------------------------------ */
 const GamificationSection = () => {
+  const { learner, badges } = useLearner();
   return (
     <Section
       eyebrow="Player card"
@@ -597,19 +609,19 @@ const GamificationSection = () => {
             <div className="flex items-center gap-4">
               <div className="h-16 w-16 overflow-hidden rounded-2xl border border-white/15 bg-gradient-to-br from-emerald-300 to-[#D4AF37] p-[2px]">
                 <img
-                  src={CURRENT_LEARNER.avatar}
-                  alt={CURRENT_LEARNER.name}
+                  src={learner.avatar}
+                  alt={learner.name}
                   className="h-full w-full rounded-[14px] object-cover"
                 />
               </div>
               <div>
                 <div className="font-display text-2xl font-bold text-slate-50">
-                  {CURRENT_LEARNER.name}
+                  {learner.name}
                 </div>
-                <div className="text-xs text-slate-400">{CURRENT_LEARNER.role}</div>
+                <div className="text-xs text-slate-400">{learner.role}</div>
                 <div className="mt-1.5 inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-200">
                   <Star className="h-3 w-3" />
-                  {CURRENT_LEARNER.currentTier}
+                  {learner.currentTier}
                 </div>
               </div>
             </div>
@@ -620,7 +632,7 @@ const GamificationSection = () => {
                   Streak
                 </div>
                 <div className="mt-2 font-display text-2xl font-bold text-[#f5d982]">
-                  {CURRENT_LEARNER.streak}
+                  {learner.streak}
                   <span className="ml-0.5 text-sm">d</span>
                 </div>
               </div>
@@ -630,7 +642,7 @@ const GamificationSection = () => {
                   Points
                 </div>
                 <div className="mt-2 font-display text-2xl font-bold text-emerald-300">
-                  {CURRENT_LEARNER.totalPoints.toLocaleString()}
+                  {learner.totalPoints.toLocaleString()}
                 </div>
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
@@ -639,20 +651,20 @@ const GamificationSection = () => {
                   Rank
                 </div>
                 <div className="mt-2 font-display text-2xl font-bold text-slate-50">
-                  #{CURRENT_LEARNER.rank}
+                  #{learner.rank}
                 </div>
               </div>
             </div>
 
             <div className="mt-6">
               <div className="flex items-center justify-between text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-500">
-                <span>Progress to {CURRENT_LEARNER.nextTier}</span>
-                <span className="font-mono text-slate-200">{CURRENT_LEARNER.tierProgress}%</span>
+                <span>Progress to {learner.nextTier}</span>
+                <span className="font-mono text-slate-200">{learner.tierProgress}%</span>
               </div>
               <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-white/10">
                 <div
                   className="h-full rounded-full bg-gradient-to-r from-emerald-300 to-[#D4AF37]"
-                  style={{ width: `${CURRENT_LEARNER.tierProgress}%` }}
+                  style={{ width: `${learner.tierProgress}%` }}
                 />
               </div>
             </div>
@@ -739,8 +751,9 @@ const GamificationSection = () => {
 
 /* ------------------------------ FEEDBACK INBOX ------------------------------ */
 const FeedbackSection = () => {
-  const [selectedId, setSelectedId] = useState(FEEDBACK_INBOX[0].id);
-  const selected = FEEDBACK_INBOX.find((f) => f.id === selectedId);
+  const { feedbackInbox, learner } = useLearner();
+  const [selectedId, setSelectedId] = useState(feedbackInbox?.[0]?.id);
+  const selected = feedbackInbox.find((f) => f.id === selectedId) || feedbackInbox[0];
 
   return (
     <Section
@@ -750,7 +763,7 @@ const FeedbackSection = () => {
     >
       <div className="grid gap-6 lg:grid-cols-[1fr,1.6fr]">
         <div className="flex flex-col gap-3">
-          {FEEDBACK_INBOX.map((f, i) => (
+          {feedbackInbox.map((f, i) => (
             <button
               key={f.id}
               data-testid={`feedback-item-${f.id}`}
@@ -888,14 +901,73 @@ const LearnerDashboard = () => {
     feedback: "Feedback Inbox",
   };
 
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ["learnerDashboard"],
+    queryFn: () => fetchWithAuth("/learner/me/"),
+  });
+
+  if (isLoading || !data) return <div className="flex h-screen items-center justify-center bg-[#05080F] text-emerald-400">Loading your profile...</div>;
+  if (error) return <div className="flex h-screen items-center justify-center bg-[#05080F] text-red-400">Error loading profile: {error.message}</div>;
+
+  // Transform backend data to match UI expectations
+  const backendProfile = data.profile || {};
+  const sessions = data.sessions || [];
+
+  const learner = {
+    id: backendProfile.id,
+    name: backendProfile.name || "Guest Player",
+    age: 17,
+    role: `Top-order batter · ${backendProfile.batting_hand}`,
+    academy: "Deccan Cricket Academy",
+    email: backendProfile.user?.email || "learner@deccan.cricket",
+    avatar: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?crop=faces&fit=crop&w=256&h=256",
+    streak: backendProfile.current_streak || 0,
+    totalPoints: backendProfile.total_points || 0,
+    currentTier: "Silver I",
+    nextTier: "Gold IV",
+    tierProgress: 45,
+    rank: 12,
+    academyRank: 12,
+    weeklyGoal: 5,
+    weeklyProgress: sessions.length,
+  };
+
+  const learnerUploads = sessions.map(s => ({
+    id: s.id,
+    title: s.title || `Session ${s.id}`,
+    date: new Date(s.date_analyzed).toLocaleDateString(),
+    duration: "0:30",
+    thumbnail: "https://images.pexels.com/photos/3628912/pexels-photo-3628912.jpeg?auto=compress&cs=tinysrgb&w=800",
+    scores: { balance: s.balance_score, power: s.power_score, technique: s.technique_score },
+    overall: s.overall_score,
+    status: s.status === "COMPLETED" ? "reviewed" : "pending",
+  }));
+  
+  // Create dummy progress based on real sessions if available
+  const progressTimeline = sessions.map((s, i) => ({
+    week: `W${i+1}`,
+    balance: s.balance_score,
+    power: s.power_score,
+    technique: s.technique_score,
+    overall: s.overall_score
+  })).reverse();
+  
+  // Dummy data for remaining parts to prevent UI crashes while connecting real backend
+  const badges = [];
+  const feedbackInbox = [];
+
+  const contextValue = { learner, learnerUploads, progressTimeline, badges, feedbackInbox, refetch };
+
   return (
-    <AppShell role="learner" activeKey={active} onNavigate={setActive} title={titleMap[active]}>
-      {active === "overview" ? <OverviewSection onNavigate={setActive} /> : null}
-      {active === "upload" ? <UploadSection /> : null}
-      {active === "progress" ? <ProgressSection /> : null}
-      {active === "profile" ? <GamificationSection /> : null}
-      {active === "feedback" ? <FeedbackSection /> : null}
-    </AppShell>
+    <LearnerContext.Provider value={contextValue}>
+      <AppShell role="learner" activeKey={active} onNavigate={setActive} title={titleMap[active]} profile={learner}>
+        {active === "overview" ? <OverviewSection onNavigate={setActive} /> : null}
+        {active === "upload" ? <UploadSection /> : null}
+        {active === "progress" ? <ProgressSection /> : null}
+        {active === "profile" ? <GamificationSection /> : null}
+        {active === "feedback" && feedbackInbox.length > 0 ? <FeedbackSection /> : null}
+      </AppShell>
+    </LearnerContext.Provider>
   );
 };
 

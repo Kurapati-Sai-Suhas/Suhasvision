@@ -29,7 +29,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { CURRENT_COACH, CURRENT_LEARNER } from "@/lib/mockData";
 
 const COACH_NAV = [
   { key: "overview", label: "Command Center", icon: LayoutGrid },
@@ -79,14 +78,13 @@ export const BrandMark = ({ size = "md" }) => (
   </div>
 );
 
-const AppShell = ({ children, activeKey, onNavigate, role, title, subtitle, rightSlot }) => {
-  const session = { name: role === "coach" ? "Suhas Menon" : "Arya Patel", role: role };
+const AppShell = ({ children, activeKey, onNavigate, role, title, subtitle, rightSlot, profile = {} }) => {
+  const session = { name: profile.name || "User", role: role };
   const logout = () => { localStorage.clear(); };
   const navigate = useNavigate();
   const location = useRouterState({ select: (s) => s.location });
 
   const nav = role === "coach" ? COACH_NAV : LEARNER_NAV;
-  const profile = role === "coach" ? CURRENT_COACH : CURRENT_LEARNER;
 
   const handleLogout = () => {
     logout();
@@ -162,7 +160,7 @@ const AppShell = ({ children, activeKey, onNavigate, role, title, subtitle, righ
               {role === "coach" ? "Academy Pulse" : "Daily Streak"}
             </div>
             <div className="mt-3 font-display text-3xl font-bold text-slate-50">
-              {role === "coach" ? "82.4" : `${CURRENT_LEARNER.streak}`}
+              {role === "coach" ? "82.4" : `${profile.streak || 0}`}
               <span className="ml-1 text-sm font-medium text-slate-500">
                 {role === "coach" ? "avg" : "days"}
               </span>

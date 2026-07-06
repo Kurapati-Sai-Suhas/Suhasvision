@@ -71,12 +71,13 @@ const AuthPage = () => {
         throw new Error(data.detail || data.error || "Authentication failed");
       }
 
-      localStorage.setItem("access_token", data.access);
-      localStorage.setItem("refresh_token", data.refresh);
-      localStorage.setItem("user_role", data.user.role || role.toUpperCase());
-      localStorage.setItem("user_name", data.user.name || name);
+      const userData = data.user || {};
+      localStorage.setItem("accessToken", data.access);
+      localStorage.setItem("refreshToken", data.refresh);
+      localStorage.setItem("user_role", userData.role || role.toUpperCase());
+      localStorage.setItem("user_name", userData.name || name || "User");
       
-      toast.success(`Welcome to SuhasVision, ${data.user.name || "Guest"}`);
+      toast.success(`Welcome to SuhasVision, ${userData.name || "Coach"}`);
       navigate({ to: role === "coach" ? "/coach" : "/learner", replace: true });
     } catch (err) {
       toast.error(err.message);

@@ -1,4 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
+import { fetchWithAuth } from "@/lib/api";
 import React, { useMemo, useState } from "react";
 import {
   Activity,
@@ -43,19 +45,14 @@ import {
   YAxis,
 } from "recharts";
 import AppShell from "@/components/AppShell";
-import {
-  BIOMECHANICS_SNAPSHOT,
-  COACH_METRICS,
-  COACH_SESSIONS,
-  CURRENT_COACH,
-  PLAYER_RANKINGS,
-  PROGRESS_TIMELINE,
-  RECENT_ACTIVITY,
-  REVIEW_QUEUE,
-  TALENT_PROSPECTS,
-} from "@/lib/mockData";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Textarea } from "@/components/ui/textarea";
+
+
+import { createContext, useContext } from 'react';
+const CoachContext = createContext(null);
+const useCoach = () => useContext(CoachContext);
 
 const trendIcon = (t) => {
   if (t === "up") return <TrendingUp className="h-3 w-3 text-emerald-300" />;
@@ -105,6 +102,7 @@ const Section = ({ eyebrow, title, action, children }) => (
 
 /* ------------------------------- OVERVIEW ------------------------------- */
 const OverviewSection = ({ onOpenAnalysis }) => {
+  const { coach, reviewQueue, coachMetrics, progressTimeline, coachSessions, recentActivity, biomechanicsSnapshot } = useCoach();
   return (
     <div className="flex flex-col gap-10">
       {/* Hero header */}
@@ -118,7 +116,7 @@ const OverviewSection = ({ onOpenAnalysis }) => {
               Feb 10 · Wednesday · Ground A
             </div>
             <h1 className="mt-4 font-display text-3xl font-bold tracking-tight text-slate-50 sm:text-4xl lg:text-5xl">
-              Good morning, {CURRENT_COACH.name.split(" ")[1]}.
+              Good morning, {coach.name.split(" ")[1]}.
             </h1>
             <p className="mt-3 max-w-xl text-base text-slate-400">
               12 new videos are waiting in your review queue and your academy's average score is
@@ -129,7 +127,7 @@ const OverviewSection = ({ onOpenAnalysis }) => {
             <button
               data-testid="cta-open-queue"
               className="sv-sheen group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-emerald-300 via-emerald-400 to-emerald-500 px-5 py-3 text-sm font-semibold text-emerald-950 shadow-[0_16px_40px_-16px_rgba(16,185,129,0.7)] transition-all hover:from-emerald-200 hover:via-emerald-300 hover:to-emerald-400"
-              onClick={() => onOpenAnalysis(REVIEW_QUEUE[0])}
+              onClick={() => onOpenAnalysis(reviewQueue[0])}
             >
               Open review queue
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -147,7 +145,7 @@ const OverviewSection = ({ onOpenAnalysis }) => {
 
       {/* Metrics grid */}
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-        {COACH_METRICS.map((m, i) => (
+        {coachMetrics.map((m, i) => (
           <div
             key={m.testId}
             data-testid={m.testId}
@@ -201,7 +199,7 @@ const OverviewSection = ({ onOpenAnalysis }) => {
           </div>
           <div className="mt-6 h-64">
             <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={PROGRESS_TIMELINE} margin={{ left: -10, right: 10, top: 10, bottom: 0 }}>
+              <AreaChart data={progressTimeline} margin={{ left: -10, right: 10, top: 10, bottom: 0 }}>
                 <defs>
                   <linearGradient id="g-balance" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0%" stopColor="#10b981" stopOpacity={0.35} />
@@ -254,7 +252,7 @@ const OverviewSection = ({ onOpenAnalysis }) => {
             <CalendarDays className="h-5 w-5 text-slate-500" />
           </div>
           <div className="mt-5 flex flex-col divide-y divide-white/5">
-            {COACH_SESSIONS.map((s, i) => (
+            {coachSessions.map((s, i) => (
               <div
                 key={i}
                 data-testid={`session-${i}`}
@@ -287,7 +285,7 @@ const OverviewSection = ({ onOpenAnalysis }) => {
           </div>
           <div className="mt-4 font-display text-xl font-semibold text-slate-50">Academy activity</div>
           <ul className="mt-5 flex flex-col gap-4">
-            {RECENT_ACTIVITY.map((a) => (
+            {recentActivity.map((a) => (
               <li key={a.id} className="flex items-start gap-3">
                 <span className="mt-1 flex h-7 w-7 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-emerald-300">
                   {a.icon === "video" ? (
@@ -322,14 +320,14 @@ const OverviewSection = ({ onOpenAnalysis }) => {
             </div>
             <button
               data-testid="jump-analysis"
-              onClick={() => onOpenAnalysis(REVIEW_QUEUE[0])}
+              onClick={() => onOpenAnalysis(reviewQueue[0])}
               className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.02] px-3 py-1.5 text-xs text-slate-200 hover:border-white/20 hover:bg-white/5"
             >
               Open in analysis <ArrowRight className="h-3.5 w-3.5" />
             </button>
           </div>
           <div className="mt-6 grid gap-5 md:grid-cols-3">
-            {Object.entries(BIOMECHANICS_SNAPSHOT).map(([k, v], i) => (
+            {Object.entries(biomechanicsSnapshot).map(([k, v], i) => (
               <div
                 key={k}
                 className="rounded-2xl border border-white/5 bg-white/[0.02] p-4"
@@ -361,10 +359,11 @@ const OverviewSection = ({ onOpenAnalysis }) => {
 
 /* ------------------------------ REVIEW QUEUE ------------------------------ */
 const ReviewQueueSection = ({ onOpenAnalysis }) => {
+  const { reviewQueue } = useCoach();
   const [filter, setFilter] = useState("all");
   const filtered = useMemo(() => {
-    if (filter === "all") return REVIEW_QUEUE;
-    return REVIEW_QUEUE.filter((r) => r.urgency === filter);
+    if (filter === "all") return reviewQueue;
+    return reviewQueue.filter((r) => r.urgency === filter);
   }, [filter]);
 
   return (
@@ -481,6 +480,7 @@ const ReviewQueueSection = ({ onOpenAnalysis }) => {
 
 /* -------------------------------- RANKINGS -------------------------------- */
 const RankingsSection = () => {
+  const { playerRankings } = useCoach();
   return (
     <Section
       eyebrow="Gamification"
@@ -494,7 +494,7 @@ const RankingsSection = () => {
     >
       {/* Podium top-3 */}
       <div className="grid gap-5 md:grid-cols-3">
-        {PLAYER_RANKINGS.slice(0, 3).map((p, i) => {
+        {playerRankings.slice(0, 3).map((p, i) => {
           const podiumColor =
             i === 0
               ? "from-[#f5d982] to-[#D4AF37]"
@@ -570,7 +570,7 @@ const RankingsSection = () => {
           <span>Sessions</span>
           <span className="text-right">Trend</span>
         </div>
-        {PLAYER_RANKINGS.slice(3).map((p, i) => (
+        {playerRankings.slice(3).map((p, i) => (
           <div
             key={p.id}
             data-testid={`row-${p.rank}`}
@@ -623,8 +623,9 @@ const RankingsSection = () => {
 
 /* ------------------------------ TALENT SCOUTING ------------------------------ */
 const TalentSection = () => {
-  const [selectedId, setSelectedId] = useState(TALENT_PROSPECTS[0].id);
-  const selected = TALENT_PROSPECTS.find((p) => p.id === selectedId);
+  const { talentProspects } = useCoach();
+  const [selectedId, setSelectedId] = useState(talentProspects?.[0]?.id);
+  const selected = talentProspects.find((p) => p.id === selectedId) || talentProspects[0];
   const [contactOpen, setContactOpen] = useState(false);
   const [message, setMessage] = useState(
     "Hello — we've been tracking your biomechanics scores this season and would love to invite you to the next-level trial. Coach Suhas."
@@ -644,13 +645,13 @@ const TalentSection = () => {
       action={
         <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-3 py-1.5 text-xs text-slate-300">
           <Search className="h-3.5 w-3.5 text-emerald-300" />
-          {TALENT_PROSPECTS.length} prospects flagged
+          {talentProspects.length} prospects flagged
         </div>
       }
     >
       <div className="grid gap-6 lg:grid-cols-[1fr,1.4fr]">
         <div className="flex flex-col gap-4">
-          {TALENT_PROSPECTS.map((p, i) => (
+          {talentProspects.map((p, i) => (
             <button
               key={p.id}
               data-testid={`prospect-${p.id}`}
@@ -846,7 +847,7 @@ const TalentSection = () => {
 
 /* ------------------------------ VIDEO ANALYSIS ------------------------------ */
 const AnalysisSection = ({ initial, onClear }) => {
-  const source = initial || REVIEW_QUEUE[0];
+  const source = initial || reviewQueue[0];
   const [scores, setScores] = useState(source.scores);
   const [note, setNote] = useState("");
   const [playing, setPlaying] = useState(false);
@@ -971,7 +972,7 @@ const AnalysisSection = ({ initial, onClear }) => {
           </div>
 
           <div className="grid gap-4 border-t border-white/5 p-6 md:grid-cols-3">
-            {Object.entries(BIOMECHANICS_SNAPSHOT).map(([k, v]) => (
+            {Object.entries(biomechanicsSnapshot).map(([k, v]) => (
               <div key={k}>
                 <div className="text-[10px] font-semibold uppercase tracking-[0.24em] text-slate-500">
                   {k} · breakdown
@@ -1091,7 +1092,7 @@ const CoachDashboard = () => {
   };
 
   return (
-    <AppShell role="coach" activeKey={active} onNavigate={setActive} title={titleMap[active]}>
+    <AppShell role="coach" activeKey={active} onNavigate={setActive} title={titleMap[active]} profile={coach}>
       {active === "overview" ? <OverviewSection onOpenAnalysis={openAnalysis} /> : null}
       {active === "queue" ? <ReviewQueueSection onOpenAnalysis={openAnalysis} /> : null}
       {active === "rankings" ? <RankingsSection /> : null}
