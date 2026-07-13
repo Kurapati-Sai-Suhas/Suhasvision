@@ -1,4 +1,6 @@
 import os
+import sys
+import logging
 import cv2
 import numpy as np
 import pandas as pd
@@ -9,6 +11,13 @@ from mediapipe.tasks import python as mp_python
 from mediapipe.tasks.python import vision
 import urllib.request
 from django.conf import settings
+
+logger = logging.getLogger(__name__)
+
+_dataset_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))), "dataset")
+if _dataset_dir not in sys.path:
+    sys.path.insert(0, _dataset_dir)
+from rule_based_scorer import score_from_keypoint_df  # noqa: E402 (path must be set up first)
 
 # 1. Custom Attention Layer Definition (Required for loading the model)
 @tf.keras.utils.register_keras_serializable()
@@ -37,9 +46,12 @@ def get_models():
     if _extractor is not None and _detector is not None:
         return _extractor, _att_layer, _detector
 
-    # Paths
+    # Paths. MODEL_FILENAME is pinned explicitly rather than auto-selected (unlike
+    # dataset/inference_service.py's glob-highest-version approach) so a production
+    # deploy always knows exactly which trained model is serving requests.
     base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
-    model_path = os.path.join(base_dir, "dataset", "cricket_stance_advanced_v2.keras")
+    model_filename = os.environ.get('CRICKET_MODEL_FILENAME', 'cricket_stance_advanced_v4.keras')
+    model_path = os.path.join(base_dir, "dataset", model_filename)
     mp_task_path = os.path.join(base_dir, 'pose_landmarker_heavy.task')
     
     if not os.path.exists(mp_task_path):
@@ -143,6 +155,18 @@ def run_advanced_inference(video_path):
         raise ValueError("Could not extract any landmarks from video")
 
     combined_df = pd.concat(dfs, ignore_index=True)
+
+    # Reliability requirement (SRS FR-ERR-001): if the ML model/inference path
+    # fails for any reason, fall back to the rule-based scorer on the same
+    # extracted keypoints rather than surfacing a 500 to the user.
+    try:
+        return _run_model_inference(combined_df, extractor)
+    except Exception:
+        logger.exception("ML inference failed; falling back to rule-based scorer")
+        return score_from_keypoint_df(combined_df)
+
+
+def _run_model_inference(combined_df, extractor):
     angles_df = pd.DataFrame()
     angles_df["angle_knee_L"] = calculate_angle(combined_df, "left_hip", "left_knee", "left_ankle")
     angles_df["angle_knee_R"] = calculate_angle(combined_df, "right_hip", "right_knee", "right_ankle")
@@ -162,29 +186,39 @@ def run_advanced_inference(video_path):
     combined_df["mid_shoulder_y"] = (combined_df["left_shoulder_y"] + combined_df["right_shoulder_y"]) / 2
     combined_df["mid_shoulder_z"] = (combined_df["left_shoulder_z"] + combined_df["right_shoulder_z"]) / 2
     angles_df["angle_head_tilt"] = calculate_angle_with_vertical(combined_df, "mid_shoulder", "nose")
-    
+
     angle_cols = angles_df.columns.tolist()
     angles_df[angle_cols] = angles_df[angle_cols] / 180.0
     for col in angle_cols:
         angles_df[col + "_vel"] = angles_df[col].diff().fillna(0)
-        
+
     tensor = angles_df.values.astype(np.float32)
     X_input = np.expand_dims(tensor, axis=0)
-    
+
     mc_scores = []
     for _ in range(30):
         s, _ = extractor(X_input, training=True)
         mc_scores.append(s.numpy())
-        
+
     scores_array = np.vstack(mc_scores)
     mean_scores = np.mean(scores_array, axis=0) * 100.0
-    
+    # Std across the 30 MC-Dropout passes = the model's own uncertainty in each
+    # score. Previously computed nowhere, discarded everywhere.
+    std_scores = np.std(scores_array, axis=0) * 100.0
+
     return {
         "balance_score": int(mean_scores[0]),
         "power_score": int(mean_scores[1]),
         "technique_score": int(mean_scores[2]),
         "defence_score": int(mean_scores[3]),
         "overall_score": int(np.mean(mean_scores)),
+        "confidence_variance": {
+            "balance": round(float(std_scores[0]), 2),
+            "power": round(float(std_scores[1]), 2),
+            "technique": round(float(std_scores[2]), 2),
+            "defence": round(float(std_scores[3]), 2),
+        },
         "primary_weakness": "Requires Review",
-        "primary_strength": "Great Form"
+        "primary_strength": "Great Form",
+        "is_fallback": False,
     }

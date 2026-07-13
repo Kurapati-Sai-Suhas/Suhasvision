@@ -102,7 +102,7 @@ const Section = ({ eyebrow, title, action, children }) => (
 
 /* ------------------------------- OVERVIEW ------------------------------- */
 const OverviewSection = ({ onOpenAnalysis }) => {
-  const { coach, reviewQueue, coachMetrics, progressTimeline, coachSessions, recentActivity, biomechanicsSnapshot } = useCoach();
+  const { coach, reviewQueue, coachMetrics, progressTimeline, coachSessions, recentActivity, biomechanicsSnapshot, latestSession } = useCoach();
   return (
     <div className="flex flex-col gap-10">
       {/* Hero header */}
@@ -113,14 +113,15 @@ const OverviewSection = ({ onOpenAnalysis }) => {
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.24em] text-slate-300">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 sv-pulse" />
-              Feb 10 · Wednesday · Ground A
+              {coach.name}
             </div>
             <h1 className="mt-4 font-display text-3xl font-bold tracking-tight text-slate-50 sm:text-4xl lg:text-5xl">
-              Good morning, {coach.name.split(" ")[1]}.
+              Good morning, coach.
             </h1>
             <p className="mt-3 max-w-xl text-base text-slate-400">
-              12 new videos are waiting in your review queue and your academy's average score is
-              trending up for the fourth week in a row.
+              {reviewQueue.length > 0
+                ? `${reviewQueue.length} video${reviewQueue.length === 1 ? "" : "s"} in your review queue.`
+                : "No videos waiting in your review queue right now."}
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
@@ -252,6 +253,11 @@ const OverviewSection = ({ onOpenAnalysis }) => {
             <CalendarDays className="h-5 w-5 text-slate-500" />
           </div>
           <div className="mt-5 flex flex-col divide-y divide-white/5">
+            {coachSessions.length === 0 ? (
+              <div className="py-6 text-center text-sm text-slate-500">
+                No scheduled sessions — calendar integration coming soon.
+              </div>
+            ) : null}
             {coachSessions.map((s, i) => (
               <div
                 key={i}
@@ -314,9 +320,11 @@ const OverviewSection = ({ onOpenAnalysis }) => {
                 Latest biomechanics snapshot
               </div>
               <div className="mt-1 font-display text-xl font-semibold text-slate-50">
-                Arya Patel · Straight drive
+                {latestSession ? `${latestSession.learner} · ${latestSession.title}` : "No sessions yet"}
               </div>
-              <div className="mt-1 text-xs text-slate-500">Submitted 23 minutes ago · 0:51</div>
+              <div className="mt-1 text-xs text-slate-500">
+                {latestSession ? `Submitted ${latestSession.date}` : "Waiting on the first upload"}
+              </div>
             </div>
             <button
               data-testid="jump-analysis"
@@ -623,13 +631,33 @@ const RankingsSection = () => {
 
 /* ------------------------------ TALENT SCOUTING ------------------------------ */
 const TalentSection = () => {
-  const { talentProspects } = useCoach();
+  const { talentProspects, coach } = useCoach();
   const [selectedId, setSelectedId] = useState(talentProspects?.[0]?.id);
   const selected = talentProspects.find((p) => p.id === selectedId) || talentProspects[0];
   const [contactOpen, setContactOpen] = useState(false);
   const [message, setMessage] = useState(
-    "Hello — we've been tracking your biomechanics scores this season and would love to invite you to the next-level trial. Coach Suhas."
+    `Hello — we've been tracking your biomechanics scores this season and would love to invite you to the next-level trial. Coach ${coach.name}.`
   );
+
+  if (!talentProspects || talentProspects.length === 0) {
+    return (
+      <Section
+        eyebrow="Talent pipeline"
+        title="Scouting the next generation"
+      >
+        <div className="rounded-3xl border border-white/5 sv-glass p-10 text-center">
+          <Search className="mx-auto h-8 w-8 text-slate-600" />
+          <div className="mt-4 font-display text-lg font-semibold text-slate-200">
+            No prospects flagged yet
+          </div>
+          <p className="mx-auto mt-2 max-w-sm text-sm text-slate-400">
+            Talent scouting surfaces once players build up enough session history for a trend to
+            stand out. Check back after a few more weeks of reviews.
+          </p>
+        </div>
+      </Section>
+    );
+  }
 
   const handleInvite = () => {
     setContactOpen(false);
@@ -847,10 +875,22 @@ const TalentSection = () => {
 
 /* ------------------------------ VIDEO ANALYSIS ------------------------------ */
 const AnalysisSection = ({ initial, onClear }) => {
+  const { reviewQueue, biomechanicsSnapshot } = useCoach();
   const source = initial || reviewQueue[0];
-  const [scores, setScores] = useState(source.scores);
+
+  const [scores, setScores] = useState(source?.scores || { balance: 0, power: 0, technique: 0 });
   const [note, setNote] = useState("");
   const [playing, setPlaying] = useState(false);
+
+  if (!source) {
+    return (
+      <Section eyebrow="AI-assisted review" title="Video analysis">
+        <div className="rounded-3xl border border-white/5 sv-glass p-10 text-center text-sm text-slate-400">
+          No session selected. Open a video from the review queue to analyze it.
+        </div>
+      </Section>
+    );
+  }
 
   const overall = Math.round((scores.balance + scores.power + scores.technique) / 3);
 
@@ -1091,16 +1131,175 @@ const CoachDashboard = () => {
     analysis: "Video Analysis",
   };
 
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["coachDashboard"],
+    queryFn: () => fetchWithAuth("/coach/me/"),
+  });
+
+  if (isLoading || !data) {
+    return (
+      <div className="flex h-screen items-center justify-center bg-[#05080F] text-emerald-400">
+        Loading your academy...
+      </div>
+    );
+  }
+  if (error) {
+    return (
+      <div className="flex h-screen items-center justify-center bg-[#05080F] text-red-400">
+        Error loading dashboard: {error.message}
+      </div>
+    );
+  }
+
+  const academyName = data.academy?.name || "Your Academy";
+  const players = data.players || [];
+  const sessions = data.review_queue || [];
+
+  const coach = {
+    name: academyName,
+    role: "coach",
+    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?crop=faces&fit=crop&w=200&h=200",
+    email: "",
+  };
+
+  const playerById = Object.fromEntries(players.map((p) => [p.id, p]));
+
+  const reviewQueue = sessions.map((s) => {
+    const player = playerById[s.player] || {};
+    return {
+      id: s.id,
+      learner: player.name || "Player",
+      tier: player.playing_level || "—",
+      avatar: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?crop=faces&fit=crop&w=256&h=256",
+      thumbnail: "https://images.pexels.com/photos/3628912/pexels-photo-3628912.jpeg?auto=compress&cs=tinysrgb&w=800",
+      duration: "0:30",
+      urgency: s.status === "COMPLETED" ? "low" : "high",
+      submittedAt: new Date(s.date_analyzed).toLocaleDateString(),
+      videoTitle: s.title || `Session ${s.id}`,
+      aiScore: s.overall_score,
+      scores: { balance: s.balance_score, power: s.power_score, technique: s.technique_score },
+    };
+  });
+
+  const avgScore = sessions.length
+    ? Math.round(sessions.reduce((sum, s) => sum + (s.overall_score || 0), 0) / sessions.length)
+    : 0;
+
+  const coachMetrics = [
+    { label: "Total players", value: players.length, delta: "enrolled", tone: "emerald", testId: "metric-players" },
+    { label: "Sessions reviewed", value: sessions.length, delta: "all time", tone: "emerald", testId: "metric-sessions" },
+    { label: "Avg AI score", value: avgScore || "—", delta: "across all sessions", tone: "gold", testId: "metric-avg" },
+    {
+      label: "Awaiting review",
+      value: sessions.filter((s) => s.status !== "COMPLETED").length,
+      delta: "in queue",
+      tone: "muted",
+      testId: "metric-queue",
+    },
+  ];
+
+  const progressTimeline = [...sessions]
+    .slice()
+    .reverse()
+    .slice(-12)
+    .map((s, i) => ({
+      week: `S${i + 1}`,
+      balance: s.balance_score,
+      power: s.power_score,
+      technique: s.technique_score,
+    }));
+
+  const recentActivity = sessions.slice(0, 6).map((s) => {
+    const player = playerById[s.player] || {};
+    return {
+      id: s.id,
+      icon: "video",
+      text: `${player.name || "A player"} submitted "${s.title || "a session"}"`,
+      time: new Date(s.date_analyzed).toLocaleDateString(),
+    };
+  });
+
+  const latest = sessions[0];
+  const latestPlayer = latest ? playerById[latest.player] || {} : null;
+  const latestSession = latest
+    ? {
+        learner: latestPlayer.name || "A player",
+        title: latest.title || `Session ${latest.id}`,
+        date: new Date(latest.date_analyzed).toLocaleDateString(),
+      }
+    : null;
+
+  const emptyMetric = { score: 0, trend: "—", breakdown: [] };
+  const biomechanicsSnapshot = latest
+    ? {
+        balance: { score: latest.balance_score, trend: "—", breakdown: [{ label: "Overall", value: latest.balance_score }] },
+        power: { score: latest.power_score, trend: "—", breakdown: [{ label: "Overall", value: latest.power_score }] },
+        technique: { score: latest.technique_score, trend: "—", breakdown: [{ label: "Overall", value: latest.technique_score }] },
+      }
+    : { balance: emptyMetric, power: emptyMetric, technique: emptyMetric };
+
+  const playerRankings = [...players]
+    .sort((a, b) => (b.total_points || 0) - (a.total_points || 0))
+    .map((p, i) => {
+      const playerSessions = sessions.filter((s) => s.player === p.id);
+      const best = playerSessions.reduce((m, s) => Math.max(m, s.overall_score || 0), 0);
+      return {
+        id: p.id,
+        rank: i + 1,
+        name: p.name,
+        avatar: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?crop=faces&fit=crop&w=256&h=256",
+        tier: p.playing_level || "—",
+        specialty: p.batting_hand ? `${p.batting_hand}-handed` : "—",
+        highlight: p.archetype || "",
+        aiScore: best,
+        peakScore: best,
+        trend: "flat",
+        trendValue: 0,
+        streak: p.current_streak || 0,
+        sessions: playerSessions.length,
+      };
+    });
+
+  const talentProspects = playerRankings
+    .filter((p) => p.aiScore >= 85)
+    .map((p) => ({
+      ...p,
+      age: "—",
+      hometown: academyName,
+      style: p.specialty,
+      signature: `Consistently scoring ${p.aiScore}+ across ${p.sessions} session${p.sessions === 1 ? "" : "s"}.`,
+      strengths: [],
+      weaknesses: [],
+      nextLevelReady: p.aiScore >= 90,
+    }));
+
+  const coachSessions = []; // no coaching-calendar backend yet
+
+  const contextValue = {
+    coach,
+    reviewQueue,
+    coachMetrics,
+    progressTimeline,
+    coachSessions,
+    recentActivity,
+    biomechanicsSnapshot,
+    playerRankings,
+    talentProspects,
+    latestSession,
+  };
+
   return (
-    <AppShell role="coach" activeKey={active} onNavigate={setActive} title={titleMap[active]} profile={coach}>
-      {active === "overview" ? <OverviewSection onOpenAnalysis={openAnalysis} /> : null}
-      {active === "queue" ? <ReviewQueueSection onOpenAnalysis={openAnalysis} /> : null}
-      {active === "rankings" ? <RankingsSection /> : null}
-      {active === "talent" ? <TalentSection /> : null}
-      {active === "analysis" ? (
-        <AnalysisSection initial={analysisTarget} onClear={() => setActive("queue")} />
-      ) : null}
-    </AppShell>
+    <CoachContext.Provider value={contextValue}>
+      <AppShell role="coach" activeKey={active} onNavigate={setActive} title={titleMap[active]} profile={coach}>
+        {active === "overview" ? <OverviewSection onOpenAnalysis={openAnalysis} /> : null}
+        {active === "queue" ? <ReviewQueueSection onOpenAnalysis={openAnalysis} /> : null}
+        {active === "rankings" ? <RankingsSection /> : null}
+        {active === "talent" ? <TalentSection /> : null}
+        {active === "analysis" ? (
+          <AnalysisSection initial={analysisTarget} onClear={() => setActive("queue")} />
+        ) : null}
+      </AppShell>
+    </CoachContext.Provider>
   );
 };
 

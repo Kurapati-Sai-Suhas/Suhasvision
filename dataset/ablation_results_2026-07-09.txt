@@ -1,0 +1,59 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1783585586.042264   44064 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1783585587.414285   44064 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+I0000 00:00:1783585588.758953   44064 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE3 SSE4.1 SSE4.2 AVX AVX2 AVX_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+WARNING:tensorflow:From C:\Users\Suhas\OneDrive\Documents\Notes\Cricket-Stance-Analyzer\backend\venv\Lib\site-packages\keras\src\backend\tensorflow\core.py:233: The name tf.placeholder is deprecated. Please use tf.compat.v1.placeholder instead.
+
+WARNING:tensorflow:5 out of the last 7 calls to <function TensorFlowTrainer.make_predict_function.<locals>.one_step_on_data_distributed at 0x000001CB8E9305E0> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+WARNING:tensorflow:6 out of the last 9 calls to <function TensorFlowTrainer.make_predict_function.<locals>.one_step_on_data_distributed at 0x000001CB8E9305E0> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+Starting 5-Fold Cross Validation across 4 architectures...
+
+--- Fold 1/5 ---
+Base LSTM: Fold 1 MAE = 16.25 pts
+LSTM + Attn: Fold 1 MAE = 12.73 pts
+Conv1D + LSTM: Fold 1 MAE = 8.42 pts
+Conv1D + LSTM + Attn: Fold 1 MAE = 7.39 pts
+
+--- Fold 2/5 ---
+Base LSTM: Fold 2 MAE = 12.78 pts
+LSTM + Attn: Fold 2 MAE = 15.11 pts
+Conv1D + LSTM: Fold 2 MAE = 10.26 pts
+Conv1D + LSTM + Attn: Fold 2 MAE = 10.92 pts
+
+--- Fold 3/5 ---
+Base LSTM: Fold 3 MAE = 11.35 pts
+LSTM + Attn: Fold 3 MAE = 9.22 pts
+Conv1D + LSTM: Fold 3 MAE = 7.77 pts
+Conv1D + LSTM + Attn: Fold 3 MAE = 7.91 pts
+
+--- Fold 4/5 ---
+Base LSTM: Fold 4 MAE = 13.94 pts
+LSTM + Attn: Fold 4 MAE = 14.93 pts
+Conv1D + LSTM: Fold 4 MAE = 8.91 pts
+Conv1D + LSTM + Attn: Fold 4 MAE = 9.21 pts
+
+--- Fold 5/5 ---
+Base LSTM: Fold 5 MAE = 44.01 pts
+LSTM + Attn: Fold 5 MAE = 44.62 pts
+Conv1D + LSTM: Fold 5 MAE = 42.51 pts
+Conv1D + LSTM + Attn: Fold 5 MAE = 40.09 pts
+
+
+==================================================
+TABLE 2: ABLATION STUDY RESULTS (5-Fold CV MAE)
+==================================================
+Base LSTM                : 19.67 ± 12.28 pts
+LSTM + Attn              : 19.32 ± 12.83 pts
+Conv1D + LSTM            : 15.57 ± 13.49 pts
+Conv1D + LSTM + Attn     : 15.10 ± 12.55 pts
+
+==================================================
+TABLE 3: PER-METRIC MAE FOR TCN-ATTENTION MODEL
+==================================================
+Balance                  : 13.99 ± 12.34 pts
+Power                    : 17.13 ± 16.06 pts
+Technique                : 17.59 ± 15.33 pts
+Defence                  : 11.70 ± 6.55 pts

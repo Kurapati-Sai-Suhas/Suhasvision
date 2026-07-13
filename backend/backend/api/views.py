@@ -1,18 +1,20 @@
 import os
 import uuid
-import base64
+import logging
 from django.conf import settings
 from rest_framework import viewsets, views
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.exceptions import PermissionDenied
 from .models import PlayerProfile, AnalysisSession, Academy
 from .serializers import AnalysisSessionSerializer, PlayerProfileSerializer
 from .ml_service import run_advanced_inference
 
-def encode_image(image_path):
-    with open(image_path, "rb") as image_file:
-        return base64.b64encode(image_file.read()).decode('utf-8')
+logger = logging.getLogger(__name__)
+
+ALLOWED_VIDEO_CONTENT_TYPES = {"video/mp4", "video/quicktime", "video/webm", "video/x-msvideo"}
+MAX_VIDEO_BYTES = 200 * 1024 * 1024  # 200MB
 
 class AnalysisSessionViewSet(viewsets.ModelViewSet):
     queryset = AnalysisSession.objects.all()
@@ -27,6 +29,21 @@ class AnalysisSessionViewSet(viewsets.ModelViewSet):
             return AnalysisSession.objects.filter(player__academy=user.academy).order_by('-date_analyzed')
         return AnalysisSession.objects.none()
 
+    def create(self, request, *args, **kwargs):
+        # Sessions may only be created via analyze_stance, which enforces player
+        # scoping and runs the ML pipeline. A bare POST here would let any
+        # authenticated user write arbitrary scores against any player id.
+        return Response(
+            {"error": "Direct session creation is not allowed. Use /sessions/analyze_stance/."},
+            status=405,
+        )
+
+    def perform_update(self, serializer):
+        user = self.request.user
+        if not hasattr(user, 'academy'):
+            raise PermissionDenied("Only a coach can override a session's scores.")
+        serializer.save()
+
     @action(detail=False, methods=['post'])
     def analyze_stance(self, request):
         user = request.user
@@ -35,7 +52,16 @@ class AnalysisSessionViewSet(viewsets.ModelViewSet):
         
         if not video_file:
             return Response({"error": "No video file provided."}, status=400)
-            
+
+        if video_file.size > MAX_VIDEO_BYTES:
+            return Response({"error": "Video exceeds the 200MB upload limit."}, status=400)
+
+        if video_file.content_type not in ALLOWED_VIDEO_CONTENT_TYPES:
+            return Response(
+                {"error": "Unsupported file type. Please upload an MP4, MOV, WEBM, or AVI video."},
+                status=400,
+            )
+
         # Determine player context
         player = None
         if hasattr(user, 'playerprofile'):
@@ -62,11 +88,23 @@ class AnalysisSessionViewSet(viewsets.ModelViewSet):
                 destination.write(chunk)
                 
         # 2. Run Custom Keras/MediaPipe Inference
+        # The uploaded video only ever needs to exist on disk for the duration of
+        # this call (zero-storage requirement) — always clean it up afterwards,
+        # whether inference succeeds or fails.
         try:
             scores_data = run_advanced_inference(video_path)
         except Exception as e:
-            return Response({"error": f"ML Inference Error: {str(e)}"}, status=500)
-        
+            logger.exception("ML inference failed for %s", unique_filename)
+            return Response(
+                {"error": "We couldn't analyze that video. Please try a clearer, well-lit clip."},
+                status=500,
+            )
+        finally:
+            try:
+                os.remove(video_path)
+            except OSError:
+                logger.warning("Could not remove temp video %s", video_path)
+
         # 3. Create Session with real AI data
         new_session = AnalysisSession.objects.create(
             player=player,

@@ -12,8 +12,26 @@ dataset/.env
 node_modules/
 dist/
 .DS_Store
-# Media and datasets
-dataset/
+# Media
 backend/backend/media/
 *.log
+
+# Dataset: track the ML source code, ignore the heavy generated/raw data.
+# (Previously the whole dataset/ folder was ignored, which meant
+# inference_service.py, zero_storage_pipeline.py, schema.py, and the .keras
+# models had no version control at all.)
+dataset/raw_videos/
+dataset/frames/
+dataset/frames_annotated/
+dataset/diversity_report/
+dataset/*.csv
+dataset/*.mp4
+dataset/*.log
+dataset/*.txt
+dataset/__pycache__/
+dataset/academic_scripts/__pycache__/
+dataset/cookies.txt
+# Large model/asset binaries — consider Git LFS for these instead of raw commits.
+dataset/*.keras
+dataset/*.task
 

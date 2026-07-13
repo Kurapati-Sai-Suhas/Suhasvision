@@ -225,7 +225,8 @@ const OverviewSection = ({ onNavigate }) => {
             <div
               key={u.id}
               data-testid={`upload-card-${u.id}`}
-              className={`sv-rise sv-rise-${i + 1} group overflow-hidden rounded-2xl border border-white/5 sv-glass transition-all hover:-translate-y-0.5 hover:border-white/15`}
+              onClick={() => onNavigate("feedback")}
+              className={`sv-rise sv-rise-${i + 1} group cursor-pointer overflow-hidden rounded-2xl border border-white/5 sv-glass transition-all hover:-translate-y-0.5 hover:border-white/15`}
             >
               <div className="relative aspect-video overflow-hidden">
                 <img
@@ -280,7 +281,7 @@ const OverviewSection = ({ onNavigate }) => {
 };
 
 /* ------------------------------ UPLOAD CENTER ------------------------------ */
-const UploadSection = () => {
+const UploadSection = ({ onNavigate }) => {
   const { learner, refetch } = useLearner();
   const [dragOver, setDragOver] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -291,26 +292,38 @@ const UploadSection = () => {
   const startUpload = async (file) => {
     setUploadedName(file?.name || "batting_session.mp4");
     setUploading(true);
-    setProgress(10);
     
     const formData = new FormData();
     formData.append("video", file);
     formData.append("title", file?.name || "Practice Session");
     
     try {
+      // Simulate progress for UI feel
+      const progressInterval = setInterval(() => {
+        setProgress(p => Math.min(p + 15, 90));
+      }, 500);
+
       const res = await fetchWithAuth("/sessions/analyze_stance/", {
         method: "POST",
         body: formData,
       });
+      
+      clearInterval(progressInterval);
       setProgress(100);
-      toast.success("Video analyzed successfully!", {
-        description: "Your biomechanics report is ready.",
-      });
-      refetch();
-    } catch (e) {
-      toast.error("Upload failed", { description: e.message });
-    } finally {
+      toast.success("Video analyzed successfully! Your biomechanics report is ready.");
+      refetch(); // refresh learner data
+      
+      setTimeout(() => {
+        setUploading(false);
+        setProgress(0);
+        setUploadedName(null);
+        if (onNavigate) onNavigate("overview");
+      }, 2000);
+    } catch (err) {
+      setProgress(0);
       setUploading(false);
+      setUploadedName(null);
+      toast.error(err.message || "Upload failed");
     }
   };
 
@@ -413,7 +426,7 @@ const UploadSection = () => {
             </div>
             <ul className="mt-5 flex flex-col gap-3 text-sm text-slate-400">
               {[
-                "Film from side-on, waist level of the batter",
+                "Film front-on, facing the batter, waist level",
                 "Ensure the full stance and follow-through are in frame",
                 "60fps or higher gives cleaner biomechanics traces",
                 "Even lighting — avoid heavy shadows on the pitch",
@@ -864,20 +877,56 @@ const FeedbackSection = () => {
               </div>
             ) : null}
 
+            {/* SWOT Analysis */}
+            <div className="grid grid-cols-2 gap-4">
+              {['Strength', 'Weakness', 'Opportunity', 'Threat'].map((type, i) => (
+                <div key={type} className="rounded-2xl border border-white/5 bg-white/[0.02] p-4">
+                  <div className={`text-[10px] font-semibold uppercase tracking-[0.24em] ${i === 0 ? 'text-emerald-300' : i === 1 ? 'text-rose-300' : i === 2 ? 'text-sky-300' : 'text-amber-300'}`}>
+                    {type}
+                  </div>
+                  <div className="mt-2 text-sm text-slate-300">{selected.swot?.[i] || ""}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Vulnerability Profile */}
+            <div className="rounded-2xl border border-rose-500/20 bg-gradient-to-br from-rose-500/5 to-transparent p-5">
+              <div className="text-[10px] font-semibold uppercase tracking-[0.24em] text-rose-400">
+                Vulnerability Profile
+              </div>
+              <div className="mt-4 grid grid-cols-2 gap-4 border-b border-white/5 pb-4">
+                <div>
+                  <div className="text-[10px] uppercase tracking-[0.2em] text-slate-500">Struggling Length</div>
+                  <div className="mt-1 font-display text-lg font-semibold text-slate-200">{selected.vulnerability?.length}</div>
+                </div>
+                <div>
+                  <div className="text-[10px] uppercase tracking-[0.2em] text-slate-500">Struggling Line</div>
+                  <div className="mt-1 font-display text-lg font-semibold text-slate-200">{selected.vulnerability?.line}</div>
+                </div>
+              </div>
+              <div className="mt-4">
+                <div className="text-[10px] uppercase tracking-[0.2em] text-slate-500">Biomechanical Reason</div>
+                <p className="mt-1 text-sm text-slate-300">{selected.vulnerability?.reason}</p>
+              </div>
+            </div>
+
             <div>
               <div className="text-[10px] font-semibold uppercase tracking-[0.24em] text-emerald-300">
-                Coach recommendations
+                Action Plan & Drills
               </div>
               <ul className="mt-3 flex flex-col gap-3">
-                {selected.recommendations.map((r, i) => (
+                {selected.drills?.map((drill, i) => (
                   <li
                     key={i}
-                    className="flex items-start gap-3 rounded-xl border border-white/5 bg-white/[0.02] p-3.5 text-sm text-slate-300"
+                    className="flex flex-col gap-2 rounded-xl border border-white/5 bg-white/[0.02] p-4 text-sm text-slate-300"
                   >
-                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-500/15 text-[11px] font-semibold text-emerald-300">
-                      {i + 1}
-                    </span>
-                    {r}
+                    <div className="flex items-center gap-3 font-semibold text-slate-100">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-500/15 text-[11px] text-emerald-300">
+                        {i + 1}
+                      </span>
+                      {drill.name}
+                    </div>
+                    <div className="pl-9 text-slate-400">{drill.description}</div>
                   </li>
                 ))}
               </ul>
@@ -887,6 +936,81 @@ const FeedbackSection = () => {
       </div>
     </Section>
   );
+};
+
+const generateAIInsights = (b, p, t) => {
+  let length = "Full Length";
+  let line = "Outside Off Stump";
+  let reason = "Your balance score indicates you are falling over to the offside, making you vulnerable to full, wide deliveries.";
+  let swot = [
+    "Solid backfoot foundation.", 
+    "Weight transfer is delayed.", 
+    "Can easily generate 15% more power with hip rotation.", 
+    "LBW candidates against inswingers."
+  ];
+  let drills = [
+    { name: "Drop Ball Drill", description: "Have a partner drop the ball on a length outside off. Focus on striding to the pitch without falling over." }
+  ];
+
+  if (b < 65) {
+    length = "Full Length";
+    line = "Outside Off Stump";
+    reason = `Your balance score (${b}) shows instability at the crease. You are likely falling over to the offside, making you vulnerable to full, wide deliveries driving away from the body.`;
+    swot = [
+      "Good initial setup.", 
+      "Falling over upon ball release.", 
+      "Stabilizing the head will massively improve shot control.", 
+      "Edges behind the wicket due to reaching."
+    ];
+    drills = [
+      { name: "The Flamingo Drill", description: "Play your shot and hold your pose on one leg for 3 seconds to enforce core stability." },
+      { name: "Cone Touch Drill", description: "Place a cone outside off. Stride and touch it with your bat while keeping your head perfectly still." }
+    ];
+  } else if (p < 65) {
+    length = "Short of a Length";
+    line = "Body Line";
+    reason = `Your power score (${p}) is low. This suggests your hip rotation is locked, making it hard to generate force against balls dug in short.`;
+    swot = [
+      "Excellent head position.", 
+      "Lack of hip and shoulder separation.", 
+      "Engaging the lower body will instantly boost bat speed.", 
+      "Getting bogged down by aggressive short bowling."
+    ];
+    drills = [
+      { name: "Medicine Ball Throws", description: "Mimic your batting stance and throw a medicine ball into a wall, focusing on hip rotation." },
+      { name: "Heavy Bat Swings", description: "Take 20 shadow swings with a heavier bat to train your fast-twitch muscle fibers." }
+    ];
+  } else if (t < 65) {
+    length = "Yorker Length";
+    line = "Middle & Leg";
+    reason = `Your technique score (${t}) indicates your bat path is coming down at an angle, opening up the gate for straight deliveries.`;
+    swot = [
+      "Aggressive intent.", 
+      "Bat coming down from first slip.", 
+      "Straightening the downswing will unlock the V.", 
+      "Bowled or LBW from straight deliveries."
+    ];
+    drills = [
+      { name: "Wall Drill", description: "Stand close to a wall and practice your straight drive. If your bat hits the wall, your downswing is crooked." },
+      { name: "Top Hand Only", description: "Hit balls off a tee using only your top hand to force a straight bat path." }
+    ];
+  } else {
+    length = "Good Length";
+    line = "4th Stump";
+    reason = `Your scores are excellent! Your only vulnerability is the classic 'corridor of uncertainty' where decision-making is tested.`;
+    swot = [
+      "Elite biomechanics.", 
+      "Occasional lapses in concentration.", 
+      "Ready for higher pace bowling.", 
+      "Nick off against elite seam movement."
+    ];
+    drills = [
+      { name: "Leave Decision Drill", description: "Partner throws mixed lines. Practice decisively leaving everything outside the 4th stump." },
+      { name: "Pace Reaction", description: "Face a bowling machine set to 140km/h focusing entirely on late adjustments." }
+    ];
+  }
+
+  return { vulnerability: { length, line, reason }, swot, drills };
 };
 
 /* --------------------------------- PAGE --------------------------------- */
@@ -954,7 +1078,23 @@ const LearnerDashboard = () => {
   
   // Dummy data for remaining parts to prevent UI crashes while connecting real backend
   const badges = [];
-  const feedbackInbox = [];
+  
+  const feedbackInbox = sessions.map((s) => {
+    const insights = generateAIInsights(s.balance_score, s.power_score, s.technique_score);
+    return {
+      id: s.id,
+      date: new Date(s.date_analyzed).toLocaleDateString(),
+      unread: s.status === "COMPLETED",
+      coachOverride: false,
+      videoTitle: s.title || `Session ${s.id}`,
+      aiSummary: `AI Biomechanics Analysis: Balance ${s.balance_score}/100, Power ${s.power_score}/100, Technique ${s.technique_score}/100. Overall AI Score: ${s.overall_score}. ${s.status === "COMPLETED" ? "Analysis complete." : "Processing..."}`,
+      coachAvatar: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?crop=faces&fit=crop&w=256&h=256",
+      coachName: "Coach Suhas",
+      swot: insights.swot,
+      vulnerability: insights.vulnerability,
+      drills: insights.drills,
+    };
+  });
 
   const contextValue = { learner, learnerUploads, progressTimeline, badges, feedbackInbox, refetch };
 
@@ -962,7 +1102,7 @@ const LearnerDashboard = () => {
     <LearnerContext.Provider value={contextValue}>
       <AppShell role="learner" activeKey={active} onNavigate={setActive} title={titleMap[active]} profile={learner}>
         {active === "overview" ? <OverviewSection onNavigate={setActive} /> : null}
-        {active === "upload" ? <UploadSection /> : null}
+        {active === "upload" ? <UploadSection onNavigate={setActive} /> : null}
         {active === "progress" ? <ProgressSection /> : null}
         {active === "profile" ? <GamificationSection /> : null}
         {active === "feedback" && feedbackInbox.length > 0 ? <FeedbackSection /> : null}
