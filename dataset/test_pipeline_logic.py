@@ -67,6 +67,16 @@ class TestPipelineLogic(unittest.TestCase):
         success, interpolated = apply_pipeline_rules(keypoints, "test_session_7")
         self.assertFalse(success)
         
+    def test_short_frame_list_is_rejected_not_crashed(self):
+        # Regression for audit C3: a caller that silently dropped a failed
+        # frame read used to hand a <7-slot list to these rules, which then
+        # indexed status[i+2] past the end and raised IndexError (swallowed
+        # upstream as a generic extraction error). Must now reject cleanly.
+        keypoints = [self.clean_frame] * 5
+        success, interpolated = apply_pipeline_rules(keypoints, "test_session_short")
+        self.assertFalse(success)
+        self.assertEqual(interpolated, [])
+
     def test_validate_pose_integration(self):
         # Test 9: Verify validate_pose actually rejects a bad topology and feeds None to the rule engine
         from zero_storage_pipeline import validate_pose

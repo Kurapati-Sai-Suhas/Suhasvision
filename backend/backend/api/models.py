@@ -8,6 +8,12 @@ class Academy(models.Model):
     academy_name = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    # ISSUE-007 / FR-AUTH-003: a coach account is created at signup but starts
+    # unprivileged. An admin flips this to True (Django admin) before the
+    # account can run coach-only actions -- see the is_verified checks in
+    # views.py's CoachDashboardView, analyze_stance, and perform_update.
+    is_verified = models.BooleanField(default=False)
+
     def __str__(self):
         return self.academy_name
 
@@ -41,12 +47,19 @@ class AnalysisSession(models.Model):
     primary_strength = models.TextField(blank=True, null=True)
     thing_to_change = models.TextField(blank=True, null=True)
     bonus_insight = models.TextField(blank=True, null=True)
-    
+
     # The Metrics
     balance_score = models.IntegerField(default=0)
     power_score = models.IntegerField(default=0)
     technique_score = models.IntegerField(default=0)
     defence_score = models.IntegerField(default=0)
+
+    # MC-Dropout std per metric and the joints Expected-Gradients attribution
+    # named as this session's real drivers -- previously computed in
+    # ml_service.py and discarded before reaching the database.
+    confidence_variance = models.JSONField(blank=True, null=True)
+    attribution_drivers = models.JSONField(blank=True, null=True)
+    is_fallback = models.BooleanField(default=False)
 
     def __str__(self):
         return f"Session: {self.player.name} - {self.date_analyzed.strftime('%Y-%m-%d')}"

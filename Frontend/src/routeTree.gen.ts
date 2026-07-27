@@ -11,13 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LearnerRouteImport } from './routes/learner'
 import { Route as CoachRouteImport } from './routes/coach'
-import { Route as ShellRouteImport } from './routes/_shell'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ShellResultsRouteImport } from './routes/_shell.results'
-import { Route as ShellLoadingRouteImport } from './routes/_shell.loading'
-import { Route as ShellDashboardRouteImport } from './routes/_shell.dashboard'
-import { Route as ShellCompareRouteImport } from './routes/_shell.compare'
-import { Route as ShellAnalyzerRouteImport } from './routes/_shell.analyzer'
 
 const LearnerRoute = LearnerRouteImport.update({
   id: '/learner',
@@ -29,110 +23,38 @@ const CoachRoute = CoachRouteImport.update({
   path: '/coach',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ShellRoute = ShellRouteImport.update({
-  id: '/_shell',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
-} as any)
-const ShellResultsRoute = ShellResultsRouteImport.update({
-  id: '/results',
-  path: '/results',
-  getParentRoute: () => ShellRoute,
-} as any)
-const ShellLoadingRoute = ShellLoadingRouteImport.update({
-  id: '/loading',
-  path: '/loading',
-  getParentRoute: () => ShellRoute,
-} as any)
-const ShellDashboardRoute = ShellDashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => ShellRoute,
-} as any)
-const ShellCompareRoute = ShellCompareRouteImport.update({
-  id: '/compare',
-  path: '/compare',
-  getParentRoute: () => ShellRoute,
-} as any)
-const ShellAnalyzerRoute = ShellAnalyzerRouteImport.update({
-  id: '/analyzer',
-  path: '/analyzer',
-  getParentRoute: () => ShellRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/coach': typeof CoachRoute
   '/learner': typeof LearnerRoute
-  '/analyzer': typeof ShellAnalyzerRoute
-  '/compare': typeof ShellCompareRoute
-  '/dashboard': typeof ShellDashboardRoute
-  '/loading': typeof ShellLoadingRoute
-  '/results': typeof ShellResultsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/coach': typeof CoachRoute
   '/learner': typeof LearnerRoute
-  '/analyzer': typeof ShellAnalyzerRoute
-  '/compare': typeof ShellCompareRoute
-  '/dashboard': typeof ShellDashboardRoute
-  '/loading': typeof ShellLoadingRoute
-  '/results': typeof ShellResultsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/_shell': typeof ShellRouteWithChildren
   '/coach': typeof CoachRoute
   '/learner': typeof LearnerRoute
-  '/_shell/analyzer': typeof ShellAnalyzerRoute
-  '/_shell/compare': typeof ShellCompareRoute
-  '/_shell/dashboard': typeof ShellDashboardRoute
-  '/_shell/loading': typeof ShellLoadingRoute
-  '/_shell/results': typeof ShellResultsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/coach'
-    | '/learner'
-    | '/analyzer'
-    | '/compare'
-    | '/dashboard'
-    | '/loading'
-    | '/results'
+  fullPaths: '/' | '/coach' | '/learner'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/coach'
-    | '/learner'
-    | '/analyzer'
-    | '/compare'
-    | '/dashboard'
-    | '/loading'
-    | '/results'
-  id:
-    | '__root__'
-    | '/'
-    | '/_shell'
-    | '/coach'
-    | '/learner'
-    | '/_shell/analyzer'
-    | '/_shell/compare'
-    | '/_shell/dashboard'
-    | '/_shell/loading'
-    | '/_shell/results'
+  to: '/' | '/coach' | '/learner'
+  id: '__root__' | '/' | '/coach' | '/learner'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ShellRoute: typeof ShellRouteWithChildren
   CoachRoute: typeof CoachRoute
   LearnerRoute: typeof LearnerRoute
 }
@@ -153,13 +75,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CoachRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_shell': {
-      id: '/_shell'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof ShellRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -167,65 +82,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_shell/results': {
-      id: '/_shell/results'
-      path: '/results'
-      fullPath: '/results'
-      preLoaderRoute: typeof ShellResultsRouteImport
-      parentRoute: typeof ShellRoute
-    }
-    '/_shell/loading': {
-      id: '/_shell/loading'
-      path: '/loading'
-      fullPath: '/loading'
-      preLoaderRoute: typeof ShellLoadingRouteImport
-      parentRoute: typeof ShellRoute
-    }
-    '/_shell/dashboard': {
-      id: '/_shell/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof ShellDashboardRouteImport
-      parentRoute: typeof ShellRoute
-    }
-    '/_shell/compare': {
-      id: '/_shell/compare'
-      path: '/compare'
-      fullPath: '/compare'
-      preLoaderRoute: typeof ShellCompareRouteImport
-      parentRoute: typeof ShellRoute
-    }
-    '/_shell/analyzer': {
-      id: '/_shell/analyzer'
-      path: '/analyzer'
-      fullPath: '/analyzer'
-      preLoaderRoute: typeof ShellAnalyzerRouteImport
-      parentRoute: typeof ShellRoute
-    }
   }
 }
 
-interface ShellRouteChildren {
-  ShellAnalyzerRoute: typeof ShellAnalyzerRoute
-  ShellCompareRoute: typeof ShellCompareRoute
-  ShellDashboardRoute: typeof ShellDashboardRoute
-  ShellLoadingRoute: typeof ShellLoadingRoute
-  ShellResultsRoute: typeof ShellResultsRoute
-}
-
-const ShellRouteChildren: ShellRouteChildren = {
-  ShellAnalyzerRoute: ShellAnalyzerRoute,
-  ShellCompareRoute: ShellCompareRoute,
-  ShellDashboardRoute: ShellDashboardRoute,
-  ShellLoadingRoute: ShellLoadingRoute,
-  ShellResultsRoute: ShellResultsRoute,
-}
-
-const ShellRouteWithChildren = ShellRoute._addFileChildren(ShellRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ShellRoute: ShellRouteWithChildren,
   CoachRoute: CoachRoute,
   LearnerRoute: LearnerRoute,
 }

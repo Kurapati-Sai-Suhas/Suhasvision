@@ -6,19 +6,29 @@ METRIC_NAMES = ["Balance", "Power", "Technique", "Defence"]
 
 def mc_dropout_predict(model, input_tensor, n_passes: int = 30, scale_to_100: bool = True):
     input_tensor = tf.convert_to_tensor(input_tensor, dtype=tf.float32)
-    
+
     # If input is single sample without batch dim, add it
     if len(input_tensor.shape) == 2:
         input_tensor = tf.expand_dims(input_tensor, axis=0)
-        
+
     batch_size = input_tensor.shape[0]
-    raw_passes = np.zeros((n_passes, batch_size, 4), dtype=np.float32)
-    
-    for i in range(n_passes):
-        pred = model(input_tensor, training=True)
-        if isinstance(pred, tuple) or isinstance(pred, list):
-            pred = pred[0]
-        raw_passes[i] = pred.numpy()
+
+    # One batched pass over n_passes tiled copies instead of n_passes
+    # sequential calls (Milestone 5, audit M8). Statistically identical to
+    # the loop: BatchNormalization's training-mode batch statistics are
+    # unchanged (each sample appears n_passes times, so batch mean/var per
+    # channel equal the original batch's), and Dropout draws an independent
+    # mask per row — the same iid samples the loop drew. tf.repeat keeps
+    # sample blocks contiguous: rows [i*n_passes:(i+1)*n_passes] are sample
+    # i's passes, un-flattened by the reshape/transpose below back into the
+    # (n_passes, batch, 4) layout the sequential version produced.
+    tiled = tf.repeat(input_tensor, repeats=n_passes, axis=0)
+    pred = model(tiled, training=True)
+    if isinstance(pred, tuple) or isinstance(pred, list):
+        pred = pred[0]
+    raw_passes = np.transpose(
+        pred.numpy().reshape(batch_size, n_passes, 4), (1, 0, 2)
+    ).astype(np.float32)
 
     if scale_to_100:
         raw_passes = raw_passes * 100.0

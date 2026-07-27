@@ -103,21 +103,30 @@ def _chat_with_images(content, max_tokens, retries=3):
 MAX_IMAGES_PER_PROMPT = 10  # NVIDIA's endpoint hard-caps at 12; stay safely under it
 
 
-def find_shot_windows(video_path, duration, max_samples=MAX_IMAGES_PER_PROMPT, retries=3, max_shots=20):
+def find_shot_windows(video_path, duration, max_samples=MAX_IMAGES_PER_PROMPT, retries=3, max_shots=20, start_offset=0.0):
     """
-    Scans `video_path` (already macro-trimmed) from 0 to `duration` seconds,
-    sampling up to `max_samples` EVENLY-SPACED frames across the whole window
+    Scans `video_path` from `start_offset` to `start_offset + duration` seconds,
+    sampling up to `max_samples` EVENLY-SPACED frames across that window
     (not a fixed fps — the NVIDIA endpoint hard-rejects prompts with more than
     12 images, so sample count must stay constant regardless of window length).
     Returns a LIST of {"start_time": float, "end_time": float} dicts — one per
-    distinct batting shot found, relative to video_path's OWN 0-based timeline
-    (matches what extract_keypoints_in_memory expects). A single macro window
-    can contain several separate shots (your existing dataset has session names
-    going up to _14 from one video) — this finds all of them, not just one.
+    distinct batting shot found. Times are relative to `video_path`'s own
+    0-based timeline (i.e. absolute, including `start_offset`), matching what
+    extract_keypoints_in_memory expects — a caller passing start_offset=0
+    (the original, and still default, behavior) sees identical output to
+    before this parameter existed.
 
-    Trade-off: longer macro windows get coarser temporal resolution (10 samples
-    across 90s is one frame every 9s). Keep macro windows tight (15-30s) in
-    batch_urls.csv for better shot-boundary precision.
+    start_offset lets a single long, untrimmed video be scanned in tiled
+    chunks (see find_shot_windows_auto) without needing a separately-cut
+    macro-trimmed file per chunk — the seek/sample math below is offset by
+    it, everything else (prompting, index math, degenerate-window handling)
+    is unchanged from the macro-trimmed-clip case.
+
+    Trade-off: longer windows get coarser temporal resolution (10 samples
+    across 90s is one frame every 9s). Keep each scanned window tight
+    (15-30s) for good shot-boundary precision — find_shot_windows_auto does
+    this automatically for a full video; a human-provided macro window in
+    batch_urls.csv should follow the same guidance.
     """
     cap = cv2.VideoCapture(video_path)
     fps = cap.get(cv2.CAP_PROP_FPS) or 25.0
@@ -135,13 +144,14 @@ def find_shot_windows(video_path, duration, max_samples=MAX_IMAGES_PER_PROMPT, r
             for i in range(n_samples)
         ))
 
+    offset_frames = int(round(start_offset * fps))
     sampled = []
     for frame_num in frame_nums:
-        cap.set(cv2.CAP_PROP_POS_FRAMES, frame_num)
+        cap.set(cv2.CAP_PROP_POS_FRAMES, offset_frames + frame_num)
         ret, frame = cap.read()
         if not ret:
             continue
-        sampled.append((frame_num / fps, frame))
+        sampled.append((start_offset + frame_num / fps, frame))
     cap.release()
 
     if len(sampled) < 3:
@@ -194,6 +204,133 @@ def find_shot_windows(video_path, duration, max_samples=MAX_IMAGES_PER_PROMPT, r
     return windows
 
 
+# ---------------------------------------------------------------------------
+# Automatic macro-window detection (removes the manual macro_start_sec /
+# macro_end_sec curation step from batch_urls.csv).
+#
+# WHY THIS EXISTS: until now, a human had to watch each source video first
+# and hand-write a tight (15-30s) macro window before find_shot_windows()
+# could run at its documented precision. That's a real, unautomated
+# bottleneck distinct from (and unrelated to) the wrong-person-tracking
+# defect (Milestone 4, subject_selection.py) -- confirmed by direct code
+# inspection: nothing in this file or zero_storage_pipeline.py computed
+# macro_start_sec/macro_end_sec; they were read verbatim from the CSV.
+#
+# HOW: tile the FULL video into overlapping windows no longer than the same
+# 15-30s this module's docstrings already recommend for good shot-boundary
+# resolution, run the existing, already-validated find_shot_windows() on
+# each tile (via start_offset, so no per-tile temp file is cut), and merge
+# any windows detected in the overlap between adjacent tiles. The overlap
+# exists specifically so a shot straddling a tile boundary is still fully
+# visible to at least one tile's sample set, rather than being split or
+# missed -- the merge step then collapses the resulting duplicate/adjacent
+# detections back into one real shot.
+#
+# This reuses find_shot_windows() completely unchanged in its actual
+# detection logic (prompting, index math, degenerate-window handling) --
+# only the *span of video it's pointed at* is new, exactly the same
+# discipline this project used for every prior extension (relocate/reuse,
+# verify equivalence, don't reimplement).
+# ---------------------------------------------------------------------------
+
+DEFAULT_SCAN_TILE_SECONDS = 25.0   # within this module's own "keep macro windows 15-30s" guidance
+DEFAULT_SCAN_OVERLAP_SECONDS = 5.0  # must exceed a real shot's expected duration (~1-3.5s) with margin
+
+
+def build_scan_tiles(total_duration, tile_seconds=DEFAULT_SCAN_TILE_SECONDS, overlap_seconds=DEFAULT_SCAN_OVERLAP_SECONDS):
+    """
+    Pure arithmetic, no video/NVIDIA dependency -- unit-testable in isolation
+    (this project's established pattern for anything that decides frame/time
+    indices, after the paired-fold and phase-redistribution bugs earlier in
+    this codebase's history were both found in untested index arithmetic).
+
+    Returns a list of (tile_start, tile_end) float tuples covering
+    [0, total_duration] with `overlap_seconds` of overlap between
+    consecutive tiles, each tile at most `tile_seconds` long. The final tile
+    is clamped to total_duration rather than padded past it.
+
+    Raises ValueError if overlap_seconds >= tile_seconds (a non-advancing or
+    negative-progress tiling would loop forever / silently skip video).
+    """
+    if tile_seconds <= 0 or overlap_seconds < 0:
+        raise ValueError("tile_seconds must be > 0 and overlap_seconds must be >= 0")
+    if overlap_seconds >= tile_seconds:
+        raise ValueError(f"overlap_seconds ({overlap_seconds}) must be < tile_seconds ({tile_seconds})")
+    if total_duration <= 0:
+        return []
+
+    step = tile_seconds - overlap_seconds
+    tiles = []
+    start = 0.0
+    while start < total_duration:
+        end = min(start + tile_seconds, total_duration)
+        tiles.append((start, end))
+        if end >= total_duration:
+            break
+        start += step
+    return tiles
+
+
+def merge_overlapping_windows(windows):
+    """
+    Pure arithmetic. Given a list of {"start_time", "end_time"} dicts
+    (potentially containing the same real shot detected twice from two
+    overlapping tiles), sorts by start_time and merges any pair whose time
+    ranges overlap AT ALL into their union -- two independent detections of
+    the same shot from adjacent tiles will always overlap substantially
+    (the shot itself is only ~1-3.5s; the tiles it appears in share
+    DEFAULT_SCAN_OVERLAP_SECONDS=5s), while two genuinely different shots in
+    the same video are expected not to overlap at all. Returns a new,
+    merged, start_time-sorted list.
+    """
+    if not windows:
+        return []
+    ordered = sorted(windows, key=lambda w: w["start_time"])
+    merged = [dict(ordered[0])]
+    for w in ordered[1:]:
+        last = merged[-1]
+        if w["start_time"] <= last["end_time"]:
+            last["end_time"] = max(last["end_time"], w["end_time"])
+            last["start_time"] = min(last["start_time"], w["start_time"])
+        else:
+            merged.append(dict(w))
+    return merged
+
+
+def find_shot_windows_auto(video_path, total_duration, tile_seconds=DEFAULT_SCAN_TILE_SECONDS,
+                            overlap_seconds=DEFAULT_SCAN_OVERLAP_SECONDS, max_samples=MAX_IMAGES_PER_PROMPT,
+                            retries=3, max_shots_per_tile=20):
+    """
+    The no-human-macro-window entry point: scans an ENTIRE, untrimmed video
+    (any length) for batting shots, with no macro_start_sec/macro_end_sec
+    required. Tiles the full duration (build_scan_tiles), runs the existing
+    find_shot_windows() on each tile via start_offset (no per-tile temp file
+    cut needed), and merges detections spanning tile overlaps
+    (merge_overlapping_windows).
+
+    One NVIDIA call per tile -- a 10-minute video at the default 25s tiles /
+    5s overlap is (600-5)/(25-5) + 1 = ~30 calls, versus 1 call for a
+    human-pre-trimmed 25s macro window. This is the real, accepted cost of
+    removing the manual step; callers processing many/long videos should be
+    aware it consumes proportionally more free-tier credits (see
+    CreditsExhaustedError) and budget accordingly.
+
+    Returns the same shape as find_shot_windows(): a list of
+    {"start_time", "end_time"} dicts, absolute to video_path's own timeline,
+    ready to pass straight into extract_keypoints_in_memory exactly like a
+    human-provided macro window's shots would be.
+    """
+    tiles = build_scan_tiles(total_duration, tile_seconds, overlap_seconds)
+    all_windows = []
+    for tile_start, tile_end in tiles:
+        windows = find_shot_windows(
+            video_path, duration=tile_end - tile_start, max_samples=max_samples,
+            retries=retries, max_shots=max_shots_per_tile, start_offset=tile_start,
+        )
+        all_windows.extend(windows)
+    return merge_overlapping_windows(all_windows)
+
+
 LABEL_PROMPT = """You are a professional cricket batting coach with 20+ years of experience coaching at club and national level.
 
 I will show you 7 sequential frames of a batsman's shot capturing the full batting sequence:
@@ -237,6 +374,22 @@ def label_session_frames(session_name, frames_rgb):
         return None
 
     scores = data.get("scores", {})
+    # Confirmed real bug (2026-07-18): defaulting a missing/malformed score
+    # to 50 silently fabricated data -- 90 of 496 real labels.csv rows
+    # ended up with ALL FOUR scores exactly 50 this way, indistinguishable
+    # from a genuine (if oddly uniform) assessment unless you go looking.
+    # A missing or non-numeric score means the model's response didn't
+    # actually contain a usable assessment -- treat that the same as the
+    # existing "no `data` at all" failure path (skip the label row) rather
+    # than inventing a number.
+    parsed_scores = {}
+    for key in ("balance", "power", "technique", "defence"):
+        try:
+            parsed_scores[key] = int(scores[key])
+        except (KeyError, TypeError, ValueError):
+            print(f"  [NVIDIA] Labelling for {session_name} was missing/invalid score '{key}' -- skipping label row rather than guessing 50")
+            return None
+
     return {
         "session_name": session_name,
         "shot_type": data.get("shot_type", "Other"),
@@ -245,8 +398,8 @@ def label_session_frames(session_name, frames_rgb):
         "strength": data.get("strength", ""),
         "weakness": data.get("weakness", ""),
         "change_drill": data.get("change_drill", ""),
-        "score_balance": int(scores.get("balance", 50) or 50),
-        "score_power": int(scores.get("power", 50) or 50),
-        "score_technique": int(scores.get("technique", 50) or 50),
-        "score_defence": int(scores.get("defence", 50) or 50),
+        "score_balance": parsed_scores["balance"],
+        "score_power": parsed_scores["power"],
+        "score_technique": parsed_scores["technique"],
+        "score_defence": parsed_scores["defence"],
     }

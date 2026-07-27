@@ -24,8 +24,8 @@ def score_from_keypoint_df(df):
     """
     Real-time, single-session fallback scorer (SRS FR-ERR-001). Takes a DataFrame
     of raw MediaPipe keypoint columns — one row per phase, same schema
-    ml_service.extract_landmarks produces — and returns a 4-metric score dict
-    shaped like the ML inference output, for use when the trained model or
+    ml_service._keypoints_to_dataframe produces — and returns a 4-metric score
+    dict shaped like the ML inference output, for use when the trained model or
     MC-Dropout inference throws.
 
     Deliberately conservative: the underlying rules only actually measure knee

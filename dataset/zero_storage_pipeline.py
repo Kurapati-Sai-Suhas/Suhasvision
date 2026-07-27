@@ -1,8 +1,11 @@
 import os
 import glob
+import threading
 import time
 import csv
+import traceback
 import cv2
+import numpy as np
 import urllib.request
 import yt_dlp
 from moviepy import VideoFileClip
@@ -10,10 +13,36 @@ from dotenv import load_dotenv
 import mediapipe as mp
 from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
-from nvidia_client import find_shot_windows, label_session_frames, CreditsExhaustedError
+import zlib
+from nvidia_client import find_shot_windows, find_shot_windows_auto, label_session_frames, CreditsExhaustedError
+
+
+def _resolve_naming_anchor(url, macro_start):
+    """
+    The value used in place of a human-provided macro_start_sec for
+    session/log naming when no macro window was given (auto-scan mode).
+    A stable (NOT Python's per-process-randomized hash()) tag derived from
+    the URL, so two different auto-scanned videos of the same batsman+angle
+    never collide on session_prefix -- macro_start=0.0 for every auto-scanned
+    row would otherwise make every such video's shot #1 "..._0s_01", etc.
+    Shared between run_zero_storage_pipeline (idempotency prefix check) and
+    process_single_row (actual naming) so the two can never compute a
+    different anchor for the same row.
+    """
+    if macro_start is not None:
+        return macro_start
+    return zlib.crc32(url.encode("utf-8")) % 100000
+from schema import CANONICAL_FRAME_NAMES
+from subject_selection import MAX_POSE_CANDIDATES, select_subject
+
+# Every data file this module reads or writes lives next to it in dataset/,
+# NOT in whatever the current working directory happens to be. Before this
+# anchor existed, importing the module from another directory created
+# keypoints.csv there and sent rejection logs to the wrong place (audit H10).
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def log_rejection(session_name, category, details=""):
-    log_file = "pipeline_rejections.log"
+    log_file = os.path.join(_MODULE_DIR, "pipeline_rejections.log")
     timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
     with open(log_file, "a", encoding="utf-8") as f:
         f.write(f"{timestamp} | {session_name} | {category} | {details}\n")
@@ -23,44 +52,119 @@ def log_rejection(session_name, category, details=""):
 # ==========================================
 load_dotenv(override=True)
 
-FULL_YT_VIDEO = "temp_full_youtube.mp4"
-AI_CHUNK_VIDEO = "temp_ai_chunk.mp4"
-CSV_FILE = "batch_urls.csv"
-OUTPUT_CSV = "keypoints.csv"
+FULL_YT_VIDEO = os.path.join(_MODULE_DIR, "temp_full_youtube.mp4")
+AI_CHUNK_VIDEO = os.path.join(_MODULE_DIR, "temp_ai_chunk.mp4")
+CSV_FILE = os.path.join(_MODULE_DIR, "batch_urls.csv")
+OUTPUT_CSV = os.path.join(_MODULE_DIR, "keypoints.csv")
+COOKIES_TXT = os.path.join(_MODULE_DIR, "cookies.txt")
 N_FRAMES = 7
 
-# Initialize MediaPipe Pose Tasks API
-model_path = 'pose_landmarker_heavy.task'
-if not os.path.exists(model_path):
-    print("Downloading MediaPipe Pose model...")
-    url = 'https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_heavy/float16/1/pose_landmarker_heavy.task'
-    urllib.request.urlretrieve(url, model_path)
+model_path = os.path.join(_MODULE_DIR, 'pose_landmarker_heavy.task')
 
-base_options = python.BaseOptions(model_asset_path=model_path)
-options = vision.PoseLandmarkerOptions(base_options=base_options, output_segmentation_masks=False)
-detector = vision.PoseLandmarker.create_from_options(options)
+# ONE PoseLandmarker for the whole process (Milestone 5, audits H5/H10):
+# construction used to happen once at IMPORT (every importer — including
+# Django boot — paid ~0.7s for a detector most of them never used) and then
+# AGAIN inside every extract_features_from_image_array call, which built and
+# destroyed a fresh detector per session/request. The singleton below is
+# created lazily on first use and lives until process exit (or an explicit
+# reset_shared_detector()). _DETECTOR_LOCK guards BOTH creation and use:
+# MediaPipe landmarkers are not documented thread-safe, so concurrent Django
+# requests serialize their detection passes on it — safe by construction,
+# and at this scale they would contend on CPU anyway.
+_shared_detector = None
+_DETECTOR_LOCK = threading.Lock()
 
-# Ensure CSV has headers
-if not os.path.exists(OUTPUT_CSV):
-    with open(OUTPUT_CSV, "w", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f)
-        landmarks_names = [
-            "nose", "left_eye_inner", "left_eye", "left_eye_outer", "right_eye_inner", "right_eye", 
-            "right_eye_outer", "left_ear", "right_ear", "mouth_left", "mouth_right", "left_shoulder", 
-            "right_shoulder", "left_elbow", "right_elbow", "left_wrist", "right_wrist", "left_pinky", 
-            "right_pinky", "left_index", "right_index", "left_thumb", "right_thumb", "left_hip", 
-            "right_hip", "left_knee", "right_knee", "left_ankle", "right_ankle", "left_heel", 
-            "right_heel", "left_foot_index", "right_foot_index"
-        ]
-        header = ["session_name", "frame_name"]
-        for name in landmarks_names:
-            header.extend([f"{name}_x", f"{name}_y", f"{name}_z", f"{name}_v", f"{name}_presence"])
-        header.append("interpolated_frames")
-        writer.writerow(header)
 
-LABELS_CSV = "labels.csv"
-LABELS_HEADER = ["session_name", "shot_type", "batting_hand", "skill_level", "strength", "weakness",
-                 "change_drill", "score_balance", "score_power", "score_technique", "score_defence"]
+def _create_pose_detector():
+    if not os.path.exists(model_path):
+        print("Downloading MediaPipe Pose model...")
+        url = 'https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_heavy/float16/1/pose_landmarker_heavy.task'
+        urllib.request.urlretrieve(url, model_path)
+    base_options = python.BaseOptions(model_asset_path=model_path)
+    # num_poses > 1 (Milestone 4, audit C1): the default num_poses=1 let
+    # MediaPipe silently pick ONE person per frame with no guarantee it was
+    # the batsman. All candidates are collected; WHO to trust is
+    # subject_selection.py's explicit session-level decision.
+    options = vision.PoseLandmarkerOptions(base_options=base_options, output_segmentation_masks=False,
+                                           num_poses=MAX_POSE_CANDIDATES)
+    return vision.PoseLandmarker.create_from_options(options)
+
+
+def _get_shared_detector_locked():
+    """Returns the process-wide detector, creating it on first use.
+    Caller MUST hold _DETECTOR_LOCK (the same lock that serializes use)."""
+    global _shared_detector
+    if _shared_detector is None:
+        _shared_detector = _create_pose_detector()
+    return _shared_detector
+
+
+def reset_shared_detector():
+    """Closes and clears the shared detector. For tests (isolation between
+    fake and real detectors) and embedders that need an explicit teardown —
+    normal operation just lets the singleton live until process exit."""
+    global _shared_detector
+    with _DETECTOR_LOCK:
+        if _shared_detector is not None:
+            _shared_detector.close()
+            _shared_detector = None
+
+def _expected_keypoints_header():
+    landmarks_names = [
+        "nose", "left_eye_inner", "left_eye", "left_eye_outer", "right_eye_inner", "right_eye",
+        "right_eye_outer", "left_ear", "right_ear", "mouth_left", "mouth_right", "left_shoulder",
+        "right_shoulder", "left_elbow", "right_elbow", "left_wrist", "right_wrist", "left_pinky",
+        "right_pinky", "left_index", "right_index", "left_thumb", "right_thumb", "left_hip",
+        "right_hip", "left_knee", "right_knee", "left_ankle", "right_ankle", "left_heel",
+        "right_heel", "left_foot_index", "right_foot_index"
+    ]
+    header = ["session_name", "frame_name"]
+    for name in landmarks_names:
+        header.extend([f"{name}_x", f"{name}_y", f"{name}_z", f"{name}_v", f"{name}_presence"])
+    header.append("interpolated_frames")
+    return header
+
+
+def ensure_output_csv_ready(output_csv=None):
+    """
+    Creates keypoints.csv with the expected header if it doesn't exist; if it
+    does, verifies its header matches what this version of the code writes. A
+    schema change (e.g. adding the interpolated_frames column) landing on a
+    pre-existing file silently produces rows longer than the header, which
+    corrupts the file for anyone reading it with pandas later — fail loudly
+    instead. Raises RuntimeError on mismatch.
+
+    Called at batch start (run_zero_storage_pipeline) and before each append
+    (extract_keypoints_in_memory), NOT at import time: this check used to run
+    as a module-import side effect, which created/validated keypoints.csv in
+    the importer's CURRENT WORKING DIRECTORY — planting stray files (or an
+    unrelated-looking RuntimeError) wherever the module was imported from
+    (audit H10).
+    """
+    path = output_csv or OUTPUT_CSV
+    expected_header = _expected_keypoints_header()
+    if not os.path.exists(path):
+        with open(path, "w", newline="", encoding="utf-8") as f:
+            csv.writer(f).writerow(expected_header)
+        return
+    with open(path, encoding="utf-8") as f:
+        existing_header = next(csv.reader(f), [])
+    if existing_header != expected_header:
+        raise RuntimeError(
+            f"{path}'s header ({len(existing_header)} cols) doesn't match what this "
+            f"script writes ({len(expected_header)} cols). Fix the header (or the schema "
+            "change) before running — appending now would silently corrupt the file."
+        )
+
+
+LABELS_CSV = os.path.join(_MODULE_DIR, "labels.csv")
+# bowling_type ("fast", "spin", or "unknown") is per-video metadata from
+# batch_urls.csv, not something the AI shot-labelling call infers -- a
+# batting-side camera angle usually doesn't show the bowler clearly enough
+# to classify pace vs. spin reliably, so this is set by whoever adds the
+# video, the same way angle/batsman_name already are.
+LABELS_HEADER = ["session_name", "shot_type", "batting_hand", "bowling_type", "skill_level", "strength",
+                 "weakness", "change_drill", "score_balance", "score_power", "score_technique", "score_defence"]
 
 
 def save_label_row(label_row):
@@ -73,44 +177,74 @@ def save_label_row(label_row):
         writer.writerow([label_row.get(col, "") for col in LABELS_HEADER])
 
 
-def extract_features_from_image_array(frames_rgb, session_name="unknown"):
+def _detect_candidates(detector, frames_rgb):
+    """Pass 1 — collect every candidate person per frame. A None frame slot
+    (undecodable frame, see collect_phase_frames) contributes an empty
+    candidate list, same semantics as "nobody detected"."""
+    candidates_per_frame = []
+    for frame_rgb in frames_rgb:
+        if frame_rgb is None:
+            candidates_per_frame.append([])
+            continue
+        mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=frame_rgb)
+        detection_result = detector.detect(mp_image)
+        candidates_per_frame.append(list(detection_result.pose_landmarks or []))
+    return candidates_per_frame
+
+
+def extract_features_from_image_array(frames_rgb, session_name="unknown", detector=None):
     """
-    Core shared extraction logic. Takes a list of 7 RGB numpy arrays.
-    Runs MediaPipe, validates pose topology/visibility, applies pipeline interpolation rules.
+    Core shared extraction logic (dataset ingestion AND Django serving).
+    Takes a list of 7 RGB numpy arrays (None slots = undecodable frames).
+    Detects up to MAX_POSE_CANDIDATES people per frame, selects ONE subject
+    across the whole session (subject_selection.py, Milestone 4 — or rejects
+    if no subject clearly dominates), validates the selected poses' topology
+    per phase, applies the pipeline interpolation rules.
+
+    detector: optional externally managed PoseLandmarker (tests inject
+    fakes). Default (None) uses the process-wide shared singleton, with the
+    detection pass serialized under _DETECTOR_LOCK — before Milestone 5,
+    every call built and destroyed its own detector (~0.7s per session).
+
     Returns: (success_bool, list_of_raw_keypoints_or_error_string, interpolated_frame_indices)
     """
-    import mediapipe as mp
-    from mediapipe.tasks import python
-    from mediapipe.tasks.python import vision
-    import os
+    if detector is not None:
+        candidates_per_frame = _detect_candidates(detector, frames_rgb)
+    else:
+        with _DETECTOR_LOCK:
+            candidates_per_frame = _detect_candidates(_get_shared_detector_locked(), frames_rgb)
 
-    model_asset_path = 'pose_landmarker_heavy.task'
-    if not os.path.exists(model_asset_path):
-        import urllib.request
-        url = 'https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_heavy/float16/1/pose_landmarker_heavy.task'
-        urllib.request.urlretrieve(url, model_asset_path)
+    # Pass 2 — ONE session-level subject decision (subject_selection.py):
+    # temporal track association, persistence qualification, and a
+    # dominance requirement. No confident subject -> reject the session,
+    # never silently score whoever the detector happened to find.
+    selected, report = select_subject(candidates_per_frame)
+    if selected is None:
+        log_rejection(session_name, "SUBJECT_SELECTION_REJECTED", report["reason"])
+        return False, f"No single trackable subject across the shot ({report['reason']}).", None
+    if report["multi_track"]:
+        # Logged whenever more than one track existed, so real runs build a
+        # spot-checkable record of every multi-person decision — absence of
+        # exactly this kind of positive logging is how the original
+        # wrong-person defect went unnoticed (architecture_ground_truth.md).
+        log_rejection(session_name, "SUBJECT_SELECTED",
+                      f"{report['n_tracks']} candidate track(s), winner covers "
+                      f"{report['winner_coverage']}/{len(frames_rgb)} frames, mean torso {report['winner_scale']}")
 
-    base_options = python.BaseOptions(model_asset_path=model_asset_path)
-    options = vision.PoseLandmarkerOptions(base_options=base_options, output_segmentation_masks=False)
-    
+    # Pass 3 — unchanged per-phase topology validation + conversion, now on
+    # the SELECTED subject only.
     raw_keypoints = []
-    with vision.PoseLandmarker.create_from_options(options) as detector:
-        for i, frame_rgb in enumerate(frames_rgb):
-            mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=frame_rgb)
-            detection_result = detector.detect(mp_image)
+    for i, landmarks in enumerate(selected):
+        if landmarks is None:
+            raw_keypoints.append(None)
+            continue
+        frame_name = f"frame_0{i+1}"
+        if validate_pose(landmarks, i, session_name, frame_name):
+            kp_list = [[lm.x, lm.y, lm.z, getattr(lm, 'visibility', 0.0), getattr(lm, 'presence', 0.0)] for lm in landmarks]
+            raw_keypoints.append(kp_list)
+        else:
+            raw_keypoints.append(None)
 
-            if not detection_result.pose_landmarks:
-                raw_keypoints.append(None)
-            else:
-                landmarks = detection_result.pose_landmarks[0]
-                frame_name = f"frame_0{i+1}"
-                
-                if validate_pose(landmarks, i, session_name, frame_name):
-                    kp_list = [[lm.x, lm.y, lm.z, getattr(lm, 'visibility', 0.0), getattr(lm, 'presence', 0.0)] for lm in landmarks]
-                    raw_keypoints.append(kp_list)
-                else:
-                    raw_keypoints.append(None)
-                    
     success, interpolated = apply_pipeline_rules(raw_keypoints, session_name)
     if not success:
         return False, "Pose rejected by kinematic validation rules.", None
@@ -172,6 +306,14 @@ def validate_pose(pose_landmarks, phase_index, session_name, frame_name):
 
 
 def apply_pipeline_rules(raw_keypoints, session_name):
+    # These rules hardcode the 7-phase session shape (the status[i+2] scans,
+    # edge indices 4/5/6). A shorter list used to fall through to IndexError
+    # (audit C3) when a caller silently dropped a failed frame read.
+    if len(raw_keypoints) != N_FRAMES:
+        log_rejection(session_name, "HARD_REJECT_FRAME_COUNT",
+                      f"expected {N_FRAMES} phase slots, got {len(raw_keypoints)}")
+        return False, []
+
     status = [1 if kp is not None else 0 for kp in raw_keypoints]
     
     # 1. Contact Phase Check (REMOVED)
@@ -262,51 +404,276 @@ def apply_pipeline_rules(raw_keypoints, session_name):
     return True, interpolated_phases
 
 
-def extract_keypoints_in_memory(video_path, timestamps, batsman_name, angle, shot_index, macro_start):
-    cap = cv2.VideoCapture(video_path)
-    fps = cap.get(cv2.CAP_PROP_FPS)
-    
-    def _parse_time(t):
-        try:
-            if isinstance(t, list): return float(t[0])
-            if isinstance(t, dict): return 0.0
-            return float(t) if t is not None else 0.0
-        except:
-            return 0.0
-        
-    start_time = _parse_time(timestamps.get('start_time', 0))
-    end_time = _parse_time(timestamps.get('end_time', 0))
-    
-    start_frame = int(start_time * fps)
-    end_frame = int(end_time * fps)
+# Milestone 4 (Wrist-Speed-Guided Adaptive Sampling): coarse pre-scan
+# budget for locating the wrist-speed peak within a shot window. A
+# reasonable starting point (dense enough to localize contact within a few
+# raw frames on a typical ~1-3s shot window), not a validated constant --
+# tune alongside MAX_BONE_CV / MIN_TEMPORAL_CONFIDENCE once more real
+# videos have been run through this.
+WRIST_SPEED_COARSE_SAMPLES = 20
+
+# Disabled by default (2026-07-18 review). MediaPipe's PoseLandmarker here
+# runs with the default num_poses=1 -- it detects ONE person per frame with
+# no guarantee it's the batsman. Confirmed with real footage + landmark
+# overlay (not assumed): in a nets-practice clip, the coarse scan locked
+# onto the FEEDER/coach walking toward the crease with the ball, not the
+# batsman -- the "wrist speed peak" it found was the feeder's arm swinging
+# while walking. A candidate mitigation (reject speed spikes where the hip
+# barely moved, on the theory that a real swing is wrist-dominant while a
+# full person-swap would move everything) was tested directly against that
+# same failure case and DISALLOWED: a person casually swinging an arm while
+# walking produces the identical wrist-fast/hip-stable signature a real
+# swing does (ratio 34.43 in the confirmed failure case), so it can't tell
+# the two apart. No validated fix exists yet. Rather than ship a mechanism
+# proven to silently corrupt phase sampling in exactly the kind of footage
+# this pipeline processes, it defaults OFF -- extract_keypoints_in_memory
+# always uses the original, previously-proven uniform formula until this
+# is either fixed (e.g. multi-person detection + a subject-selection
+# heuristic) and re-validated, or a source of shot windows guaranteed
+# single-person-in-frame is confirmed. The functions below are unchanged
+# and still correct/tested -- only their use in production is gated.
+#
+# Milestone 4 note: extract_features_from_image_array now does multi-person
+# subject selection (subject_selection.py), but THIS coarse scan still uses
+# the module-level single-pose detector and takes pose_landmarks[0] -- one
+# more reason this flag stays False until the scan itself is rebuilt on top
+# of the selection machinery and re-validated against real footage.
+WRIST_SPEED_SAMPLING_ENABLED = False
+
+# MediaPipe Pose landmark indices (same convention documented in
+# validate_pose() above and in kinematic_validator.py's LANDMARKS list).
+_LEFT_WRIST_IDX = 15
+_RIGHT_WRIST_IDX = 16
+
+
+def _peak_speed_frame(wrist_samples):
+    """
+    Pure helper, no video/MediaPipe dependency -- unit-testable in
+    isolation. Given a temporally-ordered list of either None (missing
+    detection) or (frame_num, left_wrist_xyz, right_wrist_xyz) tuples,
+    returns the frame_num of the LATER frame in the fastest consecutive
+    pair (the max of left/right wrist displacement between them) -- the
+    frame the wrist arrives at fastest, a proxy for the moment of contact.
+    Returns None if fewer than one valid consecutive pair exists (all
+    detections missing, or only one sample succeeded).
+    """
+    best_speed = -1.0
+    best_frame = None
+    for a, b in zip(wrist_samples, wrist_samples[1:]):
+        if a is None or b is None:
+            continue
+        _, a_left, a_right = a
+        b_frame, b_left, b_right = b
+        speed = max(float(np.linalg.norm(b_left - a_left)), float(np.linalg.norm(b_right - a_right)))
+        if speed > best_speed:
+            best_speed = speed
+            best_frame = b_frame
+    return best_frame
+
+
+def find_wrist_speed_peak_frame(cap, start_frame, end_frame, fps):
+    """
+    Coarse, bounded pre-scan of [start_frame, end_frame] to locate the raw
+    frame where wrist speed peaks -- a proxy for the moment of bat-ball
+    contact, used to anchor non-uniform phase sampling (see
+    redistribute_phase_indices). Uses the process-wide shared detector
+    (Milestone 5) rather than opening its own PoseLandmarker. NOTE: still
+    takes pose_landmarks[0] with no subject selection -- one of the reasons
+    WRIST_SPEED_SAMPLING_ENABLED stays False (see that flag's comment).
+
+    Returns the coarse-scanned frame NUMBER (absolute, same space as
+    start_frame/end_frame) at peak wrist speed, or None if too few frames
+    yielded a usable wrist detection to compute a meaningful peak (window
+    too short, video segment unreadable, or wrists not visible) -- callers
+    must fall back to uniform sampling in that case.
+    """
     window_frames = end_frame - start_frame
-    
-    if window_frames <= 0:
-        return 0, []
-        
-    indices = [int(start_frame + (window_frames * i / (N_FRAMES - 1))) for i in range(N_FRAMES)]
-    phase_labels = ["01_stance", "02_trigger", "03_backlift_start", "04_full_backlift", "05_downswing", "06_contact", "07_followthrough"]
-    
-    session_name = f"{batsman_name}_{angle}_{int(macro_start)}s_{shot_index:02d}"
-    
-    # Collect frames for shared processing
+    n_coarse = min(WRIST_SPEED_COARSE_SAMPLES, window_frames + 1)
+    if n_coarse < 2:
+        return None
+
+    coarse_frames = [int(start_frame + (window_frames * i / (n_coarse - 1))) for i in range(n_coarse)]
+
+    wrist_samples = []
+    with _DETECTOR_LOCK:
+        detector = _get_shared_detector_locked()
+        for frame_num in coarse_frames:
+            cap.set(cv2.CAP_PROP_POS_FRAMES, frame_num)
+            ret, frame = cap.read()
+            if not ret:
+                wrist_samples.append(None)
+                continue
+            frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=frame_rgb)
+            detection_result = detector.detect(mp_image)
+            if not detection_result.pose_landmarks:
+                wrist_samples.append(None)
+                continue
+            landmarks = detection_result.pose_landmarks[0]
+            left_wrist, right_wrist = landmarks[_LEFT_WRIST_IDX], landmarks[_RIGHT_WRIST_IDX]
+            wrist_samples.append((
+                frame_num,
+                np.array([left_wrist.x, left_wrist.y, left_wrist.z]),
+                np.array([right_wrist.x, right_wrist.y, right_wrist.z]),
+            ))
+
+    return _peak_speed_frame(wrist_samples)
+
+
+def redistribute_phase_indices(start_frame, end_frame, peak_frame, n_phases=N_FRAMES):
+    """
+    Non-uniform replacement for the plain linear-interpolation index
+    formula, anchored at `peak_frame` (the detected wrist-speed peak -- a
+    proxy for contact). Pure arithmetic, no video/MediaPipe dependency --
+    unit-testable in isolation (the same class of indexing logic that
+    lived untested in Milestone 3's ablation script until review found the
+    gap; extracted proactively here instead).
+
+    Distributes the phases BEFORE contact (stance, trigger,
+    backlift_start, full_backlift, downswing -- n_phases - 2 of them)
+    linearly across [start_frame, peak_frame], and puts the last 2 phases
+    (contact, follow-through) at peak_frame and end_frame respectively.
+    Same phase COUNT, ORDER, and LABELS as the uniform formula -- only
+    WHERE each phase is sampled changes.
+
+    When peak_frame sits exactly at the fraction uniform sampling would
+    already have placed contact (5/6 of the window, for the current
+    7-phase schema), this produces the IDENTICAL indices the uniform
+    formula would -- verified in test_zero_storage_pipeline.py. peak_frame
+    is clamped into [start_frame, end_frame] defensively, since a caller
+    could in principle pass a value slightly outside it.
+    """
+    peak_frame = max(start_frame, min(peak_frame, end_frame))
+    n_before = n_phases - 2
+    before = [int(start_frame + (peak_frame - start_frame) * i / n_before) for i in range(n_before)]
+    after = [peak_frame, end_frame]
+    return before + after
+
+
+def _parse_time(t):
+    """
+    Coerces a shot-window start/end value from the AI detection payload into
+    a float second count. The payload shape isn't fully trusted (historically
+    a hallucinating model returned lists/dicts here), so malformed values
+    degrade to 0.0. Narrow exception types on purpose: this used to be a bare
+    `except:` that swallowed everything, including KeyboardInterrupt
+    (audit M6). Module-level (not nested) so it's unit-testable.
+    """
+    try:
+        if isinstance(t, list):
+            return float(t[0])
+        if isinstance(t, dict):
+            return 0.0
+        return float(t) if t is not None else 0.0
+    except (TypeError, ValueError, IndexError):
+        return 0.0
+
+
+def collect_phase_frames(cap, indices, session_name):
+    """
+    Reads the frame at each index in `indices`, preserving POSITION: a failed
+    decode yields a None slot rather than silently shrinking the list. Before
+    this existed, a dropped read shifted every later frame onto the wrong
+    phase label -- validated against the wrong phase's rules and written to
+    keypoints.csv under the wrong name -- and could IndexError inside
+    apply_pipeline_rules (audit C3). A None slot instead flows through
+    extract_features_from_image_array as a missing detection, which the
+    existing interpolation rules already know how to handle or reject.
+
+    Public (no underscore) since Milestone 3: the Django serving path
+    (backend ml_service.run_advanced_inference) reuses this same collection
+    logic so serving and dataset ingestion read frames identically (audit C2).
+    """
     frames_rgb = []
     for frame_num in indices:
         cap.set(cv2.CAP_PROP_POS_FRAMES, frame_num)
         ret, frame = cap.read()
-        if not ret: continue
+        if not ret:
+            log_rejection(session_name, "FRAME_READ_FAILED",
+                          f"frame {frame_num} could not be decoded; phase slot kept as missing")
+            frames_rgb.append(None)
+            continue
         frames_rgb.append(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+    return frames_rgb
+
+
+def extract_keypoints_in_memory(video_path, timestamps, batsman_name, angle, shot_index, macro_start, bowling_type="unknown"):
+    cap = cv2.VideoCapture(video_path)
+    fps = cap.get(cv2.CAP_PROP_FPS)
+
+    start_time = _parse_time(timestamps.get('start_time', 0))
+    end_time = _parse_time(timestamps.get('end_time', 0))
+
+    start_frame = int(start_time * fps)
+    end_frame = int(end_time * fps)
+    window_frames = end_frame - start_frame
+
+    if window_frames <= 0:
+        cap.release()
+        return 0, []
+
+    session_name = f"{batsman_name}_{angle}_{int(macro_start)}s_{shot_index:02d}"
+
+    # Milestone 4 (Wrist-Speed-Guided Adaptive Sampling): anchor the 7
+    # canonical phases on the detected wrist-speed peak instead of
+    # assuming the swing progresses at constant speed. Disabled by default
+    # (WRIST_SPEED_SAMPLING_ENABLED, see its definition above) -- confirmed
+    # against real footage to sometimes track the wrong person entirely.
+    # Falls back to the original uniform formula -- unchanged -- both when
+    # disabled and when no reliable peak is found, so behavior degrades to
+    # today's proven-working sampling rather than risk a silently wrong one.
+    peak_frame = find_wrist_speed_peak_frame(cap, start_frame, end_frame, fps) if WRIST_SPEED_SAMPLING_ENABLED else None
+    if peak_frame is not None:
+        indices = redistribute_phase_indices(start_frame, end_frame, peak_frame, N_FRAMES)
+        # Logged for every session (not just the fallback case) specifically
+        # so a human can spot-check, after the fact, whether detected peaks
+        # actually land near real contact -- there was no such record before
+        # this, which is part of why an incorrect "verified against real
+        # video" claim went unchecked at implementation time (see review
+        # note in architecture_ground_truth.md). peak_fraction is the
+        # peak's position within the window (0=start, 1=end) -- a quick way
+        # to eyeball whether peaks are clustering suspiciously near either
+        # edge (a sign of idle pre/post-shot motion, not a real swing).
+        peak_fraction = (peak_frame - start_frame) / window_frames
+        log_rejection(session_name, "WRIST_SPEED_PEAK_FOUND",
+                       f"peak_frame={peak_frame}, peak_fraction={peak_fraction:.2f} of window")
+    else:
+        if WRIST_SPEED_SAMPLING_ENABLED:
+            log_rejection(session_name, "WRIST_SPEED_PEAK_NOT_FOUND", "falling back to uniform sampling")
+        indices = [int(start_frame + (window_frames * i / (N_FRAMES - 1))) for i in range(N_FRAMES)]
+
+    # Canonical phase names come from schema.py (audit H6) — this list used to
+    # be one of several independent copies across the repo.
+    phase_labels = CANONICAL_FRAME_NAMES
+
+    # Collect frames for shared processing (position-preserving: a failed
+    # read becomes a None slot, never a silent shift -- audit C3)
+    frames_rgb = collect_phase_frames(cap, indices, session_name)
     cap.release()
-    
+
     # --- Shared Feature Extraction ---
     success, raw_keypoints, interpolated_phases = extract_features_from_image_array(frames_rgb, session_name)
     if not success:
+        return 0, []
+
+    # Belt-and-braces before the CSV write below indexes raw_keypoints[0..6]:
+    # every path above should guarantee 7 slots, but a mismatch here would
+    # corrupt keypoints.csv, so reject loudly instead of trusting it.
+    if len(raw_keypoints) != N_FRAMES:
+        log_rejection(session_name, "FRAME_COUNT_MISMATCH",
+                      f"expected {N_FRAMES} keypoint rows after pipeline rules, got {len(raw_keypoints)}")
         return 0, []
 
     # Success! Write to CSV
     if interpolated_phases:
         print(f"[zero_storage_pipeline] {session_name}: interpolated phases {interpolated_phases}")
     interpolated_str = ";".join(interpolated_phases) if interpolated_phases else ""
+
+    # The header used to be guaranteed by an import-time side effect; now that
+    # that's gone (audit H10), guarantee it at the write itself so a direct
+    # caller can never append rows to a header-less or schema-mismatched file.
+    # Costs one first-line read per shot -- noise next to the MediaPipe work.
+    ensure_output_csv_ready()
 
     with open(OUTPUT_CSV, "a", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
@@ -318,8 +685,24 @@ def extract_keypoints_in_memory(video_path, timestamps, batsman_name, angle, sho
             writer.writerow(row)
 
     # --- Labelling (in-memory, same frames — nothing touches disk) ---
+    # A None slot (undecodable frame, see _collect_phase_frames) has keypoints
+    # reconstructed by the interpolation rules above, but no PIXELS -- there is
+    # nothing to send the labelling model for that phase, and its prompt
+    # hardcodes a 7-frame phase mapping, so sending fewer would mislabel every
+    # later phase. Skip labelling entirely for such sessions -- the same
+    # graceful degradation as the existing NVIDIA-failure path below.
+    if any(f is None for f in frames_rgb):
+        log_rejection(session_name, "LABELLING_SKIPPED_MISSING_FRAME",
+                      "keypoints saved (interpolated), but a frame had no decodable pixels to label")
+        print(f"   -> ⚠ No label saved for {session_name} (a frame could not be decoded) — keypoints are still valid, label it manually or re-run labelling later")
+        return N_FRAMES, interpolated_phases
+
     label_row = label_session_frames(session_name, frames_rgb)
     if label_row:
+        # bowling_type isn't something the AI labelling call infers (the
+        # batting-side camera angle doesn't reliably show the bowler) --
+        # it's per-video metadata from batch_urls.csv, attached here.
+        label_row["bowling_type"] = bowling_type
         save_label_row(label_row)
         print(f"   -> ✅ Label saved for {session_name}")
     else:
@@ -327,7 +710,7 @@ def extract_keypoints_in_memory(video_path, timestamps, batsman_name, angle, sho
 
     return N_FRAMES, interpolated_phases
 
-def process_single_row(url, batsman_name, angle, macro_start, macro_end):
+def process_single_row(url, batsman_name, angle, macro_start=None, macro_end=None, bowling_type="unknown"):
     # Clean up broken files, INCLUDING yt-dlp's partial-download temp files
     # (e.g. temp_full_youtube.mp4.part, .ytdl). A stale .part file left over
     # from an interrupted previous run makes yt-dlp try to RESUME via an HTTP
@@ -352,9 +735,11 @@ def process_single_row(url, batsman_name, angle, macro_start, macro_end):
         'continuedl': False,
     }
     
-    # If the user exported a cookies.txt file, use it as the ultimate bypass
-    if os.path.exists("cookies.txt"):
-        ydl_opts_base['cookiefile'] = 'cookies.txt'
+    # If the user exported a cookies.txt file (into dataset/, next to this
+    # script -- module-anchored like every other data path, audit H10), use
+    # it as the ultimate bypass
+    if os.path.exists(COOKIES_TXT):
+        ydl_opts_base['cookiefile'] = COOKIES_TXT
         print("   -> 🍪 Found cookies.txt! Using it to bypass YouTube bot detection...")
         
     success = False
@@ -364,7 +749,7 @@ def process_single_row(url, batsman_name, angle, macro_start, macro_end):
     for browser in [None, ('opera',), ('edge',), ('chrome',), ('firefox',), ('brave',)]:
         try:
             ydl_opts = ydl_opts_base.copy()
-            if browser and not os.path.exists("cookies.txt"):
+            if browser and not os.path.exists(COOKIES_TXT):
                 ydl_opts['cookiesfrombrowser'] = browser
                 print(f"   -> Retrying with {browser[0]} cookies to bypass bot detection...")
 
@@ -389,73 +774,156 @@ def process_single_row(url, batsman_name, angle, macro_start, macro_end):
     if not success:
         if was_bot_detection:
             print(f"🚨 YouTube Bot Detection blocked download for {url}.")
-            print("   To fix this: Export a 'cookies.txt' file from your browser and save it to this folder.")
+            print(f"   To fix this: Export a 'cookies.txt' file from your browser and save it as {COOKIES_TXT}")
         else:
             print(f"🚨 Download failed for {url} (see the error above — not bot detection, cookies.txt won't help here).")
         return
         
     print("✅ Download complete!")
 
-    # STEP 2: Pre-trim
-    print(f"✂️ Slicing video from {macro_start}s to {macro_end}s...")
+    # STEP 2: Pre-trim to the human-provided macro window -- OR, if none was
+    # given, scan the whole downloaded video automatically (no manual
+    # macro_start_sec/macro_end_sec curation step required). This is the
+    # fix for the "a person has to watch every video first" bottleneck --
+    # distinct from, and unrelated to, the wrong-person-tracking defect
+    # (already fixed separately by subject_selection.py). See
+    # nvidia_client.find_shot_windows_auto's docstring for the tiling design.
+    auto_scan = macro_start is None or macro_end is None
+    naming_anchor = _resolve_naming_anchor(url, macro_start)  # only used for naming, never for timing math
     full_video = None
-    try:
-        full_video = VideoFileClip(FULL_YT_VIDEO)
-        actual_end = min(macro_end, full_video.duration)
-        ai_chunk = full_video.subclipped(macro_start, actual_end)
-        ai_chunk.write_videofile(AI_CHUNK_VIDEO, codec="libx264", audio=False, logger=None)
-    except Exception as e:
-        print(f"❌ Failed to cut video: {e}")
+    if auto_scan:
+        print("🔎 No macro window provided -- scanning the FULL downloaded video for batting shots...")
+        try:
+            full_video = VideoFileClip(FULL_YT_VIDEO)
+            macro_start, macro_end = 0.0, full_video.duration
+        except Exception as e:
+            print(f"❌ Failed to read downloaded video: {e}")
+            if os.path.exists(FULL_YT_VIDEO): os.remove(FULL_YT_VIDEO)
+            return
+        finally:
+            if full_video:
+                full_video.close()
+        chunk_video_path = FULL_YT_VIDEO
+        # NOT deleted here -- STEP 4's finally block deletes chunk_video_path
+        # once shot detection + extraction are both done with it.
+    else:
+        print(f"✂️ Slicing video from {macro_start}s to {macro_end}s...")
+        full_video = None
+        try:
+            full_video = VideoFileClip(FULL_YT_VIDEO)
+            actual_end = min(macro_end, full_video.duration)
+            ai_chunk = full_video.subclipped(macro_start, actual_end)
+            ai_chunk.write_videofile(AI_CHUNK_VIDEO, codec="libx264", audio=False, logger=None)
+        except Exception as e:
+            print(f"❌ Failed to cut video: {e}")
+            if full_video:
+                full_video.close()
+            if os.path.exists(FULL_YT_VIDEO): os.remove(FULL_YT_VIDEO)
+            return
+
         if full_video:
             full_video.close()
+        macro_end = actual_end
+        chunk_video_path = AI_CHUNK_VIDEO
+        # 🔥 IMMEDIATE DELETE OF MASSIVE YOUTUBE VIDEO 🔥
         if os.path.exists(FULL_YT_VIDEO): os.remove(FULL_YT_VIDEO)
-        return
-        
-    if full_video:
-        full_video.close()
-    # 🔥 IMMEDIATE DELETE OF MASSIVE YOUTUBE VIDEO 🔥
-    if os.path.exists(FULL_YT_VIDEO): os.remove(FULL_YT_VIDEO)
 
-    # STEP 3: AI shot detection — find the precise stance-to-follow-through
-    # window within this macro-trimmed chunk. AI_CHUNK_VIDEO runs 0 to
-    # (actual_end - macro_start) on ITS OWN timeline (it's already been sliced),
-    # so the shot window returned here must be relative to that, not to the
-    # original video's absolute timestamps.
-    macro_length = actual_end - macro_start
-    print(f"\n🧠 Finding batting shots within this {macro_length:.1f}s window...")
-    ai_shots = find_shot_windows(AI_CHUNK_VIDEO, macro_length)
+    # STEP 3: AI shot detection — find every precise stance-to-follow-through
+    # window within this (macro-trimmed, or, in auto mode, full) video.
+    # chunk_video_path runs 0 to macro_length on ITS OWN timeline in both
+    # modes (a fresh 0-based file in manual mode; find_shot_windows_auto's
+    # own start_offset tiling keeps auto-mode results consistent with that
+    # same convention), so the shot windows returned are always relative to
+    # chunk_video_path, not the original video's absolute timestamps.
+    macro_length = macro_end - macro_start
+    print(f"\n🧠 Finding batting shots within this {macro_length:.1f}s {'video (auto-scanned)' if auto_scan else 'window'}...")
+    if auto_scan:
+        ai_shots = find_shot_windows_auto(chunk_video_path, macro_length)
+    else:
+        ai_shots = find_shot_windows(chunk_video_path, macro_length)
     if not ai_shots:
         print("🚨 No shots detected by NVIDIA vision model. Skipping this video.")
-        if os.path.exists(AI_CHUNK_VIDEO): os.remove(AI_CHUNK_VIDEO)
+        if os.path.exists(chunk_video_path): os.remove(chunk_video_path)
         return
-    print(f"   -> Found {len(ai_shots)} shot(s) in this window")
+    print(f"   -> Found {len(ai_shots)} shot(s) in this {'video' if auto_scan else 'window'}")
     for i, w in enumerate(ai_shots):
-        print(f"      Shot {i+1}: {w['start_time']:.2f}s to {w['end_time']:.2f}s (within the chunk)")
+        print(f"      Shot {i+1}: {w['start_time']:.2f}s to {w['end_time']:.2f}s")
 
     # STEP 4: In-Memory Coordinate Extraction (Zero Local Image Storage!)
     print(f"\n🎥 Extracting coordinates directly to CSV in-memory...")
     total_keypoints_saved = 0
     try:
         for index, shot in enumerate(ai_shots):
-            frames_saved, _ = extract_keypoints_in_memory(AI_CHUNK_VIDEO, shot, batsman_name, angle, index+1, macro_start)
+            frames_saved, _ = extract_keypoints_in_memory(chunk_video_path, shot, batsman_name, angle, index+1, naming_anchor, bowling_type)
             total_keypoints_saved += frames_saved
             print(f"   -> Shot {index+1}: {frames_saved}/7 frame coordinates logged.")
     except Exception as e:
-        print(f"❌ Error during memory extraction: {e}")
+        # Keep the batch alive for the next video, but never again reduce the
+        # real failure to a one-line print (that's how C3's IndexError went
+        # undiagnosed -- audit M6). The full traceback goes to the rejection
+        # log, flattened to one line because analyze_rejections.py counts
+        # entries line-by-line on " | " and multi-line entries would show up
+        # as junk lines there.
+        tb_one_line = " || ".join(traceback.format_exc().splitlines())
+        log_rejection(f"{batsman_name}_{angle}_{int(naming_anchor)}s", "EXTRACTION_ERROR", tb_one_line)
+        print(f"❌ Error during memory extraction: {e} (full traceback in pipeline_rejections.log)")
     finally:
-        # 🔥 IMMEDIATE DELETE OF THE CHUNK VIDEO 🔥
-        if os.path.exists(AI_CHUNK_VIDEO): os.remove(AI_CHUNK_VIDEO)
-        
+        # 🔥 IMMEDIATE DELETE OF THE CHUNK VIDEO (or, in auto mode, the full
+        # downloaded video, kept alive until now for shot detection) 🔥
+        if os.path.exists(chunk_video_path): os.remove(chunk_video_path)
+
     print(f"🎉 Success! {total_keypoints_saved} rows of mathematical data safely stored in keypoints.csv! Laptop Storage Used: 0 MB.")
 
-def run_zero_storage_pipeline():
+def load_ingested_sessions(output_csv=None):
+    """
+    Returns the set of session_name values already present in keypoints.csv.
+    Loaded ONCE at batch start (audit H1) so a re-run can skip rows whose
+    sessions were already ingested instead of appending duplicate copies —
+    session names are deterministic, so re-processing a row always collides.
+    """
+    path = output_csv or OUTPUT_CSV
+    if not os.path.exists(path):
+        return set()
+    with open(path, encoding="utf-8") as f:
+        reader = csv.reader(f)
+        next(reader, None)  # header
+        return {row[0] for row in reader if row}
+
+
+def sessions_matching_prefix(session_prefix, existing_sessions):
+    """
+    Sorted list of already-ingested session names belonging to one batch row.
+    A row's sessions are all named f"{batsman}_{angle}_{int(macro_start)}s_NN",
+    so the row-level identity is everything before the shot index. The
+    trailing "s_" in the prefix is what makes prefix matching collision-safe:
+    "..._10s_" can never accidentally match "..._105s_01" because the
+    character after "10" differs ("s" vs "5").
+    """
+    return sorted(s for s in existing_sessions if s.startswith(session_prefix))
+
+
+def run_zero_storage_pipeline(force=False):
     if not os.path.exists(CSV_FILE):
         print(f"🚨 Missing {CSV_FILE} file. Please create it first!")
         return
 
+    # Fail loudly BEFORE any download/API work if keypoints.csv has a
+    # mismatched schema (this check used to run at import time — audit H10).
+    ensure_output_csv_ready()
+
+    # Audit H1 (idempotent ingestion): re-running a batch used to re-download,
+    # re-extract, and APPEND every row's sessions again — the corruption class
+    # behind the 42-duplicate-session incident (architecture_ground_truth.md).
+    existing_sessions = load_ingested_sessions()
+    if force:
+        print("⚠ --force: re-ingesting rows even if their sessions already exist in keypoints.csv.")
+        print("  This APPENDS duplicate rows — remove the old sessions afterwards or the file is corrupt.")
+
     print("🚀 Starting ZERO-STORAGE Batch Pipeline...")
 
     processed = 0
+    skipped = 0
+    seen_prefixes = set()
     with open(CSV_FILE, mode='r', encoding='utf-8') as file:
         reader = csv.DictReader(file)
 
@@ -465,18 +933,59 @@ def run_zero_storage_pipeline():
 
             batsman_name = row['batsman_name'].strip()
             angle = row['angle'].strip()
+            # .get(), not row['bowling_type']: batch_urls.csv rows written
+            # before this column existed shouldn't hard-fail the batch.
+            bowling_type = (row.get('bowling_type') or "unknown").strip() or "unknown"
 
-            try:
-                macro_start = float(row['macro_start_sec'])
-                macro_end = float(row['macro_end_sec'])
-            except ValueError:
-                print(f"⚠ Skipping row due to invalid timestamps: {row}")
+            # Blank/missing macro_start_sec or macro_end_sec means "no human
+            # curated a macro window for this row" -- rather than an error,
+            # this now triggers automatic full-video shot scanning
+            # (nvidia_client.find_shot_windows_auto) instead of skipping the
+            # row. A non-blank value that fails to parse as a float is still
+            # treated as a genuine data-entry mistake and skipped, same as
+            # before.
+            raw_start = (row.get('macro_start_sec') or '').strip()
+            raw_end = (row.get('macro_end_sec') or '').strip()
+            if not raw_start or not raw_end:
+                macro_start, macro_end = None, None
+            else:
+                try:
+                    macro_start = float(raw_start)
+                    macro_end = float(raw_end)
+                except ValueError:
+                    print(f"⚠ Skipping row due to invalid timestamps: {row}")
+                    continue
+
+            naming_anchor = _resolve_naming_anchor(url, macro_start)
+            session_prefix = f"{batsman_name}_{angle}_{int(naming_anchor)}s_"
+
+            # The same row listed twice in one batch file is never processed
+            # twice — even under --force, which means "re-ingest despite
+            # history", not "ingest twice in one run".
+            if session_prefix in seen_prefixes:
+                print(f"⏭ Skipping duplicate batch row for {session_prefix}* (already handled earlier in this run).")
+                log_rejection(session_prefix, "SKIPPED_DUPLICATE_BATCH_ROW",
+                              "same row appears more than once in batch_urls.csv")
+                skipped += 1
                 continue
+            seen_prefixes.add(session_prefix)
+
+            window_desc = f"{macro_start}s-{macro_end}s" if macro_start is not None else "auto-scan whole video"
+            if not force:
+                already = sessions_matching_prefix(session_prefix, existing_sessions)
+                if already:
+                    print(f"⏭ Skipping {batsman_name} ({angle}, {window_desc}): "
+                          f"already ingested as {len(already)} session(s), e.g. {already[0]}. "
+                          "Re-run with --force to re-ingest.")
+                    log_rejection(session_prefix, "SKIPPED_ALREADY_INGESTED",
+                                  f"{len(already)} session(s) already in keypoints.csv")
+                    skipped += 1
+                    continue
 
             print(f"\n{'='*50}")
-            print(f"Processing Request: {batsman_name} ({angle}) | Window: {macro_start}s to {macro_end}s")
+            print(f"Processing Request: {batsman_name} ({angle}, {bowling_type}) | Window: {window_desc}")
             try:
-                process_single_row(url, batsman_name, angle, macro_start, macro_end)
+                process_single_row(url, batsman_name, angle, macro_start, macro_end, bowling_type)
                 processed += 1
             except CreditsExhaustedError as e:
                 print(f"\n🛑 STOPPING BATCH — {e}")
@@ -487,7 +996,15 @@ def run_zero_storage_pipeline():
             print("💤 Sleeping for 5 seconds before next video...")
             time.sleep(5)
 
-    print(f"\n🏁 PIPELINE COMPLETE! Processed {processed} video(s). All pure coordinate data stored in keypoints.csv. Laptop Storage Used: 0 MB.")
+    print(f"\n🏁 PIPELINE COMPLETE! Processed {processed} video(s), skipped {skipped} already-ingested/duplicate row(s). All pure coordinate data stored in keypoints.csv. Laptop Storage Used: 0 MB.")
 
 if __name__ == "__main__":
-    run_zero_storage_pipeline()
+    import argparse
+    ap = argparse.ArgumentParser(
+        description="Zero-storage batch ingestion: batch_urls.csv -> keypoints.csv + labels.csv")
+    ap.add_argument("--force", action="store_true",
+                    help="Process rows even if their sessions already exist in keypoints.csv. "
+                         "This APPENDS duplicate rows - only use it after removing the old ones "
+                         "(run audit_duplicates.py to check the file afterwards).")
+    args = ap.parse_args()
+    run_zero_storage_pipeline(force=args.force)

@@ -20,16 +20,20 @@ import { toast } from "sonner";
 const HERO_IMAGE =
   "https://images.unsplash.com/photo-1750716413756-b66624b64ce4?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzN8MHwxfHNlYXJjaHwxfHxjcmlja2V0JTIwc3RhZGl1bSUyMGxpZ2h0cyUyMG5pZ2h0fGVufDB8fHx8MTc4MzMxNzg1NXww&ixlib=rb-4.1.0&q=85";
 
-const ROLE_STATS = {
+// Real product capabilities, not usage numbers -- there's no public stats
+// endpoint this page could honestly source platform-wide counts from, so
+// this describes what the product does rather than fabricating adoption
+// metrics.
+const ROLE_HIGHLIGHTS = {
   coach: [
-    { label: "Videos reviewed", value: "12,480" },
-    { label: "Active academies", value: "38" },
-    { label: "Talent invites sent", value: "612" },
+    { label: "Review queue", value: "Real-time" },
+    { label: "Coach access", value: "Verification-gated" },
+    { label: "Talent scouting", value: "Score-driven" },
   ],
   learner: [
-    { label: "Sessions logged", value: "94,210" },
-    { label: "Avg score uplift", value: "+21.4%" },
-    { label: "Badges unlocked", value: "48,900" },
+    { label: "Biomechanics scoring", value: "4-factor AI" },
+    { label: "Weakness analysis", value: "Per-joint" },
+    { label: "Video storage", value: "Zero-retention" },
   ],
 };
 
@@ -42,10 +46,12 @@ const AuthPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [battingHand, setBattingHand] = useState("Right");
+  const [playingLevel, setPlayingLevel] = useState("club");
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const stats = useMemo(() => ROLE_STATS[role], [role]);
+  const stats = useMemo(() => ROLE_HIGHLIGHTS[role], [role]);
 
   
   const handleSubmit = async (e) => {
@@ -55,9 +61,15 @@ const AuthPage = () => {
     try {
       const endpoint = mode === "signin" ? "/api/auth/login/" : "/api/auth/register/";
       
-      const payload = mode === "signin" 
-        ? { username: email, password } 
-        : { email, password, name, role: role.toUpperCase() };
+      const payload = mode === "signin"
+        ? { username: email, password }
+        : {
+            email,
+            password,
+            name,
+            role: role.toUpperCase(),
+            ...(role === "learner" ? { batting_hand: battingHand, playing_level: playingLevel } : {}),
+          };
 
       const apiBase = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
       const res = await fetch(`${apiBase}${endpoint}`, {
@@ -97,23 +109,6 @@ const AuthPage = () => {
       {/* Top nav */}
       <header className="relative z-20 mx-auto flex w-full max-w-[1400px] items-center justify-between px-6 py-6 md:px-10">
         <BrandMark />
-        <div className="hidden items-center gap-6 text-sm text-slate-400 md:flex">
-          <a data-testid="link-platform" className="sv-link">
-            Platform
-          </a>
-          <a data-testid="link-academies" className="sv-link">
-            Academies
-          </a>
-          <a data-testid="link-research" className="sv-link">
-            Research
-          </a>
-        </div>
-        <div className="flex items-center gap-3">
-          <div className="hidden items-center gap-2 rounded-full border border-emerald-400/25 bg-emerald-400/5 px-3 py-1.5 text-xs text-emerald-200 md:flex">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 sv-pulse" />
-            Season 2026 · Live
-          </div>
-        </div>
       </header>
 
       <div className="relative z-10 mx-auto grid w-full max-w-[1400px] gap-10 px-6 pb-16 md:px-10 lg:grid-cols-[1.05fr,0.95fr] lg:gap-16 lg:pb-24">
@@ -155,7 +150,7 @@ const AuthPage = () => {
             </div>
           </div>
 
-          {/* Testimonial-style card */}
+          {/* Product description card */}
           <div className="relative mt-10 hidden overflow-hidden rounded-3xl border border-white/5 sv-glass lg:block">
             <img
               src={HERO_IMAGE}
@@ -165,24 +160,21 @@ const AuthPage = () => {
             <div className="absolute inset-0 bg-gradient-to-tr from-[#05080F] via-[#05080F]/70 to-transparent" />
             <div className="relative flex flex-col gap-3 p-8">
               <div className="text-[10px] font-semibold uppercase tracking-[0.28em] text-emerald-300">
-                Coach's log
+                How it works
               </div>
               <p className="font-display text-xl font-semibold leading-snug text-slate-50">
-                "Three of my top-order batters crossed a peak score of 90 in one season. The
-                biomechanical overlay changed how we practice."
+                Every session is scored across Balance, Power, Technique and Defence — with a
+                per-joint breakdown of what's driving each score and a matched drill to fix it.
               </p>
-              <div className="mt-3 flex items-center gap-3">
-                <div className="h-10 w-10 overflow-hidden rounded-full border border-white/10">
-                  <img
-                    alt="Suhas Menon"
-                    src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?crop=faces&fit=crop&w=200&h=200"
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                <div>
-                  <div className="text-sm font-semibold text-slate-100">Suhas Menon</div>
-                  <div className="text-xs text-slate-400">Head Batting Coach · Deccan Cricket Academy</div>
-                </div>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {["Balance", "Power", "Technique", "Defence"].map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs font-medium text-slate-300"
+                  >
+                    {tag}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
@@ -260,6 +252,41 @@ const AuthPage = () => {
                     />
                   </div>
                 </label>
+              ) : null}
+
+              {mode === "signup" && role === "learner" ? (
+                <div className="grid grid-cols-2 gap-4">
+                  <label className="block">
+                    <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
+                      Batting hand
+                    </span>
+                    <select
+                      data-testid="input-batting-hand"
+                      value={battingHand}
+                      onChange={(e) => setBattingHand(e.target.value)}
+                      className="h-12 w-full rounded-xl border border-white/10 bg-[#05080F] px-3 text-sm text-slate-100 outline-none transition-all focus:border-emerald-400/60 focus:ring-1 focus:ring-emerald-400/40"
+                    >
+                      <option value="Right">Right</option>
+                      <option value="Left">Left</option>
+                    </select>
+                  </label>
+                  <label className="block">
+                    <span className="mb-1.5 block text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
+                      Playing level
+                    </span>
+                    <select
+                      data-testid="input-playing-level"
+                      value={playingLevel}
+                      onChange={(e) => setPlayingLevel(e.target.value)}
+                      className="h-12 w-full rounded-xl border border-white/10 bg-[#05080F] px-3 text-sm text-slate-100 outline-none transition-all focus:border-emerald-400/60 focus:ring-1 focus:ring-emerald-400/40"
+                    >
+                      <option value="club">Club</option>
+                      <option value="school">School</option>
+                      <option value="academy">Academy</option>
+                      <option value="state">State</option>
+                    </select>
+                  </label>
+                </div>
               ) : null}
 
               <label className="block">

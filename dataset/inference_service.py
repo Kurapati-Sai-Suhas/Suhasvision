@@ -3,12 +3,12 @@ import csv
 import re
 import glob
 import shutil
+import threading
 from datetime import datetime
 import cv2
 import numpy as np
 import pandas as pd
 import tensorflow as tf
-from tensorflow.keras import layers
 import mediapipe as mp
 from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
@@ -20,33 +20,37 @@ from academic_scripts.feature_engineering import calculate_angle, calculate_angl
 
 # Gap C fix: Import EXPECTED_FEATURES from the lightweight schema module.
 # This avoids triggering TF+MediaPipe chain just to read a list of strings.
-from schema import EXPECTED_FEATURES
+# CANONICAL_FRAME_NAMES (audit H6): the tensor log below used to carry its
+# own stale 'frame_01_stance.jpg'-style copy of the frame names, silently
+# re-seeding the mixed-naming-convention state that once NaN'd 42% of the
+# dataset at feature_engineering's reindex.
+from schema import EXPECTED_FEATURES, CANONICAL_FRAME_NAMES
 
-# 1. Provide custom layer just in case we load the legacy advanced model instead of simple MLP
-@tf.keras.utils.register_keras_serializable()
-class TemporalAttention(layers.Layer):
-    def __init__(self, **kwargs):
-        super(TemporalAttention, self).__init__(**kwargs)
-
-    def build(self, input_shape):
-        self.W = self.add_weight(name="att_weight", shape=(input_shape[-1], 1), initializer="normal")
-        self.b = self.add_weight(name="att_bias", shape=(input_shape[1], 1), initializer="zeros")
-        super(TemporalAttention, self).build(input_shape)
-
-    def call(self, x):
-        e = tf.keras.backend.tanh(tf.keras.backend.dot(x, self.W) + self.b)
-        a = tf.keras.backend.softmax(e, axis=1)
-        output = x * a
-        return tf.keras.backend.sum(output, axis=1)
+# Milestone 1 (ML single-source-of-truth consolidation): this file previously
+# defined its own TemporalAttention independently, using a different Keras API
+# surface (tf.keras.backend.dot/softmax/sum) than the canonical version in
+# train_advanced_model.py (tf.tensordot/tf.keras.activations.softmax/
+# tf.reduce_sum). Verified numerically identical (max abs diff 0.0 on a random
+# test tensor) before switching -- this is a relocation, not a behavior change.
+from model_layers import TemporalAttention
 
 # Track the version of the loaded model for accurate sidebar display (Gap F fix)
+# _model was previously never initialized at module level, so the first-ever
+# get_model() call raised NameError (masked by predict_scores' catch-all) —
+# found while adding the lock (Milestone 5).
+_model = None
 _loaded_version = None
+
+# Audit H3 (Milestone 5): without this, two concurrent first-calls could
+# both load the model and silently discard one copy.
+_MODEL_LOCK = threading.Lock()
 
 def reload_model():
     """Force-reloads the model cache. Call after active_learning_retrain.py completes."""
     global _model, _loaded_version
-    _model = None
-    _loaded_version = None
+    with _MODEL_LOCK:
+        _model = None
+        _loaded_version = None
     return get_model()
 
 def get_current_model_version():
@@ -54,8 +58,8 @@ def get_current_model_version():
     Gap F fix: returns what's actually loaded, not what's on disk."""
     return _loaded_version
 
-def get_model():
-    """Loads the highest-version valid .keras model. Tries candidates from highest to lowest."""
+def _load_model_locked():
+    """The actual load. Caller must hold _MODEL_LOCK."""
     global _model, _loaded_version
     if _model is None:
         models = glob.glob("cricket_stance_advanced_v*.keras")
@@ -84,6 +88,15 @@ def get_model():
         if _model is None:
             raise RuntimeError("All .keras model files failed to load. Check for corrupt files.")
     return _model
+
+
+def get_model():
+    """Loads the highest-version valid .keras model, exactly once per process
+    (double-checked lock — audit H3, Milestone 5)."""
+    if _model is not None:
+        return _model
+    with _MODEL_LOCK:
+        return _load_model_locked()
 
 def extract_video_tensor(video_path, session_name, start_frame, end_frame):
     """
@@ -217,17 +230,18 @@ def extract_video_tensor(video_path, session_name, start_frame, end_frame):
             print(f"[inference_service] WARNING: Tensor log schema mismatch. Archived old log -> {archive}")
             file_exists = False  # Will trigger fresh header write below
 
-    canonical_frames = [
-        'frame_01_stance.jpg', 'frame_02_trigger.jpg', 'frame_03_backlift_start.jpg',
-        'frame_04_full_backlift.jpg', 'frame_05_downswing.jpg', 'frame_06_contact.jpg',
-        'frame_07_followthrough.jpg'
-    ]
+    # Canonical BARE frame names from schema.py (audit H6). Rows written
+    # before this fix used the old 'frame_01_stance.jpg' convention and are
+    # left as-is in the file -- feature_engineering.normalize_frame_name
+    # already maps both conventions to the same canonical form at read time,
+    # and within any one session the names are uniform, so per-session
+    # frame ordering is unaffected.
     with open(log_file, 'a', newline='') as f:
         writer = csv.writer(f)
         if not file_exists:
             writer.writerow(EXPECTED_HEADER)
         for i in range(7):
-            writer.writerow([session_name, canonical_frames[i]] + list(tensor_2d[i]))
+            writer.writerow([session_name, CANONICAL_FRAME_NAMES[i]] + list(tensor_2d[i]))
     # ---------------------------------------------------
     
     return True, np.expand_dims(tensor_2d, axis=0), interpolated
@@ -289,7 +303,10 @@ def predict_scores(tensor):
 
         return True, scores_dict, variance, explanations
     except Exception as e:
-        return False, str(e), None
+        # Same arity as the success path: callers unpack 4 values, and a
+        # 3-tuple here turned every inference failure into an unpacking
+        # crash that masked the real error (audit C4).
+        return False, str(e), None, None
 
 def create_annotated_video(input_path, output_path):
     """

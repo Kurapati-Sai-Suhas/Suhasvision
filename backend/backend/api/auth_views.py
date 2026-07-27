@@ -23,27 +23,44 @@ class RegisterView(APIView):
 
         # Create user
         user = User.objects.create_user(username=username, email=username, password=password)
-        
+
         # Assign to appropriate profile
+        is_verified = None
         if role == 'LEARNER':
-            PlayerProfile.objects.create(user=user, name=name, batting_hand='Right', playing_level='club')
+            batting_hand = request.data.get('batting_hand', 'Right')
+            if batting_hand not in ('Right', 'Left'):
+                batting_hand = 'Right'
+            playing_level = request.data.get('playing_level') or 'club'
+            PlayerProfile.objects.create(
+                user=user, name=name, batting_hand=batting_hand, playing_level=playing_level
+            )
         else:
-            Academy.objects.create(user=user, academy_name=name)
+            # ISSUE-007 / FR-AUTH-003: the account exists immediately (so the
+            # coach can log in and see their pending status) but starts
+            # unverified -- Academy.is_verified defaults to False, and
+            # coach-only actions in views.py stay locked until an admin
+            # flips it via Django admin.
+            academy = Academy.objects.create(user=user, academy_name=name)
+            is_verified = academy.is_verified
 
         # Generate tokens
         refresh = RefreshToken.for_user(user)
         # Custom claim for role
         refresh['role'] = role
 
+        user_payload = {
+            'id': user.id,
+            'email': user.email,
+            'role': role,
+            'name': name
+        }
+        if is_verified is not None:
+            user_payload['is_verified'] = is_verified
+
         return Response({
             'refresh': str(refresh),
             'access': str(refresh.access_token),
-            'user': {
-                'id': user.id,
-                'email': user.email,
-                'role': role,
-                'name': name
-            }
+            'user': user_payload
         }, status=status.HTTP_201_CREATED)
 
 class UserProfileView(APIView):
@@ -55,17 +72,23 @@ class UserProfileView(APIView):
         # Determine role and profile data
         role = 'UNKNOWN'
         name = 'Unknown'
-        
+        is_verified = None
+
         if hasattr(user, 'academy'):
             role = 'COACH'
             name = user.academy.academy_name
+            is_verified = user.academy.is_verified  # ISSUE-007 / FR-AUTH-003
         elif hasattr(user, 'playerprofile'):
             role = 'LEARNER'
             name = user.playerprofile.name
 
-        return Response({
+        payload = {
             'id': user.id,
             'email': user.email,
             'role': role,
             'name': name
-        })
+        }
+        if is_verified is not None:
+            payload['is_verified'] = is_verified
+
+        return Response(payload)

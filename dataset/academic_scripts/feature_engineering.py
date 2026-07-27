@@ -1,5 +1,34 @@
+import os
+import re
+import sys
+
 import pandas as pd
 import numpy as np
+
+# Same bootstrap as stance_symmetry_confidence.py: schema.py lives one
+# directory up, and when this file is run directly from academic_scripts/
+# (python feature_engineering.py ...), Python only auto-adds THIS directory
+# to sys.path — the dataset dir must be added explicitly.
+_academic_scripts_dir = os.path.dirname(os.path.abspath(__file__))
+_dataset_dir = os.path.dirname(_academic_scripts_dir)
+if _dataset_dir not in sys.path:
+    sys.path.insert(0, _dataset_dir)
+from schema import CANONICAL_FRAME_NAMES  # noqa: E402
+
+
+def normalize_frame_name(name):
+    """
+    Real data has two coexisting frame_name conventions: the current
+    zero_storage_pipeline.py writes bare "01_stance"; older data used
+    "frame_01_stance.jpg". Strips both down to the same canonical form
+    ("01_stance") so sessions from either era pad/reindex correctly --
+    confirmed via real data that a canonical list matching only ONE
+    convention silently wipes ALL metadata (scores, bowling_type, etc. to
+    NaN) for every session using the other one, not just frame_name.
+    """
+    name = re.sub(r'^frame_', '', str(name))
+    name = re.sub(r'\.(jpg|jpeg|png)$', '', name, flags=re.IGNORECASE)
+    return name
 
 def calculate_angle(df, p1_name, p2_name, p3_name):
     """
@@ -14,16 +43,14 @@ def calculate_angle(df, p1_name, p2_name, p3_name):
     v1 = p1 - p2
     v2 = p3 - p2
     
-    # Cosine of angle
+    # Cosine of angle. Epsilon handling here must match
+    # ml_service.py's calculate_angle() exactly (+1e-6 on the denominator)
+    # -- this is the training-time feature computation, and any divergence
+    # from the live-inference version is a silent train/serve skew.
     dot_prod = np.sum(v1 * v2, axis=1)
     mag1 = np.linalg.norm(v1, axis=1)
     mag2 = np.linalg.norm(v2, axis=1)
-    
-    # Avoid division by zero
-    mag_prod = mag1 * mag2
-    mag_prod[mag_prod == 0] = 1e-10
-    
-    cos_angle = dot_prod / mag_prod
+    cos_angle = dot_prod / (mag1 * mag2 + 1e-6)
     # Clip to avoid numerical issues outside [-1, 1]
     cos_angle = np.clip(cos_angle, -1.0, 1.0)
     
@@ -44,29 +71,33 @@ def calculate_angle_with_vertical(df, p1_name, p2_name):
     dot_prod = np.dot(v1, v2)
     mag1 = np.linalg.norm(v1, axis=1)
     mag2 = 1.0
-    
-    mag_prod = mag1 * mag2
-    mag_prod[mag_prod == 0] = 1e-10
-    
-    cos_angle = dot_prod / mag_prod
+
+    # Same epsilon convention as calculate_angle() above / ml_service.py.
+    cos_angle = dot_prod / (mag1 * mag2 + 1e-6)
     cos_angle = np.clip(cos_angle, -1.0, 1.0)
     
     angles = np.degrees(np.arccos(cos_angle))
     return angles
 
 def main():
-    print("Loading dataset.csv...")
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--input", default="dataset.csv")
+    ap.add_argument("--output", default="dataset_angles.csv")
+    args = ap.parse_args()
+
+    print(f"Loading {args.input}...")
     try:
-        df = pd.read_csv("dataset.csv")
+        df = pd.read_csv(args.input)
     except FileNotFoundError:
-        print("dataset.csv not found!")
+        print(f"{args.input} not found!")
         return
     
     angles_df = pd.DataFrame()
     
     # Keep metadata
-    meta_cols = ["session_name", "frame_name", "shot_type", "batting_hand", "skill_level", 
-                 "strength", "weakness", "change_drill", 
+    meta_cols = ["session_name", "frame_name", "shot_type", "batting_hand", "bowling_type", "skill_level",
+                 "strength", "weakness", "change_drill",
                  "score_balance", "score_power", "score_technique", "score_defence"]
     for col in meta_cols:
         if col in df.columns:
@@ -114,16 +145,17 @@ def main():
     angle_cols = [c for c in angles_df.columns if c.startswith("angle_")]
     angles_df[angle_cols] = angles_df[angle_cols] / 180.0
     
-    # Ensure every session has exactly 7 frames (Pad missing frames)
+    # Ensure every session has exactly 7 frames (Pad missing frames).
+    # Canonical names come from schema.py (audit H6) — an independent stale
+    # copy of this list is exactly how the 42%-NaN reindex bug happened.
+    # list(), not the tuple itself: pandas reindex gets a list indexer.
     print("Padding sequences to exactly 7 frames...")
-    canonical_frames = [
-        'frame_01_stance.jpg', 'frame_02_trigger.jpg', 'frame_03_backlift_start.jpg', 
-        'frame_04_full_backlift.jpg', 'frame_05_downswing.jpg', 'frame_06_contact.jpg', 
-        'frame_07_followthrough.jpg'
-    ]
-    
+    canonical_frames = list(CANONICAL_FRAME_NAMES)
+
     def pad_group(group):
         session_id = group.name
+        group = group.copy()
+        group["frame_name"] = group["frame_name"].apply(normalize_frame_name)
         group = group.drop_duplicates(subset=["frame_name"])
         group = group.set_index("frame_name").reindex(canonical_frames)
         group = group.ffill().bfill().reset_index()
@@ -139,8 +171,8 @@ def main():
     for col in angle_cols:
         angles_df[col + "_vel"] = angles_df.groupby("session_name")[col].diff().fillna(0)
     
-    angles_df.to_csv("dataset_angles.csv", index=False)
-    print(f"Successfully generated dataset_angles.csv with {len(angles_df)} rows and {len(angles_df.columns) - len(meta_cols)} features.")
+    angles_df.to_csv(args.output, index=False)
+    print(f"Successfully generated {args.output} with {len(angles_df)} rows and {len(angles_df.columns) - len(meta_cols)} features.")
 
 if __name__ == "__main__":
     main()

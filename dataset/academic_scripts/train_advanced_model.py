@@ -1,50 +1,41 @@
 import argparse
+import os
+import sys
 import numpy as np
 import pandas as pd
 import tensorflow as tf
 from tensorflow.keras import layers
 from sklearn.model_selection import GroupShuffleSplit
 
-SEQ_LEN = 7
-FEATURE_COLS = [
-    "angle_knee_L", "angle_knee_R", "angle_hip_L", "angle_hip_R",
-    "angle_elbow_L", "angle_elbow_R", "angle_shoulder_L", "angle_shoulder_R",
-    "angle_ankle_L", "angle_ankle_R", "angle_trunk_L", "angle_trunk_R",
-    "angle_arm_L", "angle_arm_R", "angle_head_tilt"
-]
-FEATURE_COLS += [c + "_vel" for c in FEATURE_COLS]
+# Milestone 1 (ML single-source-of-truth consolidation): SEQ_LEN and the
+# feature list used to be defined independently here. They now come from
+# schema.py (the canonical source, also used by ml_service.py,
+# inference_service.py, and active_learning_retrain.py), and TemporalAttention
+# comes from model_layers.py -- this script is the one that trained the
+# currently-deployed model weights, so its former definitions are exactly
+# what those two shared modules now contain.
+_academic_scripts_dir = os.path.dirname(os.path.abspath(__file__))
+_dataset_dir = os.path.dirname(_academic_scripts_dir)
+for _p in (_dataset_dir, _academic_scripts_dir):
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
+from schema import SEQ_LEN, EXPECTED_FEATURES as FEATURE_COLS  # noqa: E402
+from model_layers import TemporalAttention  # noqa: E402
+# Milestone 2 (unified evaluation protocol): extract_batsman_name used to be
+# defined here and separately re-defined in cross_validate.py. It now lives
+# in evaluation_protocol.py, the single shared home for cross-validation
+# methodology used by this script and every evaluation script.
+#
+# _academic_scripts_dir is explicitly added to sys.path above (not just
+# _dataset_dir) because this is a same-directory import -- Python only adds
+# a script's own directory to sys.path automatically when that script is
+# the one being *run directly*. When this module is instead *imported* as
+# academic_scripts.train_advanced_model from a different working directory
+# (as the Milestone 1 test suite does), that auto-add doesn't happen, and
+# `from evaluation_protocol import ...` would fail without this line.
+from evaluation_protocol import extract_batsman_name  # noqa: E402
 
 SCORE_COLS = ["score_balance", "score_power", "score_technique", "score_defence"]
-
-# Custom Temporal Attention Layer
-@tf.keras.utils.register_keras_serializable()
-class TemporalAttention(layers.Layer):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-
-    def build(self, input_shape):
-        self.W = self.add_weight(name="att_weight", shape=(input_shape[-1], 1), initializer="normal")
-        self.b = self.add_weight(name="att_bias", shape=(input_shape[1], 1), initializer="zeros")
-        super().build(input_shape)
-
-    def call(self, x):
-        # x shape: (batch, time, features)
-        e = tf.keras.activations.tanh(tf.tensordot(x, self.W, axes=1) + self.b)
-        alpha = tf.keras.activations.softmax(e, axis=1) # (batch, time, 1)
-        context = tf.reduce_sum(x * alpha, axis=1) # (batch, features)
-        return context
-
-def extract_batsman_name(session_name):
-    """
-    Extracts the base batsman identity so held-out validation never puts a
-    batsman's flipped clone in both train and validation (matches the grouping
-    logic in cross_validate.py / ablation_study.py).
-    """
-    base = session_name.replace("_flipped", "")
-    parts = base.split('_')
-    if base.startswith("youtube_dataset"):
-        return "_".join(parts[:3])
-    return parts[0]
 
 def build_sequences(df):
     """Groups rows by session_name into (7, 15) tensors."""

@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { fetchWithAuth } from "@/lib/api";
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowRight,
   Award,
@@ -71,9 +71,12 @@ const Section = ({ eyebrow, title, subtitle, action, children }) => (
 
 /* ------------------------------ OVERVIEW ------------------------------ */
 const OverviewSection = ({ onNavigate }) => {
-  const { learner, learnerUploads } = useLearner();
-  const nextGoal = 92;
+  const { learner, learnerUploads, badges } = useLearner();
   const pct = Math.round((learner.tierProgress / 100) * 100);
+  const scores = learnerUploads.map((u) => u.overall || 0);
+  const peakScore = scores.length ? Math.max(...scores) : 0;
+  const oneWeekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+  const sessionsThisWeek = learnerUploads.filter((u) => new Date(u.dateRaw).getTime() >= oneWeekAgo).length;
   return (
     <div className="flex flex-col gap-10">
       <div className="relative overflow-hidden rounded-3xl border border-white/5 sv-glass p-6 md:p-10">
@@ -83,7 +86,7 @@ const OverviewSection = ({ onNavigate }) => {
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.24em] text-slate-300">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 sv-pulse" />
-              Deccan Cricket Academy · U19 squad
+              {learner.role}
             </div>
             <h1 className="mt-4 font-display text-3xl font-bold tracking-tight text-slate-50 sm:text-4xl lg:text-5xl">
               Ready to raise your game today,{" "}
@@ -92,7 +95,7 @@ const OverviewSection = ({ onNavigate }) => {
               </span>
             </h1>
             <p className="mt-3 max-w-xl text-base text-slate-400">
-              You're 3 points away from a peak score of {nextGoal}. Log today's session to keep your{" "}
+              {learner.tierProgress}% of the way to {learner.nextTier}. Log today's session to keep your{" "}
               <span className="font-semibold text-[#f5d982]">{learner.streak}-day streak</span> alive.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-3">
@@ -119,7 +122,7 @@ const OverviewSection = ({ onNavigate }) => {
             <div className="flex items-center justify-between text-[10px] font-semibold uppercase tracking-[0.24em] text-slate-400">
               <span>Season tier</span>
               <span className="rounded-full bg-emerald-500/15 px-2 py-0.5 text-emerald-200">
-                #{learner.rank} academy
+                {learner.rank ? `#${learner.rank} academy` : "Unranked"}
               </span>
             </div>
             <div className="relative mt-6 flex items-center justify-center">
@@ -174,10 +177,10 @@ const OverviewSection = ({ onNavigate }) => {
       {/* Quick stats */}
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
         {[
-          { label: "Peak AI score", value: 89, sub: "+7 vs last month", tone: "emerald", testId: "stat-peak" },
-          { label: "Total sessions", value: 96, sub: "4 this week", tone: "emerald", testId: "stat-sessions" },
-          { label: "Badges", value: 4, sub: "2 in progress", tone: "gold", testId: "stat-badges" },
-          { label: "Weekly goal", value: `${learner.weeklyProgress}/${learner.weeklyGoal}`, sub: "1 more to go", tone: "muted", testId: "stat-goal" },
+          { label: "Peak AI score", value: peakScore, sub: "personal best", tone: "emerald", testId: "stat-peak" },
+          { label: "Total sessions", value: learnerUploads.length, sub: `${sessionsThisWeek} this week`, tone: "emerald", testId: "stat-sessions" },
+          { label: "Badges", value: badges.length, sub: badges.length ? "unlocked" : "none yet", tone: "gold", testId: "stat-badges" },
+          { label: "Weekly goal", value: `${learner.weeklyProgress}/${learner.weeklyGoal}`, sub: learner.weeklyProgress >= learner.weeklyGoal ? "goal met" : `${learner.weeklyGoal - learner.weeklyProgress} more to go`, tone: "muted", testId: "stat-goal" },
         ].map((s, i) => (
           <div
             key={s.label}
@@ -229,14 +232,20 @@ const OverviewSection = ({ onNavigate }) => {
               className={`sv-rise sv-rise-${i + 1} group cursor-pointer overflow-hidden rounded-2xl border border-white/5 sv-glass transition-all hover:-translate-y-0.5 hover:border-white/15`}
             >
               <div className="relative aspect-video overflow-hidden">
-                <img
-                  src={u.thumbnail}
-                  alt={u.title}
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
+                {u.thumbnail ? (
+                  <img
+                    src={u.thumbnail}
+                    alt={u.title}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-white/[0.06] to-transparent">
+                    <Film className="h-8 w-8 text-slate-600" />
+                  </div>
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#05080F] via-transparent to-transparent" />
                 <div className="absolute bottom-2.5 left-2.5 flex items-center gap-1.5">
-                  <span className="sv-chip font-mono">{u.duration}</span>
+                  {u.duration ? <span className="sv-chip font-mono">{u.duration}</span> : null}
                   <span
                     className={`sv-chip ${
                       u.status === "reviewed" ? "sv-chip-emerald" : "sv-chip-gold"
@@ -469,9 +478,36 @@ const UploadSection = ({ onNavigate }) => {
 
 /* ------------------------------ PROGRESS TIMELINE ------------------------------ */
 const ProgressSection = () => {
-  const { progressTimeline } = useLearner();
+  const { progressTimeline, learnerUploads } = useLearner();
   const [range, setRange] = useState("12w");
   const data = progressTimeline;
+
+  // Real quick-stats derived from the actual session history (first vs.
+  // latest logged session), not a hardcoded "since W1" snapshot.
+  const first = data[0];
+  const latest = data[data.length - 1];
+  const statFor = (key) => {
+    if (!latest) return { value: "—", delta: null };
+    const value = latest[key] ?? 0;
+    if (!first || data.length < 2) return { value, delta: null };
+    return { value, delta: value - (first[key] ?? 0) };
+  };
+  const quickStats = [
+    { label: "Overall", key: "overall", color: "emerald" },
+    { label: "Balance", key: "balance", color: "emerald" },
+    { label: "Power", key: "power", color: "gold" },
+    { label: "Technique", key: "technique", color: "sky" },
+  ].map((s) => ({ ...s, ...statFor(s.key) }));
+
+  // Real recent-session timeline, not fabricated badge-unlock history --
+  // there's no badge-awarding system behind the scenes yet.
+  const milestones = [...learnerUploads]
+    .sort((a, b) => new Date(b.dateRaw) - new Date(a.dateRaw))
+    .slice(0, 5)
+    .map((u) => ({
+      date: u.date,
+      title: `${u.title} · Overall ${u.overall ?? "—"}`,
+    }));
 
   return (
     <Section
@@ -499,27 +535,27 @@ const ProgressSection = () => {
     >
       <div className="rounded-3xl border border-white/5 sv-glass p-6">
         <div className="grid gap-4 border-b border-white/5 pb-6 md:grid-cols-4">
-          {[
-            { label: "Overall", value: 89, delta: "+29", color: "emerald" },
-            { label: "Balance", value: 90, delta: "+28", color: "emerald" },
-            { label: "Power", value: 88, delta: "+30", color: "gold" },
-            { label: "Technique", value: 89, delta: "+29", color: "sky" },
-          ].map((s) => (
+          {quickStats.map((s) => (
             <div key={s.label} data-testid={`progress-${s.label.toLowerCase()}`}>
               <div className="text-[10px] font-semibold uppercase tracking-[0.24em] text-slate-500">
                 {s.label}
               </div>
               <div className="mt-2 flex items-end gap-2">
                 <div className="font-display text-3xl font-bold text-slate-50">{s.value}</div>
-                <div
-                  className={`pb-1 text-xs ${
-                    s.color === "gold" ? "text-[#f5d982]" : s.color === "sky" ? "text-sky-300" : "text-emerald-300"
-                  }`}
-                >
-                  {s.delta} pts
-                </div>
+                {s.delta !== null ? (
+                  <div
+                    className={`pb-1 text-xs ${
+                      s.color === "gold" ? "text-[#f5d982]" : s.color === "sky" ? "text-sky-300" : "text-emerald-300"
+                    }`}
+                  >
+                    {s.delta >= 0 ? "+" : ""}
+                    {s.delta} pts
+                  </div>
+                ) : null}
               </div>
-              <div className="mt-2 text-xs text-slate-500">Since W1</div>
+              <div className="mt-2 text-xs text-slate-500">
+                {data.length > 0 ? "Since first session" : "No sessions yet"}
+              </div>
             </div>
           ))}
         </div>
@@ -576,29 +612,25 @@ const ProgressSection = () => {
         <div className="text-[10px] font-semibold uppercase tracking-[0.24em] text-emerald-300">
           Milestones
         </div>
-        <div className="mt-1 font-display text-xl font-semibold text-slate-50">Season timeline</div>
-        <div className="relative mt-8 pl-6">
-          <div className="absolute left-2.5 top-0 h-full w-px bg-gradient-to-b from-emerald-400/60 via-white/10 to-transparent" />
-          {[
-            { date: "Feb 09", title: "Peak score 89 · Cover drive", tone: "gold" },
-            { date: "Feb 02", title: "Streak Keeper badge unlocked", tone: "emerald" },
-            { date: "Jan 24", title: "Ironwrist badge — Balance above 85 for 20 sessions", tone: "emerald" },
-            { date: "Jan 12", title: "First Fifty badge · 50 sessions milestone", tone: "gold" },
-            { date: "Dec 04", title: "Joined SuhasVision — starting score 60", tone: "muted" },
-          ].map((m, i) => (
-            <div key={i} className="relative mb-6 last:mb-0">
-              <span
-                className={`absolute -left-[13px] top-1 h-3 w-3 rounded-full border-2 border-[#05080F] ${
-                  m.tone === "gold" ? "bg-[#D4AF37]" : m.tone === "muted" ? "bg-slate-500" : "bg-emerald-400"
-                }`}
-              />
-              <div className="text-[10px] font-semibold uppercase tracking-[0.24em] text-slate-500">
-                {m.date}
+        <div className="mt-1 font-display text-xl font-semibold text-slate-50">Recent sessions</div>
+        {milestones.length === 0 ? (
+          <div className="mt-6 text-sm text-slate-500">
+            No sessions logged yet — this timeline fills in as you upload.
+          </div>
+        ) : (
+          <div className="relative mt-8 pl-6">
+            <div className="absolute left-2.5 top-0 h-full w-px bg-gradient-to-b from-emerald-400/60 via-white/10 to-transparent" />
+            {milestones.map((m, i) => (
+              <div key={i} className="relative mb-6 last:mb-0">
+                <span className="absolute -left-[13px] top-1 h-3 w-3 rounded-full border-2 border-[#05080F] bg-emerald-400" />
+                <div className="text-[10px] font-semibold uppercase tracking-[0.24em] text-slate-500">
+                  {m.date}
+                </div>
+                <div className="mt-1 text-sm font-medium text-slate-100">{m.title}</div>
               </div>
-              <div className="mt-1 text-sm font-medium text-slate-100">{m.title}</div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </Section>
   );
@@ -664,7 +696,7 @@ const GamificationSection = () => {
                   Rank
                 </div>
                 <div className="mt-2 font-display text-2xl font-bold text-slate-50">
-                  #{learner.rank}
+                  {learner.rank ? `#${learner.rank}` : "—"}
                 </div>
               </div>
             </div>
@@ -689,7 +721,9 @@ const GamificationSection = () => {
               <div>
                 <div className="text-sm font-medium text-slate-100">Next objective</div>
                 <div className="text-xs text-slate-400">
-                  Reach a Power score of 95 — 78% there
+                  {learner.nextTier === "Max tier"
+                    ? "You've reached the top tier — keep logging sessions to stay sharp."
+                    : `${learner.tierProgress}% of the way to ${learner.nextTier} — every logged session adds points.`}
                 </div>
               </div>
             </div>
@@ -708,11 +742,18 @@ const GamificationSection = () => {
               </div>
             </div>
             <div className="text-xs text-slate-400">
-              {BADGES.filter((b) => b.unlocked).length} / {BADGES.length} unlocked
+              {badges.length > 0
+                ? `${badges.filter((b) => b.unlocked).length} / ${badges.length} unlocked`
+                : "No badges yet"}
             </div>
           </div>
           <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-3">
-            {BADGES.map((b, i) => (
+            {badges.length === 0 ? (
+              <div className="col-span-full rounded-2xl border border-white/5 bg-white/[0.01] p-6 text-center text-sm text-slate-500">
+                Badges aren't live yet — they'll appear here as the achievement system rolls out.
+              </div>
+            ) : null}
+            {badges.map((b, i) => (
               <div
                 key={b.id}
                 data-testid={`badge-${b.id}`}
@@ -764,15 +805,24 @@ const GamificationSection = () => {
 
 /* ------------------------------ FEEDBACK INBOX ------------------------------ */
 const FeedbackSection = () => {
-  const { feedbackInbox, learner } = useLearner();
+  const { feedbackInbox, learner, markFeedbackSeen } = useLearner();
   const [selectedId, setSelectedId] = useState(feedbackInbox?.[0]?.id);
   const selected = feedbackInbox.find((f) => f.id === selectedId) || feedbackInbox[0];
+
+  // Real read-tracking (persisted to localStorage via markFeedbackSeen in
+  // LearnerDashboard) -- opening a feedback item is what actually marks it
+  // seen, replacing the previous `unread: s.status === "COMPLETED"` which
+  // marked every completed session unread forever regardless of whether
+  // the learner had ever looked at it.
+  useEffect(() => {
+    if (selected?.id != null) markFeedbackSeen(selected.id);
+  }, [selected?.id, markFeedbackSeen]);
 
   return (
     <Section
       eyebrow="Feedback"
       title="Inbox from your coach"
-      subtitle="Every session is reviewed by Coach Suhas. When the AI is off, he overrides — you'll see it here."
+      subtitle="AI analysis for every session, plus any score overrides or notes your coach adds — you'll see it here."
     >
       <div className="grid gap-6 lg:grid-cols-[1fr,1.6fr]">
         <div className="flex flex-col gap-3">
@@ -835,10 +885,12 @@ const FeedbackSection = () => {
             </div>
             <button
               data-testid="reply-coach"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.02] px-4 py-2.5 text-sm text-slate-200 hover:border-white/20 hover:bg-white/5"
+              disabled
+              title="Direct coach messaging isn't available yet"
+              className="inline-flex cursor-not-allowed items-center gap-2 rounded-xl border border-white/5 bg-white/[0.01] px-4 py-2.5 text-sm text-slate-500"
             >
               <MessageCircle className="h-4 w-4" />
-              Reply to coach
+              Reply (coming soon)
             </button>
           </div>
 
@@ -850,28 +902,20 @@ const FeedbackSection = () => {
               <p className="mt-2 text-sm leading-relaxed text-slate-300">{selected.aiSummary}</p>
             </div>
 
+            {/* Real coach note (AnalysisSession.bonus_insight, written by a
+                coach's PATCH override -- see coach.jsx). The before/after
+                score comparison this card used to show was fabricated
+                (previousScore/newScore were never populated from anywhere);
+                removed rather than displaying blank values, since the
+                per-metric CoachOverrideLog entries this would need aren't
+                fetched by this view. */}
             {selected.coachOverride ? (
               <div className="rounded-2xl border border-[#D4AF37]/30 bg-gradient-to-br from-[#D4AF37]/10 to-transparent p-5">
                 <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#f5d982]">
                   <BadgeCheck className="h-3.5 w-3.5" />
-                  Coach override applied
+                  Coach note
                 </div>
-                <div className="mt-3 flex flex-wrap items-center gap-4">
-                  <div>
-                    <div className="text-[10px] uppercase tracking-[0.2em] text-slate-500">Before</div>
-                    <div className="font-display text-2xl font-bold text-slate-400 line-through">
-                      {selected.coachOverride.previousScore}
-                    </div>
-                  </div>
-                  <ArrowRight className="h-4 w-4 text-slate-500" />
-                  <div>
-                    <div className="text-[10px] uppercase tracking-[0.2em] text-slate-500">After</div>
-                    <div className="font-display text-2xl font-bold text-emerald-300">
-                      {selected.coachOverride.newScore}
-                    </div>
-                  </div>
-                </div>
-                <p className="mt-4 text-sm leading-relaxed text-slate-300">
+                <p className="mt-3 text-sm leading-relaxed text-slate-300">
                   {selected.coachOverride.note}
                 </p>
               </div>
@@ -889,20 +933,17 @@ const FeedbackSection = () => {
               ))}
             </div>
 
-            {/* Vulnerability Profile */}
+            {/* Weakness Detail -- biomechanical reason only. This card used to
+                also claim a specific "struggling length"/"struggling line"
+                (e.g. "Short of a Length" / "Body Line"), but that was a
+                static 1-of-4 lookup keyed only on which score was lowest --
+                never computed from real ball-tracking or line/length data,
+                which this system does not capture. Removed rather than
+                left in place implying a personalized finding this app
+                cannot actually make. */}
             <div className="rounded-2xl border border-rose-500/20 bg-gradient-to-br from-rose-500/5 to-transparent p-5">
               <div className="text-[10px] font-semibold uppercase tracking-[0.24em] text-rose-400">
-                Vulnerability Profile
-              </div>
-              <div className="mt-4 grid grid-cols-2 gap-4 border-b border-white/5 pb-4">
-                <div>
-                  <div className="text-[10px] uppercase tracking-[0.2em] text-slate-500">Struggling Length</div>
-                  <div className="mt-1 font-display text-lg font-semibold text-slate-200">{selected.vulnerability?.length}</div>
-                </div>
-                <div>
-                  <div className="text-[10px] uppercase tracking-[0.2em] text-slate-500">Struggling Line</div>
-                  <div className="mt-1 font-display text-lg font-semibold text-slate-200">{selected.vulnerability?.line}</div>
-                </div>
+                Weakness Detail
               </div>
               <div className="mt-4">
                 <div className="text-[10px] uppercase tracking-[0.2em] text-slate-500">Biomechanical Reason</div>
@@ -938,84 +979,124 @@ const FeedbackSection = () => {
   );
 };
 
-const generateAIInsights = (b, p, t) => {
-  let length = "Full Length";
-  let line = "Outside Off Stump";
-  let reason = "Your balance score indicates you are falling over to the offside, making you vulnerable to full, wide deliveries.";
-  let swot = [
-    "Solid backfoot foundation.", 
-    "Weight transfer is delayed.", 
-    "Can easily generate 15% more power with hip rotation.", 
-    "LBW candidates against inswingers."
-  ];
-  let drills = [
-    { name: "Drop Ball Drill", description: "Have a partner drop the ball on a length outside off. Focus on striding to the pitch without falling over." }
-  ];
-
-  if (b < 65) {
-    length = "Full Length";
-    line = "Outside Off Stump";
-    reason = `Your balance score (${b}) shows instability at the crease. You are likely falling over to the offside, making you vulnerable to full, wide deliveries driving away from the body.`;
-    swot = [
-      "Good initial setup.", 
-      "Falling over upon ball release.", 
-      "Stabilizing the head will massively improve shot control.", 
-      "Edges behind the wicket due to reaching."
-    ];
-    drills = [
+// Metric-level fallback used only when a session has no real backend
+// attribution to show (older sessions predating the gradient-attribution
+// feature, or the reliability-fallback rule scorer, which has no gradients
+// to attribute). The backend now runs real per-joint gradient attribution
+// (Expected Gradients, computed via ml_service.py's `_expected_gradients`)
+// for normal sessions and returns an honest, session-specific weakness
+// sentence + concrete drill text in `primary_weakness` / `thing_to_change` —
+// see generateAIInsights below, which prefers that real data when present.
+const METRIC_LIBRARY = {
+  balance: {
+    label: "Balance",
+    description: "base stability and head position through the shot",
+    reasonTemplate: (v) => `Balance (${v}/100) shows instability at the crease — likely falling toward the offside, vulnerable to full, wide deliveries.`,
+    drills: [
       { name: "The Flamingo Drill", description: "Play your shot and hold your pose on one leg for 3 seconds to enforce core stability." },
-      { name: "Cone Touch Drill", description: "Place a cone outside off. Stride and touch it with your bat while keeping your head perfectly still." }
-    ];
-  } else if (p < 65) {
-    length = "Short of a Length";
-    line = "Body Line";
-    reason = `Your power score (${p}) is low. This suggests your hip rotation is locked, making it hard to generate force against balls dug in short.`;
-    swot = [
-      "Excellent head position.", 
-      "Lack of hip and shoulder separation.", 
-      "Engaging the lower body will instantly boost bat speed.", 
-      "Getting bogged down by aggressive short bowling."
-    ];
-    drills = [
+      { name: "Cone Touch Drill", description: "Place a cone outside off. Stride and touch it with your bat while keeping your head perfectly still." },
+    ],
+  },
+  power: {
+    label: "Power",
+    description: "weight transfer and bat speed through contact",
+    reasonTemplate: (v) => `Power (${v}/100) is low — hip rotation looks locked, making it hard to generate force against balls dug in short.`,
+    drills: [
       { name: "Medicine Ball Throws", description: "Mimic your batting stance and throw a medicine ball into a wall, focusing on hip rotation." },
-      { name: "Heavy Bat Swings", description: "Take 20 shadow swings with a heavier bat to train your fast-twitch muscle fibers." }
-    ];
-  } else if (t < 65) {
-    length = "Yorker Length";
-    line = "Middle & Leg";
-    reason = `Your technique score (${t}) indicates your bat path is coming down at an angle, opening up the gate for straight deliveries.`;
-    swot = [
-      "Aggressive intent.", 
-      "Bat coming down from first slip.", 
-      "Straightening the downswing will unlock the V.", 
-      "Bowled or LBW from straight deliveries."
-    ];
-    drills = [
-      { name: "Wall Drill", description: "Stand close to a wall and practice your straight drive. If your bat hits the wall, your downswing is crooked." },
-      { name: "Top Hand Only", description: "Hit balls off a tee using only your top hand to force a straight bat path." }
-    ];
-  } else {
-    length = "Good Length";
-    line = "4th Stump";
-    reason = `Your scores are excellent! Your only vulnerability is the classic 'corridor of uncertainty' where decision-making is tested.`;
-    swot = [
-      "Elite biomechanics.", 
-      "Occasional lapses in concentration.", 
-      "Ready for higher pace bowling.", 
-      "Nick off against elite seam movement."
-    ];
-    drills = [
+      { name: "Heavy Bat Swings", description: "Take 20 shadow swings with a heavier bat to train fast-twitch muscle fibers." },
+    ],
+  },
+  technique: {
+    label: "Technique",
+    description: "grip, backlift, and bat path correctness",
+    reasonTemplate: (v) => `Technique (${v}/100) suggests the bat path comes down at an angle, opening the gate for straight deliveries.`,
+    drills: [
+      { name: "Wall Drill", description: "Stand close to a wall and practice your straight drive — if your bat hits the wall, the downswing is crooked." },
+      { name: "Top Hand Only", description: "Hit balls off a tee using only your top hand to force a straight bat path." },
+    ],
+  },
+  defence: {
+    label: "Defence",
+    description: "stump coverage and head-over-ball at contact",
+    reasonTemplate: (v) => `Defence (${v}/100) is the softer area — stump coverage and head position at contact need tightening against seam movement.`,
+    drills: [
       { name: "Leave Decision Drill", description: "Partner throws mixed lines. Practice decisively leaving everything outside the 4th stump." },
-      { name: "Pace Reaction", description: "Face a bowling machine set to 140km/h focusing entirely on late adjustments." }
-    ];
-  }
+      { name: "Soft Hands Drill", description: "Play defensive shots with a deliberately loose grip to reduce the chance of edges carrying." },
+    ],
+  },
+};
 
-  return { vulnerability: { length, line, reason }, swot, drills };
+const generateAIInsights = (balance, power, technique, defence, session = {}) => {
+  const scores = { balance, power, technique, defence };
+  const entries = Object.entries(scores);
+  const [weakestKey, weakestVal] = entries.reduce((min, e) => (e[1] < min[1] ? e : min));
+  const [strongestKey, strongestVal] = entries.reduce((max, e) => (e[1] > max[1] ? e : max));
+
+  const weak = METRIC_LIBRARY[weakestKey];
+  const strong = METRIC_LIBRARY[strongestKey];
+
+  // Prefer the backend's real, session-specific weakness sentence (gradient
+  // attribution against the actual joints in this video) over the generic
+  // metric-level template, when the backend produced one.
+  const reason = session.primary_weakness || weak.reasonTemplate(weakestVal);
+
+  // `thing_to_change` carries the real per-joint drill recommendation
+  // (semicolon-joined) from gradient attribution. Falls back to the canned
+  // metric-level drills only when absent (older sessions, or the
+  // reliability-fallback rule scorer, which has no gradients to attribute).
+  const realDrills = session.thing_to_change
+    ? session.thing_to_change
+        .split(";")
+        .map((d) => d.trim())
+        .filter(Boolean)
+        .map((d) => ({ name: "Recommended Drill", description: d }))
+    : null;
+
+  const swot = [
+    `${strong.label} (${strongestVal}/100) is a genuine strength — ${strong.description}.`,
+    `${weak.label} (${weakestVal}/100) needs the most work — ${weak.description}.`,
+    `Closing the gap between ${weak.label.toLowerCase()} and the rest of the game is the fastest way to raise the overall score.`,
+    reason,
+  ];
+
+  return {
+    vulnerability: { reason },
+    swot,
+    drills: realDrills || weak.drills,
+  };
 };
 
 /* --------------------------------- PAGE --------------------------------- */
+const SEEN_FEEDBACK_STORAGE_KEY = "suhasvision.seenFeedbackIds";
+
 const LearnerDashboard = () => {
   const [active, setActive] = useState("overview");
+
+  // Real, working read-tracking for the feedback inbox (localStorage-backed,
+  // per-browser). Replaces a prior `unread: s.status === "COMPLETED"` that
+  // marked every completed session unread forever -- that was never a
+  // reflection of whether the learner had actually opened it.
+  const [seenIds, setSeenIds] = useState(() => {
+    try {
+      return new Set(JSON.parse(localStorage.getItem(SEEN_FEEDBACK_STORAGE_KEY) || "[]"));
+    } catch {
+      return new Set();
+    }
+  });
+  const markFeedbackSeen = useCallback((id) => {
+    setSeenIds((prev) => {
+      if (prev.has(id)) return prev;
+      const next = new Set(prev);
+      next.add(id);
+      try {
+        localStorage.setItem(SEEN_FEEDBACK_STORAGE_KEY, JSON.stringify([...next]));
+      } catch {
+        // localStorage unavailable (private browsing, quota) -- read state
+        // just won't persist across reloads; not worth failing the UI over.
+      }
+      return next;
+    });
+  }, []);
 
   const titleMap = {
     overview: "My Cricket",
@@ -1037,37 +1118,64 @@ const LearnerDashboard = () => {
   const backendProfile = data.profile || {};
   const sessions = data.sessions || [];
 
+  // Tier is a real, deterministic function of the real total_points field
+  // (thresholds below), not fabricated. Rank/academy-rank has no honest
+  // value to show -- there's no leaderboard endpoint exposing other
+  // learners' data yet -- so it renders as "—" rather than a made-up number.
+  // Same for a profile photo: no upload feature exists, so this uses a
+  // generated initials avatar instead of pretending a stock photo is real.
+  const TIER_THRESHOLDS = [
+    { name: "Bronze", min: 0 },
+    { name: "Silver", min: 500 },
+    { name: "Gold", min: 1500 },
+    { name: "Platinum", min: 3000 },
+  ];
+  const points = backendProfile.total_points || 0;
+  let tierIdx = 0;
+  for (let i = 0; i < TIER_THRESHOLDS.length; i++) {
+    if (points >= TIER_THRESHOLDS[i].min) tierIdx = i;
+  }
+  const currentTierInfo = TIER_THRESHOLDS[tierIdx];
+  const nextTierInfo = TIER_THRESHOLDS[tierIdx + 1] || null;
+  const tierProgress = nextTierInfo
+    ? Math.min(100, Math.max(0, Math.round(((points - currentTierInfo.min) / (nextTierInfo.min - currentTierInfo.min)) * 100)))
+    : 100;
+
+  const learnerName = backendProfile.name || "Guest Player";
   const learner = {
     id: backendProfile.id,
-    name: backendProfile.name || "Guest Player",
-    age: 17,
-    role: `Top-order batter · ${backendProfile.batting_hand}`,
-    academy: "Deccan Cricket Academy",
-    email: backendProfile.user?.email || "learner@deccan.cricket",
-    avatar: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?crop=faces&fit=crop&w=256&h=256",
+    name: learnerName,
+    role: `${backendProfile.playing_level || "Batter"} · ${backendProfile.batting_hand || "—"}`,
+    email: backendProfile.user?.email || "",
+    avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(learnerName)}&background=10b981&color=05080F&bold=true`,
     streak: backendProfile.current_streak || 0,
-    totalPoints: backendProfile.total_points || 0,
-    currentTier: "Silver I",
-    nextTier: "Gold IV",
-    tierProgress: 45,
-    rank: 12,
-    academyRank: 12,
-    weeklyGoal: 5,
+    totalPoints: points,
+    currentTier: currentTierInfo.name,
+    nextTier: nextTierInfo ? nextTierInfo.name : "Max tier",
+    tierProgress,
+    rank: null, // "—" in the UI; no leaderboard data source exists yet
+    weeklyGoal: 3, // fixed app-wide target, not personalized data
     weeklyProgress: sessions.length,
   };
 
+  // No video-duration or thumbnail data exists server-side (the uploaded
+  // video is deleted immediately after inference for zero-storage privacy
+  // compliance, so there's nothing to generate a real thumbnail from without
+  // adding a dedicated feature to capture one at upload time). A neutral
+  // generated placeholder is honest about that, instead of a specific stock
+  // photo pretending to be a frame from the real video.
   const learnerUploads = sessions.map(s => ({
     id: s.id,
     title: s.title || `Session ${s.id}`,
     date: new Date(s.date_analyzed).toLocaleDateString(),
-    duration: "0:30",
-    thumbnail: "https://images.pexels.com/photos/3628912/pexels-photo-3628912.jpeg?auto=compress&cs=tinysrgb&w=800",
+    dateRaw: s.date_analyzed, // ISO timestamp for real date math (the display `date` above is locale-formatted, not safe to re-parse)
+    duration: null,
+    thumbnail: null,
     scores: { balance: s.balance_score, power: s.power_score, technique: s.technique_score },
     overall: s.overall_score,
     status: s.status === "COMPLETED" ? "reviewed" : "pending",
   }));
-  
-  // Create dummy progress based on real sessions if available
+
   const progressTimeline = sessions.map((s, i) => ({
     week: `W${i+1}`,
     balance: s.balance_score,
@@ -1075,32 +1183,47 @@ const LearnerDashboard = () => {
     technique: s.technique_score,
     overall: s.overall_score
   })).reverse();
-  
-  // Dummy data for remaining parts to prevent UI crashes while connecting real backend
+
+  // No badge system exists yet -- an empty array renders an honest "no
+  // badges" empty state rather than a placeholder list.
   const badges = [];
-  
+
   const feedbackInbox = sessions.map((s) => {
-    const insights = generateAIInsights(s.balance_score, s.power_score, s.technique_score);
+    const insights = generateAIInsights(s.balance_score, s.power_score, s.technique_score, s.defence_score, s);
     return {
       id: s.id,
       date: new Date(s.date_analyzed).toLocaleDateString(),
-      unread: s.status === "COMPLETED",
-      coachOverride: false,
+      unread: s.status === "COMPLETED" && !seenIds.has(s.id),
+      // Real coach note (AnalysisSession.bonus_insight, written when a
+      // coach PATCHes an override -- see coach.jsx's perform_update). No
+      // before/after score comparison: those live in per-metric
+      // CoachOverrideLog rows this view doesn't fetch, and showing blank
+      // values would be worse than not showing them.
+      coachOverride: s.bonus_insight ? { note: s.bonus_insight } : false,
       videoTitle: s.title || `Session ${s.id}`,
       aiSummary: `AI Biomechanics Analysis: Balance ${s.balance_score}/100, Power ${s.power_score}/100, Technique ${s.technique_score}/100. Overall AI Score: ${s.overall_score}. ${s.status === "COMPLETED" ? "Analysis complete." : "Processing..."}`,
-      coachAvatar: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?crop=faces&fit=crop&w=256&h=256",
-      coachName: "Coach Suhas",
+      // No coach-assignment/profile-photo data is exposed by the API yet --
+      // generic label instead of a fabricated name and stock photo.
+      coachAvatar: `https://ui-avatars.com/api/?name=Coach&background=1f2937&color=fff`,
+      coachName: "Your Coach",
       swot: insights.swot,
       vulnerability: insights.vulnerability,
       drills: insights.drills,
     };
   });
 
-  const contextValue = { learner, learnerUploads, progressTimeline, badges, feedbackInbox, refetch };
+  const contextValue = { learner, learnerUploads, progressTimeline, badges, feedbackInbox, refetch, markFeedbackSeen };
 
   return (
     <LearnerContext.Provider value={contextValue}>
-      <AppShell role="learner" activeKey={active} onNavigate={setActive} title={titleMap[active]} profile={learner}>
+      <AppShell
+        role="learner"
+        activeKey={active}
+        onNavigate={setActive}
+        title={titleMap[active]}
+        profile={learner}
+        navBadges={{ feedback: feedbackInbox.filter((f) => f.unread).length }}
+      >
         {active === "overview" ? <OverviewSection onNavigate={setActive} /> : null}
         {active === "upload" ? <UploadSection onNavigate={setActive} /> : null}
         {active === "progress" ? <ProgressSection /> : null}

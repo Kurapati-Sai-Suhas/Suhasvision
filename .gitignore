@@ -31,6 +31,7 @@ dataset/*.txt
 dataset/__pycache__/
 dataset/academic_scripts/__pycache__/
 dataset/cookies.txt
+dataset/*.bak*
 # Large model/asset binaries — consider Git LFS for these instead of raw commits.
 dataset/*.keras
 dataset/*.task

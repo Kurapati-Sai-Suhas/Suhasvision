@@ -30,9 +30,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
+// `badge` counts are NOT set here -- they used to be hardcoded literals
+// (queue always "12", feedback always "1") shown regardless of real data.
+// Real counts are passed in via the `navBadges` prop by each dashboard,
+// which has access to the actual queue/inbox length.
 const COACH_NAV = [
   { key: "overview", label: "Command Center", icon: LayoutGrid },
-  { key: "queue", label: "Review Queue", icon: Video, badge: 12 },
+  { key: "queue", label: "Review Queue", icon: Video },
   { key: "rankings", label: "Player Rankings", icon: Trophy },
   { key: "talent", label: "Talent Scouting", icon: UserCheck },
   { key: "analysis", label: "Video Analysis", icon: Activity },
@@ -43,7 +47,7 @@ const LEARNER_NAV = [
   { key: "upload", label: "Upload Center", icon: Upload },
   { key: "progress", label: "Progress Timeline", icon: LineChart },
   { key: "profile", label: "Gamification", icon: Sparkles },
-  { key: "feedback", label: "Feedback Inbox", icon: Inbox, badge: 1 },
+  { key: "feedback", label: "Feedback Inbox", icon: Inbox },
 ];
 
 export const BrandMark = ({ size = "md" }) => (
@@ -78,7 +82,7 @@ export const BrandMark = ({ size = "md" }) => (
   </div>
 );
 
-const AppShell = ({ children, activeKey, onNavigate, role, title, subtitle, rightSlot, profile = {} }) => {
+const AppShell = ({ children, activeKey, onNavigate, role, title, subtitle, rightSlot, profile = {}, navBadges = {}, pulse = null }) => {
   const session = { name: profile.name || "User", role: role };
   const logout = () => { localStorage.clear(); };
   const navigate = useNavigate();
@@ -137,7 +141,7 @@ const AppShell = ({ children, activeKey, onNavigate, role, title, subtitle, righ
                   />
                   <span className="font-medium tracking-tight">{item.label}</span>
                 </span>
-                {item.badge ? (
+                {navBadges[item.key] ? (
                   <span
                     className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${
                       isActive
@@ -145,7 +149,7 @@ const AppShell = ({ children, activeKey, onNavigate, role, title, subtitle, righ
                         : "bg-white/5 text-slate-400 group-hover:bg-white/10"
                     }`}
                   >
-                    {item.badge}
+                    {navBadges[item.key]}
                   </span>
                 ) : null}
               </button>
@@ -157,18 +161,14 @@ const AppShell = ({ children, activeKey, onNavigate, role, title, subtitle, righ
           <div className="rounded-2xl border border-white/5 bg-gradient-to-br from-[#0C1322] to-[#0A1020] p-4">
             <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.24em] text-emerald-300">
               <Flame className="h-3.5 w-3.5" />
-              {role === "coach" ? "Academy Pulse" : "Daily Streak"}
+              {pulse?.label || (role === "coach" ? "Academy Pulse" : "Daily Streak")}
             </div>
             <div className="mt-3 font-display text-3xl font-bold text-slate-50">
-              {role === "coach" ? "82.4" : `${profile.streak || 0}`}
-              <span className="ml-1 text-sm font-medium text-slate-500">
-                {role === "coach" ? "avg" : "days"}
-              </span>
+              {pulse?.value ?? (role === "coach" ? "—" : `${profile.streak || 0}`)}
+              <span className="ml-1 text-sm font-medium text-slate-500">{pulse?.unit ?? (role === "coach" ? "" : "days")}</span>
             </div>
             <div className="mt-1 text-xs text-slate-400">
-              {role === "coach"
-                ? "Weekly academy score index"
-                : "Keep the streak alive — 1 upload today"}
+              {pulse?.sub || (role === "coach" ? "No sessions reviewed yet" : "Log a session to build your streak")}
             </div>
           </div>
           <button
@@ -212,12 +212,17 @@ const AppShell = ({ children, activeKey, onNavigate, role, title, subtitle, righ
                 ⌘K
               </span>
             </div>
+            {/* No notifications feature/endpoint exists yet -- this used to
+                unconditionally show a "new notification" dot on every page
+                load with no backing data and no onClick. Removed the fake
+                indicator rather than implying an unread notification that
+                doesn't exist; re-add it once there's a real source to read
+                from. */}
             <button
               data-testid="notifications-btn"
               className="relative flex h-9 w-9 items-center justify-center rounded-full border border-white/5 bg-white/[0.03] text-slate-300 transition-all hover:border-white/10 hover:bg-white/5"
             >
               <Bell className="h-4 w-4" />
-              <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_2px_rgba(16,185,129,0.55)]" />
             </button>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

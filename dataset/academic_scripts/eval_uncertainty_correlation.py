@@ -1,25 +1,17 @@
+import os
+import sys
 import pandas as pd
 import numpy as np
 import tensorflow as tf
-from tensorflow.keras import layers
 from scipy.stats import pearsonr
 from mc_dropout_inference import mc_dropout_predict, uncertainty_error_correlation
 
-@tf.keras.utils.register_keras_serializable()
-class TemporalAttention(layers.Layer):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-
-    def build(self, input_shape):
-        self.W = self.add_weight(name="att_weight", shape=(input_shape[-1], 1), initializer="normal")
-        self.b = self.add_weight(name="att_bias", shape=(input_shape[1], 1), initializer="zeros")
-        super().build(input_shape)
-
-    def call(self, x):
-        e = tf.keras.activations.tanh(tf.tensordot(x, self.W, axes=1) + self.b)
-        alpha = tf.keras.activations.softmax(e, axis=1) 
-        context = tf.reduce_sum(x * alpha, axis=1) 
-        return context
+# Milestone 1 (deferred here): TemporalAttention used to be redefined
+# independently in this file. Now imported from the canonical module.
+_dataset_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _dataset_dir not in sys.path:
+    sys.path.insert(0, _dataset_dir)
+from model_layers import TemporalAttention  # noqa: E402
 
 def load_data():
     try:
@@ -48,17 +40,28 @@ def load_data():
     return np.array(X_list, dtype=np.float32), np.array(Y_list, dtype=np.float32)
 
 def main():
+    import argparse
+    ap = argparse.ArgumentParser()
+    # Was hardcoded to cricket_stance_advanced_v2.keras -- stale even before
+    # this milestone (v4 has been the deployed model since before Milestone 1
+    # started), meaning this script's own uncertainty-calibration claim was
+    # silently about the wrong model. Defaults to the same env var
+    # ml_service.py uses, so "which model is this evaluating" has one answer.
+    ap.add_argument("--model", default=os.environ.get('CRICKET_MODEL_FILENAME', 'cricket_stance_advanced_v5.keras'))
+    args = ap.parse_args()
+
     print("Loading data...")
     X, Y = load_data()
     if X is None or len(X) == 0:
         print("Failed to load valid sequences.")
         return
-        
+
     print(f"Loaded {len(X)} valid sessions of shape (7, 30).")
-    
-    print("Loading model...")
+
+    model_path = os.path.join('dataset', args.model)
+    print(f"Loading model from {model_path}...")
     try:
-        model = tf.keras.models.load_model('dataset/cricket_stance_advanced_v2.keras', compile=False, custom_objects={'TemporalAttention': TemporalAttention})
+        model = tf.keras.models.load_model(model_path, compile=False, custom_objects={'TemporalAttention': TemporalAttention})
     except Exception as e:
         print(f"Failed to load model: {e}")
         return

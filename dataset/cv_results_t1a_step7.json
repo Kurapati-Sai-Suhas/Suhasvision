@@ -1,0 +1,589 @@
+{
+  "baseline": {
+    "label": "BASELINE (current production)",
+    "csv_path": "dataset_angles_production.csv",
+    "runtime_sec": 86.54364943504333,
+    "folds_completed": 5,
+    "n_splits": 5,
+    "n_sessions": 130,
+    "n_identities": 42,
+    "seed": 42,
+    "fold_records": [
+      {
+        "fold": 1,
+        "train_n": 104,
+        "test_n": 26,
+        "test_identities": [
+          "shikharDhawan",
+          "youtube_dataset_7",
+          "youtubedataset29",
+          "youtubedataset30",
+          "youtubedataset46",
+          "youtubedataset61"
+        ],
+        "epochs_ran": 46,
+        "mae": 13.090396972802969,
+        "rmse": 15.262780009332548,
+        "r2": 0.11899004876613617,
+        "per_score": {
+          "Balance": {
+            "mae": 12.414342733529898,
+            "rmse": 14.343007452865969,
+            "r2": 0.16092681884765625,
+            "spearman": 0.536210189684388
+          },
+          "Power": {
+            "mae": 12.508019007169283,
+            "rmse": 14.82050760529851,
+            "r2": 0.16770362854003906,
+            "spearman": 0.4992649211014406
+          },
+          "Technique": {
+            "mae": 14.407884744497446,
+            "rmse": 16.8580644184764,
+            "r2": -0.04623758792877197,
+            "spearman": 0.19331244673127546
+          },
+          "Defence": {
+            "mae": 13.03134140601525,
+            "rmse": 14.907924086254377,
+            "r2": 0.1935672163963318,
+            "spearman": 0.5619241767444636
+          }
+        }
+      },
+      {
+        "fold": 2,
+        "train_n": 104,
+        "test_n": 26,
+        "test_identities": [
+          "davidWarner2",
+          "ruturajGaikward2",
+          "youtube_dataset_6",
+          "youtubedataset14",
+          "youtubedataset18",
+          "youtubedataset25",
+          "youtubedataset45",
+          "youtubedataset48"
+        ],
+        "epochs_ran": 63,
+        "mae": 11.229689304645245,
+        "rmse": 15.09243876130269,
+        "r2": 0.1528376042842865,
+        "per_score": {
+          "Balance": {
+            "mae": 10.234322474553036,
+            "rmse": 13.118807830610386,
+            "r2": 0.2802640199661255,
+            "spearman": 0.5640720592130434
+          },
+          "Power": {
+            "mae": 11.279575201181265,
+            "rmse": 14.591433355505691,
+            "r2": 0.20930033922195435,
+            "spearman": 0.3261913139344043
+          },
+          "Technique": {
+            "mae": 9.353442485515888,
+            "rmse": 12.994864990190596,
+            "r2": 0.19849908351898193,
+            "spearman": 0.41981681553513445
+          },
+          "Defence": {
+            "mae": 14.051417057330791,
+            "rmse": 18.900987936367326,
+            "r2": -0.076712965965271,
+            "spearman": 0.27293679578703656
+          }
+        }
+      },
+      {
+        "fold": 3,
+        "train_n": 104,
+        "test_n": 26,
+        "test_identities": [
+          "josbuttler2",
+          "prithvishaw",
+          "viratKohli2",
+          "youtube_dataset_2",
+          "youtubedataset22",
+          "youtubedataset42",
+          "youtubedataset55",
+          "youtubedataset64",
+          "yuvrajSingh2"
+        ],
+        "epochs_ran": 66,
+        "mae": 12.62472812946026,
+        "rmse": 16.152281873369994,
+        "r2": 0.18399915099143982,
+        "per_score": {
+          "Balance": {
+            "mae": 10.75751231266902,
+            "rmse": 13.413829305995758,
+            "r2": 0.28451037406921387,
+            "spearman": 0.38465805028018185
+          },
+          "Power": {
+            "mae": 10.49717587691087,
+            "rmse": 13.856840880394431,
+            "r2": 0.18508201837539673,
+            "spearman": 0.42928019133461914
+          },
+          "Technique": {
+            "mae": 12.918324103722206,
+            "rmse": 16.72099046757688,
+            "r2": 0.06491583585739136,
+            "spearman": 0.30124795510744734
+          },
+          "Defence": {
+            "mae": 16.325900224538948,
+            "rmse": 19.800263004290183,
+            "r2": 0.20148813724517822,
+            "spearman": 0.23031769522597265
+          }
+        }
+      },
+      {
+        "fold": 4,
+        "train_n": 104,
+        "test_n": 26,
+        "test_identities": [
+          "benstokes",
+          "devduttpadikkal",
+          "farrangeytdatset1",
+          "youtube_dataset_4",
+          "youtube_dataset_8",
+          "youtubedataset34",
+          "youtubedataset40",
+          "youtubedataset49",
+          "youtubedataset52"
+        ],
+        "epochs_ran": 80,
+        "mae": 7.917483403132512,
+        "rmse": 11.21247097254029,
+        "r2": 0.06402845680713654,
+        "per_score": {
+          "Balance": {
+            "mae": 8.804649939903847,
+            "rmse": 13.41936514749912,
+            "r2": 0.14532089233398438,
+            "spearman": -0.02989961168467724
+          },
+          "Power": {
+            "mae": 7.24655400789701,
+            "rmse": 10.265588583221176,
+            "r2": 0.13293039798736572,
+            "spearman": 0.0831417746258321
+          },
+          "Technique": {
+            "mae": 7.432573465200571,
+            "rmse": 10.145503253515315,
+            "r2": 0.1430531144142151,
+            "spearman": -0.1815730562782017
+          },
+          "Defence": {
+            "mae": 8.186156199528622,
+            "rmse": 10.699771372411421,
+            "r2": -0.1651902198791504,
+            "spearman": 0.2498211267789408
+          }
+        }
+      },
+      {
+        "fold": 5,
+        "train_n": 104,
+        "test_n": 26,
+        "test_identities": [
+          "abhishek",
+          "joeroot",
+          "youtube_dataset_11",
+          "youtube_dataset_3",
+          "youtubedataset36",
+          "youtubedataset37",
+          "youtubedataset43",
+          "youtubedataset47",
+          "youtubedataset58",
+          "youtubedataset63"
+        ],
+        "epochs_ran": 64,
+        "mae": 9.389440664878258,
+        "rmse": 12.471910578046849,
+        "r2": -0.09222589433193207,
+        "per_score": {
+          "Balance": {
+            "mae": 9.04169669518104,
+            "rmse": 13.097777992090037,
+            "r2": -0.1585315465927124,
+            "spearman": 0.08853938733497894
+          },
+          "Power": {
+            "mae": 6.349466910729041,
+            "rmse": 8.38548328697009,
+            "r2": -0.1162109375,
+            "spearman": 0.07232941057973144
+          },
+          "Technique": {
+            "mae": 10.25406734759991,
+            "rmse": 12.941357318614106,
+            "r2": -0.1599961519241333,
+            "spearman": 0.17281276976446258
+          },
+          "Defence": {
+            "mae": 11.912531706003042,
+            "rmse": 14.589291530714029,
+            "r2": 0.06583422422409058,
+            "spearman": 0.40473680446411253
+          }
+        }
+      }
+    ]
+  },
+  "augmented": {
+    "label": "AUGMENTED (candidate)",
+    "csv_path": "dataset_angles_production_augmented.csv",
+    "runtime_sec": 95.40526151657104,
+    "folds_completed": 5,
+    "n_splits": 5,
+    "n_sessions": 520,
+    "n_identities": 42,
+    "seed": 42,
+    "fold_records": [
+      {
+        "fold": 1,
+        "train_n": 416,
+        "test_n": 104,
+        "test_identities": [
+          "shikharDhawan",
+          "youtube_dataset_7",
+          "youtubedataset29",
+          "youtubedataset30",
+          "youtubedataset46",
+          "youtubedataset61"
+        ],
+        "epochs_ran": 22,
+        "mae": 13.085779199233421,
+        "rmse": 15.027770720311967,
+        "r2": 0.14662563800811768,
+        "per_score": {
+          "Balance": {
+            "mae": 12.598746813260592,
+            "rmse": 13.699819655519192,
+            "r2": 0.2344931960105896,
+            "spearman": 0.6254786770335444
+          },
+          "Power": {
+            "mae": 12.892088083120493,
+            "rmse": 14.98693380296494,
+            "r2": 0.1489061713218689,
+            "spearman": 0.5230465283516481
+          },
+          "Technique": {
+            "mae": 14.47151286785419,
+            "rmse": 16.914123845154343,
+            "r2": -0.0532073974609375,
+            "spearman": 0.19453662686798298
+          },
+          "Defence": {
+            "mae": 12.380769032698412,
+            "rmse": 14.316237848600284,
+            "r2": 0.25631052255630493,
+            "spearman": 0.557849180026765
+          }
+        }
+      },
+      {
+        "fold": 2,
+        "train_n": 416,
+        "test_n": 104,
+        "test_identities": [
+          "davidWarner2",
+          "ruturajGaikward2",
+          "youtube_dataset_6",
+          "youtubedataset14",
+          "youtubedataset18",
+          "youtubedataset25",
+          "youtubedataset45",
+          "youtubedataset48"
+        ],
+        "epochs_ran": 25,
+        "mae": 11.60572531590095,
+        "rmse": 14.814436516346985,
+        "r2": 0.1665867418050766,
+        "per_score": {
+          "Balance": {
+            "mae": 10.526074336125301,
+            "rmse": 12.096924673149434,
+            "r2": 0.3880240321159363,
+            "spearman": 0.6544809637184997
+          },
+          "Power": {
+            "mae": 11.237874324505146,
+            "rmse": 14.872483497414256,
+            "r2": 0.17854708433151245,
+            "spearman": 0.43247514773135776
+          },
+          "Technique": {
+            "mae": 11.21635653422429,
+            "rmse": 14.457043387761724,
+            "r2": 0.007982194423675537,
+            "spearman": 0.3429113148100564
+          },
+          "Defence": {
+            "mae": 13.442596068749062,
+            "rmse": 17.35908053446245,
+            "r2": 0.09179389476776123,
+            "spearman": 0.32425304141011424
+          }
+        }
+      },
+      {
+        "fold": 3,
+        "train_n": 416,
+        "test_n": 104,
+        "test_identities": [
+          "josbuttler2",
+          "prithvishaw",
+          "viratKohli2",
+          "youtube_dataset_2",
+          "youtubedataset22",
+          "youtubedataset42",
+          "youtubedataset55",
+          "youtubedataset64",
+          "yuvrajSingh2"
+        ],
+        "epochs_ran": 26,
+        "mae": 13.45770111450782,
+        "rmse": 16.662342782219657,
+        "r2": 0.1274324357509613,
+        "per_score": {
+          "Balance": {
+            "mae": 12.732683255122257,
+            "rmse": 15.311560278881709,
+            "r2": 0.067740797996521,
+            "spearman": 0.3403100444237627
+          },
+          "Power": {
+            "mae": 11.227120362795317,
+            "rmse": 14.177101391237274,
+            "r2": 0.1469777226448059,
+            "spearman": 0.4180121311884184
+          },
+          "Technique": {
+            "mae": 11.869845170241137,
+            "rmse": 15.884847635385555,
+            "r2": 0.15609657764434814,
+            "spearman": 0.2694575306220524
+          },
+          "Defence": {
+            "mae": 18.001155669872578,
+            "rmse": 20.561428424776025,
+            "r2": 0.13891488313674927,
+            "spearman": 0.28233832930807984
+          }
+        }
+      },
+      {
+        "fold": 4,
+        "train_n": 416,
+        "test_n": 104,
+        "test_identities": [
+          "benstokes",
+          "devduttpadikkal",
+          "farrangeytdatset1",
+          "youtube_dataset_4",
+          "youtube_dataset_8",
+          "youtubedataset34",
+          "youtubedataset40",
+          "youtubedataset49",
+          "youtubedataset52"
+        ],
+        "epochs_ran": 30,
+        "mae": 8.210056213232187,
+        "rmse": 12.085824503552253,
+        "r2": -0.0957522988319397,
+        "per_score": {
+          "Balance": {
+            "mae": 9.136957241938664,
+            "rmse": 14.267456605616996,
+            "r2": 0.03387731313705444,
+            "spearman": -0.09818284452333766
+          },
+          "Power": {
+            "mae": 7.201423828418438,
+            "rmse": 10.973478770568839,
+            "r2": 0.009225249290466309,
+            "spearman": 0.06522715132607129
+          },
+          "Technique": {
+            "mae": 8.246203129108135,
+            "rmse": 10.973484332628242,
+            "r2": -0.002526521682739258,
+            "spearman": -0.33962447254360933
+          },
+          "Defence": {
+            "mae": 8.25564065346351,
+            "rmse": 11.826819404495973,
+            "r2": -0.42358624935150146,
+            "spearman": 0.1788476289890108
+          }
+        }
+      },
+      {
+        "fold": 5,
+        "train_n": 416,
+        "test_n": 104,
+        "test_identities": [
+          "abhishek",
+          "joeroot",
+          "youtube_dataset_11",
+          "youtube_dataset_3",
+          "youtubedataset36",
+          "youtubedataset37",
+          "youtubedataset43",
+          "youtubedataset47",
+          "youtubedataset58",
+          "youtubedataset63"
+        ],
+        "epochs_ran": 26,
+        "mae": 11.363685589570267,
+        "rmse": 13.852838086358874,
+        "r2": -0.4389554262161255,
+        "per_score": {
+          "Balance": {
+            "mae": 11.197860717773438,
+            "rmse": 13.74118480743598,
+            "r2": -0.2751491069793701,
+            "spearman": 0.3038906059931065
+          },
+          "Power": {
+            "mae": 9.608408341040978,
+            "rmse": 11.189885913311613,
+            "r2": -0.9876567125320435,
+            "spearman": 0.23359455670404491
+          },
+          "Technique": {
+            "mae": 10.98394724038931,
+            "rmse": 14.070534813971069,
+            "r2": -0.371254563331604,
+            "spearman": 0.07906368734475543
+          },
+          "Defence": {
+            "mae": 13.664526059077335,
+            "rmse": 15.987207066743142,
+            "r2": -0.12176179885864258,
+            "spearman": 0.3111953261915752
+          }
+        }
+      }
+    ]
+  },
+  "folds_match_by_identity": true,
+  "baseline_fold_identities": [
+    [
+      "shikharDhawan",
+      "youtube_dataset_7",
+      "youtubedataset29",
+      "youtubedataset30",
+      "youtubedataset46",
+      "youtubedataset61"
+    ],
+    [
+      "davidWarner2",
+      "ruturajGaikward2",
+      "youtube_dataset_6",
+      "youtubedataset14",
+      "youtubedataset18",
+      "youtubedataset25",
+      "youtubedataset45",
+      "youtubedataset48"
+    ],
+    [
+      "josbuttler2",
+      "prithvishaw",
+      "viratKohli2",
+      "youtube_dataset_2",
+      "youtubedataset22",
+      "youtubedataset42",
+      "youtubedataset55",
+      "youtubedataset64",
+      "yuvrajSingh2"
+    ],
+    [
+      "benstokes",
+      "devduttpadikkal",
+      "farrangeytdatset1",
+      "youtube_dataset_4",
+      "youtube_dataset_8",
+      "youtubedataset34",
+      "youtubedataset40",
+      "youtubedataset49",
+      "youtubedataset52"
+    ],
+    [
+      "abhishek",
+      "joeroot",
+      "youtube_dataset_11",
+      "youtube_dataset_3",
+      "youtubedataset36",
+      "youtubedataset37",
+      "youtubedataset43",
+      "youtubedataset47",
+      "youtubedataset58",
+      "youtubedataset63"
+    ]
+  ],
+  "augmented_fold_identities": [
+    [
+      "shikharDhawan",
+      "youtube_dataset_7",
+      "youtubedataset29",
+      "youtubedataset30",
+      "youtubedataset46",
+      "youtubedataset61"
+    ],
+    [
+      "davidWarner2",
+      "ruturajGaikward2",
+      "youtube_dataset_6",
+      "youtubedataset14",
+      "youtubedataset18",
+      "youtubedataset25",
+      "youtubedataset45",
+      "youtubedataset48"
+    ],
+    [
+      "josbuttler2",
+      "prithvishaw",
+      "viratKohli2",
+      "youtube_dataset_2",
+      "youtubedataset22",
+      "youtubedataset42",
+      "youtubedataset55",
+      "youtubedataset64",
+      "yuvrajSingh2"
+    ],
+    [
+      "benstokes",
+      "devduttpadikkal",
+      "farrangeytdatset1",
+      "youtube_dataset_4",
+      "youtube_dataset_8",
+      "youtubedataset34",
+      "youtubedataset40",
+      "youtubedataset49",
+      "youtubedataset52"
+    ],
+    [
+      "abhishek",
+      "joeroot",
+      "youtube_dataset_11",
+      "youtube_dataset_3",
+      "youtubedataset36",
+      "youtubedataset37",
+      "youtubedataset43",
+      "youtubedataset47",
+      "youtubedataset58",
+      "youtubedataset63"
+    ]
+  ]
+}

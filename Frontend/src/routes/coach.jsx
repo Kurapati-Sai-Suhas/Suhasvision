@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchWithAuth } from "@/lib/api";
 import React, { useMemo, useState } from "react";
 import {
@@ -20,11 +20,10 @@ import {
   Mail,
   MessageCircle,
   Minus,
-  Pause,
   Play,
-  Rewind,
   Search,
   Send,
+  ShieldCheck,
   Sparkles,
   Star,
   Target,
@@ -405,11 +404,17 @@ const ReviewQueueSection = ({ onOpenAnalysis }) => {
             className={`sv-rise sv-rise-${(i % 5) + 1} group overflow-hidden rounded-3xl border border-white/5 sv-glass transition-all duration-300 hover:-translate-y-1 hover:border-white/15 hover:shadow-[0_30px_60px_-25px_rgba(16,185,129,0.35)]`}
           >
             <div className="relative aspect-video overflow-hidden">
-              <img
-                src={item.thumbnail}
-                alt={item.videoTitle}
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
+              {item.thumbnail ? (
+                <img
+                  src={item.thumbnail}
+                  alt={item.videoTitle}
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-white/[0.06] to-transparent">
+                  <Video className="h-8 w-8 text-slate-600" />
+                </div>
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-[#05080F] via-[#05080F]/40 to-transparent" />
               <div className="absolute top-3 left-3 flex items-center gap-2">
                 <span
@@ -423,7 +428,7 @@ const ReviewQueueSection = ({ onOpenAnalysis }) => {
                 >
                   {item.urgency} priority
                 </span>
-                <span className="sv-chip font-mono">{item.duration}</span>
+                {item.duration ? <span className="sv-chip font-mono">{item.duration}</span> : null}
               </div>
               <button
                 onClick={() => onOpenAnalysis(item)}
@@ -496,7 +501,7 @@ const RankingsSection = () => {
       action={
         <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-3 py-1.5 text-xs text-slate-300">
           <Layers className="h-3.5 w-3.5 text-emerald-300" />
-          Season 2026 · All squads
+          All squads
         </div>
       }
     >
@@ -659,11 +664,19 @@ const TalentSection = () => {
     );
   }
 
-  const handleInvite = () => {
+  // There's no email/notification backend wired up yet -- copying to the
+  // clipboard is a real action instead of falsely claiming an email went
+  // out. This still requires the coach to send it themselves for now.
+  const handleInvite = async () => {
+    try {
+      await navigator.clipboard.writeText(message);
+      toast.success("Message copied", {
+        description: "Automated invite delivery isn't available yet -- paste this into an email or message to send it.",
+      });
+    } catch {
+      toast.error("Couldn't copy to clipboard");
+    }
     setContactOpen(false);
-    toast.success(`Invite sent to ${selected.name}`, {
-      description: "They'll receive an email with the trial details within the hour.",
-    });
   };
 
   return (
@@ -862,7 +875,7 @@ const TalentSection = () => {
                   className="sv-sheen inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-emerald-300 via-emerald-400 to-emerald-500 px-5 py-2.5 text-sm font-semibold text-emerald-950 shadow-[0_16px_40px_-16px_rgba(16,185,129,0.7)]"
                 >
                   <Send className="h-4 w-4" />
-                  Send invite
+                  Copy message
                 </button>
               </div>
             </div>
@@ -874,13 +887,26 @@ const TalentSection = () => {
 };
 
 /* ------------------------------ VIDEO ANALYSIS ------------------------------ */
+// Real confidence label from the model's own MC-Dropout uncertainty
+// (std dev across 30 stochastic passes per metric), not a fixed "High".
+const confidenceLabel = (confidenceVariance) => {
+  if (!confidenceVariance) return null;
+  const values = Object.values(confidenceVariance).filter((v) => typeof v === "number");
+  if (!values.length) return null;
+  const avgStd = values.reduce((a, b) => a + b, 0) / values.length;
+  if (avgStd < 3) return "High";
+  if (avgStd < 6) return "Moderate";
+  return "Low";
+};
+
 const AnalysisSection = ({ initial, onClear }) => {
   const { reviewQueue, biomechanicsSnapshot } = useCoach();
+  const queryClient = useQueryClient();
   const source = initial || reviewQueue[0];
 
   const [scores, setScores] = useState(source?.scores || { balance: 0, power: 0, technique: 0 });
   const [note, setNote] = useState("");
-  const [playing, setPlaying] = useState(false);
+  const [saving, setSaving] = useState(false);
 
   if (!source) {
     return (
@@ -893,11 +919,30 @@ const AnalysisSection = ({ initial, onClear }) => {
   }
 
   const overall = Math.round((scores.balance + scores.power + scores.technique) / 3);
+  const confidence = confidenceLabel(source.confidenceVariance);
 
-  const submit = () => {
-    toast.success(`Feedback saved for ${source.learner}`, {
-      description: "Player will see the updated scores and your notes in their feedback inbox.",
-    });
+  const submit = async () => {
+    setSaving(true);
+    try {
+      await fetchWithAuth(`/sessions/${source.id}/`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          balance_score: scores.balance,
+          power_score: scores.power,
+          technique_score: scores.technique,
+          bonus_insight: note || undefined,
+        }),
+      });
+      await queryClient.invalidateQueries({ queryKey: ["coachDashboard"] });
+      toast.success(`Feedback saved for ${source.learner}`, {
+        description: "Player will see the updated scores and your notes in their feedback inbox.",
+      });
+      onClear?.();
+    } catch (err) {
+      toast.error("Couldn't save feedback", { description: err.message });
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -923,42 +968,32 @@ const AnalysisSection = ({ initial, onClear }) => {
         {/* Video with overlay */}
         <div className="relative overflow-hidden rounded-3xl border border-white/5 sv-glass">
           <div className="relative aspect-video">
-            <img
-              src={source.thumbnail}
-              alt="video"
-              className="h-full w-full object-cover"
-            />
-            {/* Wireframe overlay */}
-            <svg viewBox="0 0 400 225" className="pointer-events-none absolute inset-0 h-full w-full opacity-70">
-              <defs>
-                <linearGradient id="wire" x1="0" x2="1" y1="0" y2="1">
-                  <stop offset="0%" stopColor="#10b981" />
-                  <stop offset="100%" stopColor="#D4AF37" />
-                </linearGradient>
-              </defs>
-              {/* Silhouette skeleton */}
-              <g stroke="url(#wire)" strokeWidth="1.2" fill="none" opacity="0.9">
-                <circle cx="200" cy="70" r="12" />
-                <line x1="200" y1="82" x2="200" y2="130" />
-                <line x1="200" y1="95" x2="176" y2="120" />
-                <line x1="200" y1="95" x2="228" y2="120" />
-                <line x1="176" y1="120" x2="164" y2="152" />
-                <line x1="228" y1="120" x2="248" y2="150" />
-                <line x1="200" y1="130" x2="184" y2="170" />
-                <line x1="200" y1="130" x2="216" y2="170" />
-                <line x1="184" y1="170" x2="180" y2="205" />
-                <line x1="216" y1="170" x2="224" y2="205" />
-              </g>
-              {/* Ball trail */}
-              <path
-                d="M20 200 Q 120 40 220 130"
-                stroke="#10b981"
-                strokeWidth="1.5"
-                fill="none"
-                strokeDasharray="6 6"
-                opacity="0.7"
+            {source.thumbnail ? (
+              <img
+                src={source.thumbnail}
+                alt="video"
+                className="h-full w-full object-cover"
               />
-            </svg>
+            ) : (
+              <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-white/[0.06] to-transparent">
+                <Video className="h-10 w-10 text-slate-600" />
+              </div>
+            )}
+            {/* Real per-joint attribution, when the model produced any --
+                replaces a fixed decorative skeleton silhouette that never
+                reflected this session's actual pose data. */}
+            {source.attributionDrivers.length > 0 ? (
+              <div className="pointer-events-none absolute inset-x-0 top-0 flex flex-wrap justify-center gap-2 p-4">
+                {source.attributionDrivers.map((label) => (
+                  <span
+                    key={label}
+                    className="rounded-full border border-emerald-400/30 bg-[#0C1322]/80 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.14em] text-emerald-200 backdrop-blur-md"
+                  >
+                    {label}
+                  </span>
+                ))}
+              </div>
+            ) : null}
 
             {/* Floating biomechanics badges */}
             <div className="pointer-events-none absolute inset-0 p-4">
@@ -984,30 +1019,12 @@ const AnalysisSection = ({ initial, onClear }) => {
               </div>
             </div>
 
-            {/* Timeline / controls */}
-            <div className="absolute inset-x-4 bottom-4 rounded-2xl border border-white/10 bg-[#05080F]/70 p-3 backdrop-blur-xl">
-              <div className="flex items-center gap-3">
-                <button
-                  data-testid="video-rewind"
-                  className="rounded-full border border-white/10 bg-white/5 p-2 text-slate-200 hover:bg-white/10"
-                >
-                  <Rewind className="h-4 w-4" />
-                </button>
-                <button
-                  data-testid="video-play"
-                  onClick={() => setPlaying((p) => !p)}
-                  className="rounded-full bg-emerald-400 p-2 text-emerald-950 hover:bg-emerald-300"
-                >
-                  {playing ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
-                </button>
-                <div className="flex-1">
-                  <div className="relative h-1.5 w-full overflow-hidden rounded-full bg-white/10">
-                    <div className="absolute inset-y-0 left-0 w-[42%] rounded-full bg-gradient-to-r from-emerald-300 to-[#D4AF37]" />
-                    <div className="absolute left-[42%] top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white shadow" />
-                  </div>
-                </div>
-                <div className="font-mono text-xs text-slate-300">00:18 / {source.duration}</div>
-              </div>
+            {/* No playback controls -- the source video is deleted right
+                after inference (zero-storage privacy policy), so there's
+                nothing to actually play or scrub. */}
+            <div className="absolute inset-x-4 bottom-4 flex items-center gap-2 rounded-2xl border border-white/10 bg-[#05080F]/70 px-3 py-2 backdrop-blur-xl">
+              <ShieldCheck className="h-3.5 w-3.5 text-emerald-300" />
+              <span className="text-xs text-slate-400">Video deleted after analysis · zero-storage privacy</span>
             </div>
           </div>
 
@@ -1044,11 +1061,11 @@ const AnalysisSection = ({ initial, onClear }) => {
               </div>
               <div className="text-right">
                 <div className="text-[10px] font-semibold uppercase tracking-[0.24em] text-slate-500">
-                  Coach confidence
+                  Model confidence
                 </div>
                 <div className="mt-1 flex items-center justify-end gap-1 text-xs text-slate-300">
                   <Gauge className="h-3.5 w-3.5 text-emerald-300" />
-                  High
+                  {source.isFallback ? "Rule-based fallback" : confidence || "—"}
                 </div>
               </div>
             </div>
@@ -1100,10 +1117,11 @@ const AnalysisSection = ({ initial, onClear }) => {
               <button
                 data-testid="submit-feedback"
                 onClick={submit}
-                className="sv-sheen inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-emerald-300 via-emerald-400 to-emerald-500 px-5 py-2.5 text-sm font-semibold text-emerald-950 shadow-[0_16px_40px_-16px_rgba(16,185,129,0.7)]"
+                disabled={saving}
+                className="sv-sheen inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-emerald-300 via-emerald-400 to-emerald-500 px-5 py-2.5 text-sm font-semibold text-emerald-950 shadow-[0_16px_40px_-16px_rgba(16,185,129,0.7)] disabled:opacity-60"
               >
                 <Check className="h-4 w-4" />
-                Send feedback
+                {saving ? "Saving…" : "Send feedback"}
               </button>
             </div>
           </div>
@@ -1155,10 +1173,15 @@ const CoachDashboard = () => {
   const players = data.players || [];
   const sessions = data.review_queue || [];
 
+  // No profile-photo upload feature exists yet -- generated initials avatars
+  // instead of stock photos pretending to be real people.
+  const avatarFor = (name) =>
+    `https://ui-avatars.com/api/?name=${encodeURIComponent(name || "?")}&background=1f2937&color=fff`;
+
   const coach = {
     name: academyName,
     role: "coach",
-    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?crop=faces&fit=crop&w=200&h=200",
+    avatar: avatarFor(academyName),
     email: "",
   };
 
@@ -1170,14 +1193,20 @@ const CoachDashboard = () => {
       id: s.id,
       learner: player.name || "Player",
       tier: player.playing_level || "—",
-      avatar: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?crop=faces&fit=crop&w=256&h=256",
-      thumbnail: "https://images.pexels.com/photos/3628912/pexels-photo-3628912.jpeg?auto=compress&cs=tinysrgb&w=800",
-      duration: "0:30",
+      avatar: avatarFor(player.name),
+      // No thumbnail/duration is captured server-side (the video is deleted
+      // right after inference for zero-storage compliance) -- null rather
+      // than a fabricated stock photo/length.
+      thumbnail: null,
+      duration: null,
       urgency: s.status === "COMPLETED" ? "low" : "high",
       submittedAt: new Date(s.date_analyzed).toLocaleDateString(),
       videoTitle: s.title || `Session ${s.id}`,
       aiScore: s.overall_score,
       scores: { balance: s.balance_score, power: s.power_score, technique: s.technique_score },
+      confidenceVariance: s.confidence_variance || null,
+      isFallback: s.is_fallback,
+      attributionDrivers: s.attribution_drivers || [],
     };
   });
 
@@ -1243,35 +1272,59 @@ const CoachDashboard = () => {
     .map((p, i) => {
       const playerSessions = sessions.filter((s) => s.player === p.id);
       const best = playerSessions.reduce((m, s) => Math.max(m, s.overall_score || 0), 0);
+
+      // Real week-over-week movement: the two most recent sessions by
+      // date_analyzed (defensively re-sorted here, not assumed pre-sorted).
+      // Previously hardcoded to "flat"/0 for every player regardless of
+      // their actual score history.
+      const byDateDesc = [...playerSessions].sort(
+        (a, b) => new Date(b.date_analyzed) - new Date(a.date_analyzed)
+      );
+      let trend = "—", trendValue = 0;
+      if (byDateDesc.length >= 2) {
+        trendValue = (byDateDesc[0].overall_score || 0) - (byDateDesc[1].overall_score || 0);
+        trend = trendValue > 0 ? "up" : trendValue < 0 ? "down" : "flat";
+      }
+
       return {
         id: p.id,
         rank: i + 1,
         name: p.name,
-        avatar: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?crop=faces&fit=crop&w=256&h=256",
+        avatar: avatarFor(p.name),
         tier: p.playing_level || "—",
         specialty: p.batting_hand ? `${p.batting_hand}-handed` : "—",
         highlight: p.archetype || "",
         aiScore: best,
         peakScore: best,
-        trend: "flat",
-        trendValue: 0,
+        trend,
+        trendValue,
         streak: p.current_streak || 0,
         sessions: playerSessions.length,
+        // Kept for talentProspects below -- not derived from playerSessions
+        // again there.
+        _sortedSessions: byDateDesc,
       };
     });
 
   const talentProspects = playerRankings
     .filter((p) => p.aiScore >= 85)
-    .map((p) => ({
-      ...p,
-      age: "—",
-      hometown: academyName,
-      style: p.specialty,
-      signature: `Consistently scoring ${p.aiScore}+ across ${p.sessions} session${p.sessions === 1 ? "" : "s"}.`,
-      strengths: [],
-      weaknesses: [],
-      nextLevelReady: p.aiScore >= 90,
-    }));
+    .map((p) => {
+      // Real strengths/weaknesses from the player's most recent session's
+      // actual AI output (primary_strength/primary_weakness), rather than
+      // permanently-empty arrays. Both come from the same real gradient-
+      // attribution path used elsewhere (see learner.jsx's generateAIInsights).
+      const latest = p._sortedSessions?.[0];
+      return {
+        ...p,
+        age: "—",
+        hometown: academyName,
+        style: p.specialty,
+        signature: `Consistently scoring ${p.aiScore}+ across ${p.sessions} session${p.sessions === 1 ? "" : "s"}.`,
+        strengths: latest?.primary_strength ? [latest.primary_strength] : [],
+        weaknesses: latest?.primary_weakness ? [latest.primary_weakness] : [],
+        nextLevelReady: p.aiScore >= 90,
+      };
+    });
 
   const coachSessions = []; // no coaching-calendar backend yet
 
@@ -1290,7 +1343,20 @@ const CoachDashboard = () => {
 
   return (
     <CoachContext.Provider value={contextValue}>
-      <AppShell role="coach" activeKey={active} onNavigate={setActive} title={titleMap[active]} profile={coach}>
+      <AppShell
+        role="coach"
+        activeKey={active}
+        onNavigate={setActive}
+        title={titleMap[active]}
+        profile={coach}
+        navBadges={{ queue: sessions.filter((s) => s.status !== "COMPLETED").length }}
+        pulse={{
+          label: "Academy Pulse",
+          value: avgScore || "—",
+          unit: avgScore ? "avg" : "",
+          sub: sessions.length ? "Avg AI score across all sessions" : "No sessions reviewed yet",
+        }}
+      >
         {active === "overview" ? <OverviewSection onOpenAnalysis={openAnalysis} /> : null}
         {active === "queue" ? <ReviewQueueSection onOpenAnalysis={openAnalysis} /> : null}
         {active === "rankings" ? <RankingsSection /> : null}
