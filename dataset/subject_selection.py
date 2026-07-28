@@ -25,6 +25,12 @@ footage once a ground-truth-labeled clip exists):
    Deliberately equal to what apply_pipeline_rules can survive (max 3 of 7
    missing): selecting a less-persistent subject would be rejected two steps
    later anyway.
+2b. TRAVERSAL FILTER — candidates whose net hip-center travel exceeds
+   MAX_SUBJECT_DISPLACEMENT_TORSOS are dropped. This is the BOWLER filter:
+   a camera-near bowler visible throughout the window is both large and
+   persistent, so steps 2 and 3 alone would happily select him. What
+   actually distinguishes the two is that a batsman plays from a fixed
+   crease while a bowler traverses the scene.
 3. WINNER — a single qualified track wins outright. With several, the winner
    must be BOTH at least as persistent as every rival AND clearly larger
    (SIZE_DOMINANCE_RATIO x mean torso) than every rival. If no track
@@ -65,6 +71,45 @@ GATE_TORSOS_MAX = 4.0
 # footage is the prominent, camera-near figure.
 SIZE_DOMINANCE_RATIO = 1.25
 
+# Traversal limits: how far a candidate's hip center may travel and still be
+# a batsman playing from a CREASE. A track is disqualified only when it
+# exceeds BOTH limits below.
+#
+# WHY THIS FILTER EXISTS: size and persistence alone cannot separate a
+# batsman from a BOWLER. A bowler running in is often camera-near (so
+# comparably large) and visible in every frame of the window (so equally
+# persistent) — the exact profile the size+coverage rules were built to
+# select. What separates them is that a batsman plays from a fixed crease
+# (a stride, a trigger movement) while a bowler traverses the scene.
+#
+# WHY TWO MEASURES, AND WHY "BOTH": each normalization alone has a blind
+# spot, and they are blind in opposite directions —
+#   * Torso units are scale-invariant, but DEFLATE for a camera-near
+#     subject: a person with a 0.30 torso cannot physically travel more than
+#     ~3.3 of their own torso lengths across a normalized frame, so a
+#     torso-only threshold can barely fire for the large, near bowler this
+#     filter most needs to catch.
+#   * Frame fraction directly measures "crossed the scene", but INFLATES in
+#     a tight close-up, where a real batsman's ordinary stride can span a
+#     large fraction of the frame.
+# Requiring both to be exceeded keeps the true positives (a bowler is far
+# from the crease AND crosses the frame, on either measure) while protecting
+# the two false-positive cases (close-up batsman, distant batsman).
+#
+# Both are documented starting points in the MAX_BONE_CV tradition, not
+# validated optima — tune against real multi-person footage once
+# frame-accurate ground truth exists. Real batting motion measures roughly
+# 0.3–1.5 torsos / 0.05–0.15 frame; both limits sit clearly above that.
+#
+# NOTE ON CAMERA PANNING: landmarks are normalized to the frame, so a camera
+# that tracks the batsman keeps the batsman's normalized position roughly
+# constant (low displacement, correctly kept) while sweeping background
+# figures across the frame (high displacement, correctly disqualified). A
+# camera panning AWAY from the batsman drops their coverage instead, which
+# MIN_TRACK_COVERAGE already handles.
+MAX_SUBJECT_DISPLACEMENT_TORSOS = 2.0
+MAX_SUBJECT_DISPLACEMENT_FRAME = 0.25
+
 # MediaPipe Pose landmark indices (same convention as validate_pose and
 # kinematic_validator.py).
 _LEFT_SHOULDER, _RIGHT_SHOULDER = 11, 12
@@ -89,6 +134,42 @@ def _mean_scale(track):
     return sum(track["scales"]) / len(track["scales"])
 
 
+def _net_displacement_raw(track):
+    """Net hip-center travel (first -> last observed frame) in normalized
+    frame units. Deliberately NET, not total path length: a batsman's hips
+    move forward and back across a stroke, ending near where they started,
+    so path length would penalise real batting motion. Net displacement
+    measures what actually matters here — did this person end up somewhere
+    else, i.e. traverse the scene."""
+    centers = track["centers"]
+    if len(centers) < 2:
+        return 0.0
+    (x0, y0), (x1, y1) = centers[0], centers[-1]
+    return math.hypot(x1 - x0, y1 - y0)
+
+
+def net_displacement_torsos(track):
+    """Net travel in the track's own mean torso lengths — scale-invariant,
+    so a near/large and far/small person moving the same fraction of their
+    own body length score identically."""
+    return _net_displacement_raw(track) / _mean_scale(track)
+
+
+def net_displacement_frame(track):
+    """Net travel as a fraction of the frame — measures 'crossed the scene'
+    directly, without the torso-unit deflation that affects camera-near
+    subjects (see MAX_SUBJECT_DISPLACEMENT_* for why both are needed)."""
+    return _net_displacement_raw(track)
+
+
+def is_traversing(track):
+    """True when a track travels too far to be batting from a crease. Requires
+    BOTH measures to be exceeded — see MAX_SUBJECT_DISPLACEMENT_* for why
+    either one alone has a blind spot in the opposite direction."""
+    return (net_displacement_torsos(track) > MAX_SUBJECT_DISPLACEMENT_TORSOS
+            and net_displacement_frame(track) > MAX_SUBJECT_DISPLACEMENT_FRAME)
+
+
 def build_tracks(candidates_per_frame):
     """
     Greedy, deterministic temporal association of per-frame pose candidates
@@ -97,7 +178,11 @@ def build_tracks(candidates_per_frame):
     track index), at most one candidate per track per frame; unmatched
     candidates open new tracks. Returns a list of track dicts:
       {"poses": {frame_idx: pose}, "last_center": (x, y),
-       "last_frame": int, "scales": [floats]}
+       "last_frame": int, "scales": [floats], "centers": [(x, y), ...]}
+
+    "centers" holds every observed hip center in frame order (parallel to
+    "scales"), so net_displacement_torsos can tell a batsman playing from a
+    fixed crease apart from a bowler traversing the scene.
     """
     tracks = []
     for frame_idx, candidates in enumerate(candidates_per_frame):
@@ -121,6 +206,7 @@ def build_tracks(candidates_per_frame):
                     "last_center": (cx, cy),
                     "last_frame": frame_idx,
                     "scales": [scale],
+                    "centers": [(cx, cy)],
                 })
                 # A newly opened track is spoken for this frame — a second
                 # candidate in the SAME frame must never join it.
@@ -131,6 +217,7 @@ def build_tracks(candidates_per_frame):
                 track["last_center"] = (cx, cy)
                 track["last_frame"] = frame_idx
                 track["scales"].append(scale)
+                track["centers"].append((cx, cy))
                 matched_track_ids.add(best[1])
     return tracks
 
@@ -146,7 +233,8 @@ def select_subject(candidates_per_frame):
                  interpolation rules handle those), or None overall when no
                  subject qualifies or dominates.
       report   — {"n_tracks", "multi_track", "qualified", "reason",
-                  "winner_coverage", "winner_scale"} for logging.
+                  "traversing", "winner_coverage", "winner_scale",
+                  "winner_displacement"} for logging.
     """
     n_frames = len(candidates_per_frame)
     tracks = build_tracks(candidates_per_frame)
@@ -165,6 +253,24 @@ def select_subject(candidates_per_frame):
             f"frames (need >= {MIN_TRACK_COVERAGE})"
         )
         return None, report
+
+    # Bowler/traversal filter. Size and persistence alone cannot separate a
+    # batsman from a camera-near bowler who is visible throughout the window
+    # -- that candidate profile is exactly what the dominance rules below
+    # would happily select. A batsman plays from a fixed crease; anyone who
+    # nets more than MAX_SUBJECT_DISPLACEMENT_TORSOS of travel crossed the
+    # scene and is not batting at one.
+    stationary = [t for t in qualified if not is_traversing(t)]
+    report["traversing"] = len(qualified) - len(stationary)
+    if not stationary:
+        nearest = min(net_displacement_torsos(t) for t in qualified)
+        report["reason"] = (
+            f"every persistent candidate traverses the scene (nearest is {nearest:.1f} torso lengths "
+            f"of net travel, limits {MAX_SUBJECT_DISPLACEMENT_TORSOS} torsos AND "
+            f"{MAX_SUBJECT_DISPLACEMENT_FRAME} frame) -- no batsman at a crease here"
+        )
+        return None, report
+    qualified = stationary
 
     if len(qualified) == 1:
         winner = qualified[0]
@@ -187,6 +293,7 @@ def select_subject(candidates_per_frame):
 
     report["winner_coverage"] = len(winner["poses"])
     report["winner_scale"] = round(_mean_scale(winner), 4)
+    report["winner_displacement"] = round(net_displacement_torsos(winner), 2)
     report["reason"] = "selected"
     selected = [winner["poses"].get(i) for i in range(n_frames)]
     return selected, report

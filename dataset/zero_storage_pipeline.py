@@ -228,8 +228,10 @@ def extract_features_from_image_array(frames_rgb, session_name="unknown", detect
         # exactly this kind of positive logging is how the original
         # wrong-person defect went unnoticed (architecture_ground_truth.md).
         log_rejection(session_name, "SUBJECT_SELECTED",
-                      f"{report['n_tracks']} candidate track(s), winner covers "
-                      f"{report['winner_coverage']}/{len(frames_rgb)} frames, mean torso {report['winner_scale']}")
+                      f"{report['n_tracks']} candidate track(s), "
+                      f"{report.get('traversing', 0)} dropped as traversing (bowler filter), winner covers "
+                      f"{report['winner_coverage']}/{len(frames_rgb)} frames, mean torso {report['winner_scale']}, "
+                      f"net travel {report.get('winner_displacement')} torsos")
 
     # Pass 3 — unchanged per-phase topology validation + conversion, now on
     # the SELECTED subject only.
