@@ -446,6 +446,74 @@ _LEFT_WRIST_IDX = 15
 _RIGHT_WRIST_IDX = 16
 
 
+def motion_energy_phase_indices(frames_gray, start_frame, end_frame, n_phases=N_FRAMES):
+    """
+    Non-uniform phase sampling by CUMULATIVE MOTION ENERGY, following
+    MGSampler (Zhi, Tong, Wang & Wu, "MGSampler: An Explainable Sampling
+    Strategy for Video Action Recognition", ICCV 2021).
+
+    WHY: uniform sampling assumes the swing progresses at constant speed. It
+    does not -- stance/trigger is a near-static setup while
+    backlift->contact is explosive -- so uniform sampling systematically
+    lands "contact" on a transitional frame and over-samples the idle setup.
+
+    HOW: build the motion-energy profile over the window (mean absolute
+    difference between consecutive sampled frames), take its cumulative
+    distribution, and place the 7 phases at EQUAL INTERVALS OF CUMULATIVE
+    MOTION rather than equal intervals of time. Fast phases therefore receive
+    proportionally more samples automatically.
+
+    WHY THIS SUCCEEDS WHERE THE WRIST-SPEED SAMPLER FAILED (and stays
+    disabled, see WRIST_SPEED_SAMPLING_ENABLED): that approach depended on
+    argmax of a single landmark's speed, so ONE wrong detection -- a feeder
+    walking through frame -- silently relocated "contact" to the wrong
+    person's arm swing. A cumulative distribution over whole-frame energy has
+    no single point of catastrophic failure: a small moving figure elsewhere
+    in frame perturbs the distribution slightly instead of capturing it, and
+    the phases stay monotonically ordered by construction.
+
+    Pure arithmetic on an already-decoded grayscale frame list -- no MediaPipe
+    call, no API call, no second decode pass. Falls back to the original
+    uniform formula (returns None) whenever the profile is degenerate (no
+    motion at all, or too few readable frames), so behaviour degrades to
+    today's proven sampling rather than to something unvalidated.
+    """
+    valid = [(i, f) for i, f in enumerate(frames_gray) if f is not None]
+    if len(valid) < 3:
+        return None
+
+    diffs = []
+    for (i_prev, f_prev), (i_cur, f_cur) in zip(valid, valid[1:]):
+        if f_prev.shape != f_cur.shape:
+            return None
+        diffs.append((i_cur, float(np.mean(np.abs(f_cur.astype(np.int16) - f_prev.astype(np.int16))))))
+
+    total = sum(d for _, d in diffs)
+    if total <= 1e-6:
+        return None  # completely static window -- uniform is as good as anything
+
+    # Cumulative motion at each sampled position, normalised to [0, 1].
+    cum, running = {valid[0][0]: 0.0}, 0.0
+    for idx, d in diffs:
+        running += d
+        cum[idx] = running / total
+    positions = sorted(cum)
+
+    window_frames = end_frame - start_frame
+    targets = [i / (n_phases - 1) for i in range(n_phases)]
+    indices = []
+    for t in targets:
+        # First sampled position whose cumulative motion reaches this target.
+        chosen = next((p for p in positions if cum[p] >= t - 1e-9), positions[-1])
+        frac = chosen / (len(frames_gray) - 1) if len(frames_gray) > 1 else 0.0
+        indices.append(int(start_frame + window_frames * frac))
+
+    # Monotonic and in-bounds by construction, but assert cheaply rather than
+    # trust it -- a non-monotonic phase list would mislabel every phase.
+    indices = sorted(min(max(i, start_frame), end_frame) for i in indices)
+    return indices
+
+
 def _peak_speed_frame(wrist_samples):
     """
     Pure helper, no video/MediaPipe dependency -- unit-testable in

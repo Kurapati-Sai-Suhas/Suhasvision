@@ -265,11 +265,42 @@ def _expected_gradients(extractor, x_input, output_index, n_baselines=12, n_step
     return attributions.numpy()  # signed attribution per frame/feature
 
 
-def _top_feature_drivers(extractor, x_input, weakest_key, top_k=2):
-    """Returns (joint_labels, drill_texts) for the features with the largest
-    aggregate |attribution| toward the weakest score."""
-    attributions = _expected_gradients(extractor, x_input, SCORE_INDEX[weakest_key])
-    feature_importance = np.sum(np.abs(attributions), axis=0)  # (F,)
+PHASE_LABELS = ["stance", "trigger", "backlift start", "full backlift",
+                "downswing", "contact", "follow-through"]
+
+
+def _top_feature_drivers(extractor, x_input, weakest_key, top_k=2, top_phases=3):
+    """
+    Returns (joint_labels, drill_texts, phase_label) for the features with the
+    largest |attribution| toward the weakest score.
+
+    TWO-STAGE attribution (Ismail et al., "Benchmarking Deep Learning
+    Interpretability in Time Series Predictions", NeurIPS 2020). Their
+    benchmark finds saliency degrades when a method must attribute across the
+    time AND feature axes at once, and that the effective fix is to first find
+    the salient TIMESTEPS, then rank features conditioned on those timesteps.
+
+    This previously summed |attribution| across all 7 phases, discarding the
+    temporal axis entirely -- so "left knee flexion" could win on diffuse
+    noise spread over the whole stroke while a sharp, real signal confined to
+    contact lost. Now the phase ranking comes first, and features are ranked
+    only within the top-scoring phases. Pure post-processing of the same
+    attribution tensor -- no extra forward/backward passes, no added latency.
+
+    The returned phase_label also makes the coaching copy concrete: "your
+    front knee, during the downswing" instead of just "your front knee".
+    """
+    attributions = _expected_gradients(extractor, x_input, SCORE_INDEX[weakest_key])  # (7, F)
+    abs_attr = np.abs(attributions)
+
+    # Stage 1 -- which phases carry the signal.
+    phase_importance = np.sum(abs_attr, axis=1)  # (7,)
+    n_phases = min(top_phases, abs_attr.shape[0])
+    top_phase_idx = np.argsort(-phase_importance)[:n_phases]
+    dominant_phase = int(np.argmax(phase_importance))
+
+    # Stage 2 -- rank features using only those phases.
+    feature_importance = np.sum(abs_attr[top_phase_idx, :], axis=0)  # (F,)
 
     n_base = len(FEATURE_BASE_NAMES)
     combined = feature_importance[:n_base] + feature_importance[n_base:]  # pair angle with its velocity
@@ -278,7 +309,43 @@ def _top_feature_drivers(extractor, x_input, weakest_key, top_k=2):
     joints = [FEATURE_BASE_NAMES[i] for i in ranked_idx]
     labels = [FEATURE_JOINT_LABELS[j] for j in joints]
     drills = [JOINT_DRILL_MAP[j] for j in joints]
-    return labels, drills
+    phase_label = PHASE_LABELS[dominant_phase] if dominant_phase < len(PHASE_LABELS) else None
+    return labels, drills, phase_label
+
+
+def _attention_focus(extractor, att_layer, x_input):
+    """
+    The model's own temporal attention weights -- "which of the 7 phases did
+    the network concentrate on for this stroke". One tensordot over an
+    already-computed (1, 7, 128) BiLSTM output; sub-millisecond, no extra
+    model call.
+
+    DELIBERATE WORDING CAVEAT (Jain & Wallace, "Attention is not Explanation",
+    NAACL 2019; Wiegreffe & Pinter, "Attention is not not Explanation", EMNLP
+    2019; Bibal et al., ACL 2022): single-head additive attention pooling is
+    exactly the architecture class shown to admit alternative attention
+    distributions that preserve the prediction. So this is reported as WHERE
+    THE MODEL LOOKED, never as WHY it scored what it did -- the causal claim
+    stays with Expected Gradients (§_expected_gradients), which is
+    axiomatically grounded. Returns None on any failure; this is a nice-to-
+    have signal and must never break an inference.
+    """
+    if att_layer is None:
+        return None
+    try:
+        _, bilstm_out = extractor(x_input, training=False)  # (1, 7, 128)
+        e = tf.keras.activations.tanh(tf.tensordot(bilstm_out, att_layer.W, axes=1) + att_layer.b)
+        alpha = tf.keras.activations.softmax(e, axis=1).numpy()[0, :, 0]  # (7,)
+        focus_idx = int(np.argmax(alpha))
+        return {
+            "phase": PHASE_LABELS[focus_idx] if focus_idx < len(PHASE_LABELS) else str(focus_idx),
+            "weight": round(float(alpha[focus_idx]), 3),
+            "distribution": {PHASE_LABELS[i]: round(float(w), 3)
+                             for i, w in enumerate(alpha) if i < len(PHASE_LABELS)},
+        }
+    except Exception:
+        logger.exception("Attention focus extraction failed; omitting it from the response")
+        return None
 
 
 class InvalidUploadError(ValueError):
@@ -358,14 +425,14 @@ def run_advanced_inference(video_path):
     # absent — get_models is inside the try on purpose), fall back to the
     # rule-based scorer on the same extracted keypoints rather than 500.
     try:
-        extractor, _ = get_models()
-        return _run_model_inference(combined_df, extractor)
+        extractor, att_layer = get_models()
+        return _run_model_inference(combined_df, extractor, att_layer)
     except Exception:
         logger.exception("ML inference failed; falling back to rule-based scorer")
         return score_from_keypoint_df(combined_df)
 
 
-def _run_model_inference(combined_df, extractor):
+def _run_model_inference(combined_df, extractor, att_layer=None):
     angles_df = pd.DataFrame()
     angles_df["angle_knee_L"] = calculate_angle(combined_df, "left_hip", "left_knee", "left_ankle")
     angles_df["angle_knee_R"] = calculate_angle(combined_df, "right_hip", "right_knee", "right_ankle")
@@ -426,14 +493,22 @@ def _run_model_inference(combined_df, extractor):
     # score -- identifies which joints actually drove that score down for
     # this specific session, rather than just naming the lowest of 4 numbers.
     try:
-        driver_labels, drill_texts = _top_feature_drivers(extractor, X_input, weakest_key)
+        driver_labels, drill_texts, phase_label = _top_feature_drivers(extractor, X_input, weakest_key)
         attribution_drivers = driver_labels
         recommended_drill = "; ".join(drill_texts)
-        weakness = f"{weakness} Biggest drivers: {', '.join(driver_labels)}."
+        # Two-stage attribution also tells us WHEN, not just WHAT -- name the
+        # phase when we have it, since "during your downswing" is far more
+        # actionable to a batter than a joint name alone.
+        if phase_label:
+            weakness = f"{weakness} Biggest drivers: {', '.join(driver_labels)}, mainly during your {phase_label}."
+        else:
+            weakness = f"{weakness} Biggest drivers: {', '.join(driver_labels)}."
     except Exception:
         logger.exception("Gradient attribution failed; shipping score-level weakness only")
         attribution_drivers = []
         recommended_drill = None
+
+    attention_focus = _attention_focus(extractor, att_layer, X_input)
 
     return {
         **scores_by_metric,
@@ -448,6 +523,11 @@ def _run_model_inference(combined_df, extractor):
         "primary_strength": strength,
         "attribution_drivers": attribution_drivers,
         "recommended_drill": recommended_drill,
+        # WHERE the model concentrated (its own attention weights) -- a second,
+        # architecturally independent signal from the Expected-Gradients
+        # attribution above. Reported as focus, never as cause; see
+        # _attention_focus's docstring for the Jain & Wallace caveat.
+        "attention_focus": attention_focus,
         "is_fallback": False,
     }
 

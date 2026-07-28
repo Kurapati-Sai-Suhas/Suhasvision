@@ -1,5 +1,21 @@
 # MODEL_EVALUATION.md — Current Deployed Model, Consolidated
 
+> ## ⚠️ SUPERSEDED, 2026-07-28 — READ THIS FIRST
+>
+> Every cross-validation figure in this document was produced by a protocol that
+> passed the **test fold** into `model.fit(validation_data=...)` alongside
+> `EarlyStopping(restore_best_weights=True)`, then scored on that same fold — so
+> the reported weights were *selected* on the data being measured.
+>
+> Measured optimism bias on identical folds/seed: **MAE 10.85 → 15.08 (+39%)**,
+> **Spearman 0.279 → 0.145**.
+>
+> The protocol is fixed (`evaluation_protocol.split_inner_validation`), but the
+> numbers below have **not** been regenerated. Cite
+> [`IMPROVEMENT_ROADMAP.md`](IMPROVEMENT_ROADMAP.md) instead until this file is
+> re-run. The v4-vs-v5 *relative* comparison still holds (both measured the same
+> way); the *absolute* values do not.
+
 **Date:** 2026-07-27. **Scope:** the model actually serving both stacks right now — `cricket_stance_advanced_v5.keras` — evaluated against the currently-deployed environment default (verified directly: `ml_service.resolve_model_path()` resolves to v5 with no `CRICKET_MODEL_FILENAME` override set). Every number below cites the script/command that produced it; nothing here is estimated or reconstructed from memory.
 
 ---

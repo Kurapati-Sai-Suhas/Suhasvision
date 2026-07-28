@@ -23,7 +23,7 @@ Before this module existed:
     type. This module adds all of that in one place instead of four times.
 """
 import numpy as np
-from sklearn.model_selection import GroupKFold, LeaveOneGroupOut
+from sklearn.model_selection import GroupKFold, GroupShuffleSplit, LeaveOneGroupOut
 from scipy.stats import spearmanr, kendalltau, wilcoxon
 
 SCORE_NAMES = ["Balance", "Power", "Technique", "Defence"]
@@ -77,6 +77,38 @@ def assert_no_leakage(groups, train_idx, test_idx, fold_label=""):
     overlap = train_groups & test_groups
     label = f" in {fold_label}" if fold_label else ""
     assert not overlap, f"Leakage{label}: identities {overlap} appear in both train and test."
+
+
+def split_inner_validation(groups, train_idx, val_fraction=0.25, seed=42):
+    """
+    Carves an identity-grouped INNER validation set out of a fold's training
+    indices, so early stopping / LR scheduling never touch the outer test fold.
+
+    WHY THIS EXISTS (real bug found 2026-07-28): cross_validate.py previously
+    passed the outer test fold straight into model.fit(validation_data=...)
+    with EarlyStopping(restore_best_weights=True), then scored the model on
+    that same fold. The reported weights were therefore explicitly SELECTED to
+    minimise loss on the data being scored -- a textbook optimistically-biased
+    estimate, not a generalisation estimate. train_advanced_model.py had the
+    same shape of problem (one split doing double duty as early-stopping
+    monitor and as the headline "held-out" number).
+
+    Returns (inner_train_idx, inner_val_idx) as arrays of positions into the
+    SAME index space train_idx uses. Falls back to returning
+    (train_idx, train_idx) only when the training fold has too few identities
+    to split (< 2), which would otherwise raise -- callers should treat that
+    as "no clean inner split available" rather than silently trusting it.
+    """
+    groups = np.asarray(groups)
+    train_idx = np.asarray(train_idx)
+    train_groups = groups[train_idx]
+    n_train_identities = len(set(train_groups))
+    if n_train_identities < 2:
+        return train_idx, train_idx
+
+    splitter = GroupShuffleSplit(n_splits=1, test_size=val_fraction, random_state=seed)
+    inner_train_pos, inner_val_pos = next(splitter.split(np.zeros(len(train_idx)), groups=train_groups))
+    return train_idx[inner_train_pos], train_idx[inner_val_pos]
 
 
 def compute_metrics(y_true, y_pred, score_names=SCORE_NAMES):

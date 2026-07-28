@@ -170,17 +170,36 @@ Full six-question treatment (what/why/alternatives/limitations/would-we-redesign
 
 ## 8. Results — Current Model Evaluation
 
-Deployed model: **`cricket_stance_advanced_v5.keras`**, trained on 130 sessions / 42 identities (front-view, fast bowling only). Full detail, every number sourced to its exact command, in [`MODEL_EVALUATION.md`](MODEL_EVALUATION.md).
+Deployed model: **`cricket_stance_advanced_v5.keras`**, trained on 130 sessions / 42 identities (front-view, fast bowling only).
 
-| Metric | Value |
+> ⚠️ **Corrected 2026-07-28.** The previously-published 10.85 MAE came from a
+> protocol where early stopping could see the test fold. Under a corrected
+> protocol (inner validation split carved from the training fold) the honest
+> numbers are below. See [`IMPROVEMENT_ROADMAP.md`](IMPROVEMENT_ROADMAP.md) for
+> the full measurement and root-cause analysis.
+
+| Metric | Value (corrected protocol) |
 |---|---|
-| 5-fold grouped CV, overall MAE | **10.85 ± 1.95** |
-| RMSE | 14.04 ± 1.87 |
-| R² | 0.086 ± 0.097 |
-| vs. constant-mean baseline (13.59 MAE) | beats it in **5 of 5 folds** (Wilcoxon p=0.0625) |
-| Direct MAE vs. previous deployed model (v4) | **11.85 vs. 18.61** |
+| 5-fold grouped CV, overall MAE | **15.75 ± 3.35** |
+| Constant-mean baseline | **13.59 ± 1.44** |
+| Wilcoxon vs. baseline | p=0.6250 — **not significant** |
+| Mean Spearman ρ *(the AQA-standard metric)* | **+0.145** |
+| Previously reported (test-fold-selected) MAE | 10.85 ± 1.95 — **superseded, +39% optimistic** |
 
-A real negative result, kept rather than hidden: a flip + Gaussian-jitter data-augmentation strategy was implemented, leak-checked, and evaluated under the identical controlled protocol — it made MAE **6.4% worse** and was **not adopted**. Promotion in this project is a measured decision in both directions, not "ship whatever's newest."
+**Honest reading: under correct evaluation the model does not currently beat
+predicting the mean.** The previously-reported advantage was an artefact of
+letting early stopping see the test fold. For context, Pirsiavash et al. (ECCV
+2014) achieved SRC 0.41–0.45 with classical pose features on ~150 samples — that
+is the bar to clear. [`IMPROVEMENT_ROADMAP.md`](IMPROVEMENT_ROADMAP.md) explains
+the route there (label validation first, then more identities, then
+pairwise/contrastive regression).
+
+What *is* demonstrated and defensible today: a zero-storage, fully-automated
+ingestion pipeline with layered data-quality gates, multi-person subject
+selection, train/serve consistency, axiomatically-grounded attribution, and an
+evaluation protocol honest enough to catch and report its own inflated numbers.
+
+A real negative result, kept rather than hidden: a flip + Gaussian-jitter data-augmentation strategy was implemented, leak-checked, and evaluated under the identical controlled protocol — it made MAE **6.4% worse** and was **not adopted**. Promotion in this project is a measured decision in both directions, not "ship whatever's newest." (The *why* is now understood: with 129/130 sessions right-handed, horizontal flip generates an out-of-distribution left-handed set carrying labels never validated for it — a label-invariance violation, per Gao et al.'s time-series augmentation survey. See [`IMPROVEMENT_ROADMAP.md`](IMPROVEMENT_ROADMAP.md) §1.)
 
 ## 9. Sample Output
 
@@ -261,7 +280,8 @@ Current: 130 sessions / 42 identities, 129 right-handed / 1 left-handed, skill-l
 
 | Document | Contents |
 |---|---|
-| [`MODEL_EVALUATION.md`](MODEL_EVALUATION.md) | Current deployed model's full, sourced accuracy record |
+| [`IMPROVEMENT_ROADMAP.md`](IMPROVEMENT_ROADMAP.md) | **Start here.** Research-grounded findings, the evaluation-protocol fix and its measured impact, and what to do next |
+| [`MODEL_EVALUATION.md`](MODEL_EVALUATION.md) | Prior accuracy record — partially superseded, see its header |
 | [`DATA_COLLECTION.md`](DATA_COLLECTION.md) | How and how much more data to collect |
 | [`DATA_LINEAGE.md`](DATA_LINEAGE.md) | Every dataset/model artifact — producer, inputs, production status |
 | [`PROJECT_UNDERSTANDING.md`](PROJECT_UNDERSTANDING.md) | Full-repository architecture read-through |
