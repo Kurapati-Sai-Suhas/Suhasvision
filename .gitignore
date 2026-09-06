@@ -55,3 +55,4 @@ dataset/experiment_results/sheets_A3/
 
 # Stray diagnostics written by test runs into the module's default path.
 dataset/extraction_diagnostics.jsonl
+dataset/phase3_results/batsman_audit_sheets/

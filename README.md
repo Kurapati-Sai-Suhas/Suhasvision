@@ -279,7 +279,10 @@ newer stack is measured but deliberately not promoted. Status is marked per comp
 | Motion-energy (MGSampler) sampling | **REJECTED** | no measured benefit, +1.56 s/clip |
 | Flip + jitter augmentation | **REJECTED** | MAE +6.4% worse |
 | BoT-SORT / ReID tracking | **REJECTED** | no better than ByteTrack, ~19% slower |
-| Bat / equipment evidence in batsman score | **PLANNED** | COCO `baseball bat` fires on 56.3% of batsman frames — viable, unbenchmarked |
+| Skeleton-dynamics batsman evidence (S2) | **EXPERIMENTAL** | refusal 0.333 → 0.222, accuracy 0.630 → 0.741 (held-out); +5.1 s/clip |
+| Bat / equipment evidence (S3) | **EXPERIMENTAL** | removes the last wrong answer (1 → 0); bat-on-person separation 0.355 vs 0.020 for bat-anywhere |
+| Persistence evidence (S1) | **REJECTED** | net −1 clip; contributes variance, not signal |
+| Batting-action evidence (S4) | **REJECTED** | wrong-person 0.000 → 0.095; re-breaks the feeder case |
 | RTMPose | **PLANNED** | MediaPipe-on-crop works at 81% success; no evidence yet that a switch is justified |
 | Phase segmentation, candidate generation, frame-quality scoring | **PLANNED** | Phase 3 continuation |
 
@@ -301,6 +304,18 @@ Coverage is honest about what the footage supports:
 - **0/51** carry per-phase spans: at 30 fps, stance/trigger and backlift-start/full-backlift
   are not separable by eye, so **phase-accuracy metrics are not computable** and are not reported
 - 23 clips are excluded as multi-shot, scene-cut, whole-session, no-shot or ambiguous
+
+**S0–S4 batsman ablation (51 clips, eval 27).** All arms share identical detections, tracks
+and sampled frames; only scoring differs. Wrong-person / refusal on held-out eval:
+S0 geometry 0.056 / 0.333 · S1 +persistence 0.059 / 0.370 · S2 +skeleton 0.048 / 0.222 ·
+**S3 +equipment 0.000 / 0.259** · S4 +action 0.095 / 0.222. The ladder is **not monotonic** —
+persistence and action evidence both hurt. The clearest finding is model-free: "a bat is in
+frame" separates batsman from non-batsman tracks by **0.020**, "the bat is on *this* person"
+by **0.355**. Detecting a bat is not identifying a batsman. The dominant remaining failure is
+**pose extraction on small/occluded batsmen**, not identity. Full detail, including the
+stationary-feeder case study where bat evidence points at the *wrong* person, in
+[`PHASE3_BATSMAN_ABLATION.md`](PHASE3_BATSMAN_ABLATION.md). Nothing promoted; S2/S3 cost
+~5–6 s per clip against 0.3 ms for S0.
 
 ## 13. Known Limitations
 
@@ -333,6 +348,7 @@ Coverage is honest about what the footage supports:
 | [`PHASE1_EXTRACTION_RESULTS.md`](PHASE1_EXTRACTION_RESULTS.md) | Phase-1 instrumentation + A0–A3 ablation. Includes the negative result: Phase 1 did not reduce wrong-person error |
 | [`PHASE2_DETECTION_RESULTS.md`](PHASE2_DETECTION_RESULTS.md) | Detector/tracker replacement, crease geometry, B0–B5 ablation, held-out results |
 | [`EXTRACTION_PIPELINE_RESEARCH.md`](EXTRACTION_PIPELINE_RESEARCH.md) | Literature review behind the extraction redesign |
+| [`PHASE3_BATSMAN_ABLATION.md`](PHASE3_BATSMAN_ABLATION.md) | S0–S4 semantic batsman ablation: results, bat-signal specificity, stationary-feeder case study, latency |
 | [`docs/PHASE3_ANNOTATION_PROTOCOL.md`](docs/PHASE3_ANNOTATION_PROTOCOL.md) | Operational definitions for the Phase-3 temporal ground truth |
 | [`docs/architecture_ground_truth.md`](docs/architecture_ground_truth.md) | The dated, ground-truth engineering log — including the full wrong-person-tracking investigation |
 | [`docs/SuhasVision_SRS_v2.0.docx`](docs/SuhasVision_SRS_v2.0.docx) | Formal, IEEE-830-inspired requirements specification |

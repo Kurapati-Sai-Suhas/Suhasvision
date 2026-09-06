@@ -1,0 +1,54 @@
+{
+ "S0_geometry_features_per_track": {
+  "mean_ms": 0.051,
+  "median_ms": 0.041,
+  "p90_ms": 0.147,
+  "n": 14
+ },
+ "S1_persistence_features_per_track": {
+  "mean_ms": 0.032,
+  "median_ms": 0.026,
+  "p90_ms": 0.09,
+  "n": 14
+ },
+ "S2_pose_on_crop_per_frame_per_track": {
+  "mean_ms": 45.554,
+  "median_ms": 50.774,
+  "p90_ms": 52.829,
+  "n": 60
+ },
+ "S2_skeleton_math_per_track": {
+  "mean_ms": 0.0,
+  "median_ms": 0.0,
+  "p90_ms": 0.001,
+  "n": 30
+ },
+ "S3_bat_detection_per_frame_shared": {
+  "mean_ms": 49.639,
+  "median_ms": 48.475,
+  "p90_ms": 55.273,
+  "n": 60
+ },
+ "S3_association_math_per_track": {
+  "mean_ms": 0.005,
+  "median_ms": 0.005,
+  "p90_ms": 0.005,
+  "n": 30
+ },
+ "S4_action_math_per_track": {
+  "mean_ms": 0.0,
+  "median_ms": 0.0,
+  "p90_ms": 0.0,
+  "n": 30
+ },
+ "per_clip_estimate": {
+  "assumptions": "20 sampled frames, 5 candidate tracks per clip",
+  "S0_S1_ms": 0.3,
+  "S2_added_ms": 5077.4,
+  "S3_added_ms": 969.5,
+  "S4_added_ms": 0.0,
+  "S2_total_ms": 5077.7,
+  "S3_total_ms": 6047.2,
+  "S4_total_ms": 6047.2
+ }
+}

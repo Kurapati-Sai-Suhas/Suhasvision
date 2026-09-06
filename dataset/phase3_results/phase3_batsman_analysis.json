@@ -1,0 +1,347 @@
+{
+ "bat_level_ablation": {
+  "S2_baseline_no_bat": {
+   "correct": 20,
+   "wrong": 1,
+   "refused": 6,
+   "batsman_precision": 0.9524,
+   "wrong_person_rate": 0.0476,
+   "refusal_rate": 0.2222,
+   "accuracy_all_clips": 0.7407
+  },
+  "+bat_anywhere": {
+   "correct": 20,
+   "wrong": 0,
+   "refused": 7,
+   "batsman_precision": 1.0,
+   "wrong_person_rate": 0.0,
+   "refusal_rate": 0.2593,
+   "accuracy_all_clips": 0.7407
+  },
+  "+bat_on_person": {
+   "correct": 20,
+   "wrong": 0,
+   "refused": 7,
+   "batsman_precision": 1.0,
+   "wrong_person_rate": 0.0,
+   "refusal_rate": 0.2593,
+   "accuracy_all_clips": 0.7407
+  },
+  "+bat_near_hand": {
+   "correct": 20,
+   "wrong": 0,
+   "refused": 7,
+   "batsman_precision": 1.0,
+   "wrong_person_rate": 0.0,
+   "refusal_rate": 0.2593,
+   "accuracy_all_clips": 0.7407
+  },
+  "+bat_persist": {
+   "correct": 21,
+   "wrong": 0,
+   "refused": 6,
+   "batsman_precision": 1.0,
+   "wrong_person_rate": 0.0,
+   "refusal_rate": 0.2222,
+   "accuracy_all_clips": 0.7778
+  },
+  "+all_bat (=S3)": {
+   "correct": 20,
+   "wrong": 0,
+   "refused": 7,
+   "batsman_precision": 1.0,
+   "wrong_person_rate": 0.0,
+   "refusal_rate": 0.2593,
+   "accuracy_all_clips": 0.7407
+  }
+ },
+ "bat_discrimination": {
+  "e_bat_anywhere": {
+   "batsman_mean": 0.6118,
+   "other_mean": 0.5915,
+   "separation": 0.0203,
+   "n_batsman": 51,
+   "n_other": 199
+  },
+  "e_bat_on_person": {
+   "batsman_mean": 0.3765,
+   "other_mean": 0.0211,
+   "separation": 0.3554,
+   "n_batsman": 51,
+   "n_other": 199
+  },
+  "e_bat_near_hand": {
+   "batsman_mean": 0.2824,
+   "other_mean": 0.0116,
+   "separation": 0.2708,
+   "n_batsman": 51,
+   "n_other": 199
+  },
+  "e_bat_persist": {
+   "batsman_mean": 0.2392,
+   "other_mean": 0.0161,
+   "separation": 0.2231,
+   "n_batsman": 51,
+   "n_other": 199
+  },
+  "e_bat_conf": {
+   "batsman_mean": 0.3013,
+   "other_mean": 0.0385,
+   "separation": 0.2628,
+   "n_batsman": 51,
+   "n_other": 199
+  }
+ },
+ "stationary_feeder_clips": [
+  {
+   "clip_id": "instagram1_front_01.mp4",
+   "split": "dev",
+   "gt_track": 1,
+   "rival_track": 2,
+   "rival_foot_stability": 0.9991,
+   "rival_rel_height": 0.3008,
+   "gt_rel_height": 0.2778,
+   "rival_bat_on_person": 0.0,
+   "gt_bat_on_person": 0.95,
+   "rival_bat_near_hand": 0.0,
+   "gt_bat_near_hand": 0.8,
+   "rival_updown": 0.0999,
+   "gt_updown": 0.016
+  },
+  {
+   "clip_id": "instagram1_front_03.mp4",
+   "split": "eval",
+   "gt_track": 2,
+   "rival_track": 1,
+   "rival_foot_stability": 0.9993,
+   "rival_rel_height": 0.3124,
+   "gt_rel_height": 0.3079,
+   "rival_bat_on_person": 0.0,
+   "gt_bat_on_person": 0.95,
+   "rival_bat_near_hand": 0.0,
+   "gt_bat_near_hand": 0.75,
+   "rival_updown": 0.0893,
+   "gt_updown": 0.3158
+  },
+  {
+   "clip_id": "pro_player_front_01.mp4",
+   "split": "eval",
+   "gt_track": 1,
+   "rival_track": 7,
+   "rival_foot_stability": 0.985,
+   "rival_rel_height": 0.8342,
+   "gt_rel_height": 0.3622,
+   "rival_bat_on_person": 0.05,
+   "gt_bat_on_person": 0.35,
+   "rival_bat_near_hand": 0.0,
+   "gt_bat_near_hand": 0.25,
+   "rival_updown": 0.0,
+   "gt_updown": 0.1429
+  },
+  {
+   "clip_id": "pro_player_front_03.mp4",
+   "split": "dev",
+   "gt_track": 2,
+   "rival_track": 6,
+   "rival_foot_stability": 0.997,
+   "rival_rel_height": 0.8948,
+   "gt_rel_height": 0.3585,
+   "rival_bat_on_person": 0.0,
+   "gt_bat_on_person": 0.4,
+   "rival_bat_near_hand": 0.0,
+   "gt_bat_near_hand": 0.1,
+   "rival_updown": 0.0,
+   "gt_updown": 0.3108
+  },
+  {
+   "clip_id": "pro_player_front_06.mp4",
+   "split": "eval",
+   "gt_track": 2,
+   "rival_track": 1,
+   "rival_foot_stability": 0.9372,
+   "rival_rel_height": 0.7631,
+   "gt_rel_height": 0.4055,
+   "rival_bat_on_person": 0.4,
+   "gt_bat_on_person": 0.15,
+   "rival_bat_near_hand": 0.1,
+   "gt_bat_near_hand": 0.0,
+   "rival_updown": 0.0,
+   "gt_updown": 0.0
+  },
+  {
+   "clip_id": "pro_player_front_08.mp4",
+   "split": "dev",
+   "gt_track": 2,
+   "rival_track": 4,
+   "rival_foot_stability": 0.9937,
+   "rival_rel_height": 0.7712,
+   "gt_rel_height": 0.344,
+   "rival_bat_on_person": 0.0,
+   "gt_bat_on_person": 0.35,
+   "rival_bat_near_hand": 0.0,
+   "gt_bat_near_hand": 0.1,
+   "rival_updown": 0.2222,
+   "gt_updown": 0.8571
+  },
+  {
+   "clip_id": "pro_player_front_10.mp4",
+   "split": "eval",
+   "gt_track": 2,
+   "rival_track": 1,
+   "rival_foot_stability": 0.9356,
+   "rival_rel_height": 0.7762,
+   "gt_rel_height": 0.3812,
+   "rival_bat_on_person": 0.05,
+   "gt_bat_on_person": 0.05,
+   "rival_bat_near_hand": 0.0,
+   "gt_bat_near_hand": 0.05,
+   "rival_updown": 0.0,
+   "gt_updown": 0.0
+  },
+  {
+   "clip_id": "pro_player_front_12.mp4",
+   "split": "dev",
+   "gt_track": 2,
+   "rival_track": 1,
+   "rival_foot_stability": 0.9773,
+   "rival_rel_height": 0.8909,
+   "gt_rel_height": 0.3375,
+   "rival_bat_on_person": 0.05,
+   "gt_bat_on_person": 0.25,
+   "rival_bat_near_hand": 0.05,
+   "gt_bat_near_hand": 0.1,
+   "rival_updown": 0.0339,
+   "gt_updown": 0.0
+  },
+  {
+   "clip_id": "pro_player_front_14.mp4",
+   "split": "eval",
+   "gt_track": 2,
+   "rival_track": 6,
+   "rival_foot_stability": 0.9975,
+   "rival_rel_height": 0.8727,
+   "gt_rel_height": 0.3345,
+   "rival_bat_on_person": 0.0,
+   "gt_bat_on_person": 0.3,
+   "rival_bat_near_hand": 0.0,
+   "gt_bat_near_hand": 0.05,
+   "rival_updown": 0.0,
+   "gt_updown": 0.1643
+  },
+  {
+   "clip_id": "pro_player_front_16.mp4",
+   "split": "eval",
+   "gt_track": 1,
+   "rival_track": 2,
+   "rival_foot_stability": 0.9773,
+   "rival_rel_height": 0.8351,
+   "gt_rel_height": 0.3624,
+   "rival_bat_on_person": 0.0,
+   "gt_bat_on_person": 0.3,
+   "rival_bat_near_hand": 0.0,
+   "gt_bat_near_hand": 0.05,
+   "rival_updown": 0.0728,
+   "gt_updown": 0.3693
+  },
+  {
+   "clip_id": "pro_player_front_18.mp4",
+   "split": "eval",
+   "gt_track": 4,
+   "rival_track": 6,
+   "rival_foot_stability": 0.996,
+   "rival_rel_height": 0.7121,
+   "gt_rel_height": 0.4226,
+   "rival_bat_on_person": 0.0,
+   "gt_bat_on_person": 0.05,
+   "rival_bat_near_hand": 0.0,
+   "gt_bat_near_hand": 0.0,
+   "rival_updown": 0.2697,
+   "gt_updown": 0.0
+  }
+ ],
+ "failure_categories": {
+  "S0_geometry": {
+   "margin too small \u2014 candidates not separable": [
+    "instagram1_front_03.mp4",
+    "instagram2_front_03.mp4",
+    "pro_player_front_16.mp4"
+   ],
+   "pose failure on the batsman crop (small/occluded subject)": [
+    "kohli_side_12.mp4",
+    "kohli_side_16.mp4",
+    "pro_player_front_10.mp4",
+    "pro_player_front_18.mp4",
+    "rishi_front_2.mp4",
+    "sanjay_front _1.mp4"
+   ],
+   "stationary feeder \u2014 rival is stationary and larger": [
+    "pro_player_front_06.mp4"
+   ]
+  },
+  "S1_persistence": {
+   "margin too small \u2014 candidates not separable": [
+    "instagram1_front_03.mp4",
+    "instagram2_front_03.mp4",
+    "pro_player_front_16.mp4"
+   ],
+   "single candidate below confidence threshold": [
+    "kohli_side_08.mp4"
+   ],
+   "pose failure on the batsman crop (small/occluded subject)": [
+    "kohli_side_12.mp4",
+    "kohli_side_16.mp4",
+    "pro_player_front_10.mp4",
+    "pro_player_front_18.mp4",
+    "rishi_front_2.mp4",
+    "sanjay_front _1.mp4"
+   ],
+   "stationary feeder \u2014 rival is stationary and larger": [
+    "pro_player_front_06.mp4"
+   ]
+  },
+  "S2_skeleton": {
+   "margin too small \u2014 candidates not separable": [
+    "instagram2_front_03.mp4"
+   ],
+   "semantic ambiguity \u2014 rival scored higher on mixed evidence": [
+    "kohli_side_12.mp4"
+   ],
+   "pose failure on the batsman crop (small/occluded subject)": [
+    "kohli_side_16.mp4",
+    "pro_player_front_06.mp4",
+    "pro_player_front_18.mp4",
+    "rishi_front_2.mp4",
+    "sanjay_front _1.mp4"
+   ]
+  },
+  "S3_equipment": {
+   "single candidate below confidence threshold": [
+    "kohli_side_08.mp4"
+   ],
+   "pose failure on the batsman crop (small/occluded subject)": [
+    "kohli_side_12.mp4",
+    "kohli_side_16.mp4",
+    "pro_player_front_06.mp4",
+    "pro_player_front_18.mp4",
+    "rishi_front_2.mp4",
+    "sanjay_front _1.mp4"
+   ]
+  },
+  "S4_action": {
+   "margin too small \u2014 candidates not separable": [
+    "instagram2_front_03.mp4"
+   ],
+   "pose failure on the batsman crop (small/occluded subject)": [
+    "kohli_side_12.mp4",
+    "kohli_side_16.mp4",
+    "pro_player_front_10.mp4",
+    "rishi_front_2.mp4",
+    "sanjay_front _1.mp4"
+   ],
+   "stationary feeder \u2014 rival is stationary and larger": [
+    "pro_player_front_06.mp4",
+    "pro_player_front_18.mp4"
+   ]
+  }
+ }
+}
