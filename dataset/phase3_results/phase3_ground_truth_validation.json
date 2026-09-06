@@ -1,0 +1,117 @@
+{
+ "schema": "phase3-annotation-1.0",
+ "total_clips": 51,
+ "schema_validation_failures": {},
+ "reliable_shot_boundaries": {
+  "count": 28,
+  "dev": 14,
+  "eval": 14,
+  "excluding_low_confidence": 26
+ },
+ "usable_contact_labels": {
+  "count": 28,
+  "exact_ball_visible": 4,
+  "contact_adjacent": 24,
+  "dev": 14,
+  "eval": 14
+ },
+ "usable_phase_labels": {
+  "count": 0,
+  "note": "No per-phase spans were annotated. The five-phase vocabulary exists in the schema, but on 30fps footage the STANCE/BACKLIFT and DOWNSWING/CONTACT boundaries could not be placed reproducibly from the sheets, and guessing them would make phase-accuracy metrics unfalsifiable. Phase metrics are therefore NOT computable and must not be reported."
+ },
+ "too_ambiguous": {
+  "multiple_shots": 12,
+  "scene_cut": 3,
+  "excessive_duration": 3,
+  "no_shot": 1,
+  "insufficient_action": 1,
+  "ambiguous": 3
+ },
+ "low_confidence_clips": [
+  "beginnerunorthodox1_front_01.mp4",
+  "pro_player_back_25.mp4",
+  "instagram2_front_01.mp4",
+  "pro_player_back_21.mp4",
+  "pro_player_back_36.mp4"
+ ],
+ "benchmark_subsets": {
+  "L0-L3_shot_localization": {
+   "n": 28,
+   "clips": [
+    "instagram1_front_01.mp4",
+    "instagram2_front_03.mp4",
+    "pro_player_front_44.mp4",
+    "roa_front_1.mp4",
+    "instagram2_front_05.mp4",
+    "instagram2_front_07.mp4",
+    "beginnerunorthodox1_front_01.mp4",
+    "kohli_side_08.mp4",
+    "kohli_side_10.mp4",
+    "kohli_side_14.mp4",
+    "kohli_side_16.mp4",
+    "kohli_side_20.mp4",
+    "kohli_side_24.mp4",
+    "kohli_side_28.mp4",
+    "kohli_side_32.mp4",
+    "pro_player_back_23.mp4",
+    "pro_player_back_25.mp4",
+    "pro_player_back_27.mp4",
+    "pro_player_back_31.mp4",
+    "pro_player_back_33.mp4",
+    "pro_player_back_38.mp4",
+    "pro_player_front_01.mp4",
+    "pro_player_front_03.mp4",
+    "pro_player_front_06.mp4",
+    "pro_player_front_10.mp4",
+    "pro_player_front_12.mp4",
+    "pro_player_front_14.mp4",
+    "pro_player_front_16.mp4"
+   ]
+  },
+  "contact_evaluation": {
+   "n": 28,
+   "clips": [
+    "instagram1_front_01.mp4",
+    "instagram2_front_03.mp4",
+    "pro_player_front_44.mp4",
+    "roa_front_1.mp4",
+    "instagram2_front_05.mp4",
+    "instagram2_front_07.mp4",
+    "beginnerunorthodox1_front_01.mp4",
+    "kohli_side_08.mp4",
+    "kohli_side_10.mp4",
+    "kohli_side_14.mp4",
+    "kohli_side_16.mp4",
+    "kohli_side_20.mp4",
+    "kohli_side_24.mp4",
+    "kohli_side_28.mp4",
+    "kohli_side_32.mp4",
+    "pro_player_back_23.mp4",
+    "pro_player_back_25.mp4",
+    "pro_player_back_27.mp4",
+    "pro_player_back_31.mp4",
+    "pro_player_back_33.mp4",
+    "pro_player_back_38.mp4",
+    "pro_player_front_01.mp4",
+    "pro_player_front_03.mp4",
+    "pro_player_front_06.mp4",
+    "pro_player_front_10.mp4",
+    "pro_player_front_12.mp4",
+    "pro_player_front_14.mp4",
+    "pro_player_front_16.mp4"
+   ]
+  },
+  "S0-S4_batsman_identification": {
+   "n": 51,
+   "note": "All 51 clips: Phase-2 batsman boxes already cover every clip."
+  },
+  "F0-F4_frame_selection": {
+   "n": 28,
+   "note": "Requires a bounded shot to select frames within, so it shares the shot-localization subset."
+  },
+  "phase_evaluation": {
+   "n": 0,
+   "note": "Not computable \u2014 see usable_phase_labels."
+  }
+ }
+}

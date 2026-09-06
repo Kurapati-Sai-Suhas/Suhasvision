@@ -26,6 +26,7 @@
 10. [Tech Stack](#10-tech-stack)
 11. [Getting Started](#11-getting-started)
 12. [Data Collection](#12-data-collection)
+12b. [Extraction Pipeline — Phase 0–3 Status](#12b-extraction-pipeline--phase-03-status)
 13. [Known Limitations](#13-known-limitations)
 14. [Future Scope](#14-future-scope)
 15. [Project Documentation Index](#15-project-documentation-index)
@@ -259,6 +260,48 @@ Environment quirks worth knowing before you hit them: on Windows machines with a
 
 Current: 130 sessions / 42 identities, 129 right-handed / 1 left-handed, skill-level skewed toward Amateur/Club (72%) against the project's own 40/30/30 target. Concrete collection targets (by identity count, handedness, skill level), the step-by-step procedure using the new automatic full-video shot scanner (no more manual macro-window timestamping), and expected pipeline attrition rates are all in [`DATA_COLLECTION.md`](DATA_COLLECTION.md).
 
+## 12b. Extraction Pipeline — Phase 0–3 Status
+
+The upstream extraction path (video → correct batsman → correct frames) has been rebuilt and
+benchmarked across three phases. **Production still runs the Phase-0 baseline (`A0`)**; the
+newer stack is measured but deliberately not promoted. Status is marked per component.
+
+| Component | Status | Evidence |
+|---|---|---|
+| Uniform 7-frame sampling + MediaPipe subject selection | **IMPLEMENTED (production default, `A0`)** | `extraction_config.py` — `ACTIVE_CONFIG` resolves to A0 |
+| Distinct-phase-frame guard (no duplicate frames) | **IMPLEMENTED** | 24 affected clips → 0, test-pinned |
+| Diagnostics, benchmark harness, contact sheets | **IMPLEMENTED** | `extraction_*.py`, `phase2_*.py`, `phase3_*.py` |
+| YOLO11m@640 person detection | **EXPERIMENTAL** | recall 0.465 → 0.987 (held-out), 4.9× faster |
+| ByteTrack multi-object tracking | **EXPERIMENTAL** | batsman-track recall 0.981 |
+| Crease-geometry batsman scorer | **EXPERIMENTAL** | wrong-person 0.200 → 0.056 (held-out) |
+| Best-7 constrained optimizer (DP) | **EXPERIMENTAL** | `phase3_frame_selection.py`, 26 tests incl. brute-force equivalence |
+| Phase-3 temporal ground truth (51 clips) | **IMPLEMENTED** | `phase3_annotations.jsonl` + validation report |
+| Motion-energy (MGSampler) sampling | **REJECTED** | no measured benefit, +1.56 s/clip |
+| Flip + jitter augmentation | **REJECTED** | MAE +6.4% worse |
+| BoT-SORT / ReID tracking | **REJECTED** | no better than ByteTrack, ~19% slower |
+| Bat / equipment evidence in batsman score | **PLANNED** | COCO `baseball bat` fires on 56.3% of batsman frames — viable, unbenchmarked |
+| RTMPose | **PLANNED** | MediaPipe-on-crop works at 81% success; no evidence yet that a switch is justified |
+| Phase segmentation, candidate generation, frame-quality scoring | **PLANNED** | Phase 3 continuation |
+
+**Architecture evolution and negative results.** Phase 1 instrumented the pipeline and
+*failed* to reduce wrong-person error (29.4% → 26.3%), but diagnosed why: on 70/102 clips
+MediaPipe surfaced only one candidate, so subject selection had nothing to choose between.
+Phase 2 replaced the detector and confirmed the diagnosis — **100% of the baseline's
+wrong-person errors were detection failures**, not selection failures. Tracking alone fixed
+nothing; the cricket-geometric prior did. Full detail in
+[`PHASE1_EXTRACTION_RESULTS.md`](PHASE1_EXTRACTION_RESULTS.md) and
+[`PHASE2_DETECTION_RESULTS.md`](PHASE2_DETECTION_RESULTS.md).
+
+**Phase-3 ground truth (annotation gate).** 51 clips annotated for shot coherence, boundaries
+and contact against [`docs/PHASE3_ANNOTATION_PROTOCOL.md`](docs/PHASE3_ANNOTATION_PROTOCOL.md).
+Coverage is honest about what the footage supports:
+
+- **28/51** clips yield a cleanly boundable single shot (dev 14 / eval 14)
+- **28/51** carry a usable contact frame — only **4** with the ball actually visible (`EXACT`)
+- **0/51** carry per-phase spans: at 30 fps, stance/trigger and backlift-start/full-backlift
+  are not separable by eye, so **phase-accuracy metrics are not computable** and are not reported
+- 23 clips are excluded as multi-shot, scene-cut, whole-session, no-shot or ambiguous
+
 ## 13. Known Limitations
 
 - **42 unique identities** is the real ceiling on generalization claims — not architecture. See §12 for concrete growth targets.
@@ -287,6 +330,10 @@ Current: 130 sessions / 42 identities, 129 right-handed / 1 left-handed, skill-l
 | [`PROJECT_UNDERSTANDING.md`](PROJECT_UNDERSTANDING.md) | Full-repository architecture read-through |
 | [`PROJECT_AUDIT.md`](PROJECT_AUDIT.md) | Every known issue, severity-classified, with current fix status |
 | [`STABILIZATION_PLAN.md`](STABILIZATION_PLAN.md) | The milestone plan those fixes were executed against |
+| [`PHASE1_EXTRACTION_RESULTS.md`](PHASE1_EXTRACTION_RESULTS.md) | Phase-1 instrumentation + A0–A3 ablation. Includes the negative result: Phase 1 did not reduce wrong-person error |
+| [`PHASE2_DETECTION_RESULTS.md`](PHASE2_DETECTION_RESULTS.md) | Detector/tracker replacement, crease geometry, B0–B5 ablation, held-out results |
+| [`EXTRACTION_PIPELINE_RESEARCH.md`](EXTRACTION_PIPELINE_RESEARCH.md) | Literature review behind the extraction redesign |
+| [`docs/PHASE3_ANNOTATION_PROTOCOL.md`](docs/PHASE3_ANNOTATION_PROTOCOL.md) | Operational definitions for the Phase-3 temporal ground truth |
 | [`docs/architecture_ground_truth.md`](docs/architecture_ground_truth.md) | The dated, ground-truth engineering log — including the full wrong-person-tracking investigation |
 | [`docs/SuhasVision_SRS_v2.0.docx`](docs/SuhasVision_SRS_v2.0.docx) | Formal, IEEE-830-inspired requirements specification |
 | [`docs/SuhasVision_Engineering_Deepdive.docx`](docs/SuhasVision_Engineering_Deepdive.docx) | Full onboarding manual — every design decision defended, six questions at a time |
