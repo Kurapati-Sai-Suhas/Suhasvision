@@ -1,0 +1,88 @@
+﻿python : WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+At line:1 char:422
++ ... _LEVEL="3"; python run_extraction_experiment.py --videos raw_videos - ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING: All lo...itten to STDERR:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+I0000 00:00:1787987636.502384   32300 port.cc:153] oneDNN custom operations are on. You may see slightly different 
+numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the 
+environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1787987638.717339   32300 port.cc:153] oneDNN custom operations are on. You may see slightly different 
+numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the 
+environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+W0000 00:00:1787987642.857378    1096 inference_feedback_manager.cc:121] Feedback manager requires a model with a 
+single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787987642.896292    1096 inference_feedback_manager.cc:121] Feedback manager requires a model with a 
+single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1787987642.948666    6340 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS 
+is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+E0000 00:00:1787987763.258355   12452 portable_clearcut_uploader.cc:90] Failed to send to clearcut: 
+FAILED_PRECONDITION: Not valid for uploading until: 2026-08-29T07:30:03.256243751+00:00
+=== Source Location Trace: === 
+wireless/android/play/playlog/cplusplus/portable_clearcut_uploader.cc:180
+E0000 00:00:1787987823.265025   12452 portable_clearcut_uploader.cc:90] Failed to send to clearcut: 
+FAILED_PRECONDITION: Not valid for uploading until: 2026-08-29T07:30:03.256243751+00:00
+=== Source Location Trace: === 
+wireless/android/play/playlog/cplusplus/portable_clearcut_uploader.cc:180
+E0000 00:00:1787987883.268178   12452 portable_clearcut_uploader.cc:90] Failed to send to clearcut: 
+FAILED_PRECONDITION: Not valid for uploading until: 2026-08-29T07:30:03.256243751+00:00
+=== Source Location Trace: === 
+wireless/android/play/playlog/cplusplus/portable_clearcut_uploader.cc:180
+E0000 00:00:1787987943.281742   12452 portable_clearcut_uploader.cc:90] Failed to send to clearcut: 
+FAILED_PRECONDITION: Not valid for uploading until: 2026-08-29T07:30:03.256243751+00:00
+=== Source Location Trace: === 
+wireless/android/play/playlog/cplusplus/portable_clearcut_uploader.cc:180
+E0000 00:00:1787988003.286624   12452 portable_clearcut_uploader.cc:90] Failed to send to clearcut: 
+FAILED_PRECONDITION: Not valid for uploading until: 2026-08-29T07:30:03.256243751+00:00
+=== Source Location Trace: === 
+wireless/android/play/playlog/cplusplus/portable_clearcut_uploader.cc:180
+E0000 00:00:1787988063.292798   12452 portable_clearcut_uploader.cc:90] Failed to send to clearcut: 
+FAILED_PRECONDITION: Not valid for uploading until: 2026-08-29T07:30:03.256243751+00:00
+=== Source Location Trace: === 
+wireless/android/play/playlog/cplusplus/portable_clearcut_uploader.cc:180
+E0000 00:00:1787988123.294730   12452 portable_clearcut_uploader.cc:90] Failed to send to clearcut: 
+FAILED_PRECONDITION: Not valid for uploading until: 2026-08-29T07:30:03.256243751+00:00
+=== Source Location Trace: === 
+wireless/android/play/playlog/cplusplus/portable_clearcut_uploader.cc:180
+E0000 00:00:1787988183.310233   12452 portable_clearcut_uploader.cc:90] Failed to send to clearcut: 
+FAILED_PRECONDITION: Not valid for uploading until: 2026-08-29T07:30:03.256243751+00:00
+=== Source Location Trace: === 
+wireless/android/play/playlog/cplusplus/portable_clearcut_uploader.cc:180
+E0000 00:00:1787988243.322051   12452 portable_clearcut_uploader.cc:90] Failed to send to clearcut: 
+FAILED_PRECONDITION: Not valid for uploading until: 2026-08-29T07:30:03.256243751+00:00
+=== Source Location Trace: === 
+wireless/android/play/playlog/cplusplus/portable_clearcut_uploader.cc:180
+E0000 00:00:1787988303.324707   12452 portable_clearcut_uploader.cc:90] Failed to send to clearcut: 
+FAILED_PRECONDITION: Not valid for uploading until: 2026-08-29T07:30:03.256243751+00:00
+=== Source Location Trace: === 
+wireless/android/play/playlog/cplusplus/portable_clearcut_uploader.cc:180
+Clips: 102 | Configs: ['A0', 'A1', 'A2', 'A3'] | Annotations: 0
+
+=== A0 ===
+  accepted 74.5% | methods {'uniform': 102}
+  pose_success 0.8788 | coarse/fine subject agreement None
+  contact_valid_rate None | mean_contact_conf None
+  61.5s total, 0.6s/clip
+
+=== A1 ===
+  accepted 74.5% | methods {'motion_energy': 102}
+  pose_success 0.8809 | coarse/fine subject agreement None
+  contact_valid_rate None | mean_contact_conf None
+  213.5s total, 2.09s/clip
+
+=== A2 ===
+  accepted 75.5% | methods {'contact_anchored': 91, 'motion_energy': 11}
+  pose_success 0.8951 | coarse/fine subject agreement 0.8529
+  contact_valid_rate 0.5098 | mean_contact_conf 0.7415
+  217.6s total, 2.13s/clip
+
+=== A3 ===
+  accepted 74.5% | methods {'contact_anchored': 52, 'motion_energy': 50}
+  pose_success 0.8915 | coarse/fine subject agreement 0.8235
+  contact_valid_rate 0.5098 | mean_contact_conf 0.7415
+  196.0s total, 1.92s/clip
+
+Wrote experiment_results\summary.json

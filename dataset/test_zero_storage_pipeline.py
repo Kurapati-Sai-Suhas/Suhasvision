@@ -10,6 +10,8 @@ import numpy as np
 
 from test_subject_selection import make_pose
 
+import zero_storage_pipeline as zsp
+from extraction_config import get_config
 from zero_storage_pipeline import (
     N_FRAMES,
     WRIST_SPEED_SAMPLING_ENABLED,
@@ -39,6 +41,69 @@ class TestWristSpeedSamplingDisabledByDefault(unittest.TestCase):
         # this test (and re-verify against real multi-person footage, not
         # just unit tests) rather than deleting it.
         self.assertFalse(WRIST_SPEED_SAMPLING_ENABLED)
+
+
+class TestDistinctPhaseFrameGuard(unittest.TestCase):
+    """select_phase_frames must never return a phase list containing the same
+    frame twice. Two phases sharing one frame produce identical landmarks, so
+    every velocity feature between them is exactly zero -- a stillness that
+    never happened, fed straight into the (7, 30) tensor.
+
+    Found by the Phase-1 benchmark: duplicate frames on 16/102 clips under A2
+    (contact anchored near a window edge) and 6/102 under A1 (motion energy
+    concentrated in one interval). Both producers are monotonic but neither
+    guaranteed distinctness."""
+
+    def setUp(self):
+        self.cfg_a2 = get_config("A2")
+        self.cfg_a1 = get_config("A1")
+
+    def test_contact_anchor_at_window_start_falls_back_instead_of_duplicating(self):
+        # Contact detected 2 frames into a 100-frame window: the five
+        # pre-contact phases would collapse onto ~2 distinct frames.
+        collapsed = zsp.redistribute_phase_indices(0, 100, 2, n_phases=7)
+        self.assertLess(len(set(collapsed)), 7, "precondition: this must collapse")
+
+        with mock.patch.object(zsp, "collect_coarse_scan",
+                               return_value=([0], [[]], [None], 0)), \
+             mock.patch.object(zsp, "select_subject",
+                               return_value=(["pose"], {"reason": "selected",
+                                                        "winner_track": {"poses": {0: "pose"}},
+                                                        "n_tracks": 1, "multi_track": False})), \
+             mock.patch.object(zsp.contact_detection, "detect_contact",
+                               return_value={"frame_index": 2, "valid": True, "confidence": 0.9,
+                                             "peak_fraction": 0.02, "peak_prominence": 3.0,
+                                             "bilateral_agreement": 0.8, "reason": "ok"}), \
+             mock.patch.object(zsp, "motion_energy_phase_indices", return_value=None):
+            indices, method = zsp.select_phase_frames(None, 0, 100, "t", self.cfg_a2)
+
+        self.assertNotEqual(method, "contact_anchored")
+        self.assertEqual(len(set(indices)), 7)
+
+    def test_degenerate_motion_energy_falls_back_to_uniform(self):
+        with mock.patch.object(zsp, "collect_coarse_scan",
+                               return_value=([0], [[]], [None], 0)), \
+             mock.patch.object(zsp, "motion_energy_phase_indices",
+                               return_value=[0, 0, 0, 5, 5, 5, 100]):
+            indices, method = zsp.select_phase_frames(None, 0, 100, "t", self.cfg_a1)
+
+        self.assertEqual(method, "uniform")
+        self.assertEqual(len(set(indices)), 7)
+
+    def test_distinct_motion_energy_is_still_used(self):
+        good = [0, 10, 20, 30, 40, 50, 100]
+        with mock.patch.object(zsp, "collect_coarse_scan",
+                               return_value=([0], [[]], [None], 0)), \
+             mock.patch.object(zsp, "motion_energy_phase_indices", return_value=good):
+            indices, method = zsp.select_phase_frames(None, 0, 100, "t", self.cfg_a1)
+
+        self.assertEqual(method, "motion_energy")
+        self.assertEqual(indices, good)
+
+    def test_a0_uniform_path_is_untouched(self):
+        indices, method = zsp.select_phase_frames(None, 100, 400, "t", get_config("A0"))
+        self.assertEqual(method, "uniform")
+        self.assertEqual(indices, [100, 150, 200, 250, 300, 350, 400])
 
 
 class TestPeakSpeedFrame(unittest.TestCase):

@@ -33,7 +33,10 @@ def _resolve_naming_anchor(url, macro_start):
         return macro_start
     return zlib.crc32(url.encode("utf-8")) % 100000
 from schema import CANONICAL_FRAME_NAMES
-from subject_selection import MAX_POSE_CANDIDATES, select_subject
+from subject_selection import MAX_POSE_CANDIDATES, MIN_TRACK_COVERAGE, select_subject
+import contact_detection
+import extraction_diagnostics as diagnostics
+from extraction_config import get_config
 
 # Every data file this module reads or writes lives next to it in dataset/,
 # NOT in whatever the current working directory happens to be. Before this
@@ -192,7 +195,7 @@ def _detect_candidates(detector, frames_rgb):
     return candidates_per_frame
 
 
-def extract_features_from_image_array(frames_rgb, session_name="unknown", detector=None):
+def extract_features_from_image_array(frames_rgb, session_name="unknown", detector=None, diag=None):
     """
     Core shared extraction logic (dataset ingestion AND Django serving).
     Takes a list of 7 RGB numpy arrays (None slots = undecodable frames).
@@ -219,6 +222,11 @@ def extract_features_from_image_array(frames_rgb, session_name="unknown", detect
     # dominance requirement. No confident subject -> reject the session,
     # never silently score whoever the detector happened to find.
     selected, report = select_subject(candidates_per_frame)
+    if diag is not None:
+        # The FINE pass, recorded separately from the coarse one. If the two
+        # passes disagree about who the batsman is, that disagreement is the
+        # identity-switch signal -- invisible unless both are stored.
+        diagnostics.record_subject_selection(diag, report, pass_name="fine")
     if selected is None:
         log_rejection(session_name, "SUBJECT_SELECTION_REJECTED", report["reason"])
         return False, f"No single trackable subject across the shot ({report['reason']}).", None
@@ -247,9 +255,17 @@ def extract_features_from_image_array(frames_rgb, session_name="unknown", detect
         else:
             raw_keypoints.append(None)
 
+    if diag is not None:
+        n_ok = sum(1 for kp in raw_keypoints if kp is not None)
+        diag.pose_success_count = n_ok
+        diag.pose_success_rate = round(n_ok / max(len(raw_keypoints), 1), 3)
+
     success, interpolated = apply_pipeline_rules(raw_keypoints, session_name)
     if not success:
         return False, "Pose rejected by kinematic validation rules.", None
+
+    if diag is not None:
+        diag.interpolated_frames = list(interpolated or [])
 
     return True, raw_keypoints, interpolated
 
@@ -620,6 +636,163 @@ def redistribute_phase_indices(start_frame, end_frame, peak_frame, n_phases=N_FR
     return before + after
 
 
+def collect_coarse_scan(cap, start_frame, end_frame, n_samples, session_name, detector=None):
+    """
+    Phase 1, step 1 — ONE pass over the shot window that serves BOTH
+    downstream needs: multi-person detection (for subject selection) and a
+    grayscale motion profile (for motion-energy sampling). Decoding once for
+    two purposes rather than twice is the difference between this being
+    affordable and not.
+
+    Returns (frame_nums, candidates_per_frame, grays, n_read_failures):
+      frame_nums            absolute frame numbers, evenly spanning the window
+      candidates_per_frame  list of ALL detected people per sampled frame
+      grays                 grayscale frames (None where the read failed),
+                            positionally aligned with frame_nums
+      n_read_failures       count of frames that could not be decoded
+
+    Position is preserved on a failed read (None slot, empty candidate list)
+    for the same reason collect_phase_frames does it: a silently shortened
+    list shifts every later frame onto the wrong phase (audit C3).
+    """
+    window_frames = end_frame - start_frame
+    n = max(2, min(n_samples, window_frames + 1))
+    frame_nums = [int(start_frame + (window_frames * i / (n - 1))) for i in range(n)]
+
+    grays, frames_rgb, n_failures = [], [], 0
+    for frame_num in frame_nums:
+        cap.set(cv2.CAP_PROP_POS_FRAMES, frame_num)
+        ret, frame = cap.read()
+        if not ret:
+            n_failures += 1
+            grays.append(None)
+            frames_rgb.append(None)
+            continue
+        grays.append(cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY))
+        frames_rgb.append(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+
+    if n_failures:
+        log_rejection(session_name, "COARSE_SCAN_READ_FAILURES",
+                      f"{n_failures}/{len(frame_nums)} coarse frames could not be decoded")
+
+    if detector is not None:
+        candidates = _detect_candidates(detector, frames_rgb)
+    else:
+        with _DETECTOR_LOCK:
+            candidates = _detect_candidates(_get_shared_detector_locked(), frames_rgb)
+
+    return frame_nums, candidates, grays, n_failures
+
+
+def select_phase_frames(cap, start_frame, end_frame, session_name, config,
+                        diag=None, detector=None):
+    """
+    Phase 1 — decide WHICH 7 frames to extract, in this order:
+
+        coarse scan  ->  SUBJECT SELECTION  ->  contact detection
+                                             ->  frame selection
+
+    The ordering is the whole point. Before Phase 1, contact detection ran
+    first and consumed `pose_landmarks[0]` — whoever the detector happened
+    to return — which on real nets footage was the ball feeder. Here contact
+    detection can only ever see the landmarks of a track that subject
+    selection already confirmed, so that failure mode is structurally
+    impossible rather than merely unlikely.
+
+    Falls back, in order: contact-anchored -> motion-energy -> uniform. Every
+    fallback is logged and recorded, never silent. Returns (indices, method).
+    """
+    window_frames = end_frame - start_frame
+    uniform = [int(start_frame + (window_frames * i / (N_FRAMES - 1))) for i in range(N_FRAMES)]
+
+    # A0 keeps the pre-Phase-1 path exactly: no coarse scan, no contact
+    # detection, uniform sampling. Measured as the baseline, not assumed.
+    if not config.use_motion_energy and not config.subject_selection_before_contact:
+        return uniform, "uniform"
+
+    frame_nums, candidates, grays, n_failures = collect_coarse_scan(
+        cap, start_frame, end_frame, config.coarse_samples, session_name, detector=detector)
+    if diag is not None:
+        diag.frame_read_failures = n_failures
+
+    # ---- Contact-anchored sampling (only on a CONFIRMED batsman) ----
+    if config.subject_selection_before_contact:
+        min_cov = max(MIN_TRACK_COVERAGE, int(config.coarse_coverage_fraction * len(frame_nums)))
+        selected, report = select_subject(candidates, min_coverage=min_cov, return_track=True)
+        if diag is not None:
+            diagnostics.record_subject_selection(diag, report, pass_name="coarse")
+
+        if selected is not None:
+            track = report["winner_track"]
+            # Landmarks of the CONFIRMED subject only. Any frame where that
+            # track has no detection becomes None, so wrist_speed_series
+            # skips the pair instead of measuring displacement across a gap.
+            samples = [
+                (frame_nums[i], track["poses"][i]) if i in track["poses"] else None
+                for i in range(len(frame_nums))
+            ]
+            event = contact_detection.detect_contact(samples, start_frame, end_frame)
+            if diag is not None:
+                diagnostics.record_contact(diag, event)
+
+            accept = event["valid"] if config.require_contact_quality else (event["frame_index"] is not None)
+            if accept:
+                indices = redistribute_phase_indices(
+                    start_frame, end_frame, event["frame_index"], N_FRAMES)
+                # Anchoring near a window edge collapses the pre-contact
+                # phases onto the same frame. redistribute_phase_indices
+                # documents that clustering as non-fatal, and in isolation it
+                # is -- but THIS caller needs N_FRAMES *distinct* frames: a
+                # repeated index means two phases receive identical
+                # landmarks, so every velocity feature between them is
+                # exactly zero and the model is fed a stillness that never
+                # happened. Found by the Phase-1 benchmark (duplicate frames
+                # on 16/102 clips under A2); fall back rather than emit it.
+                if len(set(indices)) < N_FRAMES:
+                    log_rejection(session_name, "CONTACT_ANCHOR_DEGENERATE",
+                                  f"contact_frame={event['frame_index']} at fraction "
+                                  f"{event['peak_fraction']} collapses phases onto "
+                                  f"{len(set(indices))} distinct frames; falling back")
+                else:
+                    log_rejection(session_name, "CONTACT_ANCHORED_SAMPLING",
+                                  f"contact_frame={event['frame_index']}, "
+                                  f"fraction={event['peak_fraction']}, "
+                                  f"confidence={event['confidence']}, "
+                                  f"prominence={event['peak_prominence']}, "
+                                  f"bilateral={event['bilateral_agreement']}")
+                    return indices, "contact_anchored"
+            else:
+                log_rejection(session_name, "CONTACT_REJECTED", event["reason"])
+        else:
+            log_rejection(session_name, "COARSE_SUBJECT_REJECTED", report.get("reason", ""))
+
+    # ---- Motion-energy sampling (MGSampler-style cumulative motion) ----
+    if config.use_motion_energy:
+        indices = motion_energy_phase_indices(grays, start_frame, end_frame, N_FRAMES)
+        if indices is not None and len(set(indices)) == N_FRAMES:
+            return indices, "motion_energy"
+        if indices is None:
+            log_rejection(session_name, "MOTION_ENERGY_UNAVAILABLE",
+                          "degenerate motion profile; falling back to uniform sampling")
+        else:
+            # Motion energy is monotonic by construction but not DISTINCT:
+            # when nearly all motion falls in one interval, several
+            # cumulative targets resolve to the same sampled position. Same
+            # consequence as the contact-anchor collapse above -- repeated
+            # phases mean fabricated zero-velocity features.
+            log_rejection(session_name, "MOTION_ENERGY_DEGENERATE",
+                          f"motion profile collapsed onto {len(set(indices))} distinct "
+                          f"frames; falling back to uniform sampling")
+
+    # Uniform is the floor: there is nothing better to fall back to. If even
+    # it cannot supply N_FRAMES distinct frames the window is simply too
+    # short, which is recorded rather than silently passed downstream.
+    if diag is not None and len(set(uniform)) < N_FRAMES:
+        diag.fallback_reason = (f"window of {window_frames} frames cannot supply "
+                                f"{N_FRAMES} distinct phases")
+    return uniform, "uniform"
+
+
 def _parse_time(t):
     """
     Coerces a shot-window start/end value from the AI detection payload into
@@ -667,7 +840,7 @@ def collect_phase_frames(cap, indices, session_name):
     return frames_rgb
 
 
-def extract_keypoints_in_memory(video_path, timestamps, batsman_name, angle, shot_index, macro_start, bowling_type="unknown"):
+def extract_keypoints_in_memory(video_path, timestamps, batsman_name, angle, shot_index, macro_start, bowling_type="unknown", config=None):
     cap = cv2.VideoCapture(video_path)
     fps = cap.get(cv2.CAP_PROP_FPS)
 
@@ -684,33 +857,25 @@ def extract_keypoints_in_memory(video_path, timestamps, batsman_name, angle, sho
 
     session_name = f"{batsman_name}_{angle}_{int(macro_start)}s_{shot_index:02d}"
 
-    # Milestone 4 (Wrist-Speed-Guided Adaptive Sampling): anchor the 7
-    # canonical phases on the detected wrist-speed peak instead of
-    # assuming the swing progresses at constant speed. Disabled by default
-    # (WRIST_SPEED_SAMPLING_ENABLED, see its definition above) -- confirmed
-    # against real footage to sometimes track the wrong person entirely.
-    # Falls back to the original uniform formula -- unchanged -- both when
-    # disabled and when no reliable peak is found, so behavior degrades to
-    # today's proven-working sampling rather than risk a silently wrong one.
-    peak_frame = find_wrist_speed_peak_frame(cap, start_frame, end_frame, fps) if WRIST_SPEED_SAMPLING_ENABLED else None
-    if peak_frame is not None:
-        indices = redistribute_phase_indices(start_frame, end_frame, peak_frame, N_FRAMES)
-        # Logged for every session (not just the fallback case) specifically
-        # so a human can spot-check, after the fact, whether detected peaks
-        # actually land near real contact -- there was no such record before
-        # this, which is part of why an incorrect "verified against real
-        # video" claim went unchecked at implementation time (see review
-        # note in architecture_ground_truth.md). peak_fraction is the
-        # peak's position within the window (0=start, 1=end) -- a quick way
-        # to eyeball whether peaks are clustering suspiciously near either
-        # edge (a sign of idle pre/post-shot motion, not a real swing).
-        peak_fraction = (peak_frame - start_frame) / window_frames
-        log_rejection(session_name, "WRIST_SPEED_PEAK_FOUND",
-                       f"peak_frame={peak_frame}, peak_fraction={peak_fraction:.2f} of window")
-    else:
-        if WRIST_SPEED_SAMPLING_ENABLED:
-            log_rejection(session_name, "WRIST_SPEED_PEAK_NOT_FOUND", "falling back to uniform sampling")
-        indices = [int(start_frame + (window_frames * i / (N_FRAMES - 1))) for i in range(N_FRAMES)]
+    config = config or get_config()
+    diag = diagnostics.ExtractionDiagnostics(
+        session_name=session_name, video_id=os.path.basename(video_path),
+        config_name=config.name, shot_start_frame=start_frame,
+        shot_end_frame=end_frame, shot_duration_frames=window_frames, fps=fps,
+    )
+
+    # PHASE 1 REORDERING (see select_phase_frames): subject selection now
+    # runs BEFORE contact detection, so the contact detector can only ever
+    # see a confirmed batsman's landmarks. The pre-Phase-1 path ran
+    # find_wrist_speed_peak_frame first on pose_landmarks[0] -- which is how
+    # it locked onto the ball feeder -- and was disabled for that reason.
+    # That function is retained (still tested) but is no longer on this path.
+    indices, method = select_phase_frames(
+        cap, start_frame, end_frame, session_name, config, diag=diag)
+    diagnostics.record_frames(diag, indices, method)
+    diag.fallback_used = (method == "uniform" and config.name != "A0")
+    if diag.fallback_used:
+        diag.fallback_reason = "contact and motion-energy sampling both unavailable"
 
     # Canonical phase names come from schema.py (audit H6) — this list used to
     # be one of several independent copies across the repo.
@@ -722,8 +887,12 @@ def extract_keypoints_in_memory(video_path, timestamps, batsman_name, angle, sho
     cap.release()
 
     # --- Shared Feature Extraction ---
-    success, raw_keypoints, interpolated_phases = extract_features_from_image_array(frames_rgb, session_name)
+    success, raw_keypoints, interpolated_phases = extract_features_from_image_array(
+        frames_rgb, session_name, diag=diag)
     if not success:
+        diag.accepted = False
+        diag.rejection_reason = str(raw_keypoints)
+        diagnostics.write(diag)
         return 0, []
 
     # Belt-and-braces before the CSV write below indexes raw_keypoints[0..6]:
@@ -732,7 +901,16 @@ def extract_keypoints_in_memory(video_path, timestamps, batsman_name, angle, sho
     if len(raw_keypoints) != N_FRAMES:
         log_rejection(session_name, "FRAME_COUNT_MISMATCH",
                       f"expected {N_FRAMES} keypoint rows after pipeline rules, got {len(raw_keypoints)}")
+        diag.accepted = False
+        diag.rejection_reason = f"frame count mismatch: {len(raw_keypoints)} != {N_FRAMES}"
+        diagnostics.write(diag)
         return 0, []
+
+    # Accepted: the 7 frames exist, belong to one selected subject, and
+    # passed validation. Written before labelling so a NVIDIA outage cannot
+    # cost us the extraction record.
+    diag.accepted = True
+    diagnostics.write(diag)
 
     # Success! Write to CSV
     if interpolated_phases:

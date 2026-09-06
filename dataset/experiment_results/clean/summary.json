@@ -1,0 +1,162 @@
+{
+  "A0": {
+    "split": "all",
+    "gt_free": {
+      "n": 102,
+      "acceptance_rate": 0.7451,
+      "fallback_rate": 0.0,
+      "sampling_methods": {
+        "uniform": 102
+      },
+      "contact_valid_rate": null,
+      "mean_contact_confidence": null,
+      "mean_contact_prominence": null,
+      "mean_pose_success_rate": 0.8788,
+      "interpolation_rate": 0.2353,
+      "coarse_fine_subject_agreement": null,
+      "mean_smoothness": 0.4556,
+      "mean_max_center_jump_torsos": 0.7128,
+      "large_jump_rate": 0.0,
+      "frames_monotonic_rate": 1.0,
+      "duplicate_frame_rate": 0.0,
+      "rejection_reasons": {
+        "Pose rejected by kinematic validation rules.": 16,
+        "No single trackable subject across the shot (no persistent subject: best track c": 7,
+        "No single trackable subject across the shot (every persistent candidate traverse": 3
+      }
+    },
+    "ground_truth": {
+      "available": false,
+      "n_matched": 0,
+      "note": "No annotated clips matched this run. tIoU, wrong-person rate, contact error and E2E-VSER are NOT computable and are reported as null rather than estimated.",
+      "temporal_iou_mean": null,
+      "contact_error_mean": null,
+      "contact_within_1_frame": null,
+      "e2e_vser": null
+    },
+    "wall_seconds": 68.3,
+    "mean_seconds_per_clip": 0.67
+  },
+  "A1": {
+    "split": "all",
+    "gt_free": {
+      "n": 102,
+      "acceptance_rate": 0.7451,
+      "fallback_rate": 0.0,
+      "sampling_methods": {
+        "motion_energy": 102
+      },
+      "contact_valid_rate": null,
+      "mean_contact_confidence": null,
+      "mean_contact_prominence": null,
+      "mean_pose_success_rate": 0.8809,
+      "interpolation_rate": 0.2647,
+      "coarse_fine_subject_agreement": null,
+      "mean_smoothness": 0.4766,
+      "mean_max_center_jump_torsos": 0.6789,
+      "large_jump_rate": 0.0132,
+      "frames_monotonic_rate": 1.0,
+      "duplicate_frame_rate": 0.0588,
+      "rejection_reasons": {
+        "Pose rejected by kinematic validation rules.": 14,
+        "No single trackable subject across the shot (no persistent subject: best track c": 8,
+        "No single trackable subject across the shot (every persistent candidate traverse": 3,
+        "No single trackable subject across the shot (2 persistent subjects and none domi": 1
+      }
+    },
+    "ground_truth": {
+      "available": false,
+      "n_matched": 0,
+      "note": "No annotated clips matched this run. tIoU, wrong-person rate, contact error and E2E-VSER are NOT computable and are reported as null rather than estimated.",
+      "temporal_iou_mean": null,
+      "contact_error_mean": null,
+      "contact_within_1_frame": null,
+      "e2e_vser": null
+    },
+    "wall_seconds": 220.5,
+    "mean_seconds_per_clip": 2.16,
+    "frame_divergence_vs_A0": 1.0
+  },
+  "A2": {
+    "split": "all",
+    "gt_free": {
+      "n": 102,
+      "acceptance_rate": 0.7549,
+      "fallback_rate": 0.0,
+      "sampling_methods": {
+        "contact_anchored": 91,
+        "motion_energy": 11
+      },
+      "contact_valid_rate": 0.5098,
+      "mean_contact_confidence": 0.7415,
+      "mean_contact_prominence": 2.8453,
+      "mean_pose_success_rate": 0.8951,
+      "interpolation_rate": 0.2157,
+      "coarse_fine_subject_agreement": 0.8529,
+      "mean_smoothness": 0.4552,
+      "mean_max_center_jump_torsos": 0.6718,
+      "large_jump_rate": 0.0,
+      "frames_monotonic_rate": 1.0,
+      "duplicate_frame_rate": 0.1569,
+      "rejection_reasons": {
+        "Pose rejected by kinematic validation rules.": 13,
+        "No single trackable subject across the shot (no persistent subject: best track c": 8,
+        "No single trackable subject across the shot (every persistent candidate traverse": 3,
+        "No single trackable subject across the shot (2 persistent subjects and none domi": 1
+      }
+    },
+    "ground_truth": {
+      "available": false,
+      "n_matched": 0,
+      "note": "No annotated clips matched this run. tIoU, wrong-person rate, contact error and E2E-VSER are NOT computable and are reported as null rather than estimated.",
+      "temporal_iou_mean": null,
+      "contact_error_mean": null,
+      "contact_within_1_frame": null,
+      "e2e_vser": null
+    },
+    "wall_seconds": 223.2,
+    "mean_seconds_per_clip": 2.19,
+    "frame_divergence_vs_A0": 0.9902
+  },
+  "A3": {
+    "split": "all",
+    "gt_free": {
+      "n": 102,
+      "acceptance_rate": 0.7451,
+      "fallback_rate": 0.0,
+      "sampling_methods": {
+        "contact_anchored": 52,
+        "motion_energy": 50
+      },
+      "contact_valid_rate": 0.5098,
+      "mean_contact_confidence": 0.7415,
+      "mean_contact_prominence": 2.8453,
+      "mean_pose_success_rate": 0.8915,
+      "interpolation_rate": 0.2353,
+      "coarse_fine_subject_agreement": 0.8235,
+      "mean_smoothness": 0.4426,
+      "mean_max_center_jump_torsos": 0.6671,
+      "large_jump_rate": 0.0132,
+      "frames_monotonic_rate": 1.0,
+      "duplicate_frame_rate": 0.0196,
+      "rejection_reasons": {
+        "Pose rejected by kinematic validation rules.": 11,
+        "No single trackable subject across the shot (no persistent subject: best track c": 10,
+        "No single trackable subject across the shot (every persistent candidate traverse": 4,
+        "No single trackable subject across the shot (2 persistent subjects and none domi": 1
+      }
+    },
+    "ground_truth": {
+      "available": false,
+      "n_matched": 0,
+      "note": "No annotated clips matched this run. tIoU, wrong-person rate, contact error and E2E-VSER are NOT computable and are reported as null rather than estimated.",
+      "temporal_iou_mean": null,
+      "contact_error_mean": null,
+      "contact_within_1_frame": null,
+      "e2e_vser": null
+    },
+    "wall_seconds": 222.0,
+    "mean_seconds_per_clip": 2.18,
+    "frame_divergence_vs_A0": 0.9902
+  }
+}

@@ -222,10 +222,25 @@ def build_tracks(candidates_per_frame):
     return tracks
 
 
-def select_subject(candidates_per_frame):
+def select_subject(candidates_per_frame, min_coverage=None, return_track=False):
     """
     The one session-level subject decision (never per-frame — a one-frame
     choice is exactly how the wrong person got tracked before).
+
+    min_coverage: how many frames a track must appear in to qualify.
+        Defaults to MIN_TRACK_COVERAGE (4), which is calibrated for the
+        7-frame phase sequence (= apply_pipeline_rules' survival rule).
+        Phase 1 also runs this function over a DENSE coarse scan (~20
+        frames) to establish the batsman BEFORE contact detection; 4-of-20
+        would be far too lenient there, so that caller passes a
+        proportional value. Existing callers are unaffected.
+
+    return_track: when True the report additionally carries "winner_track",
+        the raw winning track dict ({"poses": {frame_idx: pose}, "scales",
+        "centers", ...}). Contact detection needs the winner's per-frame
+        landmarks, not just the per-slot selected list, and re-deriving
+        them by matching poses would be both wasteful and a chance to pick
+        a different person than the one selection actually chose.
 
     Returns (selected, report):
       selected — per-frame list of the chosen subject's pose, None in frames
@@ -234,23 +249,27 @@ def select_subject(candidates_per_frame):
                  subject qualifies or dominates.
       report   — {"n_tracks", "multi_track", "qualified", "reason",
                   "traversing", "winner_coverage", "winner_scale",
-                  "winner_displacement"} for logging.
+                  "winner_displacement", "runner_up_scale", "margin"}
+                  (+ "winner_track" when return_track).
     """
+    if min_coverage is None:
+        min_coverage = MIN_TRACK_COVERAGE
     n_frames = len(candidates_per_frame)
     tracks = build_tracks(candidates_per_frame)
-    report = {"n_tracks": len(tracks), "multi_track": len(tracks) > 1}
+    report = {"n_tracks": len(tracks), "multi_track": len(tracks) > 1,
+              "min_coverage": min_coverage}
 
     if not tracks:
         report["reason"] = "no pose candidates in any frame"
         return None, report
 
-    qualified = [t for t in tracks if len(t["poses"]) >= MIN_TRACK_COVERAGE]
+    qualified = [t for t in tracks if len(t["poses"]) >= min_coverage]
     report["qualified"] = len(qualified)
     if not qualified:
         best_coverage = max(len(t["poses"]) for t in tracks)
         report["reason"] = (
             f"no persistent subject: best track covers {best_coverage}/{n_frames} "
-            f"frames (need >= {MIN_TRACK_COVERAGE})"
+            f"frames (need >= {min_coverage})"
         )
         return None, report
 
@@ -294,6 +313,20 @@ def select_subject(candidates_per_frame):
     report["winner_coverage"] = len(winner["poses"])
     report["winner_scale"] = round(_mean_scale(winner), 4)
     report["winner_displacement"] = round(net_displacement_torsos(winner), 2)
+    # Diagnostics (Phase 0): how clear-cut was this decision? A winner that
+    # only just cleared the dominance bar is a different situation from one
+    # that was the only candidate, and the benchmark needs to tell them
+    # apart. margin is None when there was no rival to compare against.
+    rivals = [t for t in qualified if t is not winner]
+    if rivals:
+        runner_up = max(_mean_scale(t) for t in rivals)
+        report["runner_up_scale"] = round(runner_up, 4)
+        report["margin"] = round(_mean_scale(winner) / (runner_up + _MIN_SCALE), 3)
+    else:
+        report["runner_up_scale"] = None
+        report["margin"] = None
     report["reason"] = "selected"
+    if return_track:
+        report["winner_track"] = winner
     selected = [winner["poses"].get(i) for i in range(n_frames)]
     return selected, report

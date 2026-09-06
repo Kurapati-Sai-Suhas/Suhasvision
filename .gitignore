@@ -36,3 +36,22 @@ dataset/*.bak*
 dataset/*.keras
 dataset/*.task
 
+
+# ---------------------------------------------------------------------------
+# Phase 2/3 extraction work
+# ---------------------------------------------------------------------------
+# Detector weights: ~193 MB, downloaded on first use by ultralytics. Pinned by
+# name in phase2_detectors.py, so they are reproducible without being stored.
+*.pt
+
+# Contact sheets and filmstrips: ~112 MB of JPEGs. They are regenerable from
+# the committed scripts, and they are review artifacts rather than evidence —
+# the numbers derived from them live in the committed JSON/JSONL.
+dataset/phase2_results/annotation_sheets/
+dataset/phase2_results/phase2_sheets/
+dataset/phase3_results/event_sheets/
+dataset/experiment_results/sheets_A0/
+dataset/experiment_results/sheets_A3/
+
+# Stray diagnostics written by test runs into the module's default path.
+dataset/extraction_diagnostics.jsonl
