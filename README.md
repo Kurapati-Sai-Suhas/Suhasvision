@@ -317,6 +317,31 @@ stationary-feeder case study where bat evidence points at the *wrong* person, in
 [`PHASE3_BATSMAN_ABLATION.md`](PHASE3_BATSMAN_ABLATION.md). Nothing promoted; S2/S3 cost
 ~5–6 s per clip against 0.3 ms for S0.
 
+**RTMPose evaluation — EXPERIMENTAL, decision made, nothing promoted yet.** The ablation's
+closing claim above ("the dominant remaining failure is pose extraction") turned out to be
+**partly a measurement artifact, and is corrected here**. `k_pose_rate`, the statistic that
+labels a clip a pose failure, counts frames where the batsman *track does not exist*
+identically to frames where the pose model ran and failed, so it conflates tracking with
+pose. Decomposing it as `coverage × P(pose | box)` over the pipeline's own sampling: of the
+10 clips below the 0.4 failure test, **5 are genuinely pose-limited**, 2 are tracking
+failures no pose model can reach; of the 7 clips previously *labelled* pose failures only
+**3** actually are, while **3 genuine pose failures were never labelled**. A related logic
+bug: because `k_pose_rate ≤ coverage` always, `categorise_failure()` tests pose first and its
+`"tracking failure"` branch is **unreachable**.
+
+On the comparison itself (51 clips, identical cached tracks/boxes/frames, MediaPipe vs
+RTMPose-halpe26): RTMPose's apparent 100% availability is also an artifact — it is a top-down
+regressor that **cannot decline**, and returns a full skeleton for a flat grey image. Gated to
+MediaPipe's own false-pose rate it keeps only 25.5% of real frames, so it cannot self-verify.
+But on person-verified boxes — which is all this pipeline ever gives it — it recovers **27.9%**
+of frames MediaPipe drops (**50.8%** on hard clips), wins **every** quality metric on
+MediaPipe's own successful frames, and `rtmpose-s` runs **7.2× faster** (14.6 ms vs 102.8 ms,
+CPU). **Decision: fallback hybrid** (MediaPipe primary, `rtmpose-s` where MediaPipe refuses),
+**scoped to the S2/S3 semantic path only** — `_pose_metrics()` is 2D so RTMPose is a drop-in
+there, whereas the scoring model's 15 angles are computed in **3D** and RTMPose 2D moves them
+by a median of **30.4°**, which would be train/serve skew against the frozen `(7,30)` model.
+Full detail in [`PHASE3_RTMPOSE_EVALUATION.md`](PHASE3_RTMPOSE_EVALUATION.md).
+
 ## 13. Known Limitations
 
 - **42 unique identities** is the real ceiling on generalization claims — not architecture. See §12 for concrete growth targets.
@@ -349,6 +374,7 @@ stationary-feeder case study where bat evidence points at the *wrong* person, in
 | [`PHASE2_DETECTION_RESULTS.md`](PHASE2_DETECTION_RESULTS.md) | Detector/tracker replacement, crease geometry, B0–B5 ablation, held-out results |
 | [`EXTRACTION_PIPELINE_RESEARCH.md`](EXTRACTION_PIPELINE_RESEARCH.md) | Literature review behind the extraction redesign |
 | [`PHASE3_BATSMAN_ABLATION.md`](PHASE3_BATSMAN_ABLATION.md) | S0–S4 semantic batsman ablation: results, bat-signal specificity, stationary-feeder case study, latency |
+| [`PHASE3_RTMPOSE_EVALUATION.md`](PHASE3_RTMPOSE_EVALUATION.md) | MediaPipe vs RTMPose. Corrects the "pose is the bottleneck" diagnosis, shows why RTMPose's 100% availability is an artifact, and the scoped fallback-hybrid decision |
 | [`docs/PHASE3_ANNOTATION_PROTOCOL.md`](docs/PHASE3_ANNOTATION_PROTOCOL.md) | Operational definitions for the Phase-3 temporal ground truth |
 | [`docs/architecture_ground_truth.md`](docs/architecture_ground_truth.md) | The dated, ground-truth engineering log — including the full wrong-person-tracking investigation |
 | [`docs/SuhasVision_SRS_v2.0.docx`](docs/SuhasVision_SRS_v2.0.docx) | Formal, IEEE-830-inspired requirements specification |

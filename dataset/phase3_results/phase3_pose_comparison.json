@@ -1,0 +1,360 @@
+{
+ "n_clips": 51,
+ "n_pose_failure_clips": 7,
+ "vis_threshold": 0.3,
+ "all_clips": {
+  "pose_availability": {
+   "mediapipe_heavy": 0.7255,
+   "rtmpose-s@192x256": 1.0,
+   "rtmpose-m@192x256": 1.0,
+   "rtmpose-x@288x384": 1.0
+  },
+  "bone_length_cv": {
+   "mediapipe_heavy": 0.2741,
+   "rtmpose-s@192x256": 0.278,
+   "rtmpose-m@192x256": 0.2551,
+   "rtmpose-x@288x384": 0.2533
+  },
+  "jitter_torso_units": {
+   "mediapipe_heavy": 0.2821,
+   "rtmpose-s@192x256": 0.1485,
+   "rtmpose-m@192x256": 0.1512,
+   "rtmpose-x@288x384": 0.1518
+  },
+  "invalid_rate": {
+   "mediapipe_heavy": 0.0,
+   "rtmpose-s@192x256": 0.0,
+   "rtmpose-m@192x256": 0.0001,
+   "rtmpose-x@288x384": 0.0001
+  },
+  "implausible_rate": {
+   "mediapipe_heavy": 0.0108,
+   "rtmpose-s@192x256": 0.0084,
+   "rtmpose-m@192x256": 0.0092,
+   "rtmpose-x@288x384": 0.0102
+  },
+  "velocity_discontinuity": {
+   "mediapipe_heavy": 0.0634,
+   "rtmpose-s@192x256": 0.0496,
+   "rtmpose-m@192x256": 0.0436,
+   "rtmpose-x@288x384": 0.0363
+  },
+  "angle_smoothness": {
+   "mediapipe_heavy": 20.5843,
+   "rtmpose-s@192x256": 11.731,
+   "rtmpose-m@192x256": 10.9107,
+   "rtmpose-x@288x384": 10.0166
+  },
+  "mean_visible_fraction_UNCALIBRATED": {
+   "mediapipe_heavy": 0.7812,
+   "rtmpose-s@192x256": 0.9735,
+   "rtmpose-m@192x256": 0.9863,
+   "rtmpose-x@288x384": 0.9879
+  },
+  "mean_confidence_UNCALIBRATED": {
+   "mediapipe_heavy": 0.6914,
+   "rtmpose-s@192x256": 0.5947,
+   "rtmpose-m@192x256": 0.6172,
+   "rtmpose-x@288x384": 0.6743
+  }
+ },
+ "known_pose_failures": {
+  "pose_availability": {
+   "mediapipe_heavy": 0.55,
+   "rtmpose-s@192x256": 1.0,
+   "rtmpose-m@192x256": 1.0,
+   "rtmpose-x@288x384": 1.0
+  },
+  "bone_length_cv": {
+   "mediapipe_heavy": 0.3271,
+   "rtmpose-s@192x256": 0.2642,
+   "rtmpose-m@192x256": 0.2703,
+   "rtmpose-x@288x384": 0.2527
+  },
+  "jitter_torso_units": {
+   "mediapipe_heavy": 0.4289,
+   "rtmpose-s@192x256": 0.2945,
+   "rtmpose-m@192x256": 0.3009,
+   "rtmpose-x@288x384": 0.297
+  },
+  "invalid_rate": {
+   "mediapipe_heavy": 0.0,
+   "rtmpose-s@192x256": 0.0,
+   "rtmpose-m@192x256": 0.0,
+   "rtmpose-x@288x384": 0.0
+  },
+  "implausible_rate": {
+   "mediapipe_heavy": 0.0201,
+   "rtmpose-s@192x256": 0.0052,
+   "rtmpose-m@192x256": 0.0071,
+   "rtmpose-x@288x384": 0.0133
+  },
+  "velocity_discontinuity": {
+   "mediapipe_heavy": 0.0922,
+   "rtmpose-s@192x256": 0.0603,
+   "rtmpose-m@192x256": 0.0586,
+   "rtmpose-x@288x384": 0.0381
+  },
+  "angle_smoothness": {
+   "mediapipe_heavy": 27.7417,
+   "rtmpose-s@192x256": 17.6833,
+   "rtmpose-m@192x256": 15.5636,
+   "rtmpose-x@288x384": 14.6476
+  },
+  "mean_visible_fraction_UNCALIBRATED": {
+   "mediapipe_heavy": 0.7375,
+   "rtmpose-s@192x256": 0.9681,
+   "rtmpose-m@192x256": 0.9809,
+   "rtmpose-x@288x384": 0.9786
+  },
+  "mean_confidence_UNCALIBRATED": {
+   "mediapipe_heavy": 0.6439,
+   "rtmpose-s@192x256": 0.5759,
+   "rtmpose-m@192x256": 0.597,
+   "rtmpose-x@288x384": 0.6379
+  }
+ },
+ "other_clips": {
+  "pose_availability": {
+   "mediapipe_heavy": 0.7534,
+   "rtmpose-s@192x256": 1.0,
+   "rtmpose-m@192x256": 1.0,
+   "rtmpose-x@288x384": 1.0
+  },
+  "bone_length_cv": {
+   "mediapipe_heavy": 0.2657,
+   "rtmpose-s@192x256": 0.2802,
+   "rtmpose-m@192x256": 0.2527,
+   "rtmpose-x@288x384": 0.2534
+  },
+  "jitter_torso_units": {
+   "mediapipe_heavy": 0.2582,
+   "rtmpose-s@192x256": 0.1253,
+   "rtmpose-m@192x256": 0.1274,
+   "rtmpose-x@288x384": 0.1286
+  },
+  "invalid_rate": {
+   "mediapipe_heavy": 0.0,
+   "rtmpose-s@192x256": 0.0,
+   "rtmpose-m@192x256": 0.0002,
+   "rtmpose-x@288x384": 0.0001
+  },
+  "implausible_rate": {
+   "mediapipe_heavy": 0.0094,
+   "rtmpose-s@192x256": 0.0089,
+   "rtmpose-m@192x256": 0.0095,
+   "rtmpose-x@288x384": 0.0097
+  },
+  "velocity_discontinuity": {
+   "mediapipe_heavy": 0.0587,
+   "rtmpose-s@192x256": 0.0478,
+   "rtmpose-m@192x256": 0.0412,
+   "rtmpose-x@288x384": 0.036
+  },
+  "angle_smoothness": {
+   "mediapipe_heavy": 19.4457,
+   "rtmpose-s@192x256": 10.784,
+   "rtmpose-m@192x256": 10.1705,
+   "rtmpose-x@288x384": 9.2799
+  },
+  "mean_visible_fraction_UNCALIBRATED": {
+   "mediapipe_heavy": 0.7881,
+   "rtmpose-s@192x256": 0.9744,
+   "rtmpose-m@192x256": 0.9872,
+   "rtmpose-x@288x384": 0.9894
+  },
+  "mean_confidence_UNCALIBRATED": {
+   "mediapipe_heavy": 0.6989,
+   "rtmpose-s@192x256": 0.5977,
+   "rtmpose-m@192x256": 0.6204,
+   "rtmpose-x@288x384": 0.68
+  }
+ },
+ "latency_ms_per_frame_per_track": {
+  "mediapipe_heavy": {
+   "median": 102.8,
+   "mean": 114.67,
+   "n": 1004
+  },
+  "rtmpose-s@192x256": {
+   "median": 14.55,
+   "mean": 28.4,
+   "n": 1004
+  },
+  "rtmpose-m@192x256": {
+   "median": 86.36,
+   "mean": 98.23,
+   "n": 1004
+  },
+  "rtmpose-x@288x384": {
+   "median": 629.35,
+   "mean": 628.4,
+   "n": 1004
+  }
+ },
+ "note_latency": "CPU for both models; no CUDAExecutionProvider available here.",
+ "mediapipe_z_contribution_median_deg": 30.44,
+ "crop_resolution": {
+  "all_clips": {
+   "median_person_height_px": 288.8,
+   "min_px": 119.3,
+   "max_px": 395.4,
+   "n_below_model_input_256px": 18,
+   "n": 51
+  },
+  "known_pose_failures": {
+   "median_person_height_px": 181.4,
+   "min_px": 137.2,
+   "max_px": 324.8,
+   "n_below_model_input_256px": 5,
+   "n": 7
+  },
+  "note": "RTMPose resizes each crop to its fixed input height (256 or 384). Persons already shorter than that are UPSAMPLED, so a higher-resolution model adds no real detail for them."
+ },
+ "paired_subset": {
+  "note": "Computed only on frames where EVERY model returned a pose, so all models are scored on identical frames. The headline table is not: MediaPipe is scored there only on the frames it could do, which are the easier ones.",
+  "n_paired_frames": 724,
+  "all_clips": {
+   "bone_length_cv": {
+    "mediapipe_heavy": 0.2741,
+    "rtmpose-s@192x256": 0.2502,
+    "rtmpose-m@192x256": 0.2395,
+    "rtmpose-x@288x384": 0.2306
+   },
+   "jitter_torso_units": {
+    "mediapipe_heavy": 0.38,
+    "rtmpose-s@192x256": 0.1709,
+    "rtmpose-m@192x256": 0.1752,
+    "rtmpose-x@288x384": 0.1779
+   },
+   "invalid_rate": {
+    "mediapipe_heavy": 0.0,
+    "rtmpose-s@192x256": 0.0,
+    "rtmpose-m@192x256": 0.0002,
+    "rtmpose-x@288x384": 0.0001
+   },
+   "implausible_rate": {
+    "mediapipe_heavy": 0.0108,
+    "rtmpose-s@192x256": 0.0083,
+    "rtmpose-m@192x256": 0.0097,
+    "rtmpose-x@288x384": 0.0102
+   },
+   "velocity_discontinuity": {
+    "mediapipe_heavy": 0.088,
+    "rtmpose-s@192x256": 0.0529,
+    "rtmpose-m@192x256": 0.0462,
+    "rtmpose-x@288x384": 0.042
+   },
+   "angle_smoothness": {
+    "mediapipe_heavy": 20.5843,
+    "rtmpose-s@192x256": 13.7401,
+    "rtmpose-m@192x256": 12.5081,
+    "rtmpose-x@288x384": 12.2404
+   }
+  },
+  "known_pose_failures": {
+   "bone_length_cv": {
+    "mediapipe_heavy": 0.3271,
+    "rtmpose-s@192x256": 0.225,
+    "rtmpose-m@192x256": 0.2292,
+    "rtmpose-x@288x384": 0.2084
+   },
+   "jitter_torso_units": {
+    "mediapipe_heavy": 0.5482,
+    "rtmpose-s@192x256": 0.3445,
+    "rtmpose-m@192x256": 0.3388,
+    "rtmpose-x@288x384": 0.3283
+   },
+   "invalid_rate": {
+    "mediapipe_heavy": 0.0,
+    "rtmpose-s@192x256": 0.0,
+    "rtmpose-m@192x256": 0.0,
+    "rtmpose-x@288x384": 0.0
+   },
+   "implausible_rate": {
+    "mediapipe_heavy": 0.0201,
+    "rtmpose-s@192x256": 0.0083,
+    "rtmpose-m@192x256": 0.0076,
+    "rtmpose-x@288x384": 0.0102
+   },
+   "velocity_discontinuity": {
+    "mediapipe_heavy": 0.1154,
+    "rtmpose-s@192x256": 0.0768,
+    "rtmpose-m@192x256": 0.0654,
+    "rtmpose-x@288x384": 0.0374
+   },
+   "angle_smoothness": {
+    "mediapipe_heavy": 27.7417,
+    "rtmpose-s@192x256": 21.5584,
+    "rtmpose-m@192x256": 19.1817,
+    "rtmpose-x@288x384": 18.8777
+   }
+  }
+ },
+ "hybrid_fallback": {
+  "rtmpose-s@192x256": {
+   "all_clips": {
+    "both_ok": 724,
+    "mp_fail_rtm_ok": 280,
+    "mp_ok_rtm_fail": 0,
+    "both_fail": 0,
+    "n_frames": 1004,
+    "fallback_recoverable_pct": 27.89,
+    "irreducible_pct": 0.0
+   },
+   "known_pose_failures": {
+    "both_ok": 61,
+    "mp_fail_rtm_ok": 63,
+    "mp_ok_rtm_fail": 0,
+    "both_fail": 0,
+    "n_frames": 124,
+    "fallback_recoverable_pct": 50.81,
+    "irreducible_pct": 0.0
+   }
+  },
+  "rtmpose-m@192x256": {
+   "all_clips": {
+    "both_ok": 724,
+    "mp_fail_rtm_ok": 280,
+    "mp_ok_rtm_fail": 0,
+    "both_fail": 0,
+    "n_frames": 1004,
+    "fallback_recoverable_pct": 27.89,
+    "irreducible_pct": 0.0
+   },
+   "known_pose_failures": {
+    "both_ok": 61,
+    "mp_fail_rtm_ok": 63,
+    "mp_ok_rtm_fail": 0,
+    "both_fail": 0,
+    "n_frames": 124,
+    "fallback_recoverable_pct": 50.81,
+    "irreducible_pct": 0.0
+   }
+  },
+  "rtmpose-x@288x384": {
+   "all_clips": {
+    "both_ok": 724,
+    "mp_fail_rtm_ok": 280,
+    "mp_ok_rtm_fail": 0,
+    "both_fail": 0,
+    "n_frames": 1004,
+    "fallback_recoverable_pct": 27.89,
+    "irreducible_pct": 0.0
+   },
+   "known_pose_failures": {
+    "both_ok": 61,
+    "mp_fail_rtm_ok": 63,
+    "mp_ok_rtm_fail": 0,
+    "both_fail": 0,
+    "n_frames": 124,
+    "fallback_recoverable_pct": 50.81,
+    "irreducible_pct": 0.0
+   }
+  }
+ },
+ "confounds": {
+  "rtmpose-x@288x384": "Changes BOTH capacity (m->x) and input resolution vs rtmpose-m@192x256; no halpe26 rtmpose-m exists at 384x288, so these cannot be separated with published weights. Treat as an upper bound on RTMPose, not a resolution result. rtmpose-s@192x256 vs rtmpose-m@192x256 isolates capacity at fixed resolution.",
+  "mediapipe_input": "MediaPipe runs on a crop we cut with 12% padding; RTMPose runs top-down on the original frame with the same box. One resampling step differs."
+ }
+}

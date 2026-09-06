@@ -1,0 +1,115 @@
+{
+ "n_clips": 51,
+ "models": {
+  "rtmpose-s@192x256": {
+   "matched_to_mediapipe_fpr": {
+    "matched_fpr": 0.0172,
+    "gate": 0.6634,
+    "real_batsman_frames_kept": 0.255
+   },
+   "recall_at_fixed_fpr": {
+    "fpr_0.01": {
+     "gate": 0.6974,
+     "kept": 0.1604
+    },
+    "fpr_0.02": {
+     "gate": 0.6496,
+     "kept": 0.2938
+    },
+    "fpr_0.05": {
+     "gate": 0.5411,
+     "kept": 0.7331
+    },
+    "fpr_0.10": {
+     "gate": 0.3673,
+     "kept": 0.9771
+    }
+   },
+   "n_positive_frames": 1004,
+   "n_null_boxes": 815,
+   "positive_mean": 0.5933,
+   "positive_p05": 0.4371,
+   "null_mean": 0.2055,
+   "null_p95": 0.5411,
+   "auc_person_vs_background": 0.9611,
+   "gate_from_null_p95": 0.5411,
+   "real_batsman_frames_kept_at_gate": 0.7331,
+   "null_boxes_passing_gate": 0.0503
+  },
+  "rtmpose-m@192x256": {
+   "matched_to_mediapipe_fpr": {
+    "matched_fpr": 0.0172,
+    "gate": 0.7731,
+    "real_batsman_frames_kept": 0.003
+   },
+   "recall_at_fixed_fpr": {
+    "fpr_0.01": {
+     "gate": 0.8287,
+     "kept": 0.0
+    },
+    "fpr_0.02": {
+     "gate": 0.7593,
+     "kept": 0.0189
+    },
+    "fpr_0.05": {
+     "gate": 0.6445,
+     "kept": 0.3934
+    },
+    "fpr_0.10": {
+     "gate": 0.5012,
+     "kept": 0.9333
+    }
+   },
+   "n_positive_frames": 1004,
+   "n_null_boxes": 815,
+   "positive_mean": 0.6157,
+   "positive_p05": 0.4876,
+   "null_mean": 0.2384,
+   "null_p95": 0.6445,
+   "auc_person_vs_background": 0.9395,
+   "gate_from_null_p95": 0.6445,
+   "real_batsman_frames_kept_at_gate": 0.3934,
+   "null_boxes_passing_gate": 0.0503
+  },
+  "rtmpose-x@288x384": {
+   "matched_to_mediapipe_fpr": {
+    "matched_fpr": 0.0172,
+    "gate": 0.9253,
+    "real_batsman_frames_kept": 0.0
+   },
+   "recall_at_fixed_fpr": {
+    "fpr_0.01": {
+     "gate": 0.976,
+     "kept": 0.0
+    },
+    "fpr_0.02": {
+     "gate": 0.9206,
+     "kept": 0.0
+    },
+    "fpr_0.05": {
+     "gate": 0.7908,
+     "kept": 0.0857
+    },
+    "fpr_0.10": {
+     "gate": 0.6048,
+     "kept": 0.7928
+    }
+   },
+   "n_positive_frames": 1004,
+   "n_null_boxes": 815,
+   "positive_mean": 0.6736,
+   "positive_p05": 0.5215,
+   "null_mean": 0.2848,
+   "null_p95": 0.7908,
+   "auc_person_vs_background": 0.918,
+   "gate_from_null_p95": 0.7908,
+   "real_batsman_frames_kept_at_gate": 0.0857,
+   "null_boxes_passing_gate": 0.0503
+  }
+ },
+ "mediapipe_operating_point": {
+  "real_batsman_frames_with_pose": 0.7211,
+  "false_pose_rate_on_person_free_boxes": 0.0172,
+  "note": "MediaPipe declines on its own, so it has one operating point, not a tunable curve."
+ }
+}
