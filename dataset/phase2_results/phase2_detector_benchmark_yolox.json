@@ -1,0 +1,423 @@
+{
+ "iou_match": 0.5,
+ "proposal_detector": "yolo11x@1280",
+ "results": {
+  "yolox-m@640|dev": {
+   "detector": "yolox-m@640",
+   "split": "dev",
+   "gt_batsman_frames": 144,
+   "batsman_candidate_recall": 0.9653,
+   "recall_small_subjects": 0.875,
+   "n_small_gt": 32,
+   "unscorable_proposal_misses": 0,
+   "frames": 144,
+   "mean_people_per_frame": 1.528,
+   "duplicate_rate": 0.0,
+   "tiny_detection_rate": 0.0,
+   "seconds_per_frame": 0.1272,
+   "misses": [
+    [
+     "kohli_side_22.mp4",
+     36,
+     215.5
+    ],
+    [
+     "pro_player_front_03.mp4",
+     70,
+     128.5
+    ],
+    [
+     "pro_player_front_03.mp4",
+     88,
+     99.0
+    ],
+    [
+     "pro_player_front_12.mp4",
+     70,
+     113.6
+    ],
+    [
+     "pro_player_front_42.mp4",
+     18,
+     128.5
+    ]
+   ],
+   "per_clip": [
+    {
+     "clip_id": "Sai_front_1.mp4",
+     "split": "dev",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "Sai_front_3.mp4",
+     "split": "dev",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "beginnerunorthodox1_front_01.mp4",
+     "split": "dev",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "instagram1_front_01.mp4",
+     "split": "dev",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "instagram2_front_07.mp4",
+     "split": "dev",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "instagram2_front_09.mp4",
+     "split": "dev",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "kohli_side_06.mp4",
+     "split": "dev",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "kohli_side_14.mp4",
+     "split": "dev",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "kohli_side_20.mp4",
+     "split": "dev",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "kohli_side_22.mp4",
+     "split": "dev",
+     "gt": 6,
+     "hit": 5
+    },
+    {
+     "clip_id": "kohli_side_24.mp4",
+     "split": "dev",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "kohli_side_26.mp4",
+     "split": "dev",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "kohli_side_28.mp4",
+     "split": "dev",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "kohli_side_30.mp4",
+     "split": "dev",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "pro_player_back_25.mp4",
+     "split": "dev",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "pro_player_back_27.mp4",
+     "split": "dev",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "pro_player_back_29.mp4",
+     "split": "dev",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "pro_player_back_33.mp4",
+     "split": "dev",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "pro_player_front_03.mp4",
+     "split": "dev",
+     "gt": 6,
+     "hit": 4
+    },
+    {
+     "clip_id": "pro_player_front_08.mp4",
+     "split": "dev",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "pro_player_front_12.mp4",
+     "split": "dev",
+     "gt": 6,
+     "hit": 5
+    },
+    {
+     "clip_id": "pro_player_front_42.mp4",
+     "split": "dev",
+     "gt": 6,
+     "hit": 5
+    },
+    {
+     "clip_id": "pro_player_front_44.mp4",
+     "split": "dev",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "roa_front_1.mp4",
+     "split": "dev",
+     "gt": 6,
+     "hit": 6
+    }
+   ]
+  },
+  "yolox-m@640|eval": {
+   "detector": "yolox-m@640",
+   "split": "eval",
+   "gt_batsman_frames": 159,
+   "batsman_candidate_recall": 0.9371,
+   "recall_small_subjects": 0.9,
+   "n_small_gt": 40,
+   "unscorable_proposal_misses": 1,
+   "frames": 162,
+   "mean_people_per_frame": 1.531,
+   "duplicate_rate": 0.0,
+   "tiny_detection_rate": 0.0,
+   "seconds_per_frame": 0.1422,
+   "misses": [
+    [
+     "instagram1_front_03.mp4",
+     70,
+     393.7
+    ],
+    [
+     "instagram2_front_03.mp4",
+     53,
+     284.4
+    ],
+    [
+     "kohli_side_08.mp4",
+     142,
+     249.2
+    ],
+    [
+     "kohli_side_16.mp4",
+     107,
+     150.9
+    ],
+    [
+     "kohli_side_16.mp4",
+     178,
+     226.9
+    ],
+    [
+     "pro_player_back_31.mp4",
+     70,
+     198.7
+    ],
+    [
+     "pro_player_front_14.mp4",
+     53,
+     115.8
+    ],
+    [
+     "pro_player_front_14.mp4",
+     88,
+     114.6
+    ],
+    [
+     "pro_player_front_18.mp4",
+     88,
+     137.0
+    ],
+    [
+     "rishi_front_2.mp4",
+     3724,
+     null
+    ]
+   ],
+   "per_clip": [
+    {
+     "clip_id": "instagram1_front_03.mp4",
+     "split": "eval",
+     "gt": 6,
+     "hit": 5
+    },
+    {
+     "clip_id": "instagram2_front_01.mp4",
+     "split": "eval",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "instagram2_front_03.mp4",
+     "split": "eval",
+     "gt": 6,
+     "hit": 5
+    },
+    {
+     "clip_id": "instagram2_front_05.mp4",
+     "split": "eval",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "kohli_front_02.mp4",
+     "split": "eval",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "kohli_side_04.mp4",
+     "split": "eval",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "kohli_side_08.mp4",
+     "split": "eval",
+     "gt": 5,
+     "hit": 4
+    },
+    {
+     "clip_id": "kohli_side_10.mp4",
+     "split": "eval",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "kohli_side_12.mp4",
+     "split": "eval",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "kohli_side_16.mp4",
+     "split": "eval",
+     "gt": 5,
+     "hit": 3
+    },
+    {
+     "clip_id": "kohli_side_18.mp4",
+     "split": "eval",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "kohli_side_32.mp4",
+     "split": "eval",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "pro_player_back_21.mp4",
+     "split": "eval",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "pro_player_back_23.mp4",
+     "split": "eval",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "pro_player_back_31.mp4",
+     "split": "eval",
+     "gt": 6,
+     "hit": 5
+    },
+    {
+     "clip_id": "pro_player_back_36.mp4",
+     "split": "eval",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "pro_player_back_38.mp4",
+     "split": "eval",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "pro_player_back_40.mp4",
+     "split": "eval",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "pro_player_front_01.mp4",
+     "split": "eval",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "pro_player_front_06.mp4",
+     "split": "eval",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "pro_player_front_10.mp4",
+     "split": "eval",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "pro_player_front_14.mp4",
+     "split": "eval",
+     "gt": 6,
+     "hit": 4
+    },
+    {
+     "clip_id": "pro_player_front_16.mp4",
+     "split": "eval",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "pro_player_front_18.mp4",
+     "split": "eval",
+     "gt": 6,
+     "hit": 5
+    },
+    {
+     "clip_id": "pro_player_front_20.mp4",
+     "split": "eval",
+     "gt": 6,
+     "hit": 6
+    },
+    {
+     "clip_id": "rishi_front_2.mp4",
+     "split": "eval",
+     "gt": 6,
+     "hit": 5
+    },
+    {
+     "clip_id": "sanjay_front _1.mp4",
+     "split": "eval",
+     "gt": 5,
+     "hit": 5
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,29 @@
+{
+ "B0_mediapipe_detection": {
+  "mean_ms": 67.89,
+  "median_ms": 69.76,
+  "p90_ms": 73.55,
+  "n": 96
+ },
+ "yolo11m@640_detection": {
+  "mean_ms": 15.03,
+  "median_ms": 14.31,
+  "p90_ms": 15.97,
+  "n": 96
+ },
+ "yolo11m@640_detection_plus_bytetrack": {
+  "mean_ms": 14.7,
+  "median_ms": 14.6,
+  "p90_ms": 15.81,
+  "n": 96
+ },
+ "mediapipe_pose_on_crop": {
+  "mean_ms": 62.38,
+  "median_ms": 65.96,
+  "p90_ms": 71.53,
+  "n": 96
+ },
+ "bytetrack_overhead_ms": 0.29,
+ "recommended_total_median_ms": 80.56,
+ "baseline_B0_total_median_ms": 69.76
+}

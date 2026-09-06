@@ -1,0 +1,532 @@
+{
+ "model": {
+  "coef": {
+   "coverage": 4.933078563140536,
+   "foot_stability": 6.372096065473676,
+   "scale_stability": -6.311598107349649,
+   "centroid_stability": 0.33254625902730434,
+   "relative_height": 2.3813587770763354,
+   "centrality": 3.0772192754444725,
+   "vertical_position": -0.7181905138487479,
+   "mean_conf": 3.7264370942593903
+  },
+  "intercept": -10.04937444419377
+ },
+ "feature_set": "full",
+ "feature_names": [
+  "coverage",
+  "foot_stability",
+  "scale_stability",
+  "centroid_stability",
+  "relative_height",
+  "centrality",
+  "vertical_position",
+  "mean_conf"
+ ],
+ "splits": {
+  "dev": {
+   "split": "dev",
+   "clips": 24,
+   "verdicts": {
+    "CONFIDENT_BATSMAN": 19,
+    "AMBIGUOUS": 3,
+    "NO_BATSMAN": 2
+   },
+   "rules": {
+    "model": {
+     "correct": 19,
+     "wrong": 0,
+     "refused": 5,
+     "precision_when_committed": 1.0,
+     "accuracy_all_clips": 0.7917
+    },
+    "largest": {
+     "correct": 14,
+     "wrong": 10,
+     "refused": 0,
+     "precision_when_committed": 0.5833,
+     "accuracy_all_clips": 0.5833
+    },
+    "size_dominance": {
+     "correct": 19,
+     "wrong": 0,
+     "refused": 5,
+     "precision_when_committed": 1.0,
+     "accuracy_all_clips": 0.7917
+    },
+    "most_central": {
+     "correct": 16,
+     "wrong": 8,
+     "refused": 0,
+     "precision_when_committed": 0.6667,
+     "accuracy_all_clips": 0.6667
+    },
+    "most_persistent": {
+     "correct": 23,
+     "wrong": 1,
+     "refused": 0,
+     "precision_when_committed": 0.9583,
+     "accuracy_all_clips": 0.9583
+    }
+   },
+   "detail": [
+    {
+     "clip_id": "Sai_front_1.mp4",
+     "gt_track": 1,
+     "model_verdict": "NO_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.2099,
+     "correct": false
+    },
+    {
+     "clip_id": "Sai_front_3.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.7763,
+     "correct": true
+    },
+    {
+     "clip_id": "beginnerunorthodox1_front_01.mp4",
+     "gt_track": 1,
+     "model_verdict": "AMBIGUOUS",
+     "model_pick": 1,
+     "model_conf": 0.7695,
+     "correct": false
+    },
+    {
+     "clip_id": "instagram1_front_01.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.8613,
+     "correct": true
+    },
+    {
+     "clip_id": "instagram2_front_07.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.8336,
+     "correct": true
+    },
+    {
+     "clip_id": "instagram2_front_09.mp4",
+     "gt_track": 4,
+     "model_verdict": "AMBIGUOUS",
+     "model_pick": 4,
+     "model_conf": 0.4667,
+     "correct": false
+    },
+    {
+     "clip_id": "kohli_side_06.mp4",
+     "gt_track": 5,
+     "model_verdict": "AMBIGUOUS",
+     "model_pick": 5,
+     "model_conf": 0.4574,
+     "correct": false
+    },
+    {
+     "clip_id": "kohli_side_14.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.7897,
+     "correct": true
+    },
+    {
+     "clip_id": "kohli_side_20.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.9297,
+     "correct": true
+    },
+    {
+     "clip_id": "kohli_side_22.mp4",
+     "gt_track": 1,
+     "model_verdict": "NO_BATSMAN",
+     "model_pick": 22,
+     "model_conf": 0.2591,
+     "correct": false
+    },
+    {
+     "clip_id": "kohli_side_24.mp4",
+     "gt_track": 2,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 2,
+     "model_conf": 0.9351,
+     "correct": true
+    },
+    {
+     "clip_id": "kohli_side_26.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.9149,
+     "correct": true
+    },
+    {
+     "clip_id": "kohli_side_28.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.9234,
+     "correct": true
+    },
+    {
+     "clip_id": "kohli_side_30.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.9066,
+     "correct": true
+    },
+    {
+     "clip_id": "pro_player_back_25.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.8421,
+     "correct": true
+    },
+    {
+     "clip_id": "pro_player_back_27.mp4",
+     "gt_track": 5,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 5,
+     "model_conf": 0.6792,
+     "correct": true
+    },
+    {
+     "clip_id": "pro_player_back_29.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.8754,
+     "correct": true
+    },
+    {
+     "clip_id": "pro_player_back_33.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.8778,
+     "correct": true
+    },
+    {
+     "clip_id": "pro_player_front_03.mp4",
+     "gt_track": 2,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 2,
+     "model_conf": 0.8854,
+     "correct": true
+    },
+    {
+     "clip_id": "pro_player_front_08.mp4",
+     "gt_track": 2,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 2,
+     "model_conf": 0.8038,
+     "correct": true
+    },
+    {
+     "clip_id": "pro_player_front_12.mp4",
+     "gt_track": 2,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 2,
+     "model_conf": 0.835,
+     "correct": true
+    },
+    {
+     "clip_id": "pro_player_front_42.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.7565,
+     "correct": true
+    },
+    {
+     "clip_id": "pro_player_front_44.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.809,
+     "correct": true
+    },
+    {
+     "clip_id": "roa_front_1.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.7359,
+     "correct": true
+    }
+   ]
+  },
+  "eval": {
+   "split": "eval",
+   "clips": 27,
+   "verdicts": {
+    "CONFIDENT_BATSMAN": 20,
+    "AMBIGUOUS": 2,
+    "NO_BATSMAN": 5
+   },
+   "rules": {
+    "model": {
+     "correct": 18,
+     "wrong": 2,
+     "refused": 7,
+     "precision_when_committed": 0.9,
+     "accuracy_all_clips": 0.6667
+    },
+    "largest": {
+     "correct": 15,
+     "wrong": 12,
+     "refused": 0,
+     "precision_when_committed": 0.5556,
+     "accuracy_all_clips": 0.5556
+    },
+    "size_dominance": {
+     "correct": 16,
+     "wrong": 4,
+     "refused": 7,
+     "precision_when_committed": 0.8,
+     "accuracy_all_clips": 0.5926
+    },
+    "most_central": {
+     "correct": 12,
+     "wrong": 15,
+     "refused": 0,
+     "precision_when_committed": 0.4444,
+     "accuracy_all_clips": 0.4444
+    },
+    "most_persistent": {
+     "correct": 22,
+     "wrong": 5,
+     "refused": 0,
+     "precision_when_committed": 0.8148,
+     "accuracy_all_clips": 0.8148
+    }
+   },
+   "detail": [
+    {
+     "clip_id": "instagram1_front_03.mp4",
+     "gt_track": 2,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 2,
+     "model_conf": 0.8858,
+     "correct": true
+    },
+    {
+     "clip_id": "instagram2_front_01.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.8183,
+     "correct": true
+    },
+    {
+     "clip_id": "instagram2_front_03.mp4",
+     "gt_track": 1,
+     "model_verdict": "NO_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.3661,
+     "correct": false
+    },
+    {
+     "clip_id": "instagram2_front_05.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.8522,
+     "correct": true
+    },
+    {
+     "clip_id": "kohli_front_02.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.9558,
+     "correct": true
+    },
+    {
+     "clip_id": "kohli_side_04.mp4",
+     "gt_track": 2,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 2,
+     "model_conf": 0.9438,
+     "correct": true
+    },
+    {
+     "clip_id": "kohli_side_08.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.7299,
+     "correct": true
+    },
+    {
+     "clip_id": "kohli_side_10.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.9406,
+     "correct": true
+    },
+    {
+     "clip_id": "kohli_side_12.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 5,
+     "model_conf": 0.644,
+     "correct": false
+    },
+    {
+     "clip_id": "kohli_side_16.mp4",
+     "gt_track": 1,
+     "model_verdict": "NO_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.0389,
+     "correct": false
+    },
+    {
+     "clip_id": "kohli_side_18.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.9337,
+     "correct": true
+    },
+    {
+     "clip_id": "kohli_side_32.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.9341,
+     "correct": true
+    },
+    {
+     "clip_id": "pro_player_back_21.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.8497,
+     "correct": true
+    },
+    {
+     "clip_id": "pro_player_back_23.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.8215,
+     "correct": true
+    },
+    {
+     "clip_id": "pro_player_back_31.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.8134,
+     "correct": true
+    },
+    {
+     "clip_id": "pro_player_back_36.mp4",
+     "gt_track": 3,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 3,
+     "model_conf": 0.8148,
+     "correct": true
+    },
+    {
+     "clip_id": "pro_player_back_38.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.8817,
+     "correct": true
+    },
+    {
+     "clip_id": "pro_player_back_40.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.7747,
+     "correct": true
+    },
+    {
+     "clip_id": "pro_player_front_01.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.8763,
+     "correct": true
+    },
+    {
+     "clip_id": "pro_player_front_06.mp4",
+     "gt_track": 2,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.7886,
+     "correct": false
+    },
+    {
+     "clip_id": "pro_player_front_10.mp4",
+     "gt_track": 2,
+     "model_verdict": "NO_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.3508,
+     "correct": false
+    },
+    {
+     "clip_id": "pro_player_front_14.mp4",
+     "gt_track": 2,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 2,
+     "model_conf": 0.8484,
+     "correct": true
+    },
+    {
+     "clip_id": "pro_player_front_16.mp4",
+     "gt_track": 1,
+     "model_verdict": "AMBIGUOUS",
+     "model_pick": 1,
+     "model_conf": 0.7949,
+     "correct": false
+    },
+    {
+     "clip_id": "pro_player_front_18.mp4",
+     "gt_track": 4,
+     "model_verdict": "AMBIGUOUS",
+     "model_pick": 6,
+     "model_conf": 0.4111,
+     "correct": false
+    },
+    {
+     "clip_id": "pro_player_front_20.mp4",
+     "gt_track": 1,
+     "model_verdict": "CONFIDENT_BATSMAN",
+     "model_pick": 1,
+     "model_conf": 0.8141,
+     "correct": true
+    },
+    {
+     "clip_id": "rishi_front_2.mp4",
+     "gt_track": 1,
+     "model_verdict": "NO_BATSMAN",
+     "model_pick": 2,
+     "model_conf": 0.2238,
+     "correct": false
+    },
+    {
+     "clip_id": "sanjay_front _1.mp4",
+     "gt_track": 1,
+     "model_verdict": "NO_BATSMAN",
+     "model_pick": 87,
+     "model_conf": 0.0343,
+     "correct": false
+    }
+   ]
+  }
+ }
+}

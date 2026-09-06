@@ -1,0 +1,4620 @@
+{
+ "note": "Batsman ground truth from proposal-assisted visual annotation. batsman_bbox is null when source=='proposal_miss' (batsman visible but undetected by the proposal detector) -- those frames count in the recall denominator and no detector can score them. Frames with batsman_visible==false are excluded entirely.",
+ "proposal_detector": "yolo11x@1280",
+ "annotator": "single annotator, not blind to proposals, no second rater",
+ "clips": [
+  {
+   "clip_id": "Sai_front_1.mp4",
+   "split": "dev",
+   "n_frames": 623,
+   "fps": 30.0,
+   "width": 1080,
+   "height": 1920,
+   "scene_cut": false,
+   "single_shot": false,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      565.396240234375,
+      812.9144897460938,
+      746.8656005859375,
+      1101.70947265625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9371
+    },
+    {
+     "frame": 124,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      432.88720703125,
+      663.2891845703125,
+      613.3670043945312,
+      1059.226806640625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9103
+    },
+    {
+     "frame": 248,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      638.9891967773438,
+      610.09130859375,
+      740.7183837890625,
+      972.012451171875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9092
+    },
+    {
+     "frame": 373,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      602.5399169921875,
+      588.2656860351562,
+      727.654296875,
+      950.7540893554688
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8577
+    },
+    {
+     "frame": 497,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      544.3817138671875,
+      557.4354248046875,
+      644.9880981445312,
+      919.337158203125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9109
+    },
+    {
+     "frame": 621,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      529.366943359375,
+      574.775634765625,
+      666.3414306640625,
+      943.9503173828125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.887
+    }
+   ]
+  },
+  {
+   "clip_id": "Sai_front_3.mp4",
+   "split": "dev",
+   "n_frames": 347,
+   "fps": 30.0,
+   "width": 540,
+   "height": 960,
+   "scene_cut": false,
+   "single_shot": false,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      188.01177978515625,
+      370.1644592285156,
+      268.1208801269531,
+      522.5771484375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8859
+    },
+    {
+     "frame": 69,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      267.90203857421875,
+      340.4101867675781,
+      329.405517578125,
+      511.51904296875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8979
+    },
+    {
+     "frame": 138,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      274.5185546875,
+      330.26983642578125,
+      326.2191467285156,
+      505.2446594238281
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.911
+    },
+    {
+     "frame": 207,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      227.51483154296875,
+      327.10540771484375,
+      296.9157409667969,
+      493.4927673339844
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9038
+    },
+    {
+     "frame": 276,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      263.88165283203125,
+      323.5904846191406,
+      325.15447998046875,
+      498.1322937011719
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8959
+    },
+    {
+     "frame": 345,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      273.03436279296875,
+      315.75604248046875,
+      322.3870849609375,
+      492.1440124511719
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9039
+    }
+   ]
+  },
+  {
+   "clip_id": "beginnerunorthodox1_front_01.mp4",
+   "split": "dev",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 720,
+   "height": 1280,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      252.923095703125,
+      353.43634033203125,
+      320.09423828125,
+      557.4514770507812
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8597
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      309.3238220214844,
+      366.80853271484375,
+      377.6673889160156,
+      577.2723999023438
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.8678
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      312.77130126953125,
+      388.9053955078125,
+      404.70465087890625,
+      584.78955078125
+     ],
+     "source": "proposal",
+     "proposal_index": 2,
+     "proposal_conf": 0.8835
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      348.80078125,
+      388.72943115234375,
+      443.3822021484375,
+      574.3750610351562
+     ],
+     "source": "proposal",
+     "proposal_index": 2,
+     "proposal_conf": 0.9102
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      384.55908203125,
+      375.29931640625,
+      461.653564453125,
+      575.8175048828125
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.9054
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      372.86468505859375,
+      363.1544189453125,
+      451.8115234375,
+      578.8982543945312
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.8546
+    }
+   ]
+  },
+  {
+   "clip_id": "instagram1_front_01.mp4",
+   "split": "dev",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 720,
+   "height": 1280,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      315.6031799316406,
+      306.22760009765625,
+      448.1203308105469,
+      673.9991455078125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.909
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      225.26177978515625,
+      341.27099609375,
+      462.8031005859375,
+      684.0281982421875
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.9076
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      287.93658447265625,
+      338.21343994140625,
+      454.48712158203125,
+      683.8388061523438
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.9109
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      194.35586547851562,
+      314.265380859375,
+      434.8917541503906,
+      684.5782470703125
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.9334
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      297.1000061035156,
+      326.69183349609375,
+      441.8100891113281,
+      681.626708984375
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.9159
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      284.57232666015625,
+      321.13116455078125,
+      421.58209228515625,
+      691.7028198242188
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.5097
+    }
+   ]
+  },
+  {
+   "clip_id": "instagram1_front_03.mp4",
+   "split": "eval",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 720,
+   "height": 1280,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      297.11871337890625,
+      331.18878173828125,
+      447.44354248046875,
+      682.4560546875
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.9093
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      285.2430114746094,
+      281.2099609375,
+      440.3115539550781,
+      687.279296875
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.895
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      298.48626708984375,
+      296.07415771484375,
+      464.878173828125,
+      686.1910400390625
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.8971
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      304.23468017578125,
+      315.97772216796875,
+      445.95733642578125,
+      676.1007690429688
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.914
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      283.20196533203125,
+      292.16021728515625,
+      446.5167236328125,
+      685.8810424804688
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.895
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      292.08538818359375,
+      301.9566650390625,
+      460.53167724609375,
+      683.8138427734375
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.8499
+    }
+   ]
+  },
+  {
+   "clip_id": "instagram2_front_01.mp4",
+   "split": "eval",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 720,
+   "height": 1280,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      348.7674560546875,
+      598.468994140625,
+      464.0615234375,
+      895.0582275390625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8929
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      339.6658935546875,
+      614.1900024414062,
+      456.5235595703125,
+      895.5769653320312
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8914
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      327.0588684082031,
+      628.91015625,
+      439.9991760253906,
+      896.63525390625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8798
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      303.81634521484375,
+      555.7598876953125,
+      409.97735595703125,
+      893.5281982421875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.858
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      331.3291320800781,
+      612.20166015625,
+      449.9695739746094,
+      895.9234619140625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9073
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      313.5224609375,
+      625.4730834960938,
+      431.0875244140625,
+      896.0354614257812
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.887
+    }
+   ]
+  },
+  {
+   "clip_id": "instagram2_front_03.mp4",
+   "split": "eval",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 720,
+   "height": 1280,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      340.22052001953125,
+      606.170166015625,
+      455.04119873046875,
+      896.415771484375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9239
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      322.40667724609375,
+      619.014892578125,
+      445.36883544921875,
+      895.3563232421875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8926
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      279.1949462890625,
+      628.721435546875,
+      419.74151611328125,
+      898.98583984375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8661
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      258.0369873046875,
+      615.262939453125,
+      396.5047607421875,
+      899.6611328125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.848
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      327.9632568359375,
+      617.6055908203125,
+      446.67498779296875,
+      895.0235595703125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8785
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      253.58050537109375,
+      629.270751953125,
+      423.47833251953125,
+      896.8984375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9085
+    }
+   ]
+  },
+  {
+   "clip_id": "instagram2_front_05.mp4",
+   "split": "eval",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 720,
+   "height": 1280,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      340.283203125,
+      615.3780517578125,
+      454.956298828125,
+      894.1473388671875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8863
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      320.6689453125,
+      630.2928466796875,
+      439.55511474609375,
+      890.4698486328125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8933
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      304.38922119140625,
+      567.7647705078125,
+      424.08355712890625,
+      895.6417236328125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9113
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      343.2089538574219,
+      599.1436767578125,
+      456.6221618652344,
+      894.6400146484375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9077
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      331.07098388671875,
+      614.64208984375,
+      448.28045654296875,
+      892.6103515625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8977
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      314.98638916015625,
+      631.695068359375,
+      433.52935791015625,
+      891.616943359375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8999
+    }
+   ]
+  },
+  {
+   "clip_id": "instagram2_front_07.mp4",
+   "split": "dev",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 720,
+   "height": 1280,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      337.3268127441406,
+      612.3085327148438,
+      455.3899230957031,
+      892.1170043945312
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8126
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      316.79913330078125,
+      628.6632080078125,
+      433.81072998046875,
+      892.1141357421875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8153
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      301.69622802734375,
+      625.55859375,
+      412.68682861328125,
+      890.5084228515625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8039
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      335.23077392578125,
+      604.7645874023438,
+      451.18804931640625,
+      891.8114624023438
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8902
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      333.390380859375,
+      614.753662109375,
+      465.5557861328125,
+      892.225341796875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.867
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      358.228759765625,
+      530.28271484375,
+      493.658935546875,
+      899.342041015625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.874
+    }
+   ]
+  },
+  {
+   "clip_id": "instagram2_front_09.mp4",
+   "split": "dev",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 720,
+   "height": 1280,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      323.3514404296875,
+      622.5289306640625,
+      443.4605712890625,
+      891.4525146484375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8072
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      296.83197021484375,
+      619.8814697265625,
+      415.49688720703125,
+      892.3868408203125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8944
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      345.519775390625,
+      600.04296875,
+      459.0242919921875,
+      891.7379150390625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8892
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      316.39166259765625,
+      620.2105712890625,
+      447.5833740234375,
+      892.1053466796875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8653
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      316.65869140625,
+      597.4727172851562,
+      433.850830078125,
+      890.6644897460938
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9048
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      339.11279296875,
+      606.70263671875,
+      455.909423828125,
+      890.341064453125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8914
+    }
+   ]
+  },
+  {
+   "clip_id": "kohli_front_02.mp4",
+   "split": "eval",
+   "n_frames": 180,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      257.62237548828125,
+      46.04248046875,
+      381.61956787109375,
+      353.5364990234375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8215
+    },
+    {
+     "frame": 36,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      289.9427490234375,
+      26.313751220703125,
+      395.246826171875,
+      354.5892639160156
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.905
+    },
+    {
+     "frame": 71,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      292.4681396484375,
+      26.12176513671875,
+      429.1253662109375,
+      346.774658203125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9257
+    },
+    {
+     "frame": 107,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      244.5626220703125,
+      30.8115234375,
+      399.0279541015625,
+      340.2768859863281
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.7711
+    },
+    {
+     "frame": 142,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      243.13348388671875,
+      77.79559326171875,
+      383.53375244140625,
+      351.54052734375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8595
+    },
+    {
+     "frame": 178,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      254.0718536376953,
+      27.432098388671875,
+      383.27911376953125,
+      349.77923583984375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9253
+    }
+   ]
+  },
+  {
+   "clip_id": "kohli_side_04.mp4",
+   "split": "eval",
+   "n_frames": 180,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      67.4384765625,
+      59.892333984375,
+      222.26864624023438,
+      353.258056640625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.3605
+    },
+    {
+     "frame": 36,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      230.92788696289062,
+      23.024993896484375,
+      340.8886413574219,
+      346.2944030761719
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.6792
+    },
+    {
+     "frame": 71,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      348.31158447265625,
+      25.583953857421875,
+      491.89178466796875,
+      340.42822265625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9291
+    },
+    {
+     "frame": 107,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      316.16387939453125,
+      31.14752197265625,
+      416.8297119140625,
+      347.88665771484375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.87
+    },
+    {
+     "frame": 142,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      225.2947540283203,
+      85.22576904296875,
+      352.65484619140625,
+      348.1089782714844
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.5644
+    },
+    {
+     "frame": 178,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      261.6502685546875,
+      27.29052734375,
+      386.03662109375,
+      349.1031494140625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.922
+    }
+   ]
+  },
+  {
+   "clip_id": "kohli_side_06.mp4",
+   "split": "dev",
+   "n_frames": 180,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      222.29421997070312,
+      24.145721435546875,
+      395.0786437988281,
+      349.1150207519531
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9017
+    },
+    {
+     "frame": 36,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      126.5078125,
+      37.339599609375,
+      289.6881103515625,
+      354.9028625488281
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.7858
+    },
+    {
+     "frame": 71,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      135.6519775390625,
+      57.807159423828125,
+      256.4748229980469,
+      353.1072082519531
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.0609
+    },
+    {
+     "frame": 107,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      226.25503540039062,
+      16.273529052734375,
+      392.3332214355469,
+      350.25616455078125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9193
+    },
+    {
+     "frame": 142,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      349.602783203125,
+      15.827789306640625,
+      496.41778564453125,
+      339.1918029785156
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.7565
+    },
+    {
+     "frame": 178,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      448.8736572265625,
+      25.82720947265625,
+      564.6998291015625,
+      336.25335693359375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8869
+    }
+   ]
+  },
+  {
+   "clip_id": "kohli_side_08.mp4",
+   "split": "eval",
+   "n_frames": 180,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      228.1986083984375,
+      42.782379150390625,
+      386.27032470703125,
+      349.9502258300781
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.7786
+    },
+    {
+     "frame": 36,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      213.0529022216797,
+      28.669891357421875,
+      356.19207763671875,
+      348.0987548828125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.6523
+    },
+    {
+     "frame": 71,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      163.8375244140625,
+      37.36138916015625,
+      275.80462646484375,
+      347.2662353515625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.541
+    },
+    {
+     "frame": 107,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      287.6761474609375,
+      21.56195068359375,
+      448.7059326171875,
+      351.118896484375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9094
+    },
+    {
+     "frame": 142,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      589.7318115234375,
+      105.86016845703125,
+      639.8851318359375,
+      355.1000671386719
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.4452
+    },
+    {
+     "frame": 178,
+     "batsman_visible": false,
+     "batsman_bbox": null,
+     "source": "absent"
+    }
+   ]
+  },
+  {
+   "clip_id": "kohli_side_10.mp4",
+   "split": "eval",
+   "n_frames": 180,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      409.8480224609375,
+      6.316864013671875,
+      489.9739990234375,
+      335.66778564453125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8693
+    },
+    {
+     "frame": 36,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      410.174072265625,
+      5.476409912109375,
+      516.6342163085938,
+      336.7318115234375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8757
+    },
+    {
+     "frame": 71,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      321.7469787597656,
+      27.1475830078125,
+      469.5722961425781,
+      339.96514892578125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8411
+    },
+    {
+     "frame": 107,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      260.44744873046875,
+      51.635101318359375,
+      387.54644775390625,
+      348.6300354003906
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9226
+    },
+    {
+     "frame": 142,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      261.332763671875,
+      25.70245361328125,
+      380.4237060546875,
+      347.35308837890625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8824
+    },
+    {
+     "frame": 178,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      260.136474609375,
+      28.391326904296875,
+      382.51214599609375,
+      350.29833984375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9087
+    }
+   ]
+  },
+  {
+   "clip_id": "kohli_side_12.mp4",
+   "split": "eval",
+   "n_frames": 180,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      245.11605834960938,
+      33.455963134765625,
+      466.8630676269531,
+      353.0113830566406
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.6743
+    },
+    {
+     "frame": 36,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      219.39791870117188,
+      23.671875,
+      312.8771667480469,
+      349.6015930175781
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8452
+    },
+    {
+     "frame": 71,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      318.50457763671875,
+      27.44610595703125,
+      488.20330810546875,
+      341.03082275390625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.5457
+    },
+    {
+     "frame": 107,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      337.71875,
+      30.05023193359375,
+      468.57696533203125,
+      336.59149169921875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.857
+    },
+    {
+     "frame": 142,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      295.652587890625,
+      42.797027587890625,
+      396.116943359375,
+      347.95281982421875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8848
+    },
+    {
+     "frame": 178,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      250.297119140625,
+      51.416290283203125,
+      383.09918212890625,
+      348.4856872558594
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.7639
+    }
+   ]
+  },
+  {
+   "clip_id": "kohli_side_14.mp4",
+   "split": "dev",
+   "n_frames": 180,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      77.17947387695312,
+      49.19134521484375,
+      190.23489379882812,
+      343.0389404296875
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.8204
+    },
+    {
+     "frame": 36,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      74.11420440673828,
+      20.254150390625,
+      210.21728515625,
+      332.1737365722656
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9065
+    },
+    {
+     "frame": 71,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      48.66509246826172,
+      0.937591552734375,
+      212.28289794921875,
+      310.66412353515625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.852
+    },
+    {
+     "frame": 107,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      34.78279113769531,
+      19.577117919921875,
+      187.0023956298828,
+      347.82269287109375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8988
+    },
+    {
+     "frame": 142,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      115.04139709472656,
+      63.49072265625,
+      216.18125915527344,
+      357.648681640625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8988
+    },
+    {
+     "frame": 178,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      107.86543273925781,
+      89.95706176757812,
+      213.2080535888672,
+      356.93756103515625
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.8183
+    }
+   ]
+  },
+  {
+   "clip_id": "kohli_side_16.mp4",
+   "split": "eval",
+   "n_frames": 180,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      16.905685424804688,
+      95.53857421875,
+      168.34104919433594,
+      357.20208740234375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.6943
+    },
+    {
+     "frame": 36,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      28.228424072265625,
+      97.21426391601562,
+      180.97152709960938,
+      358.3802185058594
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8021
+    },
+    {
+     "frame": 71,
+     "batsman_visible": false,
+     "batsman_bbox": null,
+     "source": "absent"
+    },
+    {
+     "frame": 107,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      578.424560546875,
+      174.83120727539062,
+      639.908935546875,
+      325.6906433105469
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.228
+    },
+    {
+     "frame": 142,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      582.1302490234375,
+      175.16708374023438,
+      639.8642578125,
+      324.9079895019531
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.1478
+    },
+    {
+     "frame": 178,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      1.031097412109375,
+      123.78890991210938,
+      194.55865478515625,
+      350.7232666015625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.6695
+    }
+   ]
+  },
+  {
+   "clip_id": "kohli_side_18.mp4",
+   "split": "eval",
+   "n_frames": 180,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      134.30184936523438,
+      78.45254516601562,
+      239.92691040039062,
+      354.09259033203125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.4725
+    },
+    {
+     "frame": 36,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      182.71929931640625,
+      55.7984619140625,
+      348.255859375,
+      346.2413024902344
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.7748
+    },
+    {
+     "frame": 71,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      250.725830078125,
+      23.734161376953125,
+      410.15521240234375,
+      325.8329772949219
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.655
+    },
+    {
+     "frame": 107,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      178.12428283691406,
+      2.458984375,
+      337.2938232421875,
+      323.03106689453125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.769
+    },
+    {
+     "frame": 142,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      231.93202209472656,
+      18.277374267578125,
+      380.4307861328125,
+      330.83233642578125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8419
+    },
+    {
+     "frame": 178,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      200.8080596923828,
+      43.74462890625,
+      318.94696044921875,
+      333.9921569824219
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.7211
+    }
+   ]
+  },
+  {
+   "clip_id": "kohli_side_20.mp4",
+   "split": "dev",
+   "n_frames": 180,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      160.63589477539062,
+      40.121307373046875,
+      317.0628967285156,
+      340.42633056640625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.5947
+    },
+    {
+     "frame": 36,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      102.76189422607422,
+      34.262481689453125,
+      309.08642578125,
+      336.41632080078125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9304
+    },
+    {
+     "frame": 71,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      233.9271240234375,
+      14.3927001953125,
+      315.94293212890625,
+      336.92095947265625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8106
+    },
+    {
+     "frame": 107,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      240.82562255859375,
+      13.316680908203125,
+      360.11737060546875,
+      333.1566162109375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9176
+    },
+    {
+     "frame": 142,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      250.45985412597656,
+      28.018707275390625,
+      366.461181640625,
+      336.9060363769531
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.862
+    },
+    {
+     "frame": 178,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      191.52545166015625,
+      81.1668701171875,
+      326.8206787109375,
+      339.81500244140625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9006
+    }
+   ]
+  },
+  {
+   "clip_id": "kohli_side_22.mp4",
+   "split": "dev",
+   "n_frames": 180,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      78.04241943359375,
+      58.108795166015625,
+      265.0900573730469,
+      336.3159484863281
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.6778
+    },
+    {
+     "frame": 36,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      0.08749771118164062,
+      115.21884155273438,
+      54.61093521118164,
+      330.6827392578125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.4861
+    },
+    {
+     "frame": 71,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      0.114013671875,
+      133.54220581054688,
+      91.2000961303711,
+      323.90606689453125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8794
+    },
+    {
+     "frame": 107,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      0.240753173828125,
+      8.496337890625,
+      149.3385009765625,
+      331.32867431640625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9164
+    },
+    {
+     "frame": 142,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      174.3441162109375,
+      8.845489501953125,
+      308.62969970703125,
+      336.71343994140625
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.7379
+    },
+    {
+     "frame": 178,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      272.1531066894531,
+      35.735626220703125,
+      384.5423278808594,
+      333.1529846191406
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9081
+    }
+   ]
+  },
+  {
+   "clip_id": "kohli_side_24.mp4",
+   "split": "dev",
+   "n_frames": 180,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      159.052734375,
+      50.315673828125,
+      283.95941162109375,
+      347.66400146484375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.7128
+    },
+    {
+     "frame": 36,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      210.1569366455078,
+      27.682220458984375,
+      337.37384033203125,
+      347.4782409667969
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.7659
+    },
+    {
+     "frame": 71,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      212.60675048828125,
+      17.869049072265625,
+      353.230224609375,
+      343.61676025390625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8731
+    },
+    {
+     "frame": 107,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      258.8599853515625,
+      39.800933837890625,
+      354.23272705078125,
+      337.0963439941406
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8516
+    },
+    {
+     "frame": 142,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      190.57473754882812,
+      42.4443359375,
+      311.36285400390625,
+      342.999755859375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8612
+    },
+    {
+     "frame": 178,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      178.852294921875,
+      38.209503173828125,
+      267.28277587890625,
+      343.6849365234375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.5865
+    }
+   ]
+  },
+  {
+   "clip_id": "kohli_side_26.mp4",
+   "split": "dev",
+   "n_frames": 180,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      367.57269287109375,
+      29.531280517578125,
+      551.0952758789062,
+      330.99176025390625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.7405
+    },
+    {
+     "frame": 36,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      255.83047485351562,
+      39.606292724609375,
+      429.9770812988281,
+      332.8073425292969
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8897
+    },
+    {
+     "frame": 71,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      158.07785034179688,
+      46.201690673828125,
+      310.3797912597656,
+      342.8042297363281
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.7859
+    },
+    {
+     "frame": 107,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      185.80294799804688,
+      19.433380126953125,
+      306.9706115722656,
+      344.61151123046875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8925
+    },
+    {
+     "frame": 142,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      181.28787231445312,
+      17.30670166015625,
+      306.39691162109375,
+      341.88616943359375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9255
+    },
+    {
+     "frame": 178,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      181.05545043945312,
+      17.76702880859375,
+      306.06854248046875,
+      341.8450927734375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9237
+    }
+   ]
+  },
+  {
+   "clip_id": "kohli_side_28.mp4",
+   "split": "dev",
+   "n_frames": 180,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      160.4464569091797,
+      71.71466064453125,
+      370.75262451171875,
+      350.2969055175781
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8705
+    },
+    {
+     "frame": 36,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      202.84149169921875,
+      37.098663330078125,
+      335.8489990234375,
+      346.1874694824219
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8888
+    },
+    {
+     "frame": 71,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      203.22714233398438,
+      32.499603271484375,
+      308.309326171875,
+      340.4527587890625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9103
+    },
+    {
+     "frame": 107,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      171.38284301757812,
+      92.80810546875,
+      306.0547180175781,
+      343.114013671875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.7529
+    },
+    {
+     "frame": 142,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      179.46182250976562,
+      79.13278198242188,
+      307.2508239746094,
+      345.22528076171875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8332
+    },
+    {
+     "frame": 178,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      180.7716064453125,
+      28.3726806640625,
+      306.93109130859375,
+      345.7847900390625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9268
+    }
+   ]
+  },
+  {
+   "clip_id": "kohli_side_30.mp4",
+   "split": "dev",
+   "n_frames": 180,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      575.8408203125,
+      80.07984161376953,
+      639.836669921875,
+      293.716064453125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8501
+    },
+    {
+     "frame": 36,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      366.55963134765625,
+      17.749481201171875,
+      483.88189697265625,
+      343.3297119140625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8742
+    },
+    {
+     "frame": 71,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      186.174560546875,
+      37.38287353515625,
+      325.2381591796875,
+      344.02978515625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9303
+    },
+    {
+     "frame": 107,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      182.78335571289062,
+      22.680938720703125,
+      304.4041442871094,
+      344.24395751953125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8955
+    },
+    {
+     "frame": 142,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      178.30166625976562,
+      18.01654052734375,
+      303.2547302246094,
+      341.2205505371094
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.919
+    },
+    {
+     "frame": 178,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      181.15185546875,
+      28.703399658203125,
+      303.66168212890625,
+      345.3512268066406
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9209
+    }
+   ]
+  },
+  {
+   "clip_id": "kohli_side_32.mp4",
+   "split": "eval",
+   "n_frames": 180,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      149.54129028320312,
+      13.77679443359375,
+      291.3970947265625,
+      340.09228515625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8013
+    },
+    {
+     "frame": 36,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      186.4718780517578,
+      21.402099609375,
+      327.48529052734375,
+      334.72332763671875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9112
+    },
+    {
+     "frame": 71,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      209.46827697753906,
+      39.243377685546875,
+      315.8175048828125,
+      339.9089050292969
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8756
+    },
+    {
+     "frame": 107,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      183.14309692382812,
+      32.140167236328125,
+      279.01910400390625,
+      343.60595703125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.6379
+    },
+    {
+     "frame": 142,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      180.71612548828125,
+      18.506561279296875,
+      307.1932678222656,
+      342.6932067871094
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9247
+    },
+    {
+     "frame": 178,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      180.91726684570312,
+      20.22308349609375,
+      307.0556335449219,
+      343.15185546875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9101
+    }
+   ]
+  },
+  {
+   "clip_id": "pro_player_back_21.mp4",
+   "split": "eval",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      186.51953125,
+      46.725830078125,
+      329.8614501953125,
+      338.56536865234375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.4724
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      198.44747924804688,
+      12.8011474609375,
+      306.46270751953125,
+      327.6397705078125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.7635
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      212.91177368164062,
+      57.979644775390625,
+      301.7867736816406,
+      341.9504699707031
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.3969
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      185.78298950195312,
+      76.04763793945312,
+      358.4510803222656,
+      357.39495849609375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8823
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      205.36167907714844,
+      69.269775390625,
+      335.86083984375,
+      356.6658935546875
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.6417
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      160.27328491210938,
+      71.50076293945312,
+      266.75384521484375,
+      356.5707092285156
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.7669
+    }
+   ]
+  },
+  {
+   "clip_id": "pro_player_back_23.mp4",
+   "split": "eval",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      164.66015625,
+      103.19631958007812,
+      264.6564025878906,
+      358.24761962890625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9132
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      186.42681884765625,
+      114.7247314453125,
+      299.47021484375,
+      357.0674743652344
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8425
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      196.94384765625,
+      122.38925170898438,
+      308.04888916015625,
+      356.18218994140625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.5885
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      201.6897430419922,
+      84.11676025390625,
+      358.47589111328125,
+      356.38543701171875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8857
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      217.732666015625,
+      86.8736572265625,
+      375.00286865234375,
+      356.74822998046875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9132
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      212.35984802246094,
+      88.72048950195312,
+      309.4854736328125,
+      356.5593566894531
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.7009
+    }
+   ]
+  },
+  {
+   "clip_id": "pro_player_back_25.mp4",
+   "split": "dev",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      194.9537811279297,
+      101.73297119140625,
+      378.12445068359375,
+      356.8829040527344
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8278
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      130.72677612304688,
+      29.17816162109375,
+      231.75961303710938,
+      354.36651611328125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8162
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      138.509765625,
+      19.962249755859375,
+      242.96319580078125,
+      348.48675537109375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8522
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      147.18496704101562,
+      20.267822265625,
+      259.8516845703125,
+      348.21954345703125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.6938
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      159.43829345703125,
+      47.559906005859375,
+      331.37103271484375,
+      344.1971435546875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8707
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      163.8226318359375,
+      5.61212158203125,
+      320.5028991699219,
+      338.3468322753906
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.6408
+    }
+   ]
+  },
+  {
+   "clip_id": "pro_player_back_27.mp4",
+   "split": "dev",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      157.32315063476562,
+      3.99713134765625,
+      337.8448486328125,
+      338.68011474609375
+     ],
+     "source": "proposal",
+     "proposal_index": 2,
+     "proposal_conf": 0.36
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      160.23037719726562,
+      11.173675537109375,
+      343.8046569824219,
+      341.4332275390625
+     ],
+     "source": "proposal",
+     "proposal_index": 2,
+     "proposal_conf": 0.4033
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      144.53988647460938,
+      53.098876953125,
+      256.9737243652344,
+      355.1611328125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8807
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      159.58624267578125,
+      49.434814453125,
+      333.9153747558594,
+      356.21429443359375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8691
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      165.6434326171875,
+      108.38131713867188,
+      328.467041015625,
+      347.84014892578125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.7743
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      112.6937255859375,
+      113.936279296875,
+      329.0316162109375,
+      352.2099914550781
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.7276
+    }
+   ]
+  },
+  {
+   "clip_id": "pro_player_back_29.mp4",
+   "split": "dev",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      133.69281005859375,
+      65.486572265625,
+      291.6136474609375,
+      355.636474609375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8417
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      122.21976470947266,
+      82.25497436523438,
+      288.1596374511719,
+      356.1670227050781
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9322
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      115.45086669921875,
+      88.16879272460938,
+      282.30999755859375,
+      356.0740051269531
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9289
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      110.02571868896484,
+      92.2900390625,
+      280.8254089355469,
+      353.41217041015625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.919
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      114.52741241455078,
+      47.7552490234375,
+      276.52679443359375,
+      354.87615966796875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9067
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      126.84661865234375,
+      30.253814697265625,
+      270.20306396484375,
+      354.3664245605469
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8408
+    }
+   ]
+  },
+  {
+   "clip_id": "pro_player_back_31.mp4",
+   "split": "eval",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      127.84893798828125,
+      19.427215576171875,
+      272.27301025390625,
+      351.6379089355469
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.7821
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      134.88694763183594,
+      17.09228515625,
+      237.45399475097656,
+      341.8046875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.6299
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      143.86740112304688,
+      17.348876953125,
+      255.18075561523438,
+      352.95233154296875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8442
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      150.3385009765625,
+      82.09799194335938,
+      268.29473876953125,
+      346.03631591796875
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.1835
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      162.56344604492188,
+      138.55215454101562,
+      245.57015991210938,
+      337.21295166015625
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.3988
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      150.77658081054688,
+      14.29083251953125,
+      255.48504638671875,
+      339.74346923828125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8288
+    }
+   ]
+  },
+  {
+   "clip_id": "pro_player_back_33.mp4",
+   "split": "dev",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      113.06210327148438,
+      3.320343017578125,
+      317.0008850097656,
+      337.28656005859375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9327
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      99.99087524414062,
+      56.55059814453125,
+      272.3485412597656,
+      347.0436096191406
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9264
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      117.12301635742188,
+      7.29693603515625,
+      244.16757202148438,
+      341.77685546875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9063
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      126.40380859375,
+      3.161651611328125,
+      244.56378173828125,
+      335.2558288574219
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9131
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      117.63720703125,
+      15.545501708984375,
+      289.38665771484375,
+      342.25201416015625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9011
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      136.74102783203125,
+      19.37969970703125,
+      249.1639404296875,
+      348.00445556640625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9055
+    }
+   ]
+  },
+  {
+   "clip_id": "pro_player_back_36.mp4",
+   "split": "eval",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      192.6822509765625,
+      2.9110107421875,
+      366.58331298828125,
+      323.30218505859375
+     ],
+     "source": "proposal",
+     "proposal_index": 2,
+     "proposal_conf": 0.5862
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      178.7257080078125,
+      28.841217041015625,
+      290.165771484375,
+      344.82427978515625
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.7858
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      166.12667846679688,
+      5.160186767578125,
+      296.5869445800781,
+      330.02203369140625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8246
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      155.12960815429688,
+      6.186065673828125,
+      279.95941162109375,
+      329.76959228515625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8619
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      141.28466796875,
+      40.486572265625,
+      244.64154052734375,
+      354.0933837890625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9025
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      142.41629028320312,
+      38.8336181640625,
+      248.14468383789062,
+      349.65875244140625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8796
+    }
+   ]
+  },
+  {
+   "clip_id": "pro_player_back_38.mp4",
+   "split": "eval",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      164.62527465820312,
+      46.296234130859375,
+      266.4268493652344,
+      346.6122741699219
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.673
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      173.33428955078125,
+      67.20660400390625,
+      302.9598388671875,
+      350.7105407714844
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.7827
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      187.48251342773438,
+      6.278594970703125,
+      289.5688171386719,
+      321.4830017089844
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.2146
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      185.57614135742188,
+      0.9161376953125,
+      312.3988037109375,
+      318.405517578125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8678
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      198.9541473388672,
+      3.27783203125,
+      333.31219482421875,
+      322.4911804199219
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8018
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      224.08187866210938,
+      35.49945068359375,
+      342.0408630371094,
+      318.5684814453125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8036
+    }
+   ]
+  },
+  {
+   "clip_id": "pro_player_back_40.mp4",
+   "split": "eval",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": true,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      134.23709106445312,
+      2.299957275390625,
+      249.13003540039062,
+      324.287353515625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8958
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      149.73480224609375,
+      21.45172119140625,
+      272.7419128417969,
+      328.09356689453125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.6078
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      168.80731201171875,
+      43.153045654296875,
+      327.6414794921875,
+      286.6060791015625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.7812
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      188.04248046875,
+      8.95062255859375,
+      304.1712951660156,
+      279.68853759765625
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.5848
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      162.41033935546875,
+      31.26068115234375,
+      278.10498046875,
+      351.9012451171875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8291
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      319.7235107421875,
+      79.03060913085938,
+      359.74884033203125,
+      196.04852294921875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.3791
+    }
+   ]
+  },
+  {
+   "clip_id": "pro_player_front_01.mp4",
+   "split": "eval",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      307.9345703125,
+      91.8880386352539,
+      362.4991455078125,
+      222.46194458007812
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8321
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      302.15142822265625,
+      103.33670043945312,
+      356.86700439453125,
+      225.31393432617188
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8718
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      286.16558837890625,
+      99.18411254882812,
+      353.95391845703125,
+      224.7239990234375
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.6885
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      288.35760498046875,
+      82.04859161376953,
+      346.84918212890625,
+      224.58935546875
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.8957
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      289.0708312988281,
+      79.83024597167969,
+      346.5306091308594,
+      224.0359344482422
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.882
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      304.5736999511719,
+      104.92987060546875,
+      354.3539733886719,
+      231.83901977539062
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8086
+    }
+   ]
+  },
+  {
+   "clip_id": "pro_player_front_03.mp4",
+   "split": "dev",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      299.2761535644531,
+      80.00692749023438,
+      353.1368103027344,
+      227.07669067382812
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.7214
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      297.09088134765625,
+      85.34500122070312,
+      355.4254150390625,
+      218.45440673828125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.7819
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      303.5655212402344,
+      94.3426284790039,
+      349.2702331542969,
+      217.68460083007812
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8456
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      292.2754211425781,
+      101.73777770996094,
+      348.0357360839844,
+      222.7876434326172
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8764
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      283.1258850097656,
+      94.62167358398438,
+      340.5997009277344,
+      223.0845947265625
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.8509
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      316.371337890625,
+      85.37947082519531,
+      359.96588134765625,
+      184.39088439941406
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.589
+    }
+   ]
+  },
+  {
+   "clip_id": "pro_player_front_06.mp4",
+   "split": "eval",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      288.99139404296875,
+      86.92770385742188,
+      348.92559814453125,
+      206.75567626953125
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.831
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      291.68194580078125,
+      55.935150146484375,
+      349.55047607421875,
+      205.53338623046875
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.7956
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      286.802001953125,
+      70.86390686035156,
+      335.9417724609375,
+      213.1984405517578
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.4197
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      286.66436767578125,
+      87.4395751953125,
+      332.83819580078125,
+      220.19955444335938
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.7487
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      283.99151611328125,
+      101.73553466796875,
+      352.25885009765625,
+      211.66598510742188
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.6939
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      282.94708251953125,
+      110.08187103271484,
+      344.34625244140625,
+      212.23452758789062
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.8591
+    }
+   ]
+  },
+  {
+   "clip_id": "pro_player_front_08.mp4",
+   "split": "dev",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      294.72967529296875,
+      99.70639038085938,
+      343.68695068359375,
+      211.65768432617188
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.8363
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      307.0863037109375,
+      91.65890502929688,
+      357.663818359375,
+      218.77044677734375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8659
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      291.95916748046875,
+      105.5201416015625,
+      351.7362060546875,
+      220.89028930664062
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.8794
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      289.49810791015625,
+      103.96914672851562,
+      349.68499755859375,
+      236.11312866210938
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.8415
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      285.78155517578125,
+      106.522705078125,
+      352.506103515625,
+      243.21002197265625
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.6782
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      298.6919250488281,
+      91.99618530273438,
+      342.7462463378906,
+      211.7288818359375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8927
+    }
+   ]
+  },
+  {
+   "clip_id": "pro_player_front_10.mp4",
+   "split": "eval",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      275.5198669433594,
+      95.58572387695312,
+      328.7179870605469,
+      208.01080322265625
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.8378
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      277.60137939453125,
+      72.66250610351562,
+      323.70928955078125,
+      210.23907470703125
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.8546
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      276.84979248046875,
+      71.39936065673828,
+      321.0517578125,
+      211.097412109375
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.7857
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      304.29022216796875,
+      68.73729705810547,
+      358.83038330078125,
+      201.59918212890625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8612
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      297.34564208984375,
+      77.17132568359375,
+      347.11871337890625,
+      201.06973266601562
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.8035
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      287.262939453125,
+      80.55345153808594,
+      343.5919189453125,
+      204.35386657714844
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.9002
+    }
+   ]
+  },
+  {
+   "clip_id": "pro_player_front_12.mp4",
+   "split": "dev",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      285.6590576171875,
+      42.43016052246094,
+      332.01092529296875,
+      187.779052734375
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.8143
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      306.4612121582031,
+      38.484649658203125,
+      350.2737121582031,
+      187.54537963867188
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.8288
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      272.0694580078125,
+      71.3749771118164,
+      326.3077392578125,
+      211.02255249023438
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.5604
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      279.95947265625,
+      86.01730346679688,
+      334.4666748046875,
+      203.69406127929688
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8788
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      280.3196105957031,
+      92.75381469726562,
+      330.4000549316406,
+      206.330810546875
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.7764
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      274.4285888671875,
+      88.83584594726562,
+      330.4517822265625,
+      211.326416015625
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.8806
+    }
+   ]
+  },
+  {
+   "clip_id": "pro_player_front_14.mp4",
+   "split": "eval",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      268.6261901855469,
+      77.29544067382812,
+      321.9541931152344,
+      206.33505249023438
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.6624
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      313.3846740722656,
+      92.924072265625,
+      356.9209289550781,
+      209.137939453125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.7273
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      288.1292724609375,
+      99.97030639648438,
+      348.0,
+      212.76657104492188
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8737
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      296.8905029296875,
+      102.3333969116211,
+      347.6519775390625,
+      218.16250610351562
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.7917
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      303.0585632324219,
+      81.32662200927734,
+      350.0801696777344,
+      217.18759155273438
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.8439
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      298.84552001953125,
+      106.03448486328125,
+      342.4417724609375,
+      220.59207153320312
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.7936
+    }
+   ]
+  },
+  {
+   "clip_id": "pro_player_front_16.mp4",
+   "split": "eval",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      304.7617492675781,
+      79.14885711669922,
+      354.2904968261719,
+      209.3724365234375
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.7579
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      283.2105712890625,
+      78.45004272460938,
+      342.4189453125,
+      203.9864501953125
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.7455
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      285.4013671875,
+      60.992149353027344,
+      340.6676025390625,
+      197.60086059570312
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.8311
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      259.8006591796875,
+      67.01422119140625,
+      338.4375,
+      203.51849365234375
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.8698
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      284.5120849609375,
+      80.53278350830078,
+      340.2471923828125,
+      208.23321533203125
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.8761
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      280.2942199707031,
+      80.88919067382812,
+      330.0783996582031,
+      194.77349853515625
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.876
+    }
+   ]
+  },
+  {
+   "clip_id": "pro_player_front_18.mp4",
+   "split": "eval",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      261.4765625,
+      80.6147232055664,
+      334.6722412109375,
+      185.77096557617188
+     ],
+     "source": "proposal",
+     "proposal_index": 2,
+     "proposal_conf": 0.8039
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      310.9944152832031,
+      143.32504272460938,
+      370.7199401855469,
+      270.7751159667969
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.3578
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      301.437744140625,
+      145.38064575195312,
+      370.64459228515625,
+      270.42431640625
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.6107
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      328.087890625,
+      117.54830169677734,
+      387.6307373046875,
+      261.9818420410156
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.2505
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      287.30218505859375,
+      35.7978515625,
+      371.47601318359375,
+      202.85911560058594
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.4128
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      288.5155029296875,
+      69.34829711914062,
+      353.6107177734375,
+      206.30029296875
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.4027
+    }
+   ]
+  },
+  {
+   "clip_id": "pro_player_front_20.mp4",
+   "split": "eval",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": true,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      306.5503845214844,
+      60.121681213378906,
+      351.5104675292969,
+      197.51821899414062
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.8439
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      132.0245361328125,
+      29.12896728515625,
+      237.95489501953125,
+      352.89599609375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.881
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      146.149658203125,
+      29.225372314453125,
+      263.00537109375,
+      351.022705078125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8213
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      174.10641479492188,
+      55.78106689453125,
+      327.7021484375,
+      346.07147216796875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.4941
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      200.79202270507812,
+      23.933807373046875,
+      307.4847106933594,
+      328.19903564453125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.4794
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      189.83163452148438,
+      38.90765380859375,
+      304.7392883300781,
+      344.49652099609375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.4566
+    }
+   ]
+  },
+  {
+   "clip_id": "pro_player_front_42.mp4",
+   "split": "dev",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": false,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      286.2239990234375,
+      58.45951843261719,
+      340.1663818359375,
+      168.0095977783203
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.7972
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      290.94952392578125,
+      31.978652954101562,
+      334.1824951171875,
+      160.52459716796875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.6184
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      293.58843994140625,
+      40.45327377319336,
+      333.38421630859375,
+      161.23199462890625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8383
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      295.3671875,
+      29.865585327148438,
+      339.845458984375,
+      157.56179809570312
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8652
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      279.64581298828125,
+      27.517120361328125,
+      346.46514892578125,
+      156.87191772460938
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8982
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      332.7305908203125,
+      49.158599853515625,
+      371.7698974609375,
+      173.47360229492188
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.7845
+    }
+   ]
+  },
+  {
+   "clip_id": "pro_player_front_44.mp4",
+   "split": "dev",
+   "n_frames": 90,
+   "fps": 30.0,
+   "width": 640,
+   "height": 360,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      313.4631652832031,
+      43.5205192565918,
+      357.4546203613281,
+      164.20945739746094
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8737
+    },
+    {
+     "frame": 18,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      301.992431640625,
+      45.290252685546875,
+      350.4666748046875,
+      157.81944274902344
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.7947
+    },
+    {
+     "frame": 35,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      292.37347412109375,
+      57.36161804199219,
+      347.6005859375,
+      162.10488891601562
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8647
+    },
+    {
+     "frame": 53,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      293.17181396484375,
+      32.945220947265625,
+      337.53118896484375,
+      160.07583618164062
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.7831
+    },
+    {
+     "frame": 70,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      296.9932556152344,
+      39.49656677246094,
+      342.0842590332031,
+      158.56448364257812
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8744
+    },
+    {
+     "frame": 88,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      304.3324279785156,
+      38.083648681640625,
+      349.4197692871094,
+      157.550537109375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8841
+    }
+   ]
+  },
+  {
+   "clip_id": "rishi_front_2.mp4",
+   "split": "eval",
+   "n_frames": 4657,
+   "fps": 59.765,
+   "width": 478,
+   "height": 850,
+   "scene_cut": true,
+   "single_shot": false,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      232.8477783203125,
+      302.0087890625,
+      288.3851013183594,
+      484.0465087890625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8626
+    },
+    {
+     "frame": 931,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      81.13115692138672,
+      198.61256408691406,
+      148.69943237304688,
+      397.418701171875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8195
+    },
+    {
+     "frame": 1862,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      220.16180419921875,
+      270.4167175292969,
+      309.3397216796875,
+      427.5520324707031
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9219
+    },
+    {
+     "frame": 2793,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      196.90150451660156,
+      272.9055480957031,
+      252.21478271484375,
+      457.0625915527344
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8993
+    },
+    {
+     "frame": 3724,
+     "batsman_visible": true,
+     "batsman_bbox": null,
+     "source": "proposal_miss"
+    },
+    {
+     "frame": 4655,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      237.9948272705078,
+      355.7414855957031,
+      312.83050537109375,
+      550.0548095703125
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.8998
+    }
+   ]
+  },
+  {
+   "clip_id": "roa_front_1.mp4",
+   "split": "dev",
+   "n_frames": 180,
+   "fps": 59.895,
+   "width": 478,
+   "height": 850,
+   "scene_cut": false,
+   "single_shot": true,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      272.9944152832031,
+      247.69798278808594,
+      344.627685546875,
+      416.1907958984375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.846
+    },
+    {
+     "frame": 36,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      271.25592041015625,
+      248.0356903076172,
+      332.9532165527344,
+      422.8594665527344
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8659
+    },
+    {
+     "frame": 71,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      254.25198364257812,
+      256.77227783203125,
+      317.82470703125,
+      425.41033935546875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.848
+    },
+    {
+     "frame": 107,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      231.82749938964844,
+      279.11114501953125,
+      310.4670715332031,
+      429.0262145996094
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8371
+    },
+    {
+     "frame": 142,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      223.8701171875,
+      274.73858642578125,
+      290.7609558105469,
+      438.7608947753906
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8442
+    },
+    {
+     "frame": 178,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      217.1396484375,
+      262.3011474609375,
+      297.3666076660156,
+      440.347412109375
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8816
+    }
+   ]
+  },
+  {
+   "clip_id": "sanjay_front _1.mp4",
+   "split": "eval",
+   "n_frames": 5999,
+   "fps": 29.995,
+   "width": 1080,
+   "height": 1920,
+   "scene_cut": true,
+   "single_shot": false,
+   "contains_batting": true,
+   "frames": [
+    {
+     "frame": 0,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      506.0960998535156,
+      987.3533935546875,
+      592.1240234375,
+      1278.8994140625
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9018
+    },
+    {
+     "frame": 1199,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      601.8863525390625,
+      952.0186157226562,
+      696.8751220703125,
+      1277.418701171875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.8913
+    },
+    {
+     "frame": 2399,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      385.3731994628906,
+      769.2229614257812,
+      489.1035461425781,
+      1036.9676513671875
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.918
+    },
+    {
+     "frame": 3598,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      532.5175170898438,
+      796.0579833984375,
+      660.59228515625,
+      1085.331298828125
+     ],
+     "source": "proposal",
+     "proposal_index": 0,
+     "proposal_conf": 0.9073
+    },
+    {
+     "frame": 4798,
+     "batsman_visible": true,
+     "batsman_bbox": [
+      394.85906982421875,
+      881.3214111328125,
+      476.2975158691406,
+      1169.8392333984375
+     ],
+     "source": "proposal",
+     "proposal_index": 1,
+     "proposal_conf": 0.8819
+    },
+    {
+     "frame": 5997,
+     "batsman_visible": false,
+     "batsman_bbox": null,
+     "source": "absent"
+    }
+   ]
+  }
+ ]
+}

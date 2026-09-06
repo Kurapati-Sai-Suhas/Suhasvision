@@ -1,0 +1,1097 @@
+{
+ "iou_match": 0.5,
+ "results": {
+  "bytetrack.yaml|dev": {
+   "tracker": "bytetrack",
+   "detector": "yolo11m@640",
+   "split": "dev",
+   "gt_batsman_frames": 144,
+   "batsman_track_recall": 0.9792,
+   "batsman_track_coverage": 0.8958,
+   "observed_id_switches": 7,
+   "id_switch_rate": 0.0598,
+   "switch_opportunities": 117,
+   "mean_tracks_per_clip": 3.33,
+   "mean_track_fragmentation": 0.533,
+   "mean_best_track_coverage_fraction": 0.902,
+   "seconds_per_frame": 0.072,
+   "note": "MOTA/HOTA/IDF1 not computed: sparse single-subject GT cannot support them.",
+   "per_clip": [
+    {
+     "clip_id": "Sai_front_1.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 4,
+     "n_tracks": 3,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "Sai_front_3.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 3,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "beginnerunorthodox1_front_01.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 3,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "instagram1_front_01.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 2,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "instagram2_front_07.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 1,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "instagram2_front_09.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 4,
+     "n_tracks": 3,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_06.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 5,
+     "best_track": 3,
+     "n_tracks": 2,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_14.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 3,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_20.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 5,
+     "best_track": 5,
+     "n_tracks": 3,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_22.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 3,
+     "n_tracks": 5,
+     "switches": 2,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_24.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 5,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_26.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 4,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_28.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 3,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_30.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 1,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_back_25.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 6,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_back_27.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 4,
+     "n_tracks": 8,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_back_29.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 2,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_back_33.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 4,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_front_03.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 5,
+     "best_track": 5,
+     "n_tracks": 3,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_front_08.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 3,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_front_12.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 4,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_front_42.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 5,
+     "n_tracks": 4,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_front_44.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 4,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "roa_front_1.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 1,
+     "switches": 0,
+     "subsampled": false
+    }
+   ]
+  },
+  "bytetrack.yaml|eval": {
+   "tracker": "bytetrack",
+   "detector": "yolo11m@640",
+   "split": "eval",
+   "gt_batsman_frames": 158,
+   "batsman_track_recall": 0.981,
+   "batsman_track_coverage": 0.8165,
+   "observed_id_switches": 19,
+   "id_switch_rate": 0.1484,
+   "switch_opportunities": 128,
+   "mean_tracks_per_clip": 6.3,
+   "mean_track_fragmentation": 2.176,
+   "mean_best_track_coverage_fraction": 0.828,
+   "seconds_per_frame": 0.0595,
+   "note": "MOTA/HOTA/IDF1 not computed: sparse single-subject GT cannot support them.",
+   "per_clip": [
+    {
+     "clip_id": "instagram1_front_03.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 3,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "instagram2_front_01.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 1,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "instagram2_front_03.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 4,
+     "n_tracks": 2,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "instagram2_front_05.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 1,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_front_02.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 1,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_04.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 3,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_08.mp4",
+     "split": "eval",
+     "gt_frames": 5,
+     "any_track": 5,
+     "best_track": 5,
+     "n_tracks": 1,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_10.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 2,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_12.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 3,
+     "n_tracks": 2,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_16.mp4",
+     "split": "eval",
+     "gt_frames": 5,
+     "any_track": 4,
+     "best_track": 2,
+     "n_tracks": 3,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_18.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 3,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_32.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 6,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_back_21.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 2,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_back_23.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 5,
+     "n_tracks": 3,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_back_31.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 5,
+     "best_track": 5,
+     "n_tracks": 4,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_back_36.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 4,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_back_38.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 3,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_back_40.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 5,
+     "n_tracks": 6,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_front_01.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 3,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_front_06.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 4,
+     "n_tracks": 5,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_front_10.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 3,
+     "n_tracks": 4,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_front_14.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 4,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_front_16.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 5,
+     "n_tracks": 5,
+     "switches": 2,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_front_18.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 5,
+     "best_track": 2,
+     "n_tracks": 8,
+     "switches": 2,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_front_20.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 5,
+     "n_tracks": 7,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "rishi_front_2.mp4",
+     "split": "eval",
+     "gt_frames": 5,
+     "any_track": 5,
+     "best_track": 2,
+     "n_tracks": 30,
+     "switches": 3,
+     "subsampled": true
+    },
+    {
+     "clip_id": "sanjay_front _1.mp4",
+     "split": "eval",
+     "gt_frames": 5,
+     "any_track": 5,
+     "best_track": 1,
+     "n_tracks": 54,
+     "switches": 4,
+     "subsampled": true
+    }
+   ]
+  },
+  "botsort.yaml|dev": {
+   "tracker": "botsort",
+   "detector": "yolo11m@640",
+   "split": "dev",
+   "gt_batsman_frames": 144,
+   "batsman_track_recall": 0.9931,
+   "batsman_track_coverage": 0.8819,
+   "observed_id_switches": 10,
+   "id_switch_rate": 0.084,
+   "switch_opportunities": 119,
+   "mean_tracks_per_clip": 3.25,
+   "mean_track_fragmentation": 0.481,
+   "mean_best_track_coverage_fraction": 0.884,
+   "seconds_per_frame": 0.0814,
+   "note": "MOTA/HOTA/IDF1 not computed: sparse single-subject GT cannot support them.",
+   "per_clip": [
+    {
+     "clip_id": "Sai_front_1.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 4,
+     "n_tracks": 3,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "Sai_front_3.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 2,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "beginnerunorthodox1_front_01.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 3,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "instagram1_front_01.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 2,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "instagram2_front_07.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 1,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "instagram2_front_09.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 4,
+     "n_tracks": 3,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_06.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 5,
+     "best_track": 3,
+     "n_tracks": 2,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_14.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 3,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_20.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 3,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_22.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 2,
+     "n_tracks": 6,
+     "switches": 3,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_24.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 5,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_26.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 4,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_28.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 2,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_30.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 1,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_back_25.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 5,
+     "n_tracks": 7,
+     "switches": 2,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_back_27.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 4,
+     "n_tracks": 8,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_back_29.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 2,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_back_33.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 3,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_front_03.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 3,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_front_08.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 3,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_front_12.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 3,
+     "n_tracks": 4,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_front_42.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 3,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_front_44.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 4,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "roa_front_1.mp4",
+     "split": "dev",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 1,
+     "switches": 0,
+     "subsampled": false
+    }
+   ]
+  },
+  "botsort.yaml|eval": {
+   "tracker": "botsort",
+   "detector": "yolo11m@640",
+   "split": "eval",
+   "gt_batsman_frames": 158,
+   "batsman_track_recall": 0.9747,
+   "batsman_track_coverage": 0.8354,
+   "observed_id_switches": 17,
+   "id_switch_rate": 0.1339,
+   "switch_opportunities": 127,
+   "mean_tracks_per_clip": 4.7,
+   "mean_track_fragmentation": 3.42,
+   "mean_best_track_coverage_fraction": 0.855,
+   "seconds_per_frame": 0.0707,
+   "note": "MOTA/HOTA/IDF1 not computed: sparse single-subject GT cannot support them.",
+   "per_clip": [
+    {
+     "clip_id": "instagram1_front_03.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 3,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "instagram2_front_01.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 1,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "instagram2_front_03.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 1,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "instagram2_front_05.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 1,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_front_02.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 1,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_04.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 5,
+     "n_tracks": 2,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_08.mp4",
+     "split": "eval",
+     "gt_frames": 5,
+     "any_track": 5,
+     "best_track": 5,
+     "n_tracks": 1,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_10.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 2,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_12.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 3,
+     "n_tracks": 2,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_16.mp4",
+     "split": "eval",
+     "gt_frames": 5,
+     "any_track": 4,
+     "best_track": 2,
+     "n_tracks": 3,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_18.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 3,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "kohli_side_32.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 5,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_back_21.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 2,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_back_23.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 5,
+     "n_tracks": 4,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_back_31.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 5,
+     "best_track": 5,
+     "n_tracks": 4,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_back_36.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 4,
+     "n_tracks": 5,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_back_38.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 4,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_back_40.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 5,
+     "n_tracks": 4,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_front_01.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 3,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_front_06.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 4,
+     "n_tracks": 5,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_front_10.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 6,
+     "n_tracks": 3,
+     "switches": 0,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_front_14.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 5,
+     "n_tracks": 5,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_front_16.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 5,
+     "n_tracks": 5,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_front_18.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 4,
+     "best_track": 3,
+     "n_tracks": 7,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "pro_player_front_20.mp4",
+     "split": "eval",
+     "gt_frames": 6,
+     "any_track": 6,
+     "best_track": 5,
+     "n_tracks": 7,
+     "switches": 1,
+     "subsampled": false
+    },
+    {
+     "clip_id": "rishi_front_2.mp4",
+     "split": "eval",
+     "gt_frames": 5,
+     "any_track": 5,
+     "best_track": 1,
+     "n_tracks": 23,
+     "switches": 4,
+     "subsampled": true
+    },
+    {
+     "clip_id": "sanjay_front _1.mp4",
+     "split": "eval",
+     "gt_frames": 5,
+     "any_track": 5,
+     "best_track": 3,
+     "n_tracks": 21,
+     "switches": 2,
+     "subsampled": true
+    }
+   ]
+  }
+ }
+}

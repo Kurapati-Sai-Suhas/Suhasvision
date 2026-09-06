@@ -1,0 +1,413 @@
+{
+ "summary": {
+  "n_clips": 31,
+  "all": {
+   "disagreement": {
+    "n": 31,
+    "mean": 29.58,
+    "median": 17
+   },
+   "prominence_global": {
+    "n": 31,
+    "mean": 5.66,
+    "median": 4.659
+   },
+   "prominence_batsman": {
+    "n": 31,
+    "mean": 3.14,
+    "median": 3.031
+   }
+  },
+  "multi_person": {
+   "n": 24,
+   "disagreement": {
+    "n": 24,
+    "mean": 31.08,
+    "median": 17
+   }
+  },
+  "single_person": {
+   "n": 7,
+   "disagreement": {
+    "n": 7,
+    "mean": 24.43,
+    "median": 17
+   }
+  },
+  "note": "Localization ACCURACY is not computed: this benchmark has no annotated shot boundaries or contact frames. Disagreement and peak prominence are computable; which peak is correct is not."
+ },
+ "per_clip": [
+  {
+   "clip_id": "Sai_front_3.mp4",
+   "split": "dev",
+   "n_tracks": 3,
+   "multi_person": true,
+   "peak_global": 51,
+   "peak_batsman": 18,
+   "disagreement_frames": 33,
+   "prominence_global": 2.141,
+   "prominence_batsman": 3.031,
+   "batsman_coverage": 1.0
+  },
+  {
+   "clip_id": "instagram2_front_01.mp4",
+   "split": "eval",
+   "n_tracks": 1,
+   "multi_person": false,
+   "peak_global": 57,
+   "peak_batsman": 57,
+   "disagreement_frames": 0,
+   "prominence_global": 9.28,
+   "prominence_batsman": 2.262,
+   "batsman_coverage": 1.0
+  },
+  {
+   "clip_id": "instagram2_front_05.mp4",
+   "split": "eval",
+   "n_tracks": 1,
+   "multi_person": false,
+   "peak_global": 48,
+   "peak_batsman": 48,
+   "disagreement_frames": 0,
+   "prominence_global": 14.466,
+   "prominence_batsman": 2.31,
+   "batsman_coverage": 1.0
+  },
+  {
+   "clip_id": "instagram2_front_07.mp4",
+   "split": "dev",
+   "n_tracks": 1,
+   "multi_person": false,
+   "peak_global": 42,
+   "peak_batsman": 43,
+   "disagreement_frames": 1,
+   "prominence_global": 10.338,
+   "prominence_batsman": 1.799,
+   "batsman_coverage": 1.0
+  },
+  {
+   "clip_id": "kohli_front_02.mp4",
+   "split": "eval",
+   "n_tracks": 1,
+   "multi_person": false,
+   "peak_global": 90,
+   "peak_batsman": 111,
+   "disagreement_frames": 21,
+   "prominence_global": 5.832,
+   "prominence_batsman": 2.152,
+   "batsman_coverage": 1.0
+  },
+  {
+   "clip_id": "kohli_side_04.mp4",
+   "split": "eval",
+   "n_tracks": 3,
+   "multi_person": true,
+   "peak_global": 60,
+   "peak_batsman": 6,
+   "disagreement_frames": 54,
+   "prominence_global": 3.745,
+   "prominence_batsman": 2.047,
+   "batsman_coverage": 0.989
+  },
+  {
+   "clip_id": "kohli_side_08.mp4",
+   "split": "eval",
+   "n_tracks": 1,
+   "multi_person": false,
+   "peak_global": 60,
+   "peak_batsman": 30,
+   "disagreement_frames": 30,
+   "prominence_global": 3.229,
+   "prominence_batsman": 1.784,
+   "batsman_coverage": 0.715
+  },
+  {
+   "clip_id": "kohli_side_10.mp4",
+   "split": "eval",
+   "n_tracks": 2,
+   "multi_person": true,
+   "peak_global": 149,
+   "peak_batsman": 90,
+   "disagreement_frames": 59,
+   "prominence_global": 5.332,
+   "prominence_batsman": 2.557,
+   "batsman_coverage": 1.0
+  },
+  {
+   "clip_id": "kohli_side_18.mp4",
+   "split": "eval",
+   "n_tracks": 3,
+   "multi_person": true,
+   "peak_global": 31,
+   "peak_batsman": 32,
+   "disagreement_frames": 1,
+   "prominence_global": 1.985,
+   "prominence_batsman": 3.074,
+   "batsman_coverage": 1.0
+  },
+  {
+   "clip_id": "kohli_side_20.mp4",
+   "split": "dev",
+   "n_tracks": 3,
+   "multi_person": true,
+   "peak_global": 149,
+   "peak_batsman": 48,
+   "disagreement_frames": 101,
+   "prominence_global": 2.931,
+   "prominence_batsman": 2.531,
+   "batsman_coverage": 0.994
+  },
+  {
+   "clip_id": "kohli_side_24.mp4",
+   "split": "dev",
+   "n_tracks": 5,
+   "multi_person": true,
+   "peak_global": 46,
+   "peak_batsman": 63,
+   "disagreement_frames": 17,
+   "prominence_global": 3.751,
+   "prominence_batsman": 1.968,
+   "batsman_coverage": 0.983
+  },
+  {
+   "clip_id": "kohli_side_26.mp4",
+   "split": "dev",
+   "n_tracks": 4,
+   "multi_person": true,
+   "peak_global": 178,
+   "peak_batsman": 1,
+   "disagreement_frames": 177,
+   "prominence_global": 3.586,
+   "prominence_batsman": 2.14,
+   "batsman_coverage": 1.0
+  },
+  {
+   "clip_id": "kohli_side_28.mp4",
+   "split": "dev",
+   "n_tracks": 3,
+   "multi_person": true,
+   "peak_global": 28,
+   "peak_batsman": 65,
+   "disagreement_frames": 37,
+   "prominence_global": 5.087,
+   "prominence_batsman": 2.707,
+   "batsman_coverage": 1.0
+  },
+  {
+   "clip_id": "kohli_side_30.mp4",
+   "split": "dev",
+   "n_tracks": 1,
+   "multi_person": false,
+   "peak_global": 28,
+   "peak_batsman": 45,
+   "disagreement_frames": 17,
+   "prominence_global": 4.204,
+   "prominence_batsman": 3.355,
+   "batsman_coverage": 0.983
+  },
+  {
+   "clip_id": "kohli_side_32.mp4",
+   "split": "eval",
+   "n_tracks": 6,
+   "multi_person": true,
+   "peak_global": 28,
+   "peak_batsman": 67,
+   "disagreement_frames": 39,
+   "prominence_global": 4.659,
+   "prominence_batsman": 3.401,
+   "batsman_coverage": 1.0
+  },
+  {
+   "clip_id": "pro_player_back_21.mp4",
+   "split": "eval",
+   "n_tracks": 2,
+   "multi_person": true,
+   "peak_global": 37,
+   "peak_batsman": 10,
+   "disagreement_frames": 27,
+   "prominence_global": 3.864,
+   "prominence_batsman": 2.788,
+   "batsman_coverage": 1.0
+  },
+  {
+   "clip_id": "pro_player_back_23.mp4",
+   "split": "eval",
+   "n_tracks": 3,
+   "multi_person": true,
+   "peak_global": 49,
+   "peak_batsman": 32,
+   "disagreement_frames": 17,
+   "prominence_global": 1.886,
+   "prominence_batsman": 5.076,
+   "batsman_coverage": 0.944
+  },
+  {
+   "clip_id": "pro_player_back_25.mp4",
+   "split": "dev",
+   "n_tracks": 6,
+   "multi_person": true,
+   "peak_global": 16,
+   "peak_batsman": 16,
+   "disagreement_frames": 0,
+   "prominence_global": 10.85,
+   "prominence_batsman": 2.855,
+   "batsman_coverage": 0.989
+  },
+  {
+   "clip_id": "pro_player_back_29.mp4",
+   "split": "dev",
+   "n_tracks": 2,
+   "multi_person": true,
+   "peak_global": 70,
+   "peak_batsman": 74,
+   "disagreement_frames": 4,
+   "prominence_global": 1.694,
+   "prominence_batsman": 3.505,
+   "batsman_coverage": 1.0
+  },
+  {
+   "clip_id": "pro_player_back_31.mp4",
+   "split": "eval",
+   "n_tracks": 4,
+   "multi_person": true,
+   "peak_global": 50,
+   "peak_batsman": 54,
+   "disagreement_frames": 4,
+   "prominence_global": 1.866,
+   "prominence_batsman": 3.551,
+   "batsman_coverage": 1.0
+  },
+  {
+   "clip_id": "pro_player_back_33.mp4",
+   "split": "dev",
+   "n_tracks": 4,
+   "multi_person": true,
+   "peak_global": 12,
+   "peak_batsman": 12,
+   "disagreement_frames": 0,
+   "prominence_global": 8.114,
+   "prominence_batsman": 3.816,
+   "batsman_coverage": 1.0
+  },
+  {
+   "clip_id": "pro_player_back_36.mp4",
+   "split": "eval",
+   "n_tracks": 4,
+   "multi_person": true,
+   "peak_global": 59,
+   "peak_batsman": 59,
+   "disagreement_frames": 0,
+   "prominence_global": 16.101,
+   "prominence_batsman": 4.544,
+   "batsman_coverage": 1.0
+  },
+  {
+   "clip_id": "pro_player_back_38.mp4",
+   "split": "eval",
+   "n_tracks": 3,
+   "multi_person": true,
+   "peak_global": 16,
+   "peak_batsman": 26,
+   "disagreement_frames": 10,
+   "prominence_global": 2.908,
+   "prominence_batsman": 3.049,
+   "batsman_coverage": 1.0
+  },
+  {
+   "clip_id": "pro_player_back_40.mp4",
+   "split": "eval",
+   "n_tracks": 6,
+   "multi_person": true,
+   "peak_global": 79,
+   "peak_batsman": 57,
+   "disagreement_frames": 22,
+   "prominence_global": 6.357,
+   "prominence_batsman": 2.623,
+   "batsman_coverage": 0.876
+  },
+  {
+   "clip_id": "pro_player_front_01.mp4",
+   "split": "eval",
+   "n_tracks": 3,
+   "multi_person": true,
+   "peak_global": 71,
+   "peak_batsman": 71,
+   "disagreement_frames": 0,
+   "prominence_global": 8.151,
+   "prominence_batsman": 4.506,
+   "batsman_coverage": 1.0
+  },
+  {
+   "clip_id": "pro_player_front_03.mp4",
+   "split": "dev",
+   "n_tracks": 3,
+   "multi_person": true,
+   "peak_global": 88,
+   "peak_batsman": 15,
+   "disagreement_frames": 73,
+   "prominence_global": 8.301,
+   "prominence_batsman": 5.529,
+   "batsman_coverage": 1.0
+  },
+  {
+   "clip_id": "pro_player_front_06.mp4",
+   "split": "eval",
+   "n_tracks": 5,
+   "multi_person": true,
+   "peak_global": 66,
+   "peak_batsman": 79,
+   "disagreement_frames": 13,
+   "prominence_global": 5.03,
+   "prominence_batsman": 2.824,
+   "batsman_coverage": 0.854
+  },
+  {
+   "clip_id": "pro_player_front_12.mp4",
+   "split": "dev",
+   "n_tracks": 4,
+   "multi_person": true,
+   "peak_global": 39,
+   "peak_batsman": 39,
+   "disagreement_frames": 0,
+   "prominence_global": 4.322,
+   "prominence_batsman": 5.086,
+   "batsman_coverage": 1.0
+  },
+  {
+   "clip_id": "pro_player_front_14.mp4",
+   "split": "eval",
+   "n_tracks": 4,
+   "multi_person": true,
+   "peak_global": 16,
+   "peak_batsman": 74,
+   "disagreement_frames": 58,
+   "prominence_global": 5.227,
+   "prominence_batsman": 3.665,
+   "batsman_coverage": 0.989
+  },
+  {
+   "clip_id": "pro_player_front_20.mp4",
+   "split": "eval",
+   "n_tracks": 7,
+   "multi_person": true,
+   "peak_global": 1,
+   "peak_batsman": 1,
+   "disagreement_frames": 0,
+   "prominence_global": 8.319,
+   "prominence_batsman": 3.253,
+   "batsman_coverage": 1.0
+  },
+  {
+   "clip_id": "roa_front_1.mp4",
+   "split": "dev",
+   "n_tracks": 1,
+   "multi_person": false,
+   "peak_global": 26,
+   "peak_batsman": 128,
+   "disagreement_frames": 102,
+   "prominence_global": 1.967,
+   "prominence_batsman": 3.406,
+   "batsman_coverage": 1.0
+  }
+ ]
+}

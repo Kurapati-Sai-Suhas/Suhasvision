@@ -1,0 +1,12 @@
+{
+ "iou_match": 0.5,
+ "proposal_detector": "yolo11x@1280",
+ "results": {
+  "rtmdet-nano@640|dev": {
+   "error": "HTTPError: HTTP Error 404: Not Found"
+  },
+  "rtmdet-nano@640|eval": {
+   "error": "HTTPError: HTTP Error 404: Not Found"
+  }
+ }
+}
