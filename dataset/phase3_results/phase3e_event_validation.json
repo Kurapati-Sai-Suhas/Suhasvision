@@ -1,0 +1,1878 @@
+{
+ "regions": {
+  "R0_l3_only": {
+   "n_valid": 28,
+   "containment": 0.1786,
+   "mean_width": 31.6,
+   "median_width": 17.5,
+   "mean_iou_with_gt": 0.2164,
+   "width_ratio_vs_gt": 1.39,
+   "detail": [
+    {
+     "clip_id": "beginnerunorthodox1_front_01.mp4",
+     "region": [
+      0,
+      89
+     ],
+     "gt": [
+      48,
+      70
+     ],
+     "contains": true,
+     "width": 89
+    },
+    {
+     "clip_id": "instagram1_front_01.mp4",
+     "region": [
+      49,
+      61
+     ],
+     "gt": [
+      5,
+      28
+     ],
+     "contains": false,
+     "width": 12
+    },
+    {
+     "clip_id": "instagram2_front_03.mp4",
+     "region": [
+      0,
+      89
+     ],
+     "gt": [
+      26,
+      45
+     ],
+     "contains": true,
+     "width": 89
+    },
+    {
+     "clip_id": "instagram2_front_05.mp4",
+     "region": [
+      43,
+      55
+     ],
+     "gt": [
+      38,
+      58
+     ],
+     "contains": false,
+     "width": 12
+    },
+    {
+     "clip_id": "instagram2_front_07.mp4",
+     "region": [
+      37,
+      49
+     ],
+     "gt": [
+      34,
+      52
+     ],
+     "contains": false,
+     "width": 12
+    },
+    {
+     "clip_id": "kohli_side_08.mp4",
+     "region": [
+      78,
+      108
+     ],
+     "gt": [
+      20,
+      45
+     ],
+     "contains": false,
+     "width": 30
+    },
+    {
+     "clip_id": "kohli_side_10.mp4",
+     "region": [
+      88,
+      118
+     ],
+     "gt": [
+      78,
+      102
+     ],
+     "contains": false,
+     "width": 30
+    },
+    {
+     "clip_id": "kohli_side_14.mp4",
+     "region": [
+      76,
+      88
+     ],
+     "gt": [
+      43,
+      62
+     ],
+     "contains": false,
+     "width": 12
+    },
+    {
+     "clip_id": "kohli_side_16.mp4",
+     "region": [
+      0,
+      179
+     ],
+     "gt": [
+      0,
+      20
+     ],
+     "contains": true,
+     "width": 179
+    },
+    {
+     "clip_id": "kohli_side_20.mp4",
+     "region": [
+      76,
+      106
+     ],
+     "gt": [
+      35,
+      58
+     ],
+     "contains": false,
+     "width": 30
+    },
+    {
+     "clip_id": "kohli_side_24.mp4",
+     "region": [
+      34,
+      64
+     ],
+     "gt": [
+      42,
+      62
+     ],
+     "contains": true,
+     "width": 30
+    },
+    {
+     "clip_id": "kohli_side_28.mp4",
+     "region": [
+      1,
+      31
+     ],
+     "gt": [
+      52,
+      76
+     ],
+     "contains": false,
+     "width": 30
+    },
+    {
+     "clip_id": "kohli_side_32.mp4",
+     "region": [
+      46,
+      76
+     ],
+     "gt": [
+      55,
+      78
+     ],
+     "contains": false,
+     "width": 30
+    },
+    {
+     "clip_id": "pro_player_back_23.mp4",
+     "region": [
+      46,
+      63
+     ],
+     "gt": [
+      18,
+      45
+     ],
+     "contains": false,
+     "width": 17
+    },
+    {
+     "clip_id": "pro_player_back_25.mp4",
+     "region": [
+      11,
+      23
+     ],
+     "gt": [
+      48,
+      70
+     ],
+     "contains": false,
+     "width": 12
+    },
+    {
+     "clip_id": "pro_player_back_27.mp4",
+     "region": [
+      23,
+      35
+     ],
+     "gt": [
+      50,
+      78
+     ],
+     "contains": false,
+     "width": 12
+    },
+    {
+     "clip_id": "pro_player_back_31.mp4",
+     "region": [
+      44,
+      65
+     ],
+     "gt": [
+      42,
+      68
+     ],
+     "contains": false,
+     "width": 21
+    },
+    {
+     "clip_id": "pro_player_back_33.mp4",
+     "region": [
+      7,
+      19
+     ],
+     "gt": [
+      20,
+      45
+     ],
+     "contains": false,
+     "width": 12
+    },
+    {
+     "clip_id": "pro_player_back_38.mp4",
+     "region": [
+      15,
+      41
+     ],
+     "gt": [
+      13,
+      38
+     ],
+     "contains": false,
+     "width": 26
+    },
+    {
+     "clip_id": "pro_player_front_01.mp4",
+     "region": [
+      66,
+      78
+     ],
+     "gt": [
+      28,
+      48
+     ],
+     "contains": false,
+     "width": 12
+    },
+    {
+     "clip_id": "pro_player_front_03.mp4",
+     "region": [
+      10,
+      22
+     ],
+     "gt": [
+      55,
+      78
+     ],
+     "contains": false,
+     "width": 12
+    },
+    {
+     "clip_id": "pro_player_front_06.mp4",
+     "region": [
+      0,
+      89
+     ],
+     "gt": [
+      38,
+      58
+     ],
+     "contains": true,
+     "width": 89
+    },
+    {
+     "clip_id": "pro_player_front_10.mp4",
+     "region": [
+      0,
+      12
+     ],
+     "gt": [
+      39,
+      58
+     ],
+     "contains": false,
+     "width": 12
+    },
+    {
+     "clip_id": "pro_player_front_12.mp4",
+     "region": [
+      20,
+      42
+     ],
+     "gt": [
+      30,
+      50
+     ],
+     "contains": false,
+     "width": 22
+    },
+    {
+     "clip_id": "pro_player_front_14.mp4",
+     "region": [
+      26,
+      38
+     ],
+     "gt": [
+      5,
+      28
+     ],
+     "contains": false,
+     "width": 12
+    },
+    {
+     "clip_id": "pro_player_front_16.mp4",
+     "region": [
+      67,
+      79
+     ],
+     "gt": [
+      15,
+      35
+     ],
+     "contains": false,
+     "width": 12
+    },
+    {
+     "clip_id": "pro_player_front_44.mp4",
+     "region": [
+      0,
+      12
+     ],
+     "gt": [
+      23,
+      45
+     ],
+     "contains": false,
+     "width": 12
+    },
+    {
+     "clip_id": "roa_front_1.mp4",
+     "region": [
+      102,
+      120
+     ],
+     "gt": [
+      110,
+      145
+     ],
+     "contains": false,
+     "width": 18
+    }
+   ]
+  },
+  "R1_l3_padded": {
+   "n_valid": 28,
+   "containment": 0.4286,
+   "mean_width": 50.6,
+   "median_width": 41.5,
+   "mean_iou_with_gt": 0.2063,
+   "width_ratio_vs_gt": 2.23,
+   "detail": [
+    {
+     "clip_id": "beginnerunorthodox1_front_01.mp4",
+     "region": [
+      0,
+      89
+     ],
+     "gt": [
+      48,
+      70
+     ],
+     "contains": true,
+     "width": 89
+    },
+    {
+     "clip_id": "instagram1_front_01.mp4",
+     "region": [
+      37,
+      73
+     ],
+     "gt": [
+      5,
+      28
+     ],
+     "contains": false,
+     "width": 36
+    },
+    {
+     "clip_id": "instagram2_front_03.mp4",
+     "region": [
+      0,
+      89
+     ],
+     "gt": [
+      26,
+      45
+     ],
+     "contains": true,
+     "width": 89
+    },
+    {
+     "clip_id": "instagram2_front_05.mp4",
+     "region": [
+      31,
+      67
+     ],
+     "gt": [
+      38,
+      58
+     ],
+     "contains": true,
+     "width": 36
+    },
+    {
+     "clip_id": "instagram2_front_07.mp4",
+     "region": [
+      25,
+      61
+     ],
+     "gt": [
+      34,
+      52
+     ],
+     "contains": true,
+     "width": 36
+    },
+    {
+     "clip_id": "kohli_side_08.mp4",
+     "region": [
+      66,
+      120
+     ],
+     "gt": [
+      20,
+      45
+     ],
+     "contains": false,
+     "width": 54
+    },
+    {
+     "clip_id": "kohli_side_10.mp4",
+     "region": [
+      76,
+      130
+     ],
+     "gt": [
+      78,
+      102
+     ],
+     "contains": true,
+     "width": 54
+    },
+    {
+     "clip_id": "kohli_side_14.mp4",
+     "region": [
+      64,
+      100
+     ],
+     "gt": [
+      43,
+      62
+     ],
+     "contains": false,
+     "width": 36
+    },
+    {
+     "clip_id": "kohli_side_16.mp4",
+     "region": [
+      0,
+      179
+     ],
+     "gt": [
+      0,
+      20
+     ],
+     "contains": true,
+     "width": 179
+    },
+    {
+     "clip_id": "kohli_side_20.mp4",
+     "region": [
+      64,
+      118
+     ],
+     "gt": [
+      35,
+      58
+     ],
+     "contains": false,
+     "width": 54
+    },
+    {
+     "clip_id": "kohli_side_24.mp4",
+     "region": [
+      22,
+      76
+     ],
+     "gt": [
+      42,
+      62
+     ],
+     "contains": true,
+     "width": 54
+    },
+    {
+     "clip_id": "kohli_side_28.mp4",
+     "region": [
+      0,
+      43
+     ],
+     "gt": [
+      52,
+      76
+     ],
+     "contains": false,
+     "width": 43
+    },
+    {
+     "clip_id": "kohli_side_32.mp4",
+     "region": [
+      34,
+      88
+     ],
+     "gt": [
+      55,
+      78
+     ],
+     "contains": true,
+     "width": 54
+    },
+    {
+     "clip_id": "pro_player_back_23.mp4",
+     "region": [
+      34,
+      75
+     ],
+     "gt": [
+      18,
+      45
+     ],
+     "contains": false,
+     "width": 41
+    },
+    {
+     "clip_id": "pro_player_back_25.mp4",
+     "region": [
+      0,
+      35
+     ],
+     "gt": [
+      48,
+      70
+     ],
+     "contains": false,
+     "width": 35
+    },
+    {
+     "clip_id": "pro_player_back_27.mp4",
+     "region": [
+      11,
+      47
+     ],
+     "gt": [
+      50,
+      78
+     ],
+     "contains": false,
+     "width": 36
+    },
+    {
+     "clip_id": "pro_player_back_31.mp4",
+     "region": [
+      32,
+      77
+     ],
+     "gt": [
+      42,
+      68
+     ],
+     "contains": true,
+     "width": 45
+    },
+    {
+     "clip_id": "pro_player_back_33.mp4",
+     "region": [
+      0,
+      31
+     ],
+     "gt": [
+      20,
+      45
+     ],
+     "contains": false,
+     "width": 31
+    },
+    {
+     "clip_id": "pro_player_back_38.mp4",
+     "region": [
+      3,
+      53
+     ],
+     "gt": [
+      13,
+      38
+     ],
+     "contains": true,
+     "width": 50
+    },
+    {
+     "clip_id": "pro_player_front_01.mp4",
+     "region": [
+      54,
+      89
+     ],
+     "gt": [
+      28,
+      48
+     ],
+     "contains": false,
+     "width": 35
+    },
+    {
+     "clip_id": "pro_player_front_03.mp4",
+     "region": [
+      0,
+      34
+     ],
+     "gt": [
+      55,
+      78
+     ],
+     "contains": false,
+     "width": 34
+    },
+    {
+     "clip_id": "pro_player_front_06.mp4",
+     "region": [
+      0,
+      89
+     ],
+     "gt": [
+      38,
+      58
+     ],
+     "contains": true,
+     "width": 89
+    },
+    {
+     "clip_id": "pro_player_front_10.mp4",
+     "region": [
+      0,
+      24
+     ],
+     "gt": [
+      39,
+      58
+     ],
+     "contains": false,
+     "width": 24
+    },
+    {
+     "clip_id": "pro_player_front_12.mp4",
+     "region": [
+      8,
+      54
+     ],
+     "gt": [
+      30,
+      50
+     ],
+     "contains": true,
+     "width": 46
+    },
+    {
+     "clip_id": "pro_player_front_14.mp4",
+     "region": [
+      14,
+      50
+     ],
+     "gt": [
+      5,
+      28
+     ],
+     "contains": false,
+     "width": 36
+    },
+    {
+     "clip_id": "pro_player_front_16.mp4",
+     "region": [
+      55,
+      89
+     ],
+     "gt": [
+      15,
+      35
+     ],
+     "contains": false,
+     "width": 34
+    },
+    {
+     "clip_id": "pro_player_front_44.mp4",
+     "region": [
+      0,
+      24
+     ],
+     "gt": [
+      23,
+      45
+     ],
+     "contains": false,
+     "width": 24
+    },
+    {
+     "clip_id": "roa_front_1.mp4",
+     "region": [
+      90,
+      132
+     ],
+     "gt": [
+      110,
+      145
+     ],
+     "contains": false,
+     "width": 42
+    }
+   ]
+  },
+  "R2_l3_union_contact": {
+   "n_valid": 28,
+   "containment": 0.9286,
+   "mean_width": 48.2,
+   "median_width": 42.5,
+   "mean_iou_with_gt": 0.5212,
+   "width_ratio_vs_gt": 2.12,
+   "detail": [
+    {
+     "clip_id": "beginnerunorthodox1_front_01.mp4",
+     "region": [
+      37,
+      69
+     ],
+     "gt": [
+      48,
+      70
+     ],
+     "contains": false,
+     "width": 32
+    },
+    {
+     "clip_id": "instagram1_front_01.mp4",
+     "region": [
+      4,
+      61
+     ],
+     "gt": [
+      5,
+      28
+     ],
+     "contains": true,
+     "width": 57
+    },
+    {
+     "clip_id": "instagram2_front_03.mp4",
+     "region": [
+      19,
+      51
+     ],
+     "gt": [
+      26,
+      45
+     ],
+     "contains": true,
+     "width": 32
+    },
+    {
+     "clip_id": "instagram2_front_05.mp4",
+     "region": [
+      33,
+      65
+     ],
+     "gt": [
+      38,
+      58
+     ],
+     "contains": true,
+     "width": 32
+    },
+    {
+     "clip_id": "instagram2_front_07.mp4",
+     "region": [
+      27,
+      59
+     ],
+     "gt": [
+      34,
+      52
+     ],
+     "contains": true,
+     "width": 32
+    },
+    {
+     "clip_id": "kohli_side_08.mp4",
+     "region": [
+      15,
+      108
+     ],
+     "gt": [
+      20,
+      45
+     ],
+     "contains": true,
+     "width": 93
+    },
+    {
+     "clip_id": "kohli_side_10.mp4",
+     "region": [
+      74,
+      118
+     ],
+     "gt": [
+      78,
+      102
+     ],
+     "contains": true,
+     "width": 44
+    },
+    {
+     "clip_id": "kohli_side_14.mp4",
+     "region": [
+      36,
+      88
+     ],
+     "gt": [
+      43,
+      62
+     ],
+     "contains": true,
+     "width": 52
+    },
+    {
+     "clip_id": "kohli_side_16.mp4",
+     "region": [
+      0,
+      24
+     ],
+     "gt": [
+      0,
+      20
+     ],
+     "contains": true,
+     "width": 24
+    },
+    {
+     "clip_id": "kohli_side_20.mp4",
+     "region": [
+      31,
+      106
+     ],
+     "gt": [
+      35,
+      58
+     ],
+     "contains": true,
+     "width": 75
+    },
+    {
+     "clip_id": "kohli_side_24.mp4",
+     "region": [
+      34,
+      68
+     ],
+     "gt": [
+      42,
+      62
+     ],
+     "contains": true,
+     "width": 34
+    },
+    {
+     "clip_id": "kohli_side_28.mp4",
+     "region": [
+      1,
+      80
+     ],
+     "gt": [
+      52,
+      76
+     ],
+     "contains": true,
+     "width": 79
+    },
+    {
+     "clip_id": "kohli_side_32.mp4",
+     "region": [
+      46,
+      83
+     ],
+     "gt": [
+      55,
+      78
+     ],
+     "contains": true,
+     "width": 37
+    },
+    {
+     "clip_id": "pro_player_back_23.mp4",
+     "region": [
+      16,
+      63
+     ],
+     "gt": [
+      18,
+      45
+     ],
+     "contains": true,
+     "width": 47
+    },
+    {
+     "clip_id": "pro_player_back_25.mp4",
+     "region": [
+      11,
+      75
+     ],
+     "gt": [
+      48,
+      70
+     ],
+     "contains": true,
+     "width": 64
+    },
+    {
+     "clip_id": "pro_player_back_27.mp4",
+     "region": [
+      23,
+      79
+     ],
+     "gt": [
+      50,
+      78
+     ],
+     "contains": true,
+     "width": 56
+    },
+    {
+     "clip_id": "pro_player_back_31.mp4",
+     "region": [
+      38,
+      70
+     ],
+     "gt": [
+      42,
+      68
+     ],
+     "contains": true,
+     "width": 32
+    },
+    {
+     "clip_id": "pro_player_back_33.mp4",
+     "region": [
+      7,
+      47
+     ],
+     "gt": [
+      20,
+      45
+     ],
+     "contains": true,
+     "width": 40
+    },
+    {
+     "clip_id": "pro_player_back_38.mp4",
+     "region": [
+      9,
+      41
+     ],
+     "gt": [
+      13,
+      38
+     ],
+     "contains": true,
+     "width": 32
+    },
+    {
+     "clip_id": "pro_player_front_01.mp4",
+     "region": [
+      23,
+      78
+     ],
+     "gt": [
+      28,
+      48
+     ],
+     "contains": true,
+     "width": 55
+    },
+    {
+     "clip_id": "pro_player_front_03.mp4",
+     "region": [
+      10,
+      83
+     ],
+     "gt": [
+      55,
+      78
+     ],
+     "contains": true,
+     "width": 73
+    },
+    {
+     "clip_id": "pro_player_front_06.mp4",
+     "region": [
+      31,
+      63
+     ],
+     "gt": [
+      38,
+      58
+     ],
+     "contains": true,
+     "width": 32
+    },
+    {
+     "clip_id": "pro_player_front_10.mp4",
+     "region": [
+      0,
+      64
+     ],
+     "gt": [
+      39,
+      58
+     ],
+     "contains": true,
+     "width": 64
+    },
+    {
+     "clip_id": "pro_player_front_12.mp4",
+     "region": [
+      20,
+      55
+     ],
+     "gt": [
+      30,
+      50
+     ],
+     "contains": true,
+     "width": 35
+    },
+    {
+     "clip_id": "pro_player_front_14.mp4",
+     "region": [
+      1,
+      38
+     ],
+     "gt": [
+      5,
+      28
+     ],
+     "contains": true,
+     "width": 37
+    },
+    {
+     "clip_id": "pro_player_front_16.mp4",
+     "region": [
+      8,
+      79
+     ],
+     "gt": [
+      15,
+      35
+     ],
+     "contains": true,
+     "width": 71
+    },
+    {
+     "clip_id": "pro_player_front_44.mp4",
+     "region": [
+      0,
+      48
+     ],
+     "gt": [
+      23,
+      45
+     ],
+     "contains": true,
+     "width": 48
+    },
+    {
+     "clip_id": "roa_front_1.mp4",
+     "region": [
+      102,
+      143
+     ],
+     "gt": [
+      110,
+      145
+     ],
+     "contains": false,
+     "width": 41
+    }
+   ]
+  },
+  "R3_contact_centred": {
+   "n_valid": 28,
+   "containment": 1.0,
+   "mean_width": 35.6,
+   "median_width": 36.0,
+   "mean_iou_with_gt": 0.6382,
+   "width_ratio_vs_gt": 1.57,
+   "detail": [
+    {
+     "clip_id": "beginnerunorthodox1_front_01.mp4",
+     "region": [
+      35,
+      71
+     ],
+     "gt": [
+      48,
+      70
+     ],
+     "contains": true,
+     "width": 36
+    },
+    {
+     "clip_id": "instagram1_front_01.mp4",
+     "region": [
+      2,
+      38
+     ],
+     "gt": [
+      5,
+      28
+     ],
+     "contains": true,
+     "width": 36
+    },
+    {
+     "clip_id": "instagram2_front_03.mp4",
+     "region": [
+      17,
+      53
+     ],
+     "gt": [
+      26,
+      45
+     ],
+     "contains": true,
+     "width": 36
+    },
+    {
+     "clip_id": "instagram2_front_05.mp4",
+     "region": [
+      31,
+      67
+     ],
+     "gt": [
+      38,
+      58
+     ],
+     "contains": true,
+     "width": 36
+    },
+    {
+     "clip_id": "instagram2_front_07.mp4",
+     "region": [
+      25,
+      61
+     ],
+     "gt": [
+      34,
+      52
+     ],
+     "contains": true,
+     "width": 36
+    },
+    {
+     "clip_id": "kohli_side_08.mp4",
+     "region": [
+      13,
+      49
+     ],
+     "gt": [
+      20,
+      45
+     ],
+     "contains": true,
+     "width": 36
+    },
+    {
+     "clip_id": "kohli_side_10.mp4",
+     "region": [
+      72,
+      108
+     ],
+     "gt": [
+      78,
+      102
+     ],
+     "contains": true,
+     "width": 36
+    },
+    {
+     "clip_id": "kohli_side_14.mp4",
+     "region": [
+      34,
+      70
+     ],
+     "gt": [
+      43,
+      62
+     ],
+     "contains": true,
+     "width": 36
+    },
+    {
+     "clip_id": "kohli_side_16.mp4",
+     "region": [
+      0,
+      26
+     ],
+     "gt": [
+      0,
+      20
+     ],
+     "contains": true,
+     "width": 26
+    },
+    {
+     "clip_id": "kohli_side_20.mp4",
+     "region": [
+      29,
+      65
+     ],
+     "gt": [
+      35,
+      58
+     ],
+     "contains": true,
+     "width": 36
+    },
+    {
+     "clip_id": "kohli_side_24.mp4",
+     "region": [
+      34,
+      70
+     ],
+     "gt": [
+      42,
+      62
+     ],
+     "contains": true,
+     "width": 36
+    },
+    {
+     "clip_id": "kohli_side_28.mp4",
+     "region": [
+      46,
+      82
+     ],
+     "gt": [
+      52,
+      76
+     ],
+     "contains": true,
+     "width": 36
+    },
+    {
+     "clip_id": "kohli_side_32.mp4",
+     "region": [
+      49,
+      85
+     ],
+     "gt": [
+      55,
+      78
+     ],
+     "contains": true,
+     "width": 36
+    },
+    {
+     "clip_id": "pro_player_back_23.mp4",
+     "region": [
+      14,
+      50
+     ],
+     "gt": [
+      18,
+      45
+     ],
+     "contains": true,
+     "width": 36
+    },
+    {
+     "clip_id": "pro_player_back_25.mp4",
+     "region": [
+      41,
+      77
+     ],
+     "gt": [
+      48,
+      70
+     ],
+     "contains": true,
+     "width": 36
+    },
+    {
+     "clip_id": "pro_player_back_27.mp4",
+     "region": [
+      45,
+      81
+     ],
+     "gt": [
+      50,
+      78
+     ],
+     "contains": true,
+     "width": 36
+    },
+    {
+     "clip_id": "pro_player_back_31.mp4",
+     "region": [
+      36,
+      72
+     ],
+     "gt": [
+      42,
+      68
+     ],
+     "contains": true,
+     "width": 36
+    },
+    {
+     "clip_id": "pro_player_back_33.mp4",
+     "region": [
+      13,
+      49
+     ],
+     "gt": [
+      20,
+      45
+     ],
+     "contains": true,
+     "width": 36
+    },
+    {
+     "clip_id": "pro_player_back_38.mp4",
+     "region": [
+      7,
+      43
+     ],
+     "gt": [
+      13,
+      38
+     ],
+     "contains": true,
+     "width": 36
+    },
+    {
+     "clip_id": "pro_player_front_01.mp4",
+     "region": [
+      21,
+      57
+     ],
+     "gt": [
+      28,
+      48
+     ],
+     "contains": true,
+     "width": 36
+    },
+    {
+     "clip_id": "pro_player_front_03.mp4",
+     "region": [
+      49,
+      85
+     ],
+     "gt": [
+      55,
+      78
+     ],
+     "contains": true,
+     "width": 36
+    },
+    {
+     "clip_id": "pro_player_front_06.mp4",
+     "region": [
+      29,
+      65
+     ],
+     "gt": [
+      38,
+      58
+     ],
+     "contains": true,
+     "width": 36
+    },
+    {
+     "clip_id": "pro_player_front_10.mp4",
+     "region": [
+      30,
+      66
+     ],
+     "gt": [
+      39,
+      58
+     ],
+     "contains": true,
+     "width": 36
+    },
+    {
+     "clip_id": "pro_player_front_12.mp4",
+     "region": [
+      21,
+      57
+     ],
+     "gt": [
+      30,
+      50
+     ],
+     "contains": true,
+     "width": 36
+    },
+    {
+     "clip_id": "pro_player_front_14.mp4",
+     "region": [
+      0,
+      35
+     ],
+     "gt": [
+      5,
+      28
+     ],
+     "contains": true,
+     "width": 35
+    },
+    {
+     "clip_id": "pro_player_front_16.mp4",
+     "region": [
+      6,
+      42
+     ],
+     "gt": [
+      15,
+      35
+     ],
+     "contains": true,
+     "width": 36
+    },
+    {
+     "clip_id": "pro_player_front_44.mp4",
+     "region": [
+      14,
+      50
+     ],
+     "gt": [
+      23,
+      45
+     ],
+     "contains": true,
+     "width": 36
+    },
+    {
+     "clip_id": "roa_front_1.mp4",
+     "region": [
+      109,
+      145
+     ],
+     "gt": [
+      110,
+      145
+     ],
+     "contains": true,
+     "width": 36
+    }
+   ]
+  },
+  "R4_hybrid_current": {
+   "n_valid": 28,
+   "containment": 1.0,
+   "mean_width": 62.6,
+   "median_width": 56.5,
+   "mean_iou_with_gt": 0.3871,
+   "width_ratio_vs_gt": 2.76,
+   "detail": [
+    {
+     "clip_id": "beginnerunorthodox1_front_01.mp4",
+     "region": [
+      29,
+      77
+     ],
+     "gt": [
+      48,
+      70
+     ],
+     "contains": true,
+     "width": 48
+    },
+    {
+     "clip_id": "instagram1_front_01.mp4",
+     "region": [
+      0,
+      69
+     ],
+     "gt": [
+      5,
+      28
+     ],
+     "contains": true,
+     "width": 69
+    },
+    {
+     "clip_id": "instagram2_front_03.mp4",
+     "region": [
+      11,
+      59
+     ],
+     "gt": [
+      26,
+      45
+     ],
+     "contains": true,
+     "width": 48
+    },
+    {
+     "clip_id": "instagram2_front_05.mp4",
+     "region": [
+      25,
+      73
+     ],
+     "gt": [
+      38,
+      58
+     ],
+     "contains": true,
+     "width": 48
+    },
+    {
+     "clip_id": "instagram2_front_07.mp4",
+     "region": [
+      19,
+      67
+     ],
+     "gt": [
+      34,
+      52
+     ],
+     "contains": true,
+     "width": 48
+    },
+    {
+     "clip_id": "kohli_side_08.mp4",
+     "region": [
+      7,
+      116
+     ],
+     "gt": [
+      20,
+      45
+     ],
+     "contains": true,
+     "width": 109
+    },
+    {
+     "clip_id": "kohli_side_10.mp4",
+     "region": [
+      66,
+      126
+     ],
+     "gt": [
+      78,
+      102
+     ],
+     "contains": true,
+     "width": 60
+    },
+    {
+     "clip_id": "kohli_side_14.mp4",
+     "region": [
+      28,
+      96
+     ],
+     "gt": [
+      43,
+      62
+     ],
+     "contains": true,
+     "width": 68
+    },
+    {
+     "clip_id": "kohli_side_16.mp4",
+     "region": [
+      0,
+      32
+     ],
+     "gt": [
+      0,
+      20
+     ],
+     "contains": true,
+     "width": 32
+    },
+    {
+     "clip_id": "kohli_side_20.mp4",
+     "region": [
+      23,
+      114
+     ],
+     "gt": [
+      35,
+      58
+     ],
+     "contains": true,
+     "width": 91
+    },
+    {
+     "clip_id": "kohli_side_24.mp4",
+     "region": [
+      26,
+      76
+     ],
+     "gt": [
+      42,
+      62
+     ],
+     "contains": true,
+     "width": 50
+    },
+    {
+     "clip_id": "kohli_side_28.mp4",
+     "region": [
+      0,
+      88
+     ],
+     "gt": [
+      52,
+      76
+     ],
+     "contains": true,
+     "width": 88
+    },
+    {
+     "clip_id": "kohli_side_32.mp4",
+     "region": [
+      38,
+      91
+     ],
+     "gt": [
+      55,
+      78
+     ],
+     "contains": true,
+     "width": 53
+    },
+    {
+     "clip_id": "pro_player_back_23.mp4",
+     "region": [
+      8,
+      71
+     ],
+     "gt": [
+      18,
+      45
+     ],
+     "contains": true,
+     "width": 63
+    },
+    {
+     "clip_id": "pro_player_back_25.mp4",
+     "region": [
+      3,
+      83
+     ],
+     "gt": [
+      48,
+      70
+     ],
+     "contains": true,
+     "width": 80
+    },
+    {
+     "clip_id": "pro_player_back_27.mp4",
+     "region": [
+      15,
+      87
+     ],
+     "gt": [
+      50,
+      78
+     ],
+     "contains": true,
+     "width": 72
+    },
+    {
+     "clip_id": "pro_player_back_31.mp4",
+     "region": [
+      30,
+      78
+     ],
+     "gt": [
+      42,
+      68
+     ],
+     "contains": true,
+     "width": 48
+    },
+    {
+     "clip_id": "pro_player_back_33.mp4",
+     "region": [
+      0,
+      55
+     ],
+     "gt": [
+      20,
+      45
+     ],
+     "contains": true,
+     "width": 55
+    },
+    {
+     "clip_id": "pro_player_back_38.mp4",
+     "region": [
+      1,
+      49
+     ],
+     "gt": [
+      13,
+      38
+     ],
+     "contains": true,
+     "width": 48
+    },
+    {
+     "clip_id": "pro_player_front_01.mp4",
+     "region": [
+      15,
+      86
+     ],
+     "gt": [
+      28,
+      48
+     ],
+     "contains": true,
+     "width": 71
+    },
+    {
+     "clip_id": "pro_player_front_03.mp4",
+     "region": [
+      2,
+      89
+     ],
+     "gt": [
+      55,
+      78
+     ],
+     "contains": true,
+     "width": 87
+    },
+    {
+     "clip_id": "pro_player_front_06.mp4",
+     "region": [
+      23,
+      71
+     ],
+     "gt": [
+      38,
+      58
+     ],
+     "contains": true,
+     "width": 48
+    },
+    {
+     "clip_id": "pro_player_front_10.mp4",
+     "region": [
+      0,
+      72
+     ],
+     "gt": [
+      39,
+      58
+     ],
+     "contains": true,
+     "width": 72
+    },
+    {
+     "clip_id": "pro_player_front_12.mp4",
+     "region": [
+      12,
+      63
+     ],
+     "gt": [
+      30,
+      50
+     ],
+     "contains": true,
+     "width": 51
+    },
+    {
+     "clip_id": "pro_player_front_14.mp4",
+     "region": [
+      0,
+      46
+     ],
+     "gt": [
+      5,
+      28
+     ],
+     "contains": true,
+     "width": 46
+    },
+    {
+     "clip_id": "pro_player_front_16.mp4",
+     "region": [
+      0,
+      87
+     ],
+     "gt": [
+      15,
+      35
+     ],
+     "contains": true,
+     "width": 87
+    },
+    {
+     "clip_id": "pro_player_front_44.mp4",
+     "region": [
+      0,
+      56
+     ],
+     "gt": [
+      23,
+      45
+     ],
+     "contains": true,
+     "width": 56
+    },
+    {
+     "clip_id": "roa_front_1.mp4",
+     "region": [
+      94,
+      151
+     ],
+     "gt": [
+      110,
+      145
+     ],
+     "contains": true,
+     "width": 57
+    }
+   ]
+  }
+ },
+ "selected_region": "R3_contact_centred",
+ "selection_rule": "highest containment, then narrowest mean width",
+ "confound": "R2-R4 use the C0 contact proposal and are scored against annotations made by someone who saw C0. See phase3e_leakage_analysis.json \u2014 the evidence argues against strong leakage but is not a blind study.",
+ "l3_source": "phase3_shot_localization_corrected.json"
+}

@@ -429,6 +429,36 @@ annotation-derived and structurally biased toward F3. Detail in
 event search region → ≤40-candidate pool → F4 best-7 → pose → (7,30)`. The scoring model is
 untouched: `SEQ_LEN = 7`, 30 features, no retraining.
 
+**Phase 3E — blind validation, L3 correction, region fix.** *Blind annotation is not yet done:
+it needs a human who has never seen the C0 marker, so the pack (12 adversarially-stratified
+clips, marker-free sheets, answer template) is built and waiting rather than machine-filled.*
+**Partial leakage test** using the existing independent re-annotation: the two human passes agree
+with each other (mean **0.60** frames, ±1 on 100% of clips) roughly **twice as closely as either
+agrees with C0** (1.10 / 1.50, ±1 on 60–70%). They share information C0 lacks, which argues
+**against** strong leakage — C0 is useful but measurably worse than a human. Not proof: both
+passes saw the marker. **[CONFOUNDED — directional only]**
+
+**L3 smoothing corrected.** `_smooth` used `np.convolve(mode="same")`, which zero-pads and decays
+the signal at both clip ends. Fixed with edge replication; the pre-fix results are preserved in
+`phase3_shot_localization_original.json`. **L0, L1 and L2 are bit-identical; only L3 moves** —
+eval mean IoU **0.289 → 0.244**, identity-conditioned **0.368 → 0.311**. L3 is still the best
+method, but **one earlier claim is withdrawn**: its identity-conditioned *median* IoU is
+**0.129, below L0's 0.225** (previously reported as 0.385). L3 wins on mean and threshold recall
+while losing on median. **[BENCHMARK]**
+
+**Event region replaced: R3 beats the Phase-3D region on both axes.** Contact-centred ±18 gives
+**100% GT containment at mean width 35.6** (IoU 0.638) against R4's 100% at 62.6 (IoU 0.387).
+Critically, **L3 alone (R0) contains the full annotated shot only 18% of the time** — decisive
+confirmation that it must remain a soft prior and never a crop. Narrowing the region lifted
+**F4's in-shot fraction from 0.416 to 0.621 with the optimizer untouched**, confirming the
+Phase-3D diagnosis that region width, not the selector, was the limit. F4 still trails F2 (0.792)
+and F3 (0.652) on raw event faithfulness — but F2 reaches its score by clustering all seven
+frames onto adjacent ones (min gap 1.0) and has the worst pose quality, so in-shot fraction alone
+is not a sufficient criterion. F4's **minimum** pose quality (0.680) is ~3× every alternative.
+**Three objectives are kept separate: event faithfulness (partial), biomechanical validity
+(strong), downstream predictive usefulness (NOT MEASURED — needs retraining).** Detail in
+[`PHASE3E_BLIND_VALIDATION_RESULTS.md`](PHASE3E_BLIND_VALIDATION_RESULTS.md).
+
 ## 13. Known Limitations
 
 - **42 unique identities** is the real ceiling on generalization claims — not architecture. See §12 for concrete growth targets.
@@ -466,6 +496,7 @@ untouched: `SEQ_LEN = 7`, 30 features, no retraining.
 | [`PHASE3_SHOT_LOCALIZATION_RESULTS.md`](PHASE3_SHOT_LOCALIZATION_RESULTS.md) | L0–L3 shot localization against the annotation benchmark: identity-conditioned results, rejection behaviour, failure mechanisms, latency, and the selected L3+L0-fallback configuration |
 | [`PHASE3_CONTACT_RESULTS.md`](PHASE3_CONTACT_RESULTS.md) | C0–C6 contact localization, the non-blind-annotation and fixed-offset confounds, and why contact-anchored shot IoU must not be reported as a localization result |
 | [`PHASE3_BEST7_RESULTS.md`](PHASE3_BEST7_RESULTS.md) | Event search region and the F0–F4 Best-7 ablation: biomechanical `(7,30)` quality, failure analysis, and the adopted F4 configuration with its event-faithfulness limitation |
+| [`PHASE3E_BLIND_VALIDATION_RESULTS.md`](PHASE3E_BLIND_VALIDATION_RESULTS.md) | Blind-validation methodology and pack, the partial C0 leakage test, the corrected L3 results, the R0–R4 region comparison, and F4 reassessed |
 | [`docs/PHASE3_ANNOTATION_PROTOCOL.md`](docs/PHASE3_ANNOTATION_PROTOCOL.md) | Operational definitions for the Phase-3 temporal ground truth |
 | [`docs/architecture_ground_truth.md`](docs/architecture_ground_truth.md) | The dated, ground-truth engineering log — including the full wrong-person-tracking investigation |
 | [`docs/SuhasVision_SRS_v2.0.docx`](docs/SuhasVision_SRS_v2.0.docx) | Formal, IEEE-830-inspired requirements specification |

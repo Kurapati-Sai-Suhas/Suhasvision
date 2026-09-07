@@ -1,0 +1,4188 @@
+{
+ "region": "R3_contact_centred",
+ "l3_source": "phase3_shot_localization_corrected.json",
+ "objectives": {
+  "1_event_faithfulness": "in_shot_fraction, median_distance_to_shot",
+  "2_biomechanical_validity": "pose quality, min_gap",
+  "3_downstream_usefulness": "NOT MEASURED \u2014 needs retraining, out of scope"
+ },
+ "methods": {
+  "F0_uniform": {
+   "in_shot_fraction": 0.5714,
+   "median_distance_to_shot": 0.5,
+   "mean_pose_quality": 0.5501,
+   "min_pose_quality": 0.2338,
+   "min_gap": 5.7917,
+   "contact_adjacent": 1.0417,
+   "in_shot_identity_correct": 0.5714
+  },
+  "F1_contact_anchored": {
+   "in_shot_fraction": 0.5595,
+   "median_distance_to_shot": 0.4583,
+   "mean_pose_quality": 0.5178,
+   "min_pose_quality": 0.2089,
+   "min_gap": 2.875,
+   "contact_adjacent": 1.0833,
+   "in_shot_identity_correct": 0.5595
+  },
+  "F2_motion_top": {
+   "in_shot_fraction": 0.7917,
+   "median_distance_to_shot": 0.25,
+   "mean_pose_quality": 0.481,
+   "min_pose_quality": 0.2225,
+   "min_gap": 1.0,
+   "contact_adjacent": 2.5,
+   "in_shot_identity_correct": 0.7917
+  },
+  "F3_phase_aware": {
+   "in_shot_fraction": 0.6522,
+   "median_distance_to_shot": 0.0,
+   "mean_pose_quality": 0.5052,
+   "min_pose_quality": 0.1927,
+   "min_gap": 1.5652,
+   "contact_adjacent": 2.0,
+   "in_shot_identity_correct": 0.6522
+  },
+  "F4_optimized": {
+   "in_shot_fraction": 0.6214,
+   "median_distance_to_shot": 0.05,
+   "mean_pose_quality": 0.8043,
+   "min_pose_quality": 0.6799,
+   "min_gap": 2.55,
+   "contact_adjacent": 1.7,
+   "in_shot_identity_correct": 0.6214
+  }
+ },
+ "per_clip": [
+  {
+   "clip_id": "Sai_front_1.mp4",
+   "split": "dev",
+   "identity_correct": false,
+   "gt_shot": null,
+   "region": [
+    387,
+    199
+   ],
+   "pool_size": 0,
+   "methods": {
+    "F0_uniform": {
+     "frames": null
+    },
+    "F1_contact_anchored": {
+     "frames": null
+    },
+    "F2_motion_top": {
+     "frames": null
+    },
+    "F3_phase_aware": {
+     "frames": null
+    },
+    "F4_optimized": {
+     "frames": null
+    }
+   }
+  },
+  {
+   "clip_id": "Sai_front_3.mp4",
+   "split": "dev",
+   "identity_correct": true,
+   "gt_shot": null,
+   "region": [
+    0,
+    23
+   ],
+   "pool_size": 24,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      0,
+      4,
+      8,
+      11,
+      15,
+      19,
+      23
+     ],
+     "mean_pose_quality": 0.8482,
+     "min_pose_quality": 0.7109,
+     "min_gap": 3,
+     "contact_adjacent": 2
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      23
+     ],
+     "mean_pose_quality": 0.7942,
+     "min_pose_quality": 0.7109,
+     "min_gap": 1,
+     "contact_adjacent": 4
+    },
+    "F2_motion_top": {
+     "frames": [
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23
+     ],
+     "mean_pose_quality": 0.8963,
+     "min_pose_quality": 0.8217,
+     "min_gap": 1,
+     "contact_adjacent": 0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      6,
+      18
+     ],
+     "mean_pose_quality": 0.7968,
+     "min_pose_quality": 0.7109,
+     "min_gap": 1,
+     "contact_adjacent": 4
+    },
+    "F4_optimized": {
+     "frames": [
+      0,
+      2,
+      4,
+      6,
+      11,
+      17,
+      22
+     ],
+     "mean_pose_quality": 0.8524,
+     "min_pose_quality": 0.7109,
+     "min_gap": 2,
+     "contact_adjacent": 3
+    }
+   }
+  },
+  {
+   "clip_id": "beginnerunorthodox1_front_01.mp4",
+   "split": "dev",
+   "identity_correct": false,
+   "gt_shot": [
+    48,
+    70
+   ],
+   "region": [
+    35,
+    71
+   ],
+   "pool_size": 0,
+   "methods": {
+    "F0_uniform": {
+     "frames": null
+    },
+    "F1_contact_anchored": {
+     "frames": null
+    },
+    "F2_motion_top": {
+     "frames": null
+    },
+    "F3_phase_aware": {
+     "frames": null
+    },
+    "F4_optimized": {
+     "frames": null
+    }
+   }
+  },
+  {
+   "clip_id": "instagram1_front_01.mp4",
+   "split": "dev",
+   "identity_correct": true,
+   "gt_shot": [
+    5,
+    28
+   ],
+   "region": [
+    2,
+    38
+   ],
+   "pool_size": 37,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      2,
+      8,
+      14,
+      20,
+      26,
+      32,
+      38
+     ],
+     "mean_pose_quality": 0.7534,
+     "min_pose_quality": 0.6847,
+     "min_gap": 6,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      2,
+      6,
+      9,
+      13,
+      16,
+      20,
+      38
+     ],
+     "mean_pose_quality": 0.7059,
+     "min_pose_quality": 0.6509,
+     "min_gap": 3,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.7143,
+     "median_distance_to_shot": 0.0
+    },
+    "F2_motion_top": {
+     "frames": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      18,
+      22
+     ],
+     "mean_pose_quality": 0.6963,
+     "min_pose_quality": 0.6662,
+     "min_gap": 1,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 1.0,
+     "median_distance_to_shot": 0.0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      2,
+      7,
+      11,
+      15,
+      18,
+      20,
+      33
+     ],
+     "mean_pose_quality": 0.7103,
+     "min_pose_quality": 0.6747,
+     "min_gap": 2,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.7143,
+     "median_distance_to_shot": 0.0
+    },
+    "F4_optimized": {
+     "frames": [
+      2,
+      7,
+      11,
+      15,
+      18,
+      22,
+      32
+     ],
+     "mean_pose_quality": 0.7219,
+     "min_pose_quality": 0.6747,
+     "min_gap": 3,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.7143,
+     "median_distance_to_shot": 0.0
+    }
+   }
+  },
+  {
+   "clip_id": "instagram1_front_03.mp4",
+   "split": "eval",
+   "identity_correct": true,
+   "gt_shot": null,
+   "region": [
+    6,
+    42
+   ],
+   "pool_size": 37,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      6,
+      12,
+      18,
+      24,
+      30,
+      36,
+      42
+     ],
+     "mean_pose_quality": 0.7328,
+     "min_pose_quality": 0.5872,
+     "min_gap": 6,
+     "contact_adjacent": 1
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      6,
+      10,
+      13,
+      17,
+      20,
+      24,
+      42
+     ],
+     "mean_pose_quality": 0.688,
+     "min_pose_quality": 0.5872,
+     "min_gap": 3,
+     "contact_adjacent": 1
+    },
+    "F2_motion_top": {
+     "frames": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+     ],
+     "mean_pose_quality": 0.5525,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      6,
+      11,
+      16,
+      19,
+      23,
+      24,
+      37
+     ],
+     "mean_pose_quality": 0.6771,
+     "min_pose_quality": 0.5494,
+     "min_gap": 1,
+     "contact_adjacent": 2
+    },
+    "F4_optimized": {
+     "frames": [
+      6,
+      11,
+      15,
+      19,
+      23,
+      26,
+      37
+     ],
+     "mean_pose_quality": 0.7055,
+     "min_pose_quality": 0.5494,
+     "min_gap": 3,
+     "contact_adjacent": 2
+    }
+   }
+  },
+  {
+   "clip_id": "instagram2_front_01.mp4",
+   "split": "eval",
+   "identity_correct": true,
+   "gt_shot": null,
+   "region": [
+    40,
+    76
+   ],
+   "pool_size": 37,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      40,
+      46,
+      52,
+      58,
+      64,
+      70,
+      76
+     ],
+     "mean_pose_quality": 0.6916,
+     "min_pose_quality": 0.5302,
+     "min_gap": 6,
+     "contact_adjacent": 1
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      40,
+      44,
+      47,
+      51,
+      54,
+      58,
+      76
+     ],
+     "mean_pose_quality": 0.6748,
+     "min_pose_quality": 0.5712,
+     "min_gap": 3,
+     "contact_adjacent": 1
+    },
+    "F2_motion_top": {
+     "frames": [
+      42,
+      43,
+      44,
+      47,
+      48,
+      49,
+      57
+     ],
+     "mean_pose_quality": 0.6777,
+     "min_pose_quality": 0.5343,
+     "min_gap": 1,
+     "contact_adjacent": 1
+    },
+    "F3_phase_aware": {
+     "frames": [
+      40,
+      45,
+      50,
+      53,
+      57,
+      58,
+      71
+     ],
+     "mean_pose_quality": 0.6698,
+     "min_pose_quality": 0.5002,
+     "min_gap": 1,
+     "contact_adjacent": 2
+    },
+    "F4_optimized": {
+     "frames": [
+      40,
+      45,
+      50,
+      54,
+      57,
+      60,
+      71
+     ],
+     "mean_pose_quality": 0.6734,
+     "min_pose_quality": 0.5002,
+     "min_gap": 3,
+     "contact_adjacent": 2
+    }
+   }
+  },
+  {
+   "clip_id": "instagram2_front_03.mp4",
+   "split": "eval",
+   "identity_correct": false,
+   "gt_shot": [
+    26,
+    45
+   ],
+   "region": [
+    17,
+    53
+   ],
+   "pool_size": 0,
+   "methods": {
+    "F0_uniform": {
+     "frames": null
+    },
+    "F1_contact_anchored": {
+     "frames": null
+    },
+    "F2_motion_top": {
+     "frames": null
+    },
+    "F3_phase_aware": {
+     "frames": null
+    },
+    "F4_optimized": {
+     "frames": null
+    }
+   }
+  },
+  {
+   "clip_id": "instagram2_front_05.mp4",
+   "split": "eval",
+   "identity_correct": true,
+   "gt_shot": [
+    38,
+    58
+   ],
+   "region": [
+    31,
+    67
+   ],
+   "pool_size": 37,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      31,
+      37,
+      43,
+      49,
+      55,
+      61,
+      67
+     ],
+     "mean_pose_quality": 0.7015,
+     "min_pose_quality": 0.5838,
+     "min_gap": 6,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.4286,
+     "median_distance_to_shot": 1.0
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      31,
+      35,
+      38,
+      42,
+      45,
+      49,
+      67
+     ],
+     "mean_pose_quality": 0.6358,
+     "min_pose_quality": 0.5157,
+     "min_gap": 3,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F2_motion_top": {
+     "frames": [
+      31,
+      32,
+      33,
+      34,
+      39,
+      41,
+      48
+     ],
+     "mean_pose_quality": 0.6615,
+     "min_pose_quality": 0.5506,
+     "min_gap": 1,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.4286,
+     "median_distance_to_shot": 4.0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      31,
+      36,
+      41,
+      44,
+      48,
+      49,
+      62
+     ],
+     "mean_pose_quality": 0.6853,
+     "min_pose_quality": 0.5506,
+     "min_gap": 1,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F4_optimized": {
+     "frames": [
+      31,
+      37,
+      40,
+      44,
+      48,
+      51,
+      62
+     ],
+     "mean_pose_quality": 0.6946,
+     "min_pose_quality": 0.5521,
+     "min_gap": 3,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    }
+   }
+  },
+  {
+   "clip_id": "instagram2_front_07.mp4",
+   "split": "dev",
+   "identity_correct": true,
+   "gt_shot": [
+    34,
+    52
+   ],
+   "region": [
+    25,
+    61
+   ],
+   "pool_size": 37,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      25,
+      31,
+      37,
+      43,
+      49,
+      55,
+      61
+     ],
+     "mean_pose_quality": 0.5425,
+     "min_pose_quality": 0.0,
+     "min_gap": 6,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.4286,
+     "median_distance_to_shot": 3.0
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      25,
+      29,
+      32,
+      36,
+      39,
+      43,
+      61
+     ],
+     "mean_pose_quality": 0.4337,
+     "min_pose_quality": 0.0,
+     "min_gap": 3,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.4286,
+     "median_distance_to_shot": 2.0
+    },
+    "F2_motion_top": {
+     "frames": [
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      42
+     ],
+     "mean_pose_quality": 0.1898,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.8571,
+     "median_distance_to_shot": 0.0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      25,
+      31,
+      35,
+      38,
+      42,
+      43,
+      57
+     ],
+     "mean_pose_quality": 0.5381,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F4_optimized": {
+     "frames": [
+      25,
+      29,
+      35,
+      41,
+      43,
+      47,
+      57
+     ],
+     "mean_pose_quality": 0.7315,
+     "min_pose_quality": 0.5565,
+     "min_gap": 2,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    }
+   }
+  },
+  {
+   "clip_id": "instagram2_front_09.mp4",
+   "split": "dev",
+   "identity_correct": true,
+   "gt_shot": null,
+   "region": [
+    70,
+    89
+   ],
+   "pool_size": 20,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      70,
+      73,
+      76,
+      79,
+      83,
+      86,
+      89
+     ],
+     "mean_pose_quality": 0.6367,
+     "min_pose_quality": 0.5674,
+     "min_gap": 3,
+     "contact_adjacent": 2
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      70,
+      74,
+      77,
+      81,
+      84,
+      88,
+      89
+     ],
+     "mean_pose_quality": 0.6592,
+     "min_pose_quality": 0.5859,
+     "min_gap": 1,
+     "contact_adjacent": 2
+    },
+    "F2_motion_top": {
+     "frames": [
+      70,
+      72,
+      73,
+      78,
+      81,
+      82,
+      88
+     ],
+     "mean_pose_quality": 0.6743,
+     "min_pose_quality": 0.5674,
+     "min_gap": 1,
+     "contact_adjacent": 1
+    },
+    "F3_phase_aware": {
+     "frames": null,
+     "mean_pose_quality": null,
+     "min_pose_quality": null,
+     "min_gap": null,
+     "contact_adjacent": null
+    },
+    "F4_optimized": {
+     "frames": [
+      70,
+      75,
+      80,
+      82,
+      85,
+      87,
+      89
+     ],
+     "mean_pose_quality": 0.657,
+     "min_pose_quality": 0.5271,
+     "min_gap": 2,
+     "contact_adjacent": 3
+    }
+   }
+  },
+  {
+   "clip_id": "kohli_front_02.mp4",
+   "split": "eval",
+   "identity_correct": true,
+   "gt_shot": null,
+   "region": [
+    94,
+    130
+   ],
+   "pool_size": 37,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      94,
+      100,
+      106,
+      112,
+      118,
+      124,
+      130
+     ],
+     "mean_pose_quality": 0.8513,
+     "min_pose_quality": 0.7238,
+     "min_gap": 6,
+     "contact_adjacent": 1
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      94,
+      98,
+      101,
+      105,
+      108,
+      112,
+      130
+     ],
+     "mean_pose_quality": 0.8294,
+     "min_pose_quality": 0.7238,
+     "min_gap": 3,
+     "contact_adjacent": 1
+    },
+    "F2_motion_top": {
+     "frames": [
+      107,
+      120,
+      126,
+      127,
+      128,
+      129,
+      130
+     ],
+     "mean_pose_quality": 0.9203,
+     "min_pose_quality": 0.8812,
+     "min_gap": 1,
+     "contact_adjacent": 0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      94,
+      99,
+      104,
+      108,
+      110,
+      112,
+      125
+     ],
+     "mean_pose_quality": 0.8355,
+     "min_pose_quality": 0.7238,
+     "min_gap": 2,
+     "contact_adjacent": 2
+    },
+    "F4_optimized": {
+     "frames": [
+      94,
+      99,
+      104,
+      107,
+      110,
+      115,
+      126
+     ],
+     "mean_pose_quality": 0.8568,
+     "min_pose_quality": 0.7238,
+     "min_gap": 3,
+     "contact_adjacent": 2
+    }
+   }
+  },
+  {
+   "clip_id": "kohli_side_04.mp4",
+   "split": "eval",
+   "identity_correct": true,
+   "gt_shot": null,
+   "region": [
+    92,
+    128
+   ],
+   "pool_size": 37,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      92,
+      98,
+      104,
+      110,
+      116,
+      122,
+      128
+     ],
+     "mean_pose_quality": 0.8982,
+     "min_pose_quality": 0.7593,
+     "min_gap": 6,
+     "contact_adjacent": 1
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      92,
+      96,
+      99,
+      103,
+      106,
+      110,
+      128
+     ],
+     "mean_pose_quality": 0.7576,
+     "min_pose_quality": 0.0,
+     "min_gap": 3,
+     "contact_adjacent": 1
+    },
+    "F2_motion_top": {
+     "frames": [
+      93,
+      94,
+      95,
+      120,
+      124,
+      127,
+      128
+     ],
+     "mean_pose_quality": 0.9221,
+     "min_pose_quality": 0.8596,
+     "min_gap": 1,
+     "contact_adjacent": 0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      92,
+      98,
+      102,
+      106,
+      107,
+      110,
+      123
+     ],
+     "mean_pose_quality": 0.8481,
+     "min_pose_quality": 0.7593,
+     "min_gap": 1,
+     "contact_adjacent": 2
+    },
+    "F4_optimized": {
+     "frames": [
+      92,
+      96,
+      101,
+      106,
+      110,
+      117,
+      125
+     ],
+     "mean_pose_quality": 0.9118,
+     "min_pose_quality": 0.7956,
+     "min_gap": 4,
+     "contact_adjacent": 1
+    }
+   }
+  },
+  {
+   "clip_id": "kohli_side_06.mp4",
+   "split": "dev",
+   "identity_correct": false,
+   "gt_shot": null,
+   "region": [
+    88,
+    124
+   ],
+   "pool_size": 0,
+   "methods": {
+    "F0_uniform": {
+     "frames": null
+    },
+    "F1_contact_anchored": {
+     "frames": null
+    },
+    "F2_motion_top": {
+     "frames": null
+    },
+    "F3_phase_aware": {
+     "frames": null
+    },
+    "F4_optimized": {
+     "frames": null
+    }
+   }
+  },
+  {
+   "clip_id": "kohli_side_08.mp4",
+   "split": "eval",
+   "identity_correct": true,
+   "gt_shot": [
+    20,
+    45
+   ],
+   "region": [
+    13,
+    49
+   ],
+   "pool_size": 36,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      13,
+      19,
+      25,
+      31,
+      37,
+      43,
+      49
+     ],
+     "mean_pose_quality": 0.4719,
+     "min_pose_quality": 0.0,
+     "min_gap": 6,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      13,
+      17,
+      20,
+      24,
+      27,
+      31,
+      49
+     ],
+     "mean_pose_quality": 0.6338,
+     "min_pose_quality": 0.0,
+     "min_gap": 3,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F2_motion_top": {
+     "frames": [
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34
+     ],
+     "mean_pose_quality": 0.5316,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 7,
+     "in_shot_fraction": 1.0,
+     "median_distance_to_shot": 0.0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      13,
+      18,
+      23,
+      27,
+      30,
+      31,
+      44
+     ],
+     "mean_pose_quality": 0.5815,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.7143,
+     "median_distance_to_shot": 0.0
+    },
+    "F4_optimized": {
+     "frames": [
+      13,
+      18,
+      23,
+      26,
+      28,
+      33,
+      45
+     ],
+     "mean_pose_quality": 0.8383,
+     "min_pose_quality": 0.6141,
+     "min_gap": 2,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.7143,
+     "median_distance_to_shot": 0.0
+    }
+   }
+  },
+  {
+   "clip_id": "kohli_side_10.mp4",
+   "split": "eval",
+   "identity_correct": true,
+   "gt_shot": [
+    78,
+    102
+   ],
+   "region": [
+    72,
+    108
+   ],
+   "pool_size": 37,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      72,
+      78,
+      84,
+      90,
+      96,
+      102,
+      108
+     ],
+     "mean_pose_quality": 0.9381,
+     "min_pose_quality": 0.8425,
+     "min_gap": 6,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.7143,
+     "median_distance_to_shot": 0.0
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      72,
+      76,
+      79,
+      83,
+      86,
+      90,
+      108
+     ],
+     "mean_pose_quality": 0.9326,
+     "min_pose_quality": 0.9035,
+     "min_gap": 3,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F2_motion_top": {
+     "frames": [
+      84,
+      93,
+      98,
+      100,
+      101,
+      102,
+      103
+     ],
+     "mean_pose_quality": 0.9526,
+     "min_pose_quality": 0.9211,
+     "min_gap": 1,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.8571,
+     "median_distance_to_shot": 0.0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      72,
+      77,
+      82,
+      86,
+      89,
+      93,
+      105
+     ],
+     "mean_pose_quality": 0.947,
+     "min_pose_quality": 0.9065,
+     "min_gap": 3,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F4_optimized": {
+     "frames": [
+      72,
+      77,
+      82,
+      86,
+      89,
+      93,
+      103
+     ],
+     "mean_pose_quality": 0.951,
+     "min_pose_quality": 0.9065,
+     "min_gap": 3,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    }
+   }
+  },
+  {
+   "clip_id": "kohli_side_12.mp4",
+   "split": "eval",
+   "identity_correct": false,
+   "gt_shot": null,
+   "region": [
+    50,
+    86
+   ],
+   "pool_size": 13,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      72,
+      75,
+      77,
+      79,
+      81,
+      84,
+      86
+     ],
+     "mean_pose_quality": 0.8205,
+     "min_pose_quality": 0.7092,
+     "min_gap": 2,
+     "contact_adjacent": 0
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      72,
+      72,
+      72,
+      72,
+      72,
+      72,
+      86
+     ],
+     "mean_pose_quality": 0.8008,
+     "min_pose_quality": 0.7953,
+     "min_gap": 0,
+     "contact_adjacent": 0
+    },
+    "F2_motion_top": {
+     "frames": [
+      75,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83
+     ],
+     "mean_pose_quality": 0.8319,
+     "min_pose_quality": 0.7155,
+     "min_gap": 1,
+     "contact_adjacent": 0
+    },
+    "F3_phase_aware": {
+     "frames": null,
+     "mean_pose_quality": null,
+     "min_pose_quality": null,
+     "min_gap": null,
+     "contact_adjacent": null
+    },
+    "F4_optimized": {
+     "frames": [
+      72,
+      75,
+      77,
+      79,
+      81,
+      84,
+      86
+     ],
+     "mean_pose_quality": 0.8205,
+     "min_pose_quality": 0.7092,
+     "min_gap": 2,
+     "contact_adjacent": 0
+    }
+   }
+  },
+  {
+   "clip_id": "kohli_side_14.mp4",
+   "split": "dev",
+   "identity_correct": true,
+   "gt_shot": [
+    43,
+    62
+   ],
+   "region": [
+    34,
+    70
+   ],
+   "pool_size": 37,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      34,
+      40,
+      46,
+      52,
+      58,
+      64,
+      70
+     ],
+     "mean_pose_quality": 0.9161,
+     "min_pose_quality": 0.8504,
+     "min_gap": 6,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.4286,
+     "median_distance_to_shot": 2.0
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      34,
+      38,
+      41,
+      45,
+      48,
+      52,
+      70
+     ],
+     "mean_pose_quality": 0.9369,
+     "min_pose_quality": 0.8895,
+     "min_gap": 3,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.4286,
+     "median_distance_to_shot": 2.0
+    },
+    "F2_motion_top": {
+     "frames": [
+      36,
+      37,
+      38,
+      43,
+      44,
+      45,
+      46
+     ],
+     "mean_pose_quality": 0.9116,
+     "min_pose_quality": 0.8088,
+     "min_gap": 1,
+     "contact_adjacent": 0,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      34,
+      40,
+      44,
+      47,
+      51,
+      52,
+      65
+     ],
+     "mean_pose_quality": 0.7814,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F4_optimized": {
+     "frames": [
+      34,
+      39,
+      44,
+      48,
+      50,
+      54,
+      66
+     ],
+     "mean_pose_quality": 0.9578,
+     "min_pose_quality": 0.9293,
+     "min_gap": 2,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    }
+   }
+  },
+  {
+   "clip_id": "kohli_side_16.mp4",
+   "split": "eval",
+   "identity_correct": false,
+   "gt_shot": [
+    0,
+    20
+   ],
+   "region": [
+    0,
+    26
+   ],
+   "pool_size": 0,
+   "methods": {
+    "F0_uniform": {
+     "frames": null
+    },
+    "F1_contact_anchored": {
+     "frames": null
+    },
+    "F2_motion_top": {
+     "frames": null
+    },
+    "F3_phase_aware": {
+     "frames": null
+    },
+    "F4_optimized": {
+     "frames": null
+    }
+   }
+  },
+  {
+   "clip_id": "kohli_side_18.mp4",
+   "split": "eval",
+   "identity_correct": true,
+   "gt_shot": null,
+   "region": [
+    15,
+    51
+   ],
+   "pool_size": 37,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      15,
+      21,
+      27,
+      33,
+      39,
+      45,
+      51
+     ],
+     "mean_pose_quality": 0.697,
+     "min_pose_quality": 0.0,
+     "min_gap": 6,
+     "contact_adjacent": 1
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      15,
+      19,
+      22,
+      26,
+      29,
+      33,
+      51
+     ],
+     "mean_pose_quality": 0.82,
+     "min_pose_quality": 0.6319,
+     "min_gap": 3,
+     "contact_adjacent": 1
+    },
+    "F2_motion_top": {
+     "frames": [
+      32,
+      33,
+      42,
+      43,
+      44,
+      45,
+      46
+     ],
+     "mean_pose_quality": 0.3771,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 2
+    },
+    "F3_phase_aware": {
+     "frames": [
+      15,
+      20,
+      25,
+      28,
+      32,
+      33,
+      47
+     ],
+     "mean_pose_quality": 0.7645,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 2
+    },
+    "F4_optimized": {
+     "frames": [
+      15,
+      19,
+      25,
+      28,
+      31,
+      35,
+      48
+     ],
+     "mean_pose_quality": 0.8888,
+     "min_pose_quality": 0.714,
+     "min_gap": 3,
+     "contact_adjacent": 2
+    }
+   }
+  },
+  {
+   "clip_id": "kohli_side_20.mp4",
+   "split": "dev",
+   "identity_correct": true,
+   "gt_shot": [
+    35,
+    58
+   ],
+   "region": [
+    29,
+    65
+   ],
+   "pool_size": 36,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      29,
+      35,
+      41,
+      47,
+      53,
+      59,
+      65
+     ],
+     "mean_pose_quality": 0.7446,
+     "min_pose_quality": 0.0,
+     "min_gap": 6,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      29,
+      33,
+      36,
+      40,
+      43,
+      47,
+      65
+     ],
+     "mean_pose_quality": 0.6391,
+     "min_pose_quality": 0.0,
+     "min_gap": 3,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F2_motion_top": {
+     "frames": [
+      29,
+      55,
+      56,
+      57,
+      59,
+      60,
+      65
+     ],
+     "mean_pose_quality": 0.8896,
+     "min_pose_quality": 0.8187,
+     "min_gap": 1,
+     "contact_adjacent": 0,
+     "in_shot_fraction": 0.4286,
+     "median_distance_to_shot": 1.0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      30,
+      35,
+      39,
+      43,
+      46,
+      48,
+      60
+     ],
+     "mean_pose_quality": 0.4967,
+     "min_pose_quality": 0.0,
+     "min_gap": 2,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.7143,
+     "median_distance_to_shot": 0.0
+    },
+    "F4_optimized": {
+     "frames": [
+      30,
+      34,
+      38,
+      43,
+      53,
+      56,
+      64
+     ],
+     "mean_pose_quality": 0.8963,
+     "min_pose_quality": 0.7824,
+     "min_gap": 3,
+     "contact_adjacent": 0,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    }
+   }
+  },
+  {
+   "clip_id": "kohli_side_22.mp4",
+   "split": "dev",
+   "identity_correct": false,
+   "gt_shot": null,
+   "region": [
+    0,
+    20
+   ],
+   "pool_size": 0,
+   "methods": {
+    "F0_uniform": {
+     "frames": null
+    },
+    "F1_contact_anchored": {
+     "frames": null
+    },
+    "F2_motion_top": {
+     "frames": null
+    },
+    "F3_phase_aware": {
+     "frames": null
+    },
+    "F4_optimized": {
+     "frames": null
+    }
+   }
+  },
+  {
+   "clip_id": "kohli_side_24.mp4",
+   "split": "dev",
+   "identity_correct": true,
+   "gt_shot": [
+    42,
+    62
+   ],
+   "region": [
+    34,
+    70
+   ],
+   "pool_size": 37,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      34,
+      40,
+      46,
+      52,
+      58,
+      64,
+      70
+     ],
+     "mean_pose_quality": 0.7391,
+     "min_pose_quality": 0.0,
+     "min_gap": 6,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.4286,
+     "median_distance_to_shot": 2.0
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      34,
+      38,
+      41,
+      45,
+      48,
+      52,
+      70
+     ],
+     "mean_pose_quality": 0.3436,
+     "min_pose_quality": 0.0,
+     "min_gap": 3,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.4286,
+     "median_distance_to_shot": 1.0
+    },
+    "F2_motion_top": {
+     "frames": [
+      34,
+      35,
+      46,
+      48,
+      51,
+      52,
+      53
+     ],
+     "mean_pose_quality": 0.5551,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 3,
+     "in_shot_fraction": 0.7143,
+     "median_distance_to_shot": 0.0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      34,
+      39,
+      44,
+      48,
+      51,
+      52,
+      65
+     ],
+     "mean_pose_quality": 0.4544,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F4_optimized": {
+     "frames": [
+      35,
+      39,
+      43,
+      47,
+      51,
+      54,
+      65
+     ],
+     "mean_pose_quality": 0.7951,
+     "min_pose_quality": 0.6115,
+     "min_gap": 3,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    }
+   }
+  },
+  {
+   "clip_id": "kohli_side_26.mp4",
+   "split": "dev",
+   "identity_correct": true,
+   "gt_shot": null,
+   "region": [
+    24,
+    60
+   ],
+   "pool_size": 37,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      24,
+      30,
+      36,
+      42,
+      48,
+      54,
+      60
+     ],
+     "mean_pose_quality": 0.9288,
+     "min_pose_quality": 0.8683,
+     "min_gap": 6,
+     "contact_adjacent": 1
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      24,
+      28,
+      31,
+      35,
+      38,
+      42,
+      60
+     ],
+     "mean_pose_quality": 0.9268,
+     "min_pose_quality": 0.8683,
+     "min_gap": 3,
+     "contact_adjacent": 1
+    },
+    "F2_motion_top": {
+     "frames": [
+      24,
+      25,
+      26,
+      27,
+      28,
+      30,
+      31
+     ],
+     "mean_pose_quality": 0.9199,
+     "min_pose_quality": 0.8653,
+     "min_gap": 1,
+     "contact_adjacent": 0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      24,
+      29,
+      34,
+      38,
+      40,
+      43,
+      55
+     ],
+     "mean_pose_quality": 0.9357,
+     "min_pose_quality": 0.8863,
+     "min_gap": 2,
+     "contact_adjacent": 2
+    },
+    "F4_optimized": {
+     "frames": [
+      24,
+      30,
+      34,
+      37,
+      41,
+      43,
+      55
+     ],
+     "mean_pose_quality": 0.9495,
+     "min_pose_quality": 0.9044,
+     "min_gap": 2,
+     "contact_adjacent": 2
+    }
+   }
+  },
+  {
+   "clip_id": "kohli_side_28.mp4",
+   "split": "dev",
+   "identity_correct": true,
+   "gt_shot": [
+    52,
+    76
+   ],
+   "region": [
+    46,
+    82
+   ],
+   "pool_size": 37,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      46,
+      52,
+      58,
+      64,
+      70,
+      76,
+      82
+     ],
+     "mean_pose_quality": 0.7847,
+     "min_pose_quality": 0.0,
+     "min_gap": 6,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.7143,
+     "median_distance_to_shot": 0.0
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      46,
+      50,
+      53,
+      57,
+      60,
+      64,
+      82
+     ],
+     "mean_pose_quality": 0.8535,
+     "min_pose_quality": 0.7314,
+     "min_gap": 3,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F2_motion_top": {
+     "frames": [
+      57,
+      58,
+      59,
+      76,
+      77,
+      78,
+      79
+     ],
+     "mean_pose_quality": 0.7857,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 0,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      46,
+      51,
+      56,
+      59,
+      62,
+      64,
+      78
+     ],
+     "mean_pose_quality": 0.8879,
+     "min_pose_quality": 0.7402,
+     "min_gap": 2,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F4_optimized": {
+     "frames": [
+      46,
+      51,
+      55,
+      59,
+      62,
+      66,
+      77
+     ],
+     "mean_pose_quality": 0.9002,
+     "min_pose_quality": 0.7529,
+     "min_gap": 3,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    }
+   }
+  },
+  {
+   "clip_id": "kohli_side_30.mp4",
+   "split": "dev",
+   "identity_correct": true,
+   "gt_shot": null,
+   "region": [
+    26,
+    62
+   ],
+   "pool_size": 37,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      26,
+      32,
+      38,
+      44,
+      50,
+      56,
+      62
+     ],
+     "mean_pose_quality": 0.555,
+     "min_pose_quality": 0.0,
+     "min_gap": 6,
+     "contact_adjacent": 1
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      26,
+      30,
+      33,
+      37,
+      40,
+      44,
+      62
+     ],
+     "mean_pose_quality": 0.5225,
+     "min_pose_quality": 0.0,
+     "min_gap": 3,
+     "contact_adjacent": 1
+    },
+    "F2_motion_top": {
+     "frames": [
+      26,
+      27,
+      28,
+      29,
+      43,
+      44,
+      58
+     ],
+     "mean_pose_quality": 0.4839,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 2
+    },
+    "F3_phase_aware": {
+     "frames": [
+      26,
+      32,
+      36,
+      40,
+      43,
+      44,
+      58
+     ],
+     "mean_pose_quality": 0.3572,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 2
+    },
+    "F4_optimized": {
+     "frames": [
+      26,
+      31,
+      35,
+      39,
+      47,
+      55,
+      61
+     ],
+     "mean_pose_quality": 0.7984,
+     "min_pose_quality": 0.6611,
+     "min_gap": 4,
+     "contact_adjacent": 1
+    }
+   }
+  },
+  {
+   "clip_id": "kohli_side_32.mp4",
+   "split": "eval",
+   "identity_correct": true,
+   "gt_shot": [
+    55,
+    78
+   ],
+   "region": [
+    49,
+    85
+   ],
+   "pool_size": 37,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      49,
+      55,
+      61,
+      67,
+      73,
+      79,
+      85
+     ],
+     "mean_pose_quality": 0.9085,
+     "min_pose_quality": 0.8045,
+     "min_gap": 6,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      49,
+      53,
+      56,
+      60,
+      63,
+      67,
+      85
+     ],
+     "mean_pose_quality": 0.89,
+     "min_pose_quality": 0.7625,
+     "min_gap": 3,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F2_motion_top": {
+     "frames": [
+      58,
+      61,
+      62,
+      63,
+      77,
+      79,
+      81
+     ],
+     "mean_pose_quality": 0.9299,
+     "min_pose_quality": 0.8479,
+     "min_gap": 1,
+     "contact_adjacent": 0,
+     "in_shot_fraction": 0.7143,
+     "median_distance_to_shot": 0.0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      49,
+      54,
+      59,
+      62,
+      66,
+      67,
+      80
+     ],
+     "mean_pose_quality": 0.9121,
+     "min_pose_quality": 0.8045,
+     "min_gap": 1,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F4_optimized": {
+     "frames": [
+      49,
+      54,
+      59,
+      63,
+      65,
+      68,
+      80
+     ],
+     "mean_pose_quality": 0.9182,
+     "min_pose_quality": 0.8045,
+     "min_gap": 2,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    }
+   }
+  },
+  {
+   "clip_id": "pro_player_back_21.mp4",
+   "split": "eval",
+   "identity_correct": true,
+   "gt_shot": null,
+   "region": [
+    0,
+    29
+   ],
+   "pool_size": 30,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      0,
+      5,
+      10,
+      14,
+      19,
+      24,
+      29
+     ],
+     "mean_pose_quality": 0.2654,
+     "min_pose_quality": 0.0,
+     "min_gap": 4,
+     "contact_adjacent": 2
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      0,
+      2,
+      4,
+      7,
+      9,
+      11,
+      29
+     ],
+     "mean_pose_quality": 0.3105,
+     "min_pose_quality": 0.0,
+     "min_gap": 2,
+     "contact_adjacent": 2
+    },
+    "F2_motion_top": {
+     "frames": [
+      1,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29
+     ],
+     "mean_pose_quality": 0.4088,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      0,
+      3,
+      6,
+      8,
+      10,
+      11,
+      23
+     ],
+     "mean_pose_quality": 0.2048,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 3
+    },
+    "F4_optimized": {
+     "frames": null,
+     "mean_pose_quality": null,
+     "min_pose_quality": null,
+     "min_gap": null,
+     "contact_adjacent": null
+    }
+   }
+  },
+  {
+   "clip_id": "pro_player_back_23.mp4",
+   "split": "eval",
+   "identity_correct": true,
+   "gt_shot": [
+    18,
+    45
+   ],
+   "region": [
+    14,
+    50
+   ],
+   "pool_size": 37,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      14,
+      20,
+      26,
+      32,
+      38,
+      44,
+      50
+     ],
+     "mean_pose_quality": 0.2422,
+     "min_pose_quality": 0.0,
+     "min_gap": 6,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.7143,
+     "median_distance_to_shot": 0.0
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      14,
+      18,
+      21,
+      25,
+      28,
+      32,
+      50
+     ],
+     "mean_pose_quality": 0.1991,
+     "min_pose_quality": 0.0,
+     "min_gap": 3,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.7143,
+     "median_distance_to_shot": 0.0
+    },
+    "F2_motion_top": {
+     "frames": [
+      30,
+      31,
+      32,
+      33,
+      48,
+      49,
+      50
+     ],
+     "mean_pose_quality": 0.3078,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 4,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      14,
+      20,
+      24,
+      27,
+      30,
+      32,
+      46
+     ],
+     "mean_pose_quality": 0.1246,
+     "min_pose_quality": 0.0,
+     "min_gap": 2,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.7143,
+     "median_distance_to_shot": 0.0
+    },
+    "F4_optimized": {
+     "frames": [
+      15,
+      17,
+      19,
+      21,
+      23,
+      47,
+      50
+     ],
+     "mean_pose_quality": 0.7858,
+     "min_pose_quality": 0.5712,
+     "min_gap": 2,
+     "contact_adjacent": 0,
+     "in_shot_fraction": 0.4286,
+     "median_distance_to_shot": 1.0
+    }
+   }
+  },
+  {
+   "clip_id": "pro_player_back_25.mp4",
+   "split": "dev",
+   "identity_correct": true,
+   "gt_shot": [
+    48,
+    70
+   ],
+   "region": [
+    41,
+    77
+   ],
+   "pool_size": 36,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      41,
+      47,
+      53,
+      59,
+      65,
+      71,
+      77
+     ],
+     "mean_pose_quality": 0.7063,
+     "min_pose_quality": 0.5987,
+     "min_gap": 6,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.4286,
+     "median_distance_to_shot": 1.0
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      41,
+      45,
+      48,
+      52,
+      55,
+      59,
+      77
+     ],
+     "mean_pose_quality": 0.5962,
+     "min_pose_quality": 0.0,
+     "min_gap": 3,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F2_motion_top": {
+     "frames": [
+      62,
+      65,
+      66,
+      68,
+      69,
+      70,
+      71
+     ],
+     "mean_pose_quality": 0.5884,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.8571,
+     "median_distance_to_shot": 0.0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      41,
+      46,
+      51,
+      54,
+      58,
+      60,
+      72
+     ],
+     "mean_pose_quality": 0.6351,
+     "min_pose_quality": 0.0,
+     "min_gap": 2,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F4_optimized": {
+     "frames": [
+      41,
+      47,
+      51,
+      54,
+      57,
+      61,
+      72
+     ],
+     "mean_pose_quality": 0.7476,
+     "min_pose_quality": 0.6606,
+     "min_gap": 3,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    }
+   }
+  },
+  {
+   "clip_id": "pro_player_back_27.mp4",
+   "split": "dev",
+   "identity_correct": true,
+   "gt_shot": [
+    50,
+    78
+   ],
+   "region": [
+    45,
+    81
+   ],
+   "pool_size": 33,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      45,
+      51,
+      58,
+      63,
+      69,
+      75,
+      81
+     ],
+     "mean_pose_quality": 0.5777,
+     "min_pose_quality": 0.0,
+     "min_gap": 5,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.7143,
+     "median_distance_to_shot": 0.0
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      45,
+      49,
+      52,
+      55,
+      59,
+      63,
+      81
+     ],
+     "mean_pose_quality": 0.7733,
+     "min_pose_quality": 0.5594,
+     "min_gap": 3,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F2_motion_top": {
+     "frames": [
+      63,
+      64,
+      66,
+      67,
+      68,
+      69,
+      70
+     ],
+     "mean_pose_quality": 0.4492,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 3,
+     "in_shot_fraction": 1.0,
+     "median_distance_to_shot": 0.0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      45,
+      50,
+      55,
+      58,
+      62,
+      64,
+      78
+     ],
+     "mean_pose_quality": 0.4347,
+     "min_pose_quality": 0.0,
+     "min_gap": 2,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.8571,
+     "median_distance_to_shot": 0.0
+    },
+    "F4_optimized": {
+     "frames": [
+      45,
+      49,
+      54,
+      59,
+      62,
+      64,
+      74
+     ],
+     "mean_pose_quality": 0.8244,
+     "min_pose_quality": 0.7293,
+     "min_gap": 2,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.7143,
+     "median_distance_to_shot": 0.0
+    }
+   }
+  },
+  {
+   "clip_id": "pro_player_back_29.mp4",
+   "split": "dev",
+   "identity_correct": true,
+   "gt_shot": null,
+   "region": [
+    53,
+    89
+   ],
+   "pool_size": 37,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      53,
+      59,
+      65,
+      71,
+      77,
+      83,
+      89
+     ],
+     "mean_pose_quality": 0.4299,
+     "min_pose_quality": 0.0,
+     "min_gap": 6,
+     "contact_adjacent": 1
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      53,
+      57,
+      60,
+      64,
+      67,
+      71,
+      89
+     ],
+     "mean_pose_quality": 0.423,
+     "min_pose_quality": 0.0,
+     "min_gap": 3,
+     "contact_adjacent": 1
+    },
+    "F2_motion_top": {
+     "frames": [
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76
+     ],
+     "mean_pose_quality": 0.7066,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 5
+    },
+    "F3_phase_aware": {
+     "frames": [
+      53,
+      58,
+      63,
+      67,
+      70,
+      71,
+      85
+     ],
+     "mean_pose_quality": 0.5291,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 2
+    },
+    "F4_optimized": {
+     "frames": [
+      63,
+      66,
+      68,
+      70,
+      72,
+      75,
+      85
+     ],
+     "mean_pose_quality": 0.775,
+     "min_pose_quality": 0.6463,
+     "min_gap": 2,
+     "contact_adjacent": 3
+    }
+   }
+  },
+  {
+   "clip_id": "pro_player_back_31.mp4",
+   "split": "eval",
+   "identity_correct": true,
+   "gt_shot": [
+    42,
+    68
+   ],
+   "region": [
+    36,
+    72
+   ],
+   "pool_size": 37,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      36,
+      42,
+      48,
+      54,
+      60,
+      66,
+      72
+     ],
+     "mean_pose_quality": 0.532,
+     "min_pose_quality": 0.0,
+     "min_gap": 6,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.7143,
+     "median_distance_to_shot": 0.0
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      36,
+      40,
+      43,
+      47,
+      50,
+      54,
+      72
+     ],
+     "mean_pose_quality": 0.4422,
+     "min_pose_quality": 0.0,
+     "min_gap": 3,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F2_motion_top": {
+     "frames": [
+      50,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57
+     ],
+     "mean_pose_quality": 0.4097,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 6,
+     "in_shot_fraction": 1.0,
+     "median_distance_to_shot": 0.0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      36,
+      41,
+      46,
+      49,
+      53,
+      54,
+      66
+     ],
+     "mean_pose_quality": 0.6732,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.7143,
+     "median_distance_to_shot": 0.0
+    },
+    "F4_optimized": {
+     "frames": [
+      36,
+      41,
+      46,
+      49,
+      53,
+      57,
+      67
+     ],
+     "mean_pose_quality": 0.7515,
+     "min_pose_quality": 0.5636,
+     "min_gap": 3,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.7143,
+     "median_distance_to_shot": 0.0
+    }
+   }
+  },
+  {
+   "clip_id": "pro_player_back_33.mp4",
+   "split": "dev",
+   "identity_correct": true,
+   "gt_shot": [
+    20,
+    45
+   ],
+   "region": [
+    13,
+    49
+   ],
+   "pool_size": 37,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      13,
+      19,
+      25,
+      31,
+      37,
+      43,
+      49
+     ],
+     "mean_pose_quality": 0.7842,
+     "min_pose_quality": 0.6924,
+     "min_gap": 6,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      13,
+      17,
+      20,
+      24,
+      27,
+      31,
+      49
+     ],
+     "mean_pose_quality": 0.6765,
+     "min_pose_quality": 0.0,
+     "min_gap": 3,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F2_motion_top": {
+     "frames": [
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37
+     ],
+     "mean_pose_quality": 0.7811,
+     "min_pose_quality": 0.7271,
+     "min_gap": 1,
+     "contact_adjacent": 4,
+     "in_shot_fraction": 1.0,
+     "median_distance_to_shot": 0.0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      13,
+      19,
+      23,
+      27,
+      30,
+      31,
+      45
+     ],
+     "mean_pose_quality": 0.8063,
+     "min_pose_quality": 0.756,
+     "min_gap": 1,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.7143,
+     "median_distance_to_shot": 0.0
+    },
+    "F4_optimized": {
+     "frames": [
+      13,
+      19,
+      23,
+      27,
+      31,
+      36,
+      45
+     ],
+     "mean_pose_quality": 0.8101,
+     "min_pose_quality": 0.7657,
+     "min_gap": 4,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.7143,
+     "median_distance_to_shot": 0.0
+    }
+   }
+  },
+  {
+   "clip_id": "pro_player_back_36.mp4",
+   "split": "eval",
+   "identity_correct": true,
+   "gt_shot": null,
+   "region": [
+    24,
+    60
+   ],
+   "pool_size": 37,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      24,
+      30,
+      36,
+      42,
+      48,
+      54,
+      60
+     ],
+     "mean_pose_quality": 0.6874,
+     "min_pose_quality": 0.0,
+     "min_gap": 6,
+     "contact_adjacent": 1
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      24,
+      28,
+      31,
+      35,
+      38,
+      42,
+      60
+     ],
+     "mean_pose_quality": 0.5778,
+     "min_pose_quality": 0.0,
+     "min_gap": 3,
+     "contact_adjacent": 1
+    },
+    "F2_motion_top": {
+     "frames": [
+      29,
+      32,
+      34,
+      35,
+      57,
+      58,
+      59
+     ],
+     "mean_pose_quality": 0.7234,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      24,
+      29,
+      34,
+      37,
+      41,
+      42,
+      55
+     ],
+     "mean_pose_quality": 0.8114,
+     "min_pose_quality": 0.6091,
+     "min_gap": 1,
+     "contact_adjacent": 2
+    },
+    "F4_optimized": {
+     "frames": [
+      24,
+      29,
+      34,
+      37,
+      40,
+      45,
+      54
+     ],
+     "mean_pose_quality": 0.8269,
+     "min_pose_quality": 0.6091,
+     "min_gap": 3,
+     "contact_adjacent": 2
+    }
+   }
+  },
+  {
+   "clip_id": "pro_player_back_38.mp4",
+   "split": "eval",
+   "identity_correct": true,
+   "gt_shot": [
+    13,
+    38
+   ],
+   "region": [
+    7,
+    43
+   ],
+   "pool_size": 37,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      7,
+      13,
+      19,
+      25,
+      31,
+      37,
+      43
+     ],
+     "mean_pose_quality": 0.3344,
+     "min_pose_quality": 0.0,
+     "min_gap": 6,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.7143,
+     "median_distance_to_shot": 0.0
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      7,
+      11,
+      14,
+      18,
+      21,
+      25,
+      43
+     ],
+     "mean_pose_quality": 0.221,
+     "min_pose_quality": 0.0,
+     "min_gap": 3,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F2_motion_top": {
+     "frames": [
+      16,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28
+     ],
+     "mean_pose_quality": 0.3323,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 6,
+     "in_shot_fraction": 1.0,
+     "median_distance_to_shot": 0.0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      7,
+      13,
+      17,
+      20,
+      24,
+      25,
+      38
+     ],
+     "mean_pose_quality": 0.2221,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.8571,
+     "median_distance_to_shot": 0.0
+    },
+    "F4_optimized": {
+     "frames": [
+      7,
+      12,
+      16,
+      19,
+      23,
+      27,
+      40
+     ],
+     "mean_pose_quality": 0.7443,
+     "min_pose_quality": 0.646,
+     "min_gap": 3,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    }
+   }
+  },
+  {
+   "clip_id": "pro_player_back_40.mp4",
+   "split": "eval",
+   "identity_correct": true,
+   "gt_shot": null,
+   "region": [
+    40,
+    76
+   ],
+   "pool_size": 37,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      40,
+      46,
+      52,
+      58,
+      64,
+      70,
+      76
+     ],
+     "mean_pose_quality": 0.6234,
+     "min_pose_quality": 0.5939,
+     "min_gap": 6,
+     "contact_adjacent": 1
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      40,
+      44,
+      47,
+      51,
+      54,
+      58,
+      76
+     ],
+     "mean_pose_quality": 0.6372,
+     "min_pose_quality": 0.5858,
+     "min_gap": 3,
+     "contact_adjacent": 1
+    },
+    "F2_motion_top": {
+     "frames": [
+      40,
+      41,
+      52,
+      53,
+      54,
+      59,
+      60
+     ],
+     "mean_pose_quality": 0.6146,
+     "min_pose_quality": 0.5858,
+     "min_gap": 1,
+     "contact_adjacent": 2
+    },
+    "F3_phase_aware": {
+     "frames": [
+      40,
+      45,
+      50,
+      53,
+      56,
+      59,
+      71
+     ],
+     "mean_pose_quality": 0.62,
+     "min_pose_quality": 0.5585,
+     "min_gap": 3,
+     "contact_adjacent": 2
+    },
+    "F4_optimized": {
+     "frames": [
+      40,
+      45,
+      49,
+      53,
+      56,
+      60,
+      71
+     ],
+     "mean_pose_quality": 0.6275,
+     "min_pose_quality": 0.6092,
+     "min_gap": 3,
+     "contact_adjacent": 2
+    }
+   }
+  },
+  {
+   "clip_id": "pro_player_front_01.mp4",
+   "split": "eval",
+   "identity_correct": true,
+   "gt_shot": [
+    28,
+    48
+   ],
+   "region": [
+    21,
+    57
+   ],
+   "pool_size": 37,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      21,
+      27,
+      33,
+      39,
+      45,
+      51,
+      57
+     ],
+     "mean_pose_quality": 0.7018,
+     "min_pose_quality": 0.553,
+     "min_gap": 6,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.4286,
+     "median_distance_to_shot": 1.0
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      21,
+      25,
+      28,
+      32,
+      35,
+      39,
+      57
+     ],
+     "mean_pose_quality": 0.4204,
+     "min_pose_quality": 0.0,
+     "min_gap": 3,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F2_motion_top": {
+     "frames": [
+      25,
+      26,
+      29,
+      30,
+      32,
+      33,
+      34
+     ],
+     "mean_pose_quality": 0.2207,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 0,
+     "in_shot_fraction": 0.7143,
+     "median_distance_to_shot": 0.0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      21,
+      27,
+      31,
+      35,
+      37,
+      39,
+      53
+     ],
+     "mean_pose_quality": 0.4875,
+     "min_pose_quality": 0.0,
+     "min_gap": 2,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F4_optimized": {
+     "frames": [
+      21,
+      26,
+      31,
+      33,
+      38,
+      40,
+      52
+     ],
+     "mean_pose_quality": 0.7553,
+     "min_pose_quality": 0.6528,
+     "min_gap": 2,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    }
+   }
+  },
+  {
+   "clip_id": "pro_player_front_03.mp4",
+   "split": "dev",
+   "identity_correct": true,
+   "gt_shot": [
+    55,
+    78
+   ],
+   "region": [
+    49,
+    85
+   ],
+   "pool_size": 37,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      49,
+      55,
+      61,
+      67,
+      73,
+      79,
+      85
+     ],
+     "mean_pose_quality": 0.3975,
+     "min_pose_quality": 0.0,
+     "min_gap": 6,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      49,
+      53,
+      56,
+      60,
+      63,
+      67,
+      85
+     ],
+     "mean_pose_quality": 0.2996,
+     "min_pose_quality": 0.0,
+     "min_gap": 3,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F2_motion_top": {
+     "frames": [
+      57,
+      58,
+      62,
+      64,
+      66,
+      67,
+      70
+     ],
+     "mean_pose_quality": 0.2057,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 4,
+     "in_shot_fraction": 1.0,
+     "median_distance_to_shot": 0.0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      49,
+      54,
+      59,
+      63,
+      66,
+      67,
+      81
+     ],
+     "mean_pose_quality": 0.1909,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F4_optimized": {
+     "frames": [
+      49,
+      54,
+      57,
+      68,
+      70,
+      77,
+      84
+     ],
+     "mean_pose_quality": 0.7491,
+     "min_pose_quality": 0.5974,
+     "min_gap": 2,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    }
+   }
+  },
+  {
+   "clip_id": "pro_player_front_06.mp4",
+   "split": "eval",
+   "identity_correct": false,
+   "gt_shot": [
+    38,
+    58
+   ],
+   "region": [
+    29,
+    65
+   ],
+   "pool_size": 0,
+   "methods": {
+    "F0_uniform": {
+     "frames": null
+    },
+    "F1_contact_anchored": {
+     "frames": null
+    },
+    "F2_motion_top": {
+     "frames": null
+    },
+    "F3_phase_aware": {
+     "frames": null
+    },
+    "F4_optimized": {
+     "frames": null
+    }
+   }
+  },
+  {
+   "clip_id": "pro_player_front_08.mp4",
+   "split": "dev",
+   "identity_correct": true,
+   "gt_shot": null,
+   "region": [
+    0,
+    23
+   ],
+   "pool_size": 24,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      0,
+      4,
+      8,
+      11,
+      15,
+      19,
+      23
+     ],
+     "mean_pose_quality": 0.4771,
+     "min_pose_quality": 0.0,
+     "min_gap": 3,
+     "contact_adjacent": 2
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      23
+     ],
+     "mean_pose_quality": 0.111,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 4
+    },
+    "F2_motion_top": {
+     "frames": [
+      4,
+      14,
+      16,
+      20,
+      21,
+      22,
+      23
+     ],
+     "mean_pose_quality": 0.4832,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 1
+    },
+    "F3_phase_aware": {
+     "frames": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      6,
+      19
+     ],
+     "mean_pose_quality": 0.111,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 4
+    },
+    "F4_optimized": {
+     "frames": [
+      0,
+      7,
+      11,
+      13,
+      16,
+      18,
+      21
+     ],
+     "mean_pose_quality": 0.8333,
+     "min_pose_quality": 0.7305,
+     "min_gap": 2,
+     "contact_adjacent": 1
+    }
+   }
+  },
+  {
+   "clip_id": "pro_player_front_10.mp4",
+   "split": "eval",
+   "identity_correct": true,
+   "gt_shot": [
+    39,
+    58
+   ],
+   "region": [
+    30,
+    66
+   ],
+   "pool_size": 19,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      30,
+      33,
+      36,
+      39,
+      42,
+      45,
+      48
+     ],
+     "mean_pose_quality": 0.2141,
+     "min_pose_quality": 0.0,
+     "min_gap": 3,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      30,
+      34,
+      37,
+      41,
+      44,
+      48,
+      48
+     ],
+     "mean_pose_quality": 0.0912,
+     "min_pose_quality": 0.0,
+     "min_gap": 0,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F2_motion_top": {
+     "frames": [
+      41,
+      42,
+      43,
+      45,
+      46,
+      47,
+      48
+     ],
+     "mean_pose_quality": 0.1228,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 4,
+     "in_shot_fraction": 1.0,
+     "median_distance_to_shot": 0.0
+    },
+    "F3_phase_aware": {
+     "frames": null,
+     "mean_pose_quality": null,
+     "min_pose_quality": null,
+     "min_gap": null,
+     "contact_adjacent": null
+    },
+    "F4_optimized": {
+     "frames": null,
+     "mean_pose_quality": null,
+     "min_pose_quality": null,
+     "min_gap": null,
+     "contact_adjacent": null
+    }
+   }
+  },
+  {
+   "clip_id": "pro_player_front_12.mp4",
+   "split": "dev",
+   "identity_correct": true,
+   "gt_shot": [
+    30,
+    50
+   ],
+   "region": [
+    21,
+    57
+   ],
+   "pool_size": 37,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      21,
+      27,
+      33,
+      39,
+      45,
+      51,
+      57
+     ],
+     "mean_pose_quality": 0.1071,
+     "min_pose_quality": 0.0,
+     "min_gap": 6,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.4286,
+     "median_distance_to_shot": 1.0
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      21,
+      25,
+      28,
+      32,
+      35,
+      39,
+      57
+     ],
+     "mean_pose_quality": 0.413,
+     "min_pose_quality": 0.0,
+     "min_gap": 3,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.4286,
+     "median_distance_to_shot": 2.0
+    },
+    "F2_motion_top": {
+     "frames": [
+      22,
+      26,
+      29,
+      30,
+      31,
+      32,
+      39
+     ],
+     "mean_pose_quality": 0.2691,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      21,
+      27,
+      31,
+      34,
+      39,
+      40,
+      52
+     ],
+     "mean_pose_quality": 0.0,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F4_optimized": {
+     "frames": null,
+     "mean_pose_quality": null,
+     "min_pose_quality": null,
+     "min_gap": null,
+     "contact_adjacent": null
+    }
+   }
+  },
+  {
+   "clip_id": "pro_player_front_14.mp4",
+   "split": "eval",
+   "identity_correct": true,
+   "gt_shot": [
+    5,
+    28
+   ],
+   "region": [
+    0,
+    35
+   ],
+   "pool_size": 35,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      0,
+      6,
+      12,
+      17,
+      23,
+      29,
+      35
+     ],
+     "mean_pose_quality": 0.093,
+     "min_pose_quality": 0.0,
+     "min_gap": 5,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      0,
+      3,
+      7,
+      10,
+      14,
+      17,
+      35
+     ],
+     "mean_pose_quality": 0.3521,
+     "min_pose_quality": 0.0,
+     "min_gap": 3,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F2_motion_top": {
+     "frames": [
+      1,
+      6,
+      20,
+      27,
+      29,
+      31,
+      32
+     ],
+     "mean_pose_quality": 0.0,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.4286,
+     "median_distance_to_shot": 1.0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      0,
+      5,
+      10,
+      13,
+      15,
+      19,
+      30
+     ],
+     "mean_pose_quality": 0.3511,
+     "min_pose_quality": 0.0,
+     "min_gap": 2,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.7143,
+     "median_distance_to_shot": 0.0
+    },
+    "F4_optimized": {
+     "frames": null,
+     "mean_pose_quality": null,
+     "min_pose_quality": null,
+     "min_gap": null,
+     "contact_adjacent": null
+    }
+   }
+  },
+  {
+   "clip_id": "pro_player_front_16.mp4",
+   "split": "eval",
+   "identity_correct": true,
+   "gt_shot": [
+    15,
+    35
+   ],
+   "region": [
+    6,
+    42
+   ],
+   "pool_size": 37,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      6,
+      12,
+      18,
+      24,
+      30,
+      36,
+      42
+     ],
+     "mean_pose_quality": 0.4443,
+     "min_pose_quality": 0.0,
+     "min_gap": 6,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.4286,
+     "median_distance_to_shot": 1.0
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      6,
+      10,
+      13,
+      17,
+      20,
+      24,
+      42
+     ],
+     "mean_pose_quality": 0.5768,
+     "min_pose_quality": 0.0,
+     "min_gap": 3,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.4286,
+     "median_distance_to_shot": 2.0
+    },
+    "F2_motion_top": {
+     "frames": [
+      10,
+      17,
+      20,
+      21,
+      22,
+      23,
+      24
+     ],
+     "mean_pose_quality": 0.4307,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 4,
+     "in_shot_fraction": 0.8571,
+     "median_distance_to_shot": 0.0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      6,
+      12,
+      16,
+      19,
+      22,
+      24,
+      38
+     ],
+     "mean_pose_quality": 0.3492,
+     "min_pose_quality": 0.0,
+     "min_gap": 2,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F4_optimized": {
+     "frames": [
+      6,
+      11,
+      17,
+      20,
+      24,
+      26,
+      38
+     ],
+     "mean_pose_quality": 0.8192,
+     "min_pose_quality": 0.6554,
+     "min_gap": 2,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    }
+   }
+  },
+  {
+   "clip_id": "pro_player_front_18.mp4",
+   "split": "eval",
+   "identity_correct": false,
+   "gt_shot": null,
+   "region": [
+    1,
+    37
+   ],
+   "pool_size": 0,
+   "methods": {
+    "F0_uniform": {
+     "frames": null
+    },
+    "F1_contact_anchored": {
+     "frames": null
+    },
+    "F2_motion_top": {
+     "frames": null
+    },
+    "F3_phase_aware": {
+     "frames": null
+    },
+    "F4_optimized": {
+     "frames": null
+    }
+   }
+  },
+  {
+   "clip_id": "pro_player_front_20.mp4",
+   "split": "eval",
+   "identity_correct": true,
+   "gt_shot": null,
+   "region": [
+    34,
+    70
+   ],
+   "pool_size": 37,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      34,
+      40,
+      46,
+      52,
+      58,
+      64,
+      70
+     ],
+     "mean_pose_quality": 0.4232,
+     "min_pose_quality": 0.0,
+     "min_gap": 6,
+     "contact_adjacent": 1
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      34,
+      38,
+      41,
+      45,
+      48,
+      52,
+      70
+     ],
+     "mean_pose_quality": 0.4058,
+     "min_pose_quality": 0.0,
+     "min_gap": 3,
+     "contact_adjacent": 1
+    },
+    "F2_motion_top": {
+     "frames": [
+      47,
+      51,
+      52,
+      53,
+      54,
+      55,
+      59
+     ],
+     "mean_pose_quality": 0.4065,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 5
+    },
+    "F3_phase_aware": {
+     "frames": [
+      35,
+      40,
+      44,
+      48,
+      51,
+      52,
+      64
+     ],
+     "mean_pose_quality": 0.4868,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 2
+    },
+    "F4_optimized": {
+     "frames": [
+      37,
+      40,
+      43,
+      46,
+      50,
+      52,
+      62
+     ],
+     "mean_pose_quality": 0.7482,
+     "min_pose_quality": 0.5749,
+     "min_gap": 2,
+     "contact_adjacent": 2
+    }
+   }
+  },
+  {
+   "clip_id": "pro_player_front_42.mp4",
+   "split": "dev",
+   "identity_correct": true,
+   "gt_shot": null,
+   "region": [
+    62,
+    89
+   ],
+   "pool_size": 19,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      62,
+      65,
+      68,
+      71,
+      74,
+      77,
+      80
+     ],
+     "mean_pose_quality": 0.9535,
+     "min_pose_quality": 0.8317,
+     "min_gap": 3,
+     "contact_adjacent": 2
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      62,
+      66,
+      69,
+      73,
+      76,
+      80,
+      80
+     ],
+     "mean_pose_quality": 0.9234,
+     "min_pose_quality": 0.8317,
+     "min_gap": 0,
+     "contact_adjacent": 2
+    },
+    "F2_motion_top": {
+     "frames": [
+      68,
+      73,
+      75,
+      77,
+      78,
+      79,
+      80
+     ],
+     "mean_pose_quality": 0.9333,
+     "min_pose_quality": 0.8317,
+     "min_gap": 1,
+     "contact_adjacent": 4
+    },
+    "F3_phase_aware": {
+     "frames": null,
+     "mean_pose_quality": null,
+     "min_pose_quality": null,
+     "min_gap": null,
+     "contact_adjacent": null
+    },
+    "F4_optimized": {
+     "frames": [
+      62,
+      68,
+      72,
+      74,
+      76,
+      78,
+      80
+     ],
+     "mean_pose_quality": 0.9486,
+     "min_pose_quality": 0.8317,
+     "min_gap": 2,
+     "contact_adjacent": 2
+    }
+   }
+  },
+  {
+   "clip_id": "pro_player_front_44.mp4",
+   "split": "dev",
+   "identity_correct": true,
+   "gt_shot": [
+    23,
+    45
+   ],
+   "region": [
+    14,
+    50
+   ],
+   "pool_size": 35,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      14,
+      20,
+      26,
+      32,
+      38,
+      44,
+      50
+     ],
+     "mean_pose_quality": 0.2423,
+     "min_pose_quality": 0.0,
+     "min_gap": 6,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      14,
+      18,
+      21,
+      25,
+      28,
+      32,
+      50
+     ],
+     "mean_pose_quality": 0.1256,
+     "min_pose_quality": 0.0,
+     "min_gap": 3,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.4286,
+     "median_distance_to_shot": 2.0
+    },
+    "F2_motion_top": {
+     "frames": [
+      21,
+      23,
+      25,
+      30,
+      31,
+      33,
+      35
+     ],
+     "mean_pose_quality": 0.2178,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 4,
+     "in_shot_fraction": 0.8571,
+     "median_distance_to_shot": 0.0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      14,
+      19,
+      24,
+      28,
+      31,
+      33,
+      46
+     ],
+     "mean_pose_quality": 0.2257,
+     "min_pose_quality": 0.0,
+     "min_gap": 2,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.5714,
+     "median_distance_to_shot": 0.0
+    },
+    "F4_optimized": {
+     "frames": null,
+     "mean_pose_quality": null,
+     "min_pose_quality": null,
+     "min_gap": null,
+     "contact_adjacent": null
+    }
+   }
+  },
+  {
+   "clip_id": "rishi_front_2.mp4",
+   "split": "eval",
+   "identity_correct": false,
+   "gt_shot": null,
+   "region": [
+    210,
+    199
+   ],
+   "pool_size": 0,
+   "methods": {
+    "F0_uniform": {
+     "frames": null
+    },
+    "F1_contact_anchored": {
+     "frames": null
+    },
+    "F2_motion_top": {
+     "frames": null
+    },
+    "F3_phase_aware": {
+     "frames": null
+    },
+    "F4_optimized": {
+     "frames": null
+    }
+   }
+  },
+  {
+   "clip_id": "roa_front_1.mp4",
+   "split": "dev",
+   "identity_correct": true,
+   "gt_shot": [
+    110,
+    145
+   ],
+   "region": [
+    109,
+    145
+   ],
+   "pool_size": 37,
+   "methods": {
+    "F0_uniform": {
+     "frames": [
+      109,
+      115,
+      121,
+      127,
+      133,
+      139,
+      145
+     ],
+     "mean_pose_quality": 0.3243,
+     "min_pose_quality": 0.0,
+     "min_gap": 6,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.8571,
+     "median_distance_to_shot": 0.0
+    },
+    "F1_contact_anchored": {
+     "frames": [
+      109,
+      113,
+      116,
+      120,
+      123,
+      127,
+      145
+     ],
+     "mean_pose_quality": 0.2362,
+     "min_pose_quality": 0.0,
+     "min_gap": 3,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 0.8571,
+     "median_distance_to_shot": 0.0
+    },
+    "F2_motion_top": {
+     "frames": [
+      110,
+      111,
+      112,
+      113,
+      127,
+      128,
+      129
+     ],
+     "mean_pose_quality": 0.1054,
+     "min_pose_quality": 0.0,
+     "min_gap": 1,
+     "contact_adjacent": 3,
+     "in_shot_fraction": 1.0,
+     "median_distance_to_shot": 0.0
+    },
+    "F3_phase_aware": {
+     "frames": [
+      109,
+      115,
+      119,
+      122,
+      126,
+      128,
+      139
+     ],
+     "mean_pose_quality": 0.125,
+     "min_pose_quality": 0.0,
+     "min_gap": 2,
+     "contact_adjacent": 2,
+     "in_shot_fraction": 0.8571,
+     "median_distance_to_shot": 0.0
+    },
+    "F4_optimized": {
+     "frames": [
+      114,
+      123,
+      129,
+      131,
+      133,
+      135,
+      145
+     ],
+     "mean_pose_quality": 0.6935,
+     "min_pose_quality": 0.5706,
+     "min_gap": 2,
+     "contact_adjacent": 1,
+     "in_shot_fraction": 1.0,
+     "median_distance_to_shot": 0.0
+    }
+   }
+  },
+  {
+   "clip_id": "sanjay_front _1.mp4",
+   "split": "eval",
+   "identity_correct": false,
+   "gt_shot": null,
+   "region": [
+    32,
+    68
+   ],
+   "pool_size": 0,
+   "methods": {
+    "F0_uniform": {
+     "frames": null
+    },
+    "F1_contact_anchored": {
+     "frames": null
+    },
+    "F2_motion_top": {
+     "frames": null
+    },
+    "F3_phase_aware": {
+     "frames": null
+    },
+    "F4_optimized": {
+     "frames": null
+    }
+   }
+  }
+ ]
+}
