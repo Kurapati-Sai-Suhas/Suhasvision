@@ -1,0 +1,193 @@
+{
+ "n": 12,
+ "strata_targeted": [
+  "strong_C0",
+  "weak_C0",
+  "identity_correct",
+  "identity_failure",
+  "front_view",
+  "side_view",
+  "occlusion",
+  "high_motion",
+  "background_heavy"
+ ],
+ "selection": "adversarial stratification \u2014 deliberately includes the weakest C0 predictions and identity failures, not a random sample",
+ "clips": [
+  {
+   "clip_id": "kohli_side_10.mp4",
+   "split": "eval",
+   "identity_correct": true,
+   "coherence": "VALID_SINGLE_SHOT",
+   "contact_type": "CONTACT_ADJACENT",
+   "c0_error_vs_original": 0,
+   "mean_min_visibility": 0.522,
+   "mean_local_motion": 6.374,
+   "view": "side",
+   "strata": [
+    "strong_C0"
+   ]
+  },
+  {
+   "clip_id": "pro_player_back_27.mp4",
+   "split": "dev",
+   "identity_correct": true,
+   "coherence": "VALID_SINGLE_SHOT",
+   "contact_type": "CONTACT_ADJACENT",
+   "c0_error_vs_original": 0,
+   "mean_min_visibility": 0.239,
+   "mean_local_motion": 10.297,
+   "view": "back",
+   "strata": [
+    "strong_C0"
+   ]
+  },
+  {
+   "clip_id": "beginnerunorthodox1_front_01.mp4",
+   "split": "dev",
+   "identity_correct": false,
+   "coherence": "VALID_SINGLE_SHOT",
+   "contact_type": "CONTACT_ADJACENT",
+   "c0_error_vs_original": 5,
+   "mean_min_visibility": null,
+   "mean_local_motion": null,
+   "view": "front",
+   "strata": [
+    "weak_C0",
+    "identity_failure",
+    "front_view"
+   ]
+  },
+  {
+   "clip_id": "instagram1_front_01.mp4",
+   "split": "dev",
+   "identity_correct": true,
+   "coherence": "VALID_SINGLE_SHOT",
+   "contact_type": "EXACT",
+   "c0_error_vs_original": 4,
+   "mean_min_visibility": 0.113,
+   "mean_local_motion": 6.438,
+   "view": "front",
+   "strata": [
+    "weak_C0",
+    "front_view"
+   ]
+  },
+  {
+   "clip_id": "Sai_front_1.mp4",
+   "split": "dev",
+   "identity_correct": false,
+   "coherence": "EXCESSIVE_DURATION",
+   "contact_type": "NOT_VISIBLE",
+   "c0_error_vs_original": null,
+   "mean_min_visibility": null,
+   "mean_local_motion": null,
+   "view": "front",
+   "strata": [
+    "identity_failure",
+    "front_view",
+    "background_heavy_or_invalid"
+   ]
+  },
+  {
+   "clip_id": "instagram2_front_03.mp4",
+   "split": "eval",
+   "identity_correct": false,
+   "coherence": "VALID_SINGLE_SHOT",
+   "contact_type": "EXACT",
+   "c0_error_vs_original": 2,
+   "mean_min_visibility": null,
+   "mean_local_motion": null,
+   "view": "front",
+   "strata": [
+    "identity_failure"
+   ]
+  },
+  {
+   "clip_id": "Sai_front_3.mp4",
+   "split": "dev",
+   "identity_correct": true,
+   "coherence": "MULTIPLE_SHOTS",
+   "contact_type": "AMBIGUOUS",
+   "c0_error_vs_original": null,
+   "mean_min_visibility": 0.188,
+   "mean_local_motion": 13.242,
+   "view": "front",
+   "strata": [
+    "identity_correct",
+    "front_view",
+    "background_heavy_or_invalid"
+   ]
+  },
+  {
+   "clip_id": "instagram1_front_03.mp4",
+   "split": "eval",
+   "identity_correct": true,
+   "coherence": "MULTIPLE_SHOTS",
+   "contact_type": "AMBIGUOUS",
+   "c0_error_vs_original": null,
+   "mean_min_visibility": 0.162,
+   "mean_local_motion": 5.635,
+   "view": "front",
+   "strata": [
+    "front_view",
+    "background_heavy_or_invalid"
+   ]
+  },
+  {
+   "clip_id": "kohli_side_04.mp4",
+   "split": "eval",
+   "identity_correct": true,
+   "coherence": "MULTIPLE_SHOTS",
+   "contact_type": "AMBIGUOUS",
+   "c0_error_vs_original": null,
+   "mean_min_visibility": 0.57,
+   "mean_local_motion": 8.727,
+   "view": "side",
+   "strata": [
+    "side_view"
+   ]
+  },
+  {
+   "clip_id": "pro_player_back_40.mp4",
+   "split": "eval",
+   "identity_correct": true,
+   "coherence": "SCENE_CUT",
+   "contact_type": "NOT_VISIBLE",
+   "c0_error_vs_original": null,
+   "mean_min_visibility": 0.056,
+   "mean_local_motion": 13.024,
+   "view": "back",
+   "strata": [
+    "occlusion"
+   ]
+  },
+  {
+   "clip_id": "kohli_side_14.mp4",
+   "split": "dev",
+   "identity_correct": true,
+   "coherence": "VALID_SINGLE_SHOT",
+   "contact_type": "CONTACT_ADJACENT",
+   "c0_error_vs_original": 1,
+   "mean_min_visibility": 0.615,
+   "mean_local_motion": 15.633,
+   "view": "side",
+   "strata": [
+    "high_motion"
+   ]
+  },
+  {
+   "clip_id": "instagram2_front_01.mp4",
+   "split": "eval",
+   "identity_correct": true,
+   "coherence": "AMBIGUOUS",
+   "contact_type": "AMBIGUOUS",
+   "c0_error_vs_original": null,
+   "mean_min_visibility": 0.141,
+   "mean_local_motion": 10.252,
+   "view": "front",
+   "strata": [
+    "background_heavy_or_invalid"
+   ]
+  }
+ ]
+}

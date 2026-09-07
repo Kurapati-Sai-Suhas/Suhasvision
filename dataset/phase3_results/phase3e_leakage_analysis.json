@@ -1,0 +1,226 @@
+{
+ "what_this_is": "Partial leakage test using the EXISTING re-annotation. Both passes saw the contact sheets with C0 drawn on them, so this is NOT a blind study and cannot prove independence.",
+ "n_double_annotated": 16,
+ "n_usable_for_contact": 10,
+ "contact": {
+  "human_vs_human": {
+   "n": 10,
+   "median": 1.0,
+   "mean": 0.6,
+   "max": 1,
+   "within_1": 1.0,
+   "within_2": 1.0,
+   "within_3": 1.0
+  },
+  "C0_vs_pass1": {
+   "n": 10,
+   "median": 1.0,
+   "mean": 1.1,
+   "max": 4,
+   "within_1": 0.7,
+   "within_2": 0.9,
+   "within_3": 0.9
+  },
+  "C0_vs_pass2": {
+   "n": 10,
+   "median": 1.0,
+   "mean": 1.5,
+   "max": 4,
+   "within_1": 0.6,
+   "within_2": 0.8,
+   "within_3": 0.9
+  },
+  "directional_verdict": "AGAINST strong leakage \u2014 the two annotation passes agree with each other more closely than either agrees with C0, so they share information C0 does not carry."
+ },
+ "shot_boundaries": {
+  "n": 10,
+  "human_vs_human_start": {
+   "n": 10,
+   "median": 1.0,
+   "mean": 1.3,
+   "max": 2,
+   "within_1": 0.7,
+   "within_2": 1.0,
+   "within_3": 1.0
+  },
+  "human_vs_human_end": {
+   "n": 10,
+   "median": 1.0,
+   "mean": 1.0,
+   "max": 1,
+   "within_1": 1.0,
+   "within_2": 1.0,
+   "within_3": 1.0
+  }
+ },
+ "contact_offset_convention": {
+  "pass1": {
+   "n": 10,
+   "contact_minus_start": {
+    "mean": 10.6,
+    "sd": 2.84
+   },
+   "end_minus_contact": {
+    "mean": 12.8,
+    "sd": 2.04
+   }
+  },
+  "pass2": {
+   "n": 10,
+   "contact_minus_start": {
+    "mean": 9.9,
+    "sd": 2.47
+   },
+   "end_minus_contact": {
+    "mean": 12.0,
+    "sd": 2.1
+   }
+  }
+ },
+ "per_clip": [
+  {
+   "clip_id": "instagram1_front_01.mp4",
+   "pass1_contact": 16,
+   "pass2_contact": 16,
+   "c0": 20,
+   "human_human_delta": 0,
+   "c0_vs_pass1": 4,
+   "c0_vs_pass2": 4
+  },
+  {
+   "clip_id": "instagram2_front_03.mp4",
+   "pass1_contact": 33,
+   "pass2_contact": 33,
+   "c0": 35,
+   "human_human_delta": 0,
+   "c0_vs_pass1": 2,
+   "c0_vs_pass2": 2
+  },
+  {
+   "clip_id": "roa_front_1.mp4",
+   "pass1_contact": 127,
+   "pass2_contact": 127,
+   "c0": 127,
+   "human_human_delta": 0,
+   "c0_vs_pass1": 0,
+   "c0_vs_pass2": 0
+  },
+  {
+   "clip_id": "pro_player_front_44.mp4",
+   "pass1_contact": 31,
+   "pass2_contact": 31,
+   "c0": 32,
+   "human_human_delta": 0,
+   "c0_vs_pass1": 1,
+   "c0_vs_pass2": 1
+  },
+  {
+   "clip_id": "kohli_side_24.mp4",
+   "pass1_contact": 51,
+   "pass2_contact": 52,
+   "c0": 52,
+   "human_human_delta": 1,
+   "c0_vs_pass1": 1,
+   "c0_vs_pass2": 0
+  },
+  {
+   "clip_id": "kohli_side_28.mp4",
+   "pass1_contact": 63,
+   "pass2_contact": 62,
+   "c0": 64,
+   "human_human_delta": 1,
+   "c0_vs_pass1": 1,
+   "c0_vs_pass2": 2
+  },
+  {
+   "clip_id": "pro_player_back_33.mp4",
+   "pass1_contact": 31,
+   "pass2_contact": 32,
+   "c0": 31,
+   "human_human_delta": 1,
+   "c0_vs_pass1": 0,
+   "c0_vs_pass2": 1
+  },
+  {
+   "clip_id": "pro_player_front_12.mp4",
+   "pass1_contact": 39,
+   "pass2_contact": 40,
+   "c0": 39,
+   "human_human_delta": 1,
+   "c0_vs_pass1": 0,
+   "c0_vs_pass2": 1
+  },
+  {
+   "clip_id": "pro_player_front_16.mp4",
+   "pass1_contact": 24,
+   "pass2_contact": 25,
+   "c0": 24,
+   "human_human_delta": 1,
+   "c0_vs_pass1": 0,
+   "c0_vs_pass2": 1
+  },
+  {
+   "clip_id": "pro_player_back_31.mp4",
+   "pass1_contact": 56,
+   "pass2_contact": 57,
+   "c0": 54,
+   "human_human_delta": 1,
+   "c0_vs_pass1": 2,
+   "c0_vs_pass2": 3
+  },
+  {
+   "clip_id": "pro_player_front_20.mp4",
+   "pass1_contact": null,
+   "pass2_contact": null,
+   "c0": 52,
+   "human_human_delta": null,
+   "c0_vs_pass1": null,
+   "c0_vs_pass2": null
+  },
+  {
+   "clip_id": "pro_player_front_42.mp4",
+   "pass1_contact": null,
+   "pass2_contact": null,
+   "c0": 80,
+   "human_human_delta": null,
+   "c0_vs_pass1": null,
+   "c0_vs_pass2": null
+  },
+  {
+   "clip_id": "sanjay_front _1.mp4",
+   "pass1_contact": null,
+   "pass2_contact": null,
+   "c0": 50,
+   "human_human_delta": null,
+   "c0_vs_pass1": null,
+   "c0_vs_pass2": null
+  },
+  {
+   "clip_id": "kohli_side_06.mp4",
+   "pass1_contact": null,
+   "pass2_contact": null,
+   "c0": 106,
+   "human_human_delta": null,
+   "c0_vs_pass1": null,
+   "c0_vs_pass2": null
+  },
+  {
+   "clip_id": "pro_player_back_36.mp4",
+   "pass1_contact": null,
+   "pass2_contact": null,
+   "c0": 42,
+   "human_human_delta": null,
+   "c0_vs_pass1": null,
+   "c0_vs_pass2": null
+  },
+  {
+   "clip_id": "instagram1_front_03.mp4",
+   "pass1_contact": null,
+   "pass2_contact": 16,
+   "c0": 24,
+   "human_human_delta": null,
+   "c0_vs_pass1": null,
+   "c0_vs_pass2": 8
+  }
+ ]
+}

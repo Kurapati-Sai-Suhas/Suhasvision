@@ -1,0 +1,23 @@
+# Blind annotation answer file — Phase 3E
+#
+# Fill ONE line per clip, JSON per line. Do not open any other phase3 result
+# file, and do not look at the existing annotations, before finishing.
+#
+# blind_contact_type : EXACT | CONTACT_ADJACENT | AMBIGUOUS | NOT_VISIBLE
+# blind_contact_frame: integer, or null for AMBIGUOUS / NOT_VISIBLE
+# blind_confidence   : HIGH | MEDIUM | LOW
+# blind_shot_valid   : true/false
+# blind_shot_start/end: integers, or null when not a valid single shot
+#
+{"clip_id": "kohli_side_10.mp4", "annotator": "REPLACE_ME", "blind_contact_type": null, "blind_contact_frame": null, "blind_confidence": null, "blind_shot_valid": null, "blind_shot_start": null, "blind_shot_end": null, "notes": ""}
+{"clip_id": "pro_player_back_27.mp4", "annotator": "REPLACE_ME", "blind_contact_type": null, "blind_contact_frame": null, "blind_confidence": null, "blind_shot_valid": null, "blind_shot_start": null, "blind_shot_end": null, "notes": ""}
+{"clip_id": "beginnerunorthodox1_front_01.mp4", "annotator": "REPLACE_ME", "blind_contact_type": null, "blind_contact_frame": null, "blind_confidence": null, "blind_shot_valid": null, "blind_shot_start": null, "blind_shot_end": null, "notes": ""}
+{"clip_id": "instagram1_front_01.mp4", "annotator": "REPLACE_ME", "blind_contact_type": null, "blind_contact_frame": null, "blind_confidence": null, "blind_shot_valid": null, "blind_shot_start": null, "blind_shot_end": null, "notes": ""}
+{"clip_id": "Sai_front_1.mp4", "annotator": "REPLACE_ME", "blind_contact_type": null, "blind_contact_frame": null, "blind_confidence": null, "blind_shot_valid": null, "blind_shot_start": null, "blind_shot_end": null, "notes": ""}
+{"clip_id": "instagram2_front_03.mp4", "annotator": "REPLACE_ME", "blind_contact_type": null, "blind_contact_frame": null, "blind_confidence": null, "blind_shot_valid": null, "blind_shot_start": null, "blind_shot_end": null, "notes": ""}
+{"clip_id": "Sai_front_3.mp4", "annotator": "REPLACE_ME", "blind_contact_type": null, "blind_contact_frame": null, "blind_confidence": null, "blind_shot_valid": null, "blind_shot_start": null, "blind_shot_end": null, "notes": ""}
+{"clip_id": "instagram1_front_03.mp4", "annotator": "REPLACE_ME", "blind_contact_type": null, "blind_contact_frame": null, "blind_confidence": null, "blind_shot_valid": null, "blind_shot_start": null, "blind_shot_end": null, "notes": ""}
+{"clip_id": "kohli_side_04.mp4", "annotator": "REPLACE_ME", "blind_contact_type": null, "blind_contact_frame": null, "blind_confidence": null, "blind_shot_valid": null, "blind_shot_start": null, "blind_shot_end": null, "notes": ""}
+{"clip_id": "pro_player_back_40.mp4", "annotator": "REPLACE_ME", "blind_contact_type": null, "blind_contact_frame": null, "blind_confidence": null, "blind_shot_valid": null, "blind_shot_start": null, "blind_shot_end": null, "notes": ""}
+{"clip_id": "kohli_side_14.mp4", "annotator": "REPLACE_ME", "blind_contact_type": null, "blind_contact_frame": null, "blind_confidence": null, "blind_shot_valid": null, "blind_shot_start": null, "blind_shot_end": null, "notes": ""}
+{"clip_id": "instagram2_front_01.mp4", "annotator": "REPLACE_ME", "blind_contact_type": null, "blind_contact_frame": null, "blind_confidence": null, "blind_shot_valid": null, "blind_shot_start": null, "blind_shot_end": null, "notes": ""}
