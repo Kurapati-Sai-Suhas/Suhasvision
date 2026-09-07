@@ -33,6 +33,8 @@ import os
 import cv2
 import numpy as np
 
+import phase3_failure_taxonomy as FT
+
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 P2 = os.path.join(_MODULE_DIR, "phase2_results")
 P3 = os.path.join(_MODULE_DIR, "phase3_results")
@@ -305,7 +307,111 @@ def overlap_frac(small, big):
     return (iw * ih) / a if a > 0 else 0.0
 
 
-def extract(video_dir, tracks_path, out_path, pad=0.12):
+class PoseFallbackStats:
+    """Counts for the H0/H1 comparison and for the corrected diagnostic.
+
+    `n_box` and `n_pose` are tracked separately because the old code could
+    not: it appended None both when a box was missing and when pose failed,
+    which is what let a tracking failure masquerade as a pose failure. See
+    phase3_failure_taxonomy.
+    """
+
+    def __init__(self):
+        self.n_sampled = 0
+        self.n_box = 0
+        self.n_pose_primary = 0
+        self.n_fallback_calls = 0
+        self.n_fallback_success = 0
+
+    def as_dict(self):
+        return {
+            "n_sampled": self.n_sampled, "n_box": self.n_box,
+            "n_pose_primary": self.n_pose_primary,
+            "n_fallback_calls": self.n_fallback_calls,
+            "n_fallback_success": self.n_fallback_success,
+        }
+
+
+def resolve_pose(primary_pm, rtm, frame, box, crop_box, stats):
+    """The H1 fallback rule, in one place so it can be tested directly.
+
+    Trigger: MediaPipe returned NO pose. Nothing else — not a confidence
+    threshold, not crop size, not jitter. A refusal is a signal the primary
+    model produces for free and cannot be tuned, so there is no threshold here
+    to overfit.
+
+    Returns the pose metrics to use, having updated `stats`.
+    """
+    if primary_pm is not None or rtm is None:
+        return primary_pm
+    stats.n_fallback_calls += 1
+    import phase3_pose_models as PM
+    r = rtm.infer(frame, box)
+    pm = _pose_metrics(PM.to_mediapipe_landmarks(r, crop_box), crop_box)
+    if pm:
+        stats.n_fallback_success += 1
+    return pm
+
+
+def _bat_event(bats, box, pm, x1, y1):
+    """Bat association for one track on one frame.
+
+    Depends on `pm` for the wrist positions, so a pose recovered by the
+    fallback can legitimately change `near_hand`. Factored out so H0 and H1
+    run identical association logic over their own poses.
+    """
+    on_person, near_hand, best_conf = False, False, 0.0
+    for bbox, bconf in bats:
+        if overlap_frac(bbox, box) >= BAT_ON_PERSON_OVERLAP:
+            on_person = True
+            best_conf = max(best_conf, bconf)
+            if pm:
+                bcx = (bbox[0] + bbox[2]) / 2 - x1
+                bcy = (bbox[1] + bbox[3]) / 2 - y1
+                t = pm["torso"]
+                for key in ("lwr", "rwr"):
+                    wx, wy = pm[key][0] * t, pm[key][1] * t
+                    if math.hypot(bcx - wx, bcy - wy) <= BAT_NEAR_HAND_TORSOS * t:
+                        near_hand = True
+    return {"any": bool(bats), "on_person": on_person,
+            "near_hand": near_hand, "conf": best_conf}
+
+
+def _features_for(obs, seq, bat_events, ctx, n_frames, n_idxs):
+    from phase2_batsman_score import track_features
+    feats = {}
+    feats.update(track_features(obs, ctx["frame_w"], ctx["frame_h"],
+                                ctx["frames_processed"]))
+    feats.update(persistence_features(obs, ctx["frames_processed"], n_frames))
+    feats.update(skeleton_features(seq))
+    feats.update(equipment_features(bat_events, seq, n_idxs))
+    feats.update(action_features(seq))
+    return feats
+
+
+def extract(video_dir, tracks_path, out_path, pad=0.12, hybrid_out_path=None,
+            hybrid_variant="rtmpose-s@192x256"):
+    """Semantic features for every candidate track.
+
+    `hybrid_out_path` runs the H0/H1 experiment in ONE pass. Both conditions
+    are computed from the same decoded frames, the same track boxes and the
+    same bat detections; the only difference is that H1 calls RTMPose on the
+    frames where MediaPipe returns no pose:
+
+        H0  MediaPipe only                       -> out_path
+        H1  MediaPipe, RTMPose-s where it refuses -> hybrid_out_path
+
+    Sharing the pass is not just an optimisation. Bat detection is stochastic
+    only in cost, but decoding and detection are expensive enough that running
+    them twice invites drift; computing both conditions from identical inputs
+    makes "everything else held constant" true by construction rather than by
+    intention.
+
+    Note that bat ASSOCIATION differs between conditions even though bat
+    DETECTION is shared: `near_hand` is measured against wrist positions, so a
+    recovered pose can change it. That is a real downstream effect of the
+    fallback and is intentionally not held constant.
+    """
     from phase2_cache_tracks import load_tracks
     from phase2_batsman_score import track_features
     import zero_storage_pipeline as zsp
@@ -314,6 +420,12 @@ def extract(video_dir, tracks_path, out_path, pad=0.12):
     data = load_tracks(tracks_path)
     equip = YOLO("yolo11x.pt")
     out = {}
+    hybrid = {} if hybrid_out_path else None
+    fallback = PoseFallbackStats()
+    rtm = None
+    if hybrid_out_path:
+        import phase3_pose_models as PM
+        rtm = PM.RTMPosePose(variant=hybrid_variant)
 
     for ci, (cid, c) in enumerate(data["clips"].items(), 1):
         path = os.path.join(video_dir, cid)
@@ -356,15 +468,21 @@ def extract(video_dir, tracks_path, out_path, pad=0.12):
         for tid, obs in c["tracks"].items():
             by_frame = {f: b for f, b, _ in obs}
             seq, bat_events = [], []
+            seq_h, bat_h = [], []
+            st = PoseFallbackStats()
 
             for f in idxs:
+                st.n_sampled += 1
                 box = by_frame.get(f)
                 fr = grabbed.get(f)
                 if box is None or fr is None:
-                    seq.append(None)
-                    bat_events.append({"any": bool(bats_by_frame.get(f)),
-                                       "on_person": False, "near_hand": False,
-                                       "conf": 0.0})
+                    # NO BOX. The pose model is never called, so this frame is
+                    # evidence about TRACKING, not about pose. It is counted
+                    # in n_sampled but not in n_box.
+                    empty = {"any": bool(bats_by_frame.get(f)), "on_person": False,
+                             "near_hand": False, "conf": 0.0}
+                    seq.append(None); bat_events.append(empty)
+                    seq_h.append(None); bat_h.append(dict(empty))
                     continue
 
                 h, w = fr.shape[:2]
@@ -373,60 +491,87 @@ def extract(video_dir, tracks_path, out_path, pad=0.12):
                 x2 = min(w, int(box[2] + pad * bw)); y2 = min(h, int(box[3] + pad * bh))
                 crop = fr[y1:y2, x1:x2]
                 if crop.size == 0:
-                    seq.append(None)
-                    bat_events.append({"any": False, "on_person": False,
-                                       "near_hand": False, "conf": 0.0})
+                    empty = {"any": False, "on_person": False,
+                             "near_hand": False, "conf": 0.0}
+                    seq.append(None); bat_events.append(empty)
+                    seq_h.append(None); bat_h.append(dict(empty))
                     continue
+
+                st.n_box += 1
+                bats = bats_by_frame.get(f, [])
 
                 rgb = cv2.cvtColor(crop, cv2.COLOR_BGR2RGB)
                 with zsp._DETECTOR_LOCK:
                     cands = zsp._detect_candidates(zsp._get_shared_detector_locked(), [rgb])
                 lm = cands[0][0] if cands[0] else None
                 pm = _pose_metrics(lm, (x1, y1, x2, y2))
+                if pm:
+                    st.n_pose_primary += 1
                 seq.append(pm)
+                bat_events.append(_bat_event(bats, box, pm, x1, y1))
 
-                # Bat association for THIS track at THIS frame.
-                bats = bats_by_frame.get(f, [])
-                on_person, near_hand, best_conf = False, False, 0.0
-                for bbox, bconf in bats:
-                    if overlap_frac(bbox, box) >= BAT_ON_PERSON_OVERLAP:
-                        on_person = True
-                        best_conf = max(best_conf, bconf)
-                        if pm:
-                            bcx = (bbox[0] + bbox[2]) / 2 - x1
-                            bcy = (bbox[1] + bbox[3]) / 2 - y1
-                            t = pm["torso"]
-                            for key in ("lwr", "rwr"):
-                                wx, wy = pm[key][0] * t, pm[key][1] * t
-                                if math.hypot(bcx - wx, bcy - wy) <= BAT_NEAR_HAND_TORSOS * t:
-                                    near_hand = True
-                bat_events.append({"any": bool(bats), "on_person": on_person,
-                                   "near_hand": near_hand, "conf": best_conf})
+                if rtm is None:
+                    continue
 
-            feats = {}
-            feats.update(track_features(obs, ctx["frame_w"], ctx["frame_h"],
-                                        ctx["frames_processed"]))
-            feats.update(persistence_features(obs, ctx["frames_processed"], n_frames))
-            feats.update(skeleton_features(seq))
-            feats.update(equipment_features(bat_events, seq, len(idxs)))
-            feats.update(action_features(seq))
+                pm_h = resolve_pose(pm, rtm, fr, box, (x1, y1, x2, y2), st)
+                seq_h.append(pm_h)
+                bat_h.append(_bat_event(bats, box, pm_h, x1, y1))
+
+            feats = _features_for(obs, seq, bat_events, ctx, n_frames, len(idxs))
+            diag = FT.decompose(st.n_sampled, st.n_box, st.n_pose_primary)
             clip_out["tracks"][str(tid)] = {
                 "n_obs": len(obs),
                 "features": {k: round(float(v), 5) for k, v in feats.items()},
+                # The corrected decomposition, carried alongside the features
+                # rather than re-derived later from a conflated statistic.
+                # Deliberately NOT added to any system's feature list — that
+                # would change what S2 scores and confound H0 vs H1.
+                "diagnostic": diag,
+                "pose_counts": st.as_dict(),
             }
+            if hybrid is not None:
+                fh = _features_for(obs, seq_h, bat_h, ctx, n_frames, len(idxs))
+                hyb_clip = hybrid.setdefault(
+                    cid, {"split": c["split"], "n_frames": n_frames,
+                          "sampled": idxs, "tracks": {}})
+                hyb_clip["tracks"][str(tid)] = {
+                    "n_obs": len(obs),
+                    "features": {k: round(float(v), 5) for k, v in fh.items()},
+                    "diagnostic": FT.decompose(
+                        st.n_sampled, st.n_box,
+                        st.n_pose_primary + st.n_fallback_success),
+                    "pose_counts": st.as_dict(),
+                }
+                fallback.n_sampled += st.n_sampled
+                fallback.n_box += st.n_box
+                fallback.n_pose_primary += st.n_pose_primary
+                fallback.n_fallback_calls += st.n_fallback_calls
+                fallback.n_fallback_success += st.n_fallback_success
 
         clip_out["context"] = ctx
         out[cid] = clip_out
         if ci % 10 == 0:
             print(f"  {ci}/{len(data['clips'])} clips")
 
+    meta = {"n_sample": N_SAMPLE,
+            "bat_on_person_overlap": BAT_ON_PERSON_OVERLAP,
+            "bat_near_hand_torsos": BAT_NEAR_HAND_TORSOS}
     with open(out_path, "w", encoding="utf-8") as f:
-        json.dump({"n_sample": N_SAMPLE,
-                   "bat_on_person_overlap": BAT_ON_PERSON_OVERLAP,
-                   "bat_near_hand_torsos": BAT_NEAR_HAND_TORSOS,
-                   "clips": out}, f)
+        json.dump({**meta, "condition": "H0_mediapipe_only", "clips": out}, f)
     n_tracks = sum(len(v["tracks"]) for v in out.values())
     print(f"wrote {out_path}  ({len(out)} clips, {n_tracks} tracks)")
+
+    if hybrid is not None:
+        with open(hybrid_out_path, "w", encoding="utf-8") as f:
+            json.dump({**meta,
+                       "condition": "H1_mediapipe_then_rtmpose_fallback",
+                       "hybrid_variant": hybrid_variant,
+                       "fallback_trigger": "MediaPipe returned no pose",
+                       "fallback_stats": fallback.as_dict(),
+                       "clips": hybrid}, f)
+        print(f"wrote {hybrid_out_path}  "
+              f"(fallback fired {fallback.n_fallback_calls} times, "
+              f"recovered {fallback.n_fallback_success})")
 
 
 def main():
@@ -434,9 +579,13 @@ def main():
     ap.add_argument("--videos", default=os.path.join(_MODULE_DIR, "raw_videos"))
     ap.add_argument("--tracks", default=os.path.join(P2, "tracks_yolo11m@640_bytetrack.json"))
     ap.add_argument("--out", default=os.path.join(P3, "phase3_semantic_features.json"))
+    ap.add_argument("--hybrid-out", default=None,
+                    help="also emit H1 features (MediaPipe -> RTMPose fallback) here")
+    ap.add_argument("--hybrid-variant", default="rtmpose-s@192x256")
     args = ap.parse_args()
     os.makedirs(P3, exist_ok=True)
-    extract(args.videos, args.tracks, args.out)
+    extract(args.videos, args.tracks, args.out,
+            hybrid_out_path=args.hybrid_out, hybrid_variant=args.hybrid_variant)
 
 
 if __name__ == "__main__":

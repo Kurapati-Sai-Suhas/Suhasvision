@@ -198,6 +198,48 @@ class RTMPosePose:
         return PoseResult(pts, sc)
 
 
+class _Landmark:
+    """Duck-type of a MediaPipe NormalizedLandmark: .x/.y in [0,1] of the
+    crop, plus .visibility."""
+    __slots__ = ("x", "y", "z", "visibility")
+
+    def __init__(self, x, y, visibility):
+        self.x = x
+        self.y = y
+        self.z = 0.0          # RTMPose 2D has no depth; see module docstring
+        self.visibility = visibility
+
+
+def to_mediapipe_landmarks(pose, box):
+    """Adapt a PoseResult (absolute frame pixels) to the landmark list that
+    phase3_semantic_features._pose_metrics() expects.
+
+    _pose_metrics() indexes MediaPipe's 33-point layout and reads `.x`/`.y` as
+    fractions of the CROP. Rather than fork that function for a second
+    keypoint layout — which would risk the two paths drifting apart — the
+    RTMPose skeleton is placed at the MediaPipe indices so the downstream
+    semantic feature code is byte-for-byte the same for both backends. That is
+    what makes H0 and H1 differ only in the pose model.
+
+    Returns None when the pose is unusable, matching the `lm = ... if ... else
+    None` convention at the call site.
+    """
+    if not (pose and pose.ok):
+        return None
+    x1, y1, x2, y2 = box
+    w, h = (x2 - x1), (y2 - y1)
+    if w <= 0 or h <= 0:
+        return None
+    lms = [_Landmark(0.0, 0.0, 0.0) for _ in range(33)]
+    for name, idx in MEDIAPIPE_IDX.items():
+        p = pose.pts.get(name)
+        if p is None:
+            continue
+        lms[idx] = _Landmark((p[0] - x1) / w, (p[1] - y1) / h,
+                             float(pose.scores.get(name, 0.0)))
+    return lms
+
+
 # ---------------------------------------------------------------------------
 # Quality measures — none of these need ground truth
 # ---------------------------------------------------------------------------

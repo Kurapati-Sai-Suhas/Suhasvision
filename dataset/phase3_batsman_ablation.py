@@ -120,6 +120,11 @@ def load_everything(tracks_path, feats_path):
             "clip_id": cid, "split": fc["split"], "gt_track": gt_tid,
             "gt_match_frames": n_match, "n_gt_frames": len(gt_frames),
             "tracks": {int(t): v["features"] for t, v in fc["tracks"].items()},
+            # Corrected coverage/pose decomposition, carried so failure
+            # categorisation can tell tracking from pose. Never fed to any
+            # system's feature list.
+            "diagnostics": {int(t): v.get("diagnostic")
+                            for t, v in fc["tracks"].items() if v.get("diagnostic")},
             "n_tracks": len(fc["tracks"]),
         })
     return rows

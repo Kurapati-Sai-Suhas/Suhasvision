@@ -1,0 +1,28 @@
+{
+ "variant": "rtmpose-s@192x256",
+ "device": "CPU (both models; no CUDAExecutionProvider available)",
+ "method": "H0 and H1 timed interleaved in one warm process on identical crops",
+ "n_work_items": 315,
+ "n_clips": 12,
+ "mediapipe_per_call": {
+  "mean_ms": 53.773,
+  "median_ms": 52.632,
+  "total_s": 16.938,
+  "n": 315
+ },
+ "rtmpose_fallback_per_call": {
+  "mean_ms": 6.053,
+  "median_ms": 6.03,
+  "total_s": 0.145,
+  "n": 24
+ },
+ "fallback_calls": 24,
+ "fallback_rate": 0.0762,
+ "H0_total_s": 16.938,
+ "H1_total_s": 17.084,
+ "H0_per_clip_ms": 1411.5,
+ "H1_per_clip_ms": 1423.6,
+ "marginal_cost_per_clip_ms": 12.1,
+ "marginal_overhead_pct": 0.9,
+ "fallback_calls_per_clip": 2.0
+}

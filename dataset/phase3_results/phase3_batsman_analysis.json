@@ -264,39 +264,55 @@
    "margin too small \u2014 candidates not separable": [
     "instagram1_front_03.mp4",
     "instagram2_front_03.mp4",
+    "kohli_side_12.mp4",
     "pro_player_front_16.mp4"
    ],
-   "pose failure on the batsman crop (small/occluded subject)": [
-    "kohli_side_12.mp4",
-    "kohli_side_16.mp4",
-    "pro_player_front_10.mp4",
-    "pro_player_front_18.mp4",
-    "rishi_front_2.mp4",
-    "sanjay_front _1.mp4"
+   "tracking failure \u2014 batsman track covers only 25% of sampled frames (pose succeeds on 40% of the frames it does get)": [
+    "kohli_side_16.mp4"
    ],
    "stationary feeder \u2014 rival is stationary and larger": [
     "pro_player_front_06.mp4"
+   ],
+   "pose failure on the batsman crop \u2014 track covers 55% of frames but pose succeeds on only 36% of them": [
+    "pro_player_front_10.mp4"
+   ],
+   "pose failure on the batsman crop \u2014 track covers 45% of frames but pose succeeds on only 11% of them": [
+    "pro_player_front_18.mp4"
+   ],
+   "tracking failure \u2014 batsman track covers only 25% of sampled frames (pose succeeds on 80% of the frames it does get)": [
+    "rishi_front_2.mp4"
+   ],
+   "tracking failure \u2014 batsman track covers only 5% of sampled frames (pose succeeds on 100% of the frames it does get)": [
+    "sanjay_front _1.mp4"
    ]
   },
   "S1_persistence": {
    "margin too small \u2014 candidates not separable": [
     "instagram1_front_03.mp4",
     "instagram2_front_03.mp4",
+    "kohli_side_12.mp4",
     "pro_player_front_16.mp4"
    ],
    "single candidate below confidence threshold": [
     "kohli_side_08.mp4"
    ],
-   "pose failure on the batsman crop (small/occluded subject)": [
-    "kohli_side_12.mp4",
-    "kohli_side_16.mp4",
-    "pro_player_front_10.mp4",
-    "pro_player_front_18.mp4",
-    "rishi_front_2.mp4",
-    "sanjay_front _1.mp4"
+   "tracking failure \u2014 batsman track covers only 25% of sampled frames (pose succeeds on 40% of the frames it does get)": [
+    "kohli_side_16.mp4"
    ],
    "stationary feeder \u2014 rival is stationary and larger": [
     "pro_player_front_06.mp4"
+   ],
+   "pose failure on the batsman crop \u2014 track covers 55% of frames but pose succeeds on only 36% of them": [
+    "pro_player_front_10.mp4"
+   ],
+   "pose failure on the batsman crop \u2014 track covers 45% of frames but pose succeeds on only 11% of them": [
+    "pro_player_front_18.mp4"
+   ],
+   "tracking failure \u2014 batsman track covers only 25% of sampled frames (pose succeeds on 80% of the frames it does get)": [
+    "rishi_front_2.mp4"
+   ],
+   "tracking failure \u2014 batsman track covers only 5% of sampled frames (pose succeeds on 100% of the frames it does get)": [
+    "sanjay_front _1.mp4"
    ]
   },
   "S2_skeleton": {
@@ -306,11 +322,19 @@
    "semantic ambiguity \u2014 rival scored higher on mixed evidence": [
     "kohli_side_12.mp4"
    ],
-   "pose failure on the batsman crop (small/occluded subject)": [
-    "kohli_side_16.mp4",
-    "pro_player_front_06.mp4",
-    "pro_player_front_18.mp4",
-    "rishi_front_2.mp4",
+   "tracking failure \u2014 batsman track covers only 25% of sampled frames (pose succeeds on 40% of the frames it does get)": [
+    "kohli_side_16.mp4"
+   ],
+   "pose failure on the batsman crop \u2014 track covers 75% of frames but pose succeeds on only 27% of them": [
+    "pro_player_front_06.mp4"
+   ],
+   "pose failure on the batsman crop \u2014 track covers 45% of frames but pose succeeds on only 11% of them": [
+    "pro_player_front_18.mp4"
+   ],
+   "tracking failure \u2014 batsman track covers only 25% of sampled frames (pose succeeds on 80% of the frames it does get)": [
+    "rishi_front_2.mp4"
+   ],
+   "tracking failure \u2014 batsman track covers only 5% of sampled frames (pose succeeds on 100% of the frames it does get)": [
     "sanjay_front _1.mp4"
    ]
   },
@@ -318,29 +342,45 @@
    "single candidate below confidence threshold": [
     "kohli_side_08.mp4"
    ],
-   "pose failure on the batsman crop (small/occluded subject)": [
-    "kohli_side_12.mp4",
-    "kohli_side_16.mp4",
-    "pro_player_front_06.mp4",
-    "pro_player_front_18.mp4",
-    "rishi_front_2.mp4",
+   "margin too small \u2014 candidates not separable": [
+    "kohli_side_12.mp4"
+   ],
+   "tracking failure \u2014 batsman track covers only 25% of sampled frames (pose succeeds on 40% of the frames it does get)": [
+    "kohli_side_16.mp4"
+   ],
+   "pose failure on the batsman crop \u2014 track covers 75% of frames but pose succeeds on only 27% of them": [
+    "pro_player_front_06.mp4"
+   ],
+   "pose failure on the batsman crop \u2014 track covers 45% of frames but pose succeeds on only 11% of them": [
+    "pro_player_front_18.mp4"
+   ],
+   "tracking failure \u2014 batsman track covers only 25% of sampled frames (pose succeeds on 80% of the frames it does get)": [
+    "rishi_front_2.mp4"
+   ],
+   "tracking failure \u2014 batsman track covers only 5% of sampled frames (pose succeeds on 100% of the frames it does get)": [
     "sanjay_front _1.mp4"
    ]
   },
   "S4_action": {
    "margin too small \u2014 candidates not separable": [
-    "instagram2_front_03.mp4"
+    "instagram2_front_03.mp4",
+    "kohli_side_12.mp4"
    ],
-   "pose failure on the batsman crop (small/occluded subject)": [
-    "kohli_side_12.mp4",
-    "kohli_side_16.mp4",
-    "pro_player_front_10.mp4",
-    "rishi_front_2.mp4",
-    "sanjay_front _1.mp4"
+   "tracking failure \u2014 batsman track covers only 25% of sampled frames (pose succeeds on 40% of the frames it does get)": [
+    "kohli_side_16.mp4"
    ],
    "stationary feeder \u2014 rival is stationary and larger": [
     "pro_player_front_06.mp4",
     "pro_player_front_18.mp4"
+   ],
+   "pose failure on the batsman crop \u2014 track covers 55% of frames but pose succeeds on only 36% of them": [
+    "pro_player_front_10.mp4"
+   ],
+   "tracking failure \u2014 batsman track covers only 25% of sampled frames (pose succeeds on 80% of the frames it does get)": [
+    "rishi_front_2.mp4"
+   ],
+   "tracking failure \u2014 batsman track covers only 5% of sampled frames (pose succeeds on 100% of the frames it does get)": [
+    "sanjay_front _1.mp4"
    ]
   }
  }

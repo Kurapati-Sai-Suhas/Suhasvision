@@ -340,7 +340,34 @@ CPU). **Decision: fallback hybrid** (MediaPipe primary, `rtmpose-s` where MediaP
 **scoped to the S2/S3 semantic path only** — `_pose_metrics()` is 2D so RTMPose is a drop-in
 there, whereas the scoring model's 15 angles are computed in **3D** and RTMPose 2D moves them
 by a median of **30.4°**, which would be train/serve skew against the frozen `(7,30)` model.
-Full detail in [`PHASE3_RTMPOSE_EVALUATION.md`](PHASE3_RTMPOSE_EVALUATION.md).
+Full detail in [`PHASE3_RTMPOSE_EVALUATION.md`](PHASE3_RTMPOSE_EVALUATION.md). That decision was
+provisional and has since been tested end-to-end — see below.
+
+**RTMPose status: EXPERIMENTAL. Not adopted, not production.** The fallback proposed above was
+validated against the actual S2 identity system (H0 = MediaPipe only, H1 = MediaPipe →
+RTMPose-s on refusal, real candidate tracks, no ground-truth selection, everything else
+identical and computed in one extraction pass). **It does not improve identity decisions.** On
+eval H0 scores 20 correct / 1 wrong / 6 refused (accuracy 0.741) and H1 scores 18 / 0 / 9
+(accuracy 0.667); on dev H0 is 20/0/4 and H1 18/0/6. H1 is never ahead on correct answers, and
+**no clip improved refused→correct or wrong→correct**. The fallback fires cheaply (+12.1 ms per
+clip, +0.9%), so cost is not the objection — efficacy is. Mechanism: RTMPose returns a skeleton
+for *any* box, so recovered poses accrue to non-batsman candidates too; batsman-vs-other score
+separation falls 0.7114 → 0.6876 and three more clips drop below the confidence threshold. The
+feared failure mode (a correct refusal becoming a confident wrong answer) did **not** occur —
+`correct→wrong` and `refused→wrong` are both 0. Decision: **keep experimental, do not adopt**.
+Detail in [`PHASE3_HYBRID_IDENTITY_RESULTS.md`](PHASE3_HYBRID_IDENTITY_RESULTS.md).
+
+**Diagnostic layer corrected — this changes earlier numbers.** `k_pose_rate` counted frames
+where the batsman *track had no box* identically to frames where the pose model failed, so it
+conflated tracking with pose. It is now decomposed as `coverage × P(pose | box exists)` with an
+explicit taxonomy (`TRACKING_FAILURE` / `POSE_FAILURE` / `JOINT_TRACKING+POSE_FAILURE` /
+`NO_FAILURE`), and `categorise_failure()`'s ordering bug is fixed — because `k_pose_rate ≤
+coverage` always, its pose test fired first and the tracking branch was **unreachable**.
+Corrected corpus diagnostic: **5 pose failures, 3 tracking failures, 43 clean** (51 clips). The
+old seven-clip "pose failure" list was wrong in both directions — 4 of 7 were mislabelled
+(`sanjay_front _1` has coverage 0.05 with pose succeeding on 100% of the frames it does get),
+and 2 genuine pose failures (`pro_player_front_12`, `pro_player_front_44`) were never flagged.
+**Do not reuse the old seven-clip list.**
 
 ## 13. Known Limitations
 
@@ -374,7 +401,8 @@ Full detail in [`PHASE3_RTMPOSE_EVALUATION.md`](PHASE3_RTMPOSE_EVALUATION.md).
 | [`PHASE2_DETECTION_RESULTS.md`](PHASE2_DETECTION_RESULTS.md) | Detector/tracker replacement, crease geometry, B0–B5 ablation, held-out results |
 | [`EXTRACTION_PIPELINE_RESEARCH.md`](EXTRACTION_PIPELINE_RESEARCH.md) | Literature review behind the extraction redesign |
 | [`PHASE3_BATSMAN_ABLATION.md`](PHASE3_BATSMAN_ABLATION.md) | S0–S4 semantic batsman ablation: results, bat-signal specificity, stationary-feeder case study, latency |
-| [`PHASE3_RTMPOSE_EVALUATION.md`](PHASE3_RTMPOSE_EVALUATION.md) | MediaPipe vs RTMPose. Corrects the "pose is the bottleneck" diagnosis, shows why RTMPose's 100% availability is an artifact, and the scoped fallback-hybrid decision |
+| [`PHASE3_RTMPOSE_EVALUATION.md`](PHASE3_RTMPOSE_EVALUATION.md) | MediaPipe vs RTMPose. Corrects the "pose is the bottleneck" diagnosis, shows why RTMPose's 100% availability is an artifact, and the provisional fallback-hybrid decision |
+| [`PHASE3_HYBRID_IDENTITY_RESULTS.md`](PHASE3_HYBRID_IDENTITY_RESULTS.md) | H0 vs H1 end-to-end in the real S2 identity system. Corrected failure taxonomy, the unreachable-branch fix, and why the fallback is **not** adopted |
 | [`docs/PHASE3_ANNOTATION_PROTOCOL.md`](docs/PHASE3_ANNOTATION_PROTOCOL.md) | Operational definitions for the Phase-3 temporal ground truth |
 | [`docs/architecture_ground_truth.md`](docs/architecture_ground_truth.md) | The dated, ground-truth engineering log — including the full wrong-person-tracking investigation |
 | [`docs/SuhasVision_SRS_v2.0.docx`](docs/SuhasVision_SRS_v2.0.docx) | Formal, IEEE-830-inspired requirements specification |

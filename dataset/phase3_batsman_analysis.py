@@ -20,6 +20,7 @@ P2 = os.path.join(_MODULE_DIR, "phase2_results")
 P3 = os.path.join(_MODULE_DIR, "phase3_results")
 
 import phase3_batsman_ablation as AB
+import phase3_failure_taxonomy as FT
 
 
 def bat_level_ablation(rows, dev):
@@ -104,8 +105,30 @@ def find_feeder_clips(rows):
     return hits
 
 
-def categorise_failure(r, d, feats):
-    """One documented cause per non-correct eval clip."""
+def categorise_failure(r, d, feats, diags=None):
+    """One documented cause per non-correct eval clip.
+
+    THE ORDERING BUG THIS FIXES
+    The refusal branch used to test
+
+        if k_pose_rate < 0.4:  -> "pose failure on the batsman crop"
+        if coverage    < 0.4:  -> "tracking failure - track too fragmented"
+
+    Because a pose requires a box, k_pose_rate <= coverage ALWAYS. So
+    coverage < 0.4 guaranteed k_pose_rate < 0.4, the pose branch returned
+    first, and the tracking branch was unreachable for exactly the clips it
+    was written to catch. Every fragmented-track failure was reported as a
+    pose failure -- which is what sent a whole investigation after the pose
+    model when the batsman track was the real problem.
+
+    The fix is to test the two INDEPENDENT factors in causal order (coverage
+    caps pose, so coverage first) via phase3_failure_taxonomy, which also
+    names the joint case instead of forcing it into one bucket.
+
+    `diags` carries the per-track decomposition produced during extraction.
+    It is required for the corrected verdict, because `k_pose_rate` alone
+    cannot distinguish the two causes -- that is the whole point.
+    """
     if r["gt_track"] is None:
         return "detector/tracking failure — no track matches the annotated batsman"
     gt = feats.get(r["gt_track"], {})
@@ -120,10 +143,33 @@ def categorise_failure(r, d, feats):
     # refused
     if r["n_tracks"] == 1:
         return "single candidate below confidence threshold"
-    if gt.get("k_pose_rate", 0) < 0.4:
-        return "pose failure on the batsman crop (small/occluded subject)"
-    if gt.get("coverage", 0) < 0.4:
-        return "tracking failure — batsman track too fragmented"
+
+    gd = (diags or {}).get(r["gt_track"])
+    if gd:
+        verdict = gd["failure_type"]
+        cov = gd["coverage"]
+        pgb = gd["pose_success_given_box"]
+        if verdict == FT.TRACKING_FAILURE:
+            return (f"tracking failure — batsman track covers only "
+                    f"{cov:.0%} of sampled frames "
+                    f"(pose succeeds on {pgb:.0%} of the frames it does get)"
+                    if pgb is not None else
+                    f"tracking failure — batsman track covers only {cov:.0%} "
+                    f"of sampled frames (pose never invoked)")
+        if verdict == FT.POSE_FAILURE:
+            return (f"pose failure on the batsman crop — track covers "
+                    f"{cov:.0%} of frames but pose succeeds on only "
+                    f"{pgb:.0%} of them")
+        if verdict == FT.JOINT_FAILURE:
+            return (f"joint tracking+pose failure — coverage {cov:.0%}, "
+                    f"pose {pgb:.0%} of boxed frames")
+    else:
+        # No decomposition available (features predate the fix). Say so
+        # rather than silently falling back to the conflated test.
+        if gt.get("k_pose_rate", 0) < 0.4:
+            return ("low effective pose rate, cause UNRESOLVED — "
+                    "re-extract features to separate tracking from pose")
+
     return "margin too small — candidates not separable"
 
 
@@ -180,7 +226,7 @@ def main():
             if d["outcome"] == "correct":
                 continue
             r = by_clip[d["clip_id"]]
-            c = categorise_failure(r, d, r["tracks"])
+            c = categorise_failure(r, d, r["tracks"], r.get("diagnostics"))
             cats.setdefault(c, []).append(d["clip_id"])
         failures[name] = cats
         print(f"\n  {name}:")
