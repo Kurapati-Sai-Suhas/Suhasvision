@@ -1,0 +1,654 @@
+{
+ "n_clips": 51,
+ "pool": {
+  "target": 40,
+  "mean_size": 31.9,
+  "min": 0,
+  "max": 40
+ },
+ "event_region": {
+  "n_valid_clips": 28,
+  "contains_gt_shot_rate": 1.0,
+  "mean_width": 62.6,
+  "mean_gt_width": 22.7,
+  "mean_iou_with_gt": 0.3871,
+  "note": "Optimised for RECALL, not narrowness: a wide region that contains the shot is the correct objective before Best-7.",
+  "per_clip": [
+   {
+    "clip_id": "beginnerunorthodox1_front_01.mp4",
+    "split": "dev",
+    "region": [
+     29,
+     77
+    ],
+    "gt": [
+     48,
+     70
+    ],
+    "contains_gt": true,
+    "width": 48,
+    "gt_width": 22,
+    "iou": 0.4583
+   },
+   {
+    "clip_id": "instagram1_front_01.mp4",
+    "split": "dev",
+    "region": [
+     0,
+     69
+    ],
+    "gt": [
+     5,
+     28
+    ],
+    "contains_gt": true,
+    "width": 69,
+    "gt_width": 23,
+    "iou": 0.3333
+   },
+   {
+    "clip_id": "instagram2_front_03.mp4",
+    "split": "eval",
+    "region": [
+     11,
+     59
+    ],
+    "gt": [
+     26,
+     45
+    ],
+    "contains_gt": true,
+    "width": 48,
+    "gt_width": 19,
+    "iou": 0.3958
+   },
+   {
+    "clip_id": "instagram2_front_05.mp4",
+    "split": "eval",
+    "region": [
+     25,
+     73
+    ],
+    "gt": [
+     38,
+     58
+    ],
+    "contains_gt": true,
+    "width": 48,
+    "gt_width": 20,
+    "iou": 0.4167
+   },
+   {
+    "clip_id": "instagram2_front_07.mp4",
+    "split": "dev",
+    "region": [
+     19,
+     67
+    ],
+    "gt": [
+     34,
+     52
+    ],
+    "contains_gt": true,
+    "width": 48,
+    "gt_width": 18,
+    "iou": 0.375
+   },
+   {
+    "clip_id": "kohli_side_08.mp4",
+    "split": "eval",
+    "region": [
+     7,
+     116
+    ],
+    "gt": [
+     20,
+     45
+    ],
+    "contains_gt": true,
+    "width": 109,
+    "gt_width": 25,
+    "iou": 0.2294
+   },
+   {
+    "clip_id": "kohli_side_10.mp4",
+    "split": "eval",
+    "region": [
+     66,
+     126
+    ],
+    "gt": [
+     78,
+     102
+    ],
+    "contains_gt": true,
+    "width": 60,
+    "gt_width": 24,
+    "iou": 0.4
+   },
+   {
+    "clip_id": "kohli_side_14.mp4",
+    "split": "dev",
+    "region": [
+     28,
+     96
+    ],
+    "gt": [
+     43,
+     62
+    ],
+    "contains_gt": true,
+    "width": 68,
+    "gt_width": 19,
+    "iou": 0.2794
+   },
+   {
+    "clip_id": "kohli_side_16.mp4",
+    "split": "eval",
+    "region": [
+     0,
+     32
+    ],
+    "gt": [
+     0,
+     20
+    ],
+    "contains_gt": true,
+    "width": 32,
+    "gt_width": 20,
+    "iou": 0.625
+   },
+   {
+    "clip_id": "kohli_side_20.mp4",
+    "split": "dev",
+    "region": [
+     23,
+     114
+    ],
+    "gt": [
+     35,
+     58
+    ],
+    "contains_gt": true,
+    "width": 91,
+    "gt_width": 23,
+    "iou": 0.2527
+   },
+   {
+    "clip_id": "kohli_side_24.mp4",
+    "split": "dev",
+    "region": [
+     26,
+     76
+    ],
+    "gt": [
+     42,
+     62
+    ],
+    "contains_gt": true,
+    "width": 50,
+    "gt_width": 20,
+    "iou": 0.4
+   },
+   {
+    "clip_id": "kohli_side_28.mp4",
+    "split": "dev",
+    "region": [
+     0,
+     88
+    ],
+    "gt": [
+     52,
+     76
+    ],
+    "contains_gt": true,
+    "width": 88,
+    "gt_width": 24,
+    "iou": 0.2727
+   },
+   {
+    "clip_id": "kohli_side_32.mp4",
+    "split": "eval",
+    "region": [
+     38,
+     91
+    ],
+    "gt": [
+     55,
+     78
+    ],
+    "contains_gt": true,
+    "width": 53,
+    "gt_width": 23,
+    "iou": 0.434
+   },
+   {
+    "clip_id": "pro_player_back_23.mp4",
+    "split": "eval",
+    "region": [
+     8,
+     71
+    ],
+    "gt": [
+     18,
+     45
+    ],
+    "contains_gt": true,
+    "width": 63,
+    "gt_width": 27,
+    "iou": 0.4286
+   },
+   {
+    "clip_id": "pro_player_back_25.mp4",
+    "split": "dev",
+    "region": [
+     3,
+     83
+    ],
+    "gt": [
+     48,
+     70
+    ],
+    "contains_gt": true,
+    "width": 80,
+    "gt_width": 22,
+    "iou": 0.275
+   },
+   {
+    "clip_id": "pro_player_back_27.mp4",
+    "split": "dev",
+    "region": [
+     15,
+     87
+    ],
+    "gt": [
+     50,
+     78
+    ],
+    "contains_gt": true,
+    "width": 72,
+    "gt_width": 28,
+    "iou": 0.3889
+   },
+   {
+    "clip_id": "pro_player_back_31.mp4",
+    "split": "eval",
+    "region": [
+     30,
+     78
+    ],
+    "gt": [
+     42,
+     68
+    ],
+    "contains_gt": true,
+    "width": 48,
+    "gt_width": 26,
+    "iou": 0.5417
+   },
+   {
+    "clip_id": "pro_player_back_33.mp4",
+    "split": "dev",
+    "region": [
+     0,
+     55
+    ],
+    "gt": [
+     20,
+     45
+    ],
+    "contains_gt": true,
+    "width": 55,
+    "gt_width": 25,
+    "iou": 0.4545
+   },
+   {
+    "clip_id": "pro_player_back_38.mp4",
+    "split": "eval",
+    "region": [
+     1,
+     49
+    ],
+    "gt": [
+     13,
+     38
+    ],
+    "contains_gt": true,
+    "width": 48,
+    "gt_width": 25,
+    "iou": 0.5208
+   },
+   {
+    "clip_id": "pro_player_front_01.mp4",
+    "split": "eval",
+    "region": [
+     15,
+     86
+    ],
+    "gt": [
+     28,
+     48
+    ],
+    "contains_gt": true,
+    "width": 71,
+    "gt_width": 20,
+    "iou": 0.2817
+   },
+   {
+    "clip_id": "pro_player_front_03.mp4",
+    "split": "dev",
+    "region": [
+     2,
+     89
+    ],
+    "gt": [
+     55,
+     78
+    ],
+    "contains_gt": true,
+    "width": 87,
+    "gt_width": 23,
+    "iou": 0.2644
+   },
+   {
+    "clip_id": "pro_player_front_06.mp4",
+    "split": "eval",
+    "region": [
+     23,
+     71
+    ],
+    "gt": [
+     38,
+     58
+    ],
+    "contains_gt": true,
+    "width": 48,
+    "gt_width": 20,
+    "iou": 0.4167
+   },
+   {
+    "clip_id": "pro_player_front_10.mp4",
+    "split": "eval",
+    "region": [
+     0,
+     72
+    ],
+    "gt": [
+     39,
+     58
+    ],
+    "contains_gt": true,
+    "width": 72,
+    "gt_width": 19,
+    "iou": 0.2639
+   },
+   {
+    "clip_id": "pro_player_front_12.mp4",
+    "split": "dev",
+    "region": [
+     12,
+     63
+    ],
+    "gt": [
+     30,
+     50
+    ],
+    "contains_gt": true,
+    "width": 51,
+    "gt_width": 20,
+    "iou": 0.3922
+   },
+   {
+    "clip_id": "pro_player_front_14.mp4",
+    "split": "eval",
+    "region": [
+     0,
+     46
+    ],
+    "gt": [
+     5,
+     28
+    ],
+    "contains_gt": true,
+    "width": 46,
+    "gt_width": 23,
+    "iou": 0.5
+   },
+   {
+    "clip_id": "pro_player_front_16.mp4",
+    "split": "eval",
+    "region": [
+     0,
+     87
+    ],
+    "gt": [
+     15,
+     35
+    ],
+    "contains_gt": true,
+    "width": 87,
+    "gt_width": 20,
+    "iou": 0.2299
+   },
+   {
+    "clip_id": "pro_player_front_44.mp4",
+    "split": "dev",
+    "region": [
+     0,
+     56
+    ],
+    "gt": [
+     23,
+     45
+    ],
+    "contains_gt": true,
+    "width": 56,
+    "gt_width": 22,
+    "iou": 0.3929
+   },
+   {
+    "clip_id": "roa_front_1.mp4",
+    "split": "dev",
+    "region": [
+     94,
+     151
+    ],
+    "gt": [
+     110,
+     145
+    ],
+    "contains_gt": true,
+    "width": 57,
+    "gt_width": 35,
+    "iou": 0.614
+   }
+  ]
+ },
+ "methods": {
+  "F0_uniform": {
+   "structural": {
+    "duplicates": 0.0,
+    "chronological": 1.0,
+    "min_gap": 9.6667,
+    "span": 64.625,
+    "temporal_diversity": 21.54,
+    "pre_contact": 3.625,
+    "post_contact": 3.25,
+    "contact_adjacent": 0.625,
+    "mean_pose_quality": 0.5435,
+    "min_pose_quality": 0.2368,
+    "mean_sharpness": 0.7653,
+    "mean_occlusion": 0.786,
+    "n_without_pose": 2.125,
+    "inside_region": 1.0
+   },
+   "biomechanical": {
+    "n_frames_with_angles": 4.7917,
+    "missing_frames": 2.2083,
+    "invalid_angle_rate": 0.0,
+    "implausible_angle_rate": 0.012,
+    "mean_angular_velocity": 19.4461,
+    "velocity_stability": 10.4889,
+    "abrupt_jumps": 3.3478,
+    "fabricated_zero_velocity_steps": 0.0
+   },
+   "n_selected": 24,
+   "n_refused": 4,
+   "latency_ms_median": 0.027,
+   "structural_identity_correct": {
+    "duplicates": 0.0,
+    "min_gap": 9.6667,
+    "contact_adjacent": 0.625,
+    "mean_pose_quality": 0.5435
+   }
+  },
+  "F1_contact_anchored": {
+   "structural": {
+    "duplicates": 0.0417,
+    "chronological": 0.9583,
+    "min_gap": 4.875,
+    "span": 64.625,
+    "temporal_diversity": 20.2213,
+    "pre_contact": 5.4167,
+    "post_contact": 1.0,
+    "contact_adjacent": 1.0833,
+    "mean_pose_quality": 0.5429,
+    "min_pose_quality": 0.2307,
+    "mean_sharpness": 0.7722,
+    "mean_occlusion": 0.7902,
+    "n_without_pose": 2.125,
+    "inside_region": 1.0
+   },
+   "biomechanical": {
+    "n_frames_with_angles": 4.875,
+    "missing_frames": 2.125,
+    "invalid_angle_rate": 0.0,
+    "implausible_angle_rate": 0.0148,
+    "mean_angular_velocity": 23.179,
+    "velocity_stability": 10.2672,
+    "abrupt_jumps": 4.619,
+    "fabricated_zero_velocity_steps": 0.0
+   },
+   "n_selected": 24,
+   "n_refused": 4,
+   "latency_ms_median": 0.0279,
+   "structural_identity_correct": {
+    "duplicates": 0.0417,
+    "min_gap": 4.875,
+    "contact_adjacent": 1.0833,
+    "mean_pose_quality": 0.5429
+   }
+  },
+  "F2_motion_top": {
+   "structural": {
+    "duplicates": 0.0,
+    "chronological": 1.0,
+    "min_gap": 1.2917,
+    "span": 35.375,
+    "temporal_diversity": 12.3192,
+    "pre_contact": 4.0,
+    "post_contact": 2.75,
+    "contact_adjacent": 1.7083,
+    "mean_pose_quality": 0.505,
+    "min_pose_quality": 0.2683,
+    "mean_sharpness": 0.7758,
+    "mean_occlusion": 0.7993,
+    "n_without_pose": 2.5417,
+    "inside_region": 1.0
+   },
+   "biomechanical": {
+    "n_frames_with_angles": 4.4583,
+    "missing_frames": 2.5417,
+    "invalid_angle_rate": 0.0,
+    "implausible_angle_rate": 0.0068,
+    "mean_angular_velocity": 21.3748,
+    "velocity_stability": 12.5836,
+    "abrupt_jumps": 5.1579,
+    "fabricated_zero_velocity_steps": 0.0
+   },
+   "n_selected": 24,
+   "n_refused": 4,
+   "latency_ms_median": 0.0114,
+   "structural_identity_correct": {
+    "duplicates": 0.0,
+    "min_gap": 1.2917,
+    "contact_adjacent": 1.7083,
+    "mean_pose_quality": 0.505
+   }
+  },
+  "F3_phase_aware": {
+   "structural": {
+    "duplicates": 0.0,
+    "chronological": 1.0,
+    "min_gap": 2.9565,
+    "span": 56.8696,
+    "temporal_diversity": 17.39,
+    "pre_contact": 5.0,
+    "post_contact": 1.5652,
+    "contact_adjacent": 1.8696,
+    "mean_pose_quality": 0.5666,
+    "min_pose_quality": 0.2253,
+    "mean_sharpness": 0.7655,
+    "mean_occlusion": 0.7657,
+    "n_without_pose": 2.0,
+    "inside_region": 1.0
+   },
+   "biomechanical": {
+    "n_frames_with_angles": 4.7391,
+    "missing_frames": 2.2609,
+    "invalid_angle_rate": 0.0,
+    "implausible_angle_rate": 0.0115,
+    "mean_angular_velocity": 21.9316,
+    "velocity_stability": 9.5173,
+    "abrupt_jumps": 4.381,
+    "fabricated_zero_velocity_steps": 0.0
+   },
+   "n_selected": 23,
+   "n_refused": 5,
+   "latency_ms_median": 0.0956,
+   "structural_identity_correct": {
+    "duplicates": 0.0,
+    "min_gap": 2.9565,
+    "contact_adjacent": 1.8696,
+    "mean_pose_quality": 0.5666
+   }
+  },
+  "F4_optimized": {
+   "structural": {
+    "duplicates": 0.0,
+    "chronological": 1.0,
+    "min_gap": 4.5652,
+    "span": 56.3043,
+    "temporal_diversity": 17.7048,
+    "pre_contact": 4.7826,
+    "post_contact": 2.2174,
+    "contact_adjacent": 0.9565,
+    "mean_pose_quality": 0.7976,
+    "min_pose_quality": 0.6546,
+    "mean_sharpness": 0.7779,
+    "mean_occlusion": 0.6448,
+    "n_without_pose": 0.0,
+    "inside_region": 1.0
+   },
+   "biomechanical": {
+    "n_frames_with_angles": 5.7826,
+    "missing_frames": 1.2174,
+    "invalid_angle_rate": 0.0,
+    "implausible_angle_rate": 0.01,
+    "mean_angular_velocity": 19.7952,
+    "velocity_stability": 7.918,
+    "abrupt_jumps": 4.0,
+    "fabricated_zero_velocity_steps": 0.0
+   },
+   "n_selected": 23,
+   "n_refused": 5,
+   "latency_ms_median": 0.9394,
+   "structural_identity_correct": {
+    "duplicates": 0.0,
+    "min_gap": 4.5652,
+    "contact_adjacent": 0.9565,
+    "mean_pose_quality": 0.7976
+   }
+  }
+ }
+}

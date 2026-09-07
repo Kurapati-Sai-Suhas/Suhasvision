@@ -1,0 +1,1098 @@
+{
+ "human_reference": {
+  "kind": "ANNOTATION-DERIVED, not an expert frame-selection reference",
+  "definition": "Seven production phase anchors placed on the HUMAN shot interval and HUMAN contact frame.",
+  "limitation": "Encodes a human's judgement of WHEN the event and impact occurred, not which frames are biomechanically informative. A true expert reference requires a coach and does not exist for this corpus.",
+  "n_clips": 28,
+  "summary": {
+   "F0_uniform": {
+    "n": 24,
+    "median_frame_distance": 14.21,
+    "mean_frame_distance": 16.45,
+    "mean_coverage_within_3": 0.6726
+   },
+   "F1_contact_anchored": {
+    "n": 24,
+    "median_frame_distance": 10.57,
+    "mean_frame_distance": 12.61,
+    "mean_coverage_within_3": 0.8095
+   },
+   "F2_motion_top": {
+    "n": 24,
+    "median_frame_distance": 8.21,
+    "mean_frame_distance": 12.97,
+    "mean_coverage_within_3": 0.6369
+   },
+   "F3_phase_aware": {
+    "n": 23,
+    "median_frame_distance": 7.43,
+    "mean_frame_distance": 9.01,
+    "mean_coverage_within_3": 0.8509
+   },
+   "F4_optimized": {
+    "n": 23,
+    "median_frame_distance": 10.14,
+    "mean_frame_distance": 11.56,
+    "mean_coverage_within_3": 0.764
+   }
+  },
+  "per_clip": [
+   {
+    "clip_id": "beginnerunorthodox1_front_01.mp4",
+    "split": "dev",
+    "reference": [
+     48,
+     51,
+     54,
+     56,
+     57,
+     58,
+     70
+    ],
+    "F0_uniform": {
+     "distance": null,
+     "coverage_within_3": null
+    },
+    "F1_contact_anchored": {
+     "distance": null,
+     "coverage_within_3": null
+    },
+    "F2_motion_top": {
+     "distance": null,
+     "coverage_within_3": null
+    },
+    "F3_phase_aware": {
+     "distance": null,
+     "coverage_within_3": null
+    },
+    "F4_optimized": {
+     "distance": null,
+     "coverage_within_3": null
+    }
+   },
+   {
+    "clip_id": "instagram1_front_01.mp4",
+    "split": "dev",
+    "reference": [
+     5,
+     8,
+     11,
+     13,
+     15,
+     16,
+     28
+    ],
+    "F0_uniform": {
+     "distance": 22.0,
+     "coverage_within_3": 0.4286
+    },
+    "F1_contact_anchored": {
+     "distance": 8.43,
+     "coverage_within_3": 0.8571
+    },
+    "F2_motion_top": {
+     "distance": 4.14,
+     "coverage_within_3": 0.8571
+    },
+    "F3_phase_aware": {
+     "distance": 6.86,
+     "coverage_within_3": 0.8571
+    },
+    "F4_optimized": {
+     "distance": 9.57,
+     "coverage_within_3": 1.0
+    }
+   },
+   {
+    "clip_id": "instagram2_front_03.mp4",
+    "split": "eval",
+    "reference": [
+     26,
+     28,
+     30,
+     31,
+     32,
+     33,
+     45
+    ],
+    "F0_uniform": {
+     "distance": null,
+     "coverage_within_3": null
+    },
+    "F1_contact_anchored": {
+     "distance": null,
+     "coverage_within_3": null
+    },
+    "F2_motion_top": {
+     "distance": null,
+     "coverage_within_3": null
+    },
+    "F3_phase_aware": {
+     "distance": null,
+     "coverage_within_3": null
+    },
+    "F4_optimized": {
+     "distance": null,
+     "coverage_within_3": null
+    }
+   },
+   {
+    "clip_id": "instagram2_front_05.mp4",
+    "split": "eval",
+    "reference": [
+     38,
+     42,
+     45,
+     47,
+     49,
+     50,
+     58
+    ],
+    "F0_uniform": {
+     "distance": 9.29,
+     "coverage_within_3": 1.0
+    },
+    "F1_contact_anchored": {
+     "distance": 9.14,
+     "coverage_within_3": 0.8571
+    },
+    "F2_motion_top": {
+     "distance": 16.14,
+     "coverage_within_3": 0.5714
+    },
+    "F3_phase_aware": {
+     "distance": 6.0,
+     "coverage_within_3": 0.8571
+    },
+    "F4_optimized": {
+     "distance": 7.14,
+     "coverage_within_3": 0.8571
+    }
+   },
+   {
+    "clip_id": "instagram2_front_07.mp4",
+    "split": "dev",
+    "reference": [
+     34,
+     36,
+     37,
+     38,
+     40,
+     41,
+     52
+    ],
+    "F0_uniform": {
+     "distance": 10.57,
+     "coverage_within_3": 1.0
+    },
+    "F1_contact_anchored": {
+     "distance": 8.14,
+     "coverage_within_3": 0.8571
+    },
+    "F2_motion_top": {
+     "distance": 5.14,
+     "coverage_within_3": 0.8571
+    },
+    "F3_phase_aware": {
+     "distance": 6.14,
+     "coverage_within_3": 0.8571
+    },
+    "F4_optimized": {
+     "distance": 7.57,
+     "coverage_within_3": 0.8571
+    }
+   },
+   {
+    "clip_id": "kohli_side_08.mp4",
+    "split": "eval",
+    "reference": [
+     20,
+     24,
+     28,
+     31,
+     34,
+     35,
+     45
+    ],
+    "F0_uniform": {
+     "distance": 34.86,
+     "coverage_within_3": 0.2857
+    },
+    "F1_contact_anchored": {
+     "distance": 18.0,
+     "coverage_within_3": 0.8571
+    },
+    "F2_motion_top": {
+     "distance": 67.86,
+     "coverage_within_3": 0.4286
+    },
+    "F3_phase_aware": {
+     "distance": 14.43,
+     "coverage_within_3": 0.8571
+    },
+    "F4_optimized": {
+     "distance": 12.71,
+     "coverage_within_3": 0.8571
+    }
+   },
+   {
+    "clip_id": "kohli_side_10.mp4",
+    "split": "eval",
+    "reference": [
+     78,
+     82,
+     85,
+     87,
+     89,
+     90,
+     102
+    ],
+    "F0_uniform": {
+     "distance": 13.43,
+     "coverage_within_3": 0.5714
+    },
+    "F1_contact_anchored": {
+     "distance": 9.71,
+     "coverage_within_3": 0.8571
+    },
+    "F2_motion_top": {
+     "distance": 7.86,
+     "coverage_within_3": 0.7143
+    },
+    "F3_phase_aware": {
+     "distance": 6.71,
+     "coverage_within_3": 0.8571
+    },
+    "F4_optimized": {
+     "distance": 7.14,
+     "coverage_within_3": 0.8571
+    }
+   },
+   {
+    "clip_id": "kohli_side_14.mp4",
+    "split": "dev",
+    "reference": [
+     43,
+     45,
+     47,
+     49,
+     50,
+     51,
+     62
+    ],
+    "F0_uniform": {
+     "distance": 18.0,
+     "coverage_within_3": 0.7143
+    },
+    "F1_contact_anchored": {
+     "distance": 11.57,
+     "coverage_within_3": 0.8571
+    },
+    "F2_motion_top": {
+     "distance": 14.0,
+     "coverage_within_3": 0.4286
+    },
+    "F3_phase_aware": {
+     "distance": 8.29,
+     "coverage_within_3": 0.8571
+    },
+    "F4_optimized": {
+     "distance": 10.14,
+     "coverage_within_3": 1.0
+    }
+   },
+   {
+    "clip_id": "kohli_side_16.mp4",
+    "split": "eval",
+    "reference": [
+     0,
+     3,
+     5,
+     7,
+     8,
+     9,
+     20
+    ],
+    "F0_uniform": {
+     "distance": null,
+     "coverage_within_3": null
+    },
+    "F1_contact_anchored": {
+     "distance": null,
+     "coverage_within_3": null
+    },
+    "F2_motion_top": {
+     "distance": null,
+     "coverage_within_3": null
+    },
+    "F3_phase_aware": {
+     "distance": null,
+     "coverage_within_3": null
+    },
+    "F4_optimized": {
+     "distance": null,
+     "coverage_within_3": null
+    }
+   },
+   {
+    "clip_id": "kohli_side_20.mp4",
+    "split": "dev",
+    "reference": [
+     35,
+     38,
+     41,
+     43,
+     45,
+     46,
+     58
+    ],
+    "F0_uniform": {
+     "distance": 28.29,
+     "coverage_within_3": 0.2857
+    },
+    "F1_contact_anchored": {
+     "distance": 13.86,
+     "coverage_within_3": 0.8571
+    },
+    "F2_motion_top": {
+     "distance": 35.0,
+     "coverage_within_3": 0.1429
+    },
+    "F3_phase_aware": {
+     "distance": 10.14,
+     "coverage_within_3": 0.8571
+    },
+    "F4_optimized": {
+     "distance": 14.0,
+     "coverage_within_3": 0.7143
+    }
+   },
+   {
+    "clip_id": "kohli_side_24.mp4",
+    "split": "dev",
+    "reference": [
+     42,
+     45,
+     47,
+     49,
+     50,
+     51,
+     62
+    ],
+    "F0_uniform": {
+     "distance": 10.29,
+     "coverage_within_3": 1.0
+    },
+    "F1_contact_anchored": {
+     "distance": 9.57,
+     "coverage_within_3": 0.8571
+    },
+    "F2_motion_top": {
+     "distance": 6.43,
+     "coverage_within_3": 0.7143
+    },
+    "F3_phase_aware": {
+     "distance": 7.14,
+     "coverage_within_3": 0.8571
+    },
+    "F4_optimized": {
+     "distance": 7.29,
+     "coverage_within_3": 0.8571
+    }
+   },
+   {
+    "clip_id": "kohli_side_28.mp4",
+    "split": "dev",
+    "reference": [
+     52,
+     55,
+     58,
+     60,
+     62,
+     63,
+     76
+    ],
+    "F0_uniform": {
+     "distance": 23.57,
+     "coverage_within_3": 0.5714
+    },
+    "F1_contact_anchored": {
+     "distance": 24.29,
+     "coverage_within_3": 0.7143
+    },
+    "F2_motion_top": {
+     "distance": 14.43,
+     "coverage_within_3": 0.1429
+    },
+    "F3_phase_aware": {
+     "distance": 19.71,
+     "coverage_within_3": 0.5714
+    },
+    "F4_optimized": {
+     "distance": 19.0,
+     "coverage_within_3": 0.5714
+    }
+   },
+   {
+    "clip_id": "kohli_side_32.mp4",
+    "split": "eval",
+    "reference": [
+     55,
+     58,
+     61,
+     63,
+     65,
+     66,
+     78
+    ],
+    "F0_uniform": {
+     "distance": 10.43,
+     "coverage_within_3": 0.8571
+    },
+    "F1_contact_anchored": {
+     "distance": 9.71,
+     "coverage_within_3": 0.8571
+    },
+    "F2_motion_top": {
+     "distance": 4.86,
+     "coverage_within_3": 0.8571
+    },
+    "F3_phase_aware": {
+     "distance": 6.57,
+     "coverage_within_3": 0.8571
+    },
+    "F4_optimized": {
+     "distance": 6.71,
+     "coverage_within_3": 0.8571
+    }
+   },
+   {
+    "clip_id": "pro_player_back_23.mp4",
+    "split": "eval",
+    "reference": [
+     18,
+     22,
+     25,
+     27,
+     29,
+     30,
+     45
+    ],
+    "F0_uniform": {
+     "distance": 15.29,
+     "coverage_within_3": 0.5714
+    },
+    "F1_contact_anchored": {
+     "distance": 8.57,
+     "coverage_within_3": 0.8571
+    },
+    "F2_motion_top": {
+     "distance": 9.0,
+     "coverage_within_3": 0.5714
+    },
+    "F3_phase_aware": {
+     "distance": 5.57,
+     "coverage_within_3": 0.8571
+    },
+    "F4_optimized": {
+     "distance": 12.0,
+     "coverage_within_3": 0.5714
+    }
+   },
+   {
+    "clip_id": "pro_player_back_25.mp4",
+    "split": "dev",
+    "reference": [
+     48,
+     52,
+     55,
+     58,
+     60,
+     61,
+     70
+    ],
+    "F0_uniform": {
+     "distance": 20.71,
+     "coverage_within_3": 0.4286
+    },
+    "F1_contact_anchored": {
+     "distance": 23.0,
+     "coverage_within_3": 0.7143
+    },
+    "F2_motion_top": {
+     "distance": 9.57,
+     "coverage_within_3": 0.5714
+    },
+    "F3_phase_aware": {
+     "distance": 17.14,
+     "coverage_within_3": 0.7143
+    },
+    "F4_optimized": {
+     "distance": 17.14,
+     "coverage_within_3": 0.7143
+    }
+   },
+   {
+    "clip_id": "pro_player_back_27.mp4",
+    "split": "dev",
+    "reference": [
+     50,
+     54,
+     57,
+     60,
+     62,
+     63,
+     78
+    ],
+    "F0_uniform": {
+     "distance": 15.0,
+     "coverage_within_3": 0.8571
+    },
+    "F1_contact_anchored": {
+     "distance": 16.0,
+     "coverage_within_3": 0.7143
+    },
+    "F2_motion_top": {
+     "distance": 6.29,
+     "coverage_within_3": 0.5714
+    },
+    "F3_phase_aware": {
+     "distance": 12.0,
+     "coverage_within_3": 1.0
+    },
+    "F4_optimized": {
+     "distance": 13.14,
+     "coverage_within_3": 0.7143
+    }
+   },
+   {
+    "clip_id": "pro_player_back_31.mp4",
+    "split": "eval",
+    "reference": [
+     42,
+     46,
+     50,
+     52,
+     55,
+     56,
+     68
+    ],
+    "F0_uniform": {
+     "distance": 8.0,
+     "coverage_within_3": 0.8571
+    },
+    "F1_contact_anchored": {
+     "distance": 8.43,
+     "coverage_within_3": 0.8571
+    },
+    "F2_motion_top": {
+     "distance": 3.29,
+     "coverage_within_3": 0.5714
+    },
+    "F3_phase_aware": {
+     "distance": 5.86,
+     "coverage_within_3": 1.0
+    },
+    "F4_optimized": {
+     "distance": 6.0,
+     "coverage_within_3": 1.0
+    }
+   },
+   {
+    "clip_id": "pro_player_back_33.mp4",
+    "split": "dev",
+    "reference": [
+     20,
+     23,
+     26,
+     28,
+     30,
+     31,
+     45
+    ],
+    "F0_uniform": {
+     "distance": 10.43,
+     "coverage_within_3": 0.7143
+    },
+    "F1_contact_anchored": {
+     "distance": 10.71,
+     "coverage_within_3": 0.8571
+    },
+    "F2_motion_top": {
+     "distance": 19.43,
+     "coverage_within_3": 0.0
+    },
+    "F3_phase_aware": {
+     "distance": 7.43,
+     "coverage_within_3": 0.8571
+    },
+    "F4_optimized": {
+     "distance": 9.43,
+     "coverage_within_3": 0.8571
+    }
+   },
+   {
+    "clip_id": "pro_player_back_38.mp4",
+    "split": "eval",
+    "reference": [
+     13,
+     16,
+     18,
+     20,
+     22,
+     23,
+     38
+    ],
+    "F0_uniform": {
+     "distance": 9.14,
+     "coverage_within_3": 0.8571
+    },
+    "F1_contact_anchored": {
+     "distance": 6.71,
+     "coverage_within_3": 0.8571
+    },
+    "F2_motion_top": {
+     "distance": 5.86,
+     "coverage_within_3": 0.8571
+    },
+    "F3_phase_aware": {
+     "distance": 4.43,
+     "coverage_within_3": 0.8571
+    },
+    "F4_optimized": {
+     "distance": 4.71,
+     "coverage_within_3": 1.0
+    }
+   },
+   {
+    "clip_id": "pro_player_front_01.mp4",
+    "split": "eval",
+    "reference": [
+     28,
+     30,
+     32,
+     34,
+     35,
+     36,
+     48
+    ],
+    "F0_uniform": {
+     "distance": 20.57,
+     "coverage_within_3": 0.4286
+    },
+    "F1_contact_anchored": {
+     "distance": 10.86,
+     "coverage_within_3": 0.8571
+    },
+    "F2_motion_top": {
+     "distance": 10.71,
+     "coverage_within_3": 0.8571
+    },
+    "F3_phase_aware": {
+     "distance": 8.29,
+     "coverage_within_3": 0.8571
+    },
+    "F4_optimized": {
+     "distance": 10.29,
+     "coverage_within_3": 1.0
+    }
+   },
+   {
+    "clip_id": "pro_player_front_03.mp4",
+    "split": "dev",
+    "reference": [
+     55,
+     58,
+     60,
+     62,
+     63,
+     64,
+     78
+    ],
+    "F0_uniform": {
+     "distance": 23.71,
+     "coverage_within_3": 0.5714
+    },
+    "F1_contact_anchored": {
+     "distance": 25.0,
+     "coverage_within_3": 0.2857
+    },
+    "F2_motion_top": {
+     "distance": 7.14,
+     "coverage_within_3": 1.0
+    },
+    "F3_phase_aware": {
+     "distance": 18.57,
+     "coverage_within_3": 0.5714
+    },
+    "F4_optimized": {
+     "distance": 20.43,
+     "coverage_within_3": 0.2857
+    }
+   },
+   {
+    "clip_id": "pro_player_front_06.mp4",
+    "split": "eval",
+    "reference": [
+     38,
+     42,
+     45,
+     48,
+     50,
+     51,
+     58
+    ],
+    "F0_uniform": {
+     "distance": null,
+     "coverage_within_3": null
+    },
+    "F1_contact_anchored": {
+     "distance": null,
+     "coverage_within_3": null
+    },
+    "F2_motion_top": {
+     "distance": null,
+     "coverage_within_3": null
+    },
+    "F3_phase_aware": {
+     "distance": null,
+     "coverage_within_3": null
+    },
+    "F4_optimized": {
+     "distance": null,
+     "coverage_within_3": null
+    }
+   },
+   {
+    "clip_id": "pro_player_front_10.mp4",
+    "split": "eval",
+    "reference": [
+     39,
+     42,
+     45,
+     47,
+     49,
+     50,
+     58
+    ],
+    "F0_uniform": {
+     "distance": 23.57,
+     "coverage_within_3": 0.8571
+    },
+    "F1_contact_anchored": {
+     "distance": 19.71,
+     "coverage_within_3": 0.7143
+    },
+    "F2_motion_top": {
+     "distance": 25.57,
+     "coverage_within_3": 0.8571
+    },
+    "F3_phase_aware": {
+     "distance": null,
+     "coverage_within_3": null
+    },
+    "F4_optimized": {
+     "distance": 31.57,
+     "coverage_within_3": 0.0
+    }
+   },
+   {
+    "clip_id": "pro_player_front_12.mp4",
+    "split": "dev",
+    "reference": [
+     30,
+     33,
+     35,
+     37,
+     38,
+     39,
+     50
+    ],
+    "F0_uniform": {
+     "distance": 10.43,
+     "coverage_within_3": 0.7143
+    },
+    "F1_contact_anchored": {
+     "distance": 10.43,
+     "coverage_within_3": 0.8571
+    },
+    "F2_motion_top": {
+     "distance": 7.29,
+     "coverage_within_3": 0.8571
+    },
+    "F3_phase_aware": {
+     "distance": 7.71,
+     "coverage_within_3": 0.8571
+    },
+    "F4_optimized": {
+     "distance": 12.14,
+     "coverage_within_3": 0.4286
+    }
+   },
+   {
+    "clip_id": "pro_player_front_14.mp4",
+    "split": "eval",
+    "reference": [
+     5,
+     8,
+     11,
+     13,
+     15,
+     16,
+     28
+    ],
+    "F0_uniform": {
+     "distance": 10.71,
+     "coverage_within_3": 1.0
+    },
+    "F1_contact_anchored": {
+     "distance": 5.29,
+     "coverage_within_3": 0.8571
+    },
+    "F2_motion_top": {
+     "distance": 12.14,
+     "coverage_within_3": 0.4286
+    },
+    "F3_phase_aware": {
+     "distance": 3.43,
+     "coverage_within_3": 0.8571
+    },
+    "F4_optimized": {
+     "distance": null,
+     "coverage_within_3": null
+    }
+   },
+   {
+    "clip_id": "pro_player_front_16.mp4",
+    "split": "eval",
+    "reference": [
+     15,
+     18,
+     20,
+     22,
+     23,
+     24,
+     35
+    ],
+    "F0_uniform": {
+     "distance": 26.43,
+     "coverage_within_3": 0.1429
+    },
+    "F1_contact_anchored": {
+     "distance": 14.57,
+     "coverage_within_3": 0.8571
+    },
+    "F2_motion_top": {
+     "distance": 8.57,
+     "coverage_within_3": 0.8571
+    },
+    "F3_phase_aware": {
+     "distance": 11.43,
+     "coverage_within_3": 0.8571
+    },
+    "F4_optimized": {
+     "distance": 12.57,
+     "coverage_within_3": 1.0
+    }
+   },
+   {
+    "clip_id": "pro_player_front_44.mp4",
+    "split": "dev",
+    "reference": [
+     23,
+     25,
+     27,
+     29,
+     30,
+     31,
+     45
+    ],
+    "F0_uniform": {
+     "distance": 11.43,
+     "coverage_within_3": 0.8571
+    },
+    "F1_contact_anchored": {
+     "distance": 11.86,
+     "coverage_within_3": 0.8571
+    },
+    "F2_motion_top": {
+     "distance": 4.14,
+     "coverage_within_3": 0.8571
+    },
+    "F3_phase_aware": {
+     "distance": 7.71,
+     "coverage_within_3": 1.0
+    },
+    "F4_optimized": {
+     "distance": 9.43,
+     "coverage_within_3": 0.8571
+    }
+   },
+   {
+    "clip_id": "roa_front_1.mp4",
+    "split": "dev",
+    "reference": [
+     110,
+     115,
+     119,
+     123,
+     126,
+     127,
+     145
+    ],
+    "F0_uniform": {
+     "distance": 8.71,
+     "coverage_within_3": 0.5714
+    },
+    "F1_contact_anchored": {
+     "distance": 9.14,
+     "coverage_within_3": 0.8571
+    },
+    "F2_motion_top": {
+     "distance": 6.43,
+     "coverage_within_3": 0.7143
+    },
+    "F3_phase_aware": {
+     "distance": 5.57,
+     "coverage_within_3": 1.0
+    },
+    "F4_optimized": {
+     "distance": 5.71,
+     "coverage_within_3": 0.7143
+    }
+   }
+  ]
+ },
+ "failure_modes": {
+  "F0_uniform": {
+   "n_affected": 14,
+   "by_cause": {
+    "pose failure \u2014 3+ selected frames yield no landmarks": [
+     "pro_player_back_27.mp4",
+     "pro_player_back_38.mp4",
+     "pro_player_front_01.mp4",
+     "pro_player_front_03.mp4",
+     "pro_player_front_10.mp4",
+     "pro_player_front_12.mp4",
+     "pro_player_front_14.mp4",
+     "pro_player_front_16.mp4",
+     "pro_player_front_44.mp4",
+     "roa_front_1.mp4"
+    ],
+    "identity failure \u2014 wrong batsman selected upstream": [
+     "beginnerunorthodox1_front_01.mp4",
+     "instagram2_front_03.mp4",
+     "kohli_side_16.mp4",
+     "pro_player_front_06.mp4"
+    ]
+   }
+  },
+  "F1_contact_anchored": {
+   "n_affected": 12,
+   "by_cause": {
+    "pose failure \u2014 3+ selected frames yield no landmarks": [
+     "pro_player_back_25.mp4",
+     "pro_player_back_38.mp4",
+     "pro_player_front_03.mp4",
+     "pro_player_front_10.mp4",
+     "pro_player_front_12.mp4",
+     "pro_player_front_14.mp4",
+     "pro_player_front_16.mp4",
+     "roa_front_1.mp4"
+    ],
+    "identity failure \u2014 wrong batsman selected upstream": [
+     "beginnerunorthodox1_front_01.mp4",
+     "instagram2_front_03.mp4",
+     "kohli_side_16.mp4",
+     "pro_player_front_06.mp4"
+    ]
+   }
+  },
+  "F2_motion_top": {
+   "n_affected": 24,
+   "by_cause": {
+    "pose failure \u2014 3+ selected frames yield no landmarks": [
+     "instagram2_front_07.mp4",
+     "pro_player_back_23.mp4",
+     "pro_player_back_38.mp4",
+     "pro_player_front_01.mp4",
+     "pro_player_front_03.mp4",
+     "pro_player_front_10.mp4",
+     "pro_player_front_12.mp4",
+     "pro_player_front_14.mp4",
+     "pro_player_front_16.mp4",
+     "pro_player_front_44.mp4",
+     "roa_front_1.mp4"
+    ],
+    "excessive clustering \u2014 selected frames adjacent": [
+     "instagram1_front_01.mp4",
+     "instagram2_front_05.mp4",
+     "kohli_side_10.mp4",
+     "kohli_side_14.mp4",
+     "kohli_side_24.mp4",
+     "kohli_side_32.mp4",
+     "pro_player_back_27.mp4",
+     "pro_player_back_31.mp4",
+     "pro_player_back_33.mp4"
+    ],
+    "identity failure \u2014 wrong batsman selected upstream": [
+     "beginnerunorthodox1_front_01.mp4",
+     "instagram2_front_03.mp4",
+     "kohli_side_16.mp4",
+     "pro_player_front_06.mp4"
+    ]
+   }
+  },
+  "F3_phase_aware": {
+   "n_affected": 16,
+   "by_cause": {
+    "pose failure \u2014 3+ selected frames yield no landmarks": [
+     "kohli_side_20.mp4",
+     "pro_player_back_23.mp4",
+     "pro_player_back_31.mp4",
+     "pro_player_back_38.mp4",
+     "pro_player_front_01.mp4",
+     "pro_player_front_03.mp4",
+     "pro_player_front_12.mp4",
+     "pro_player_front_14.mp4",
+     "pro_player_front_16.mp4",
+     "pro_player_front_44.mp4",
+     "roa_front_1.mp4"
+    ],
+    "identity failure \u2014 wrong batsman selected upstream": [
+     "beginnerunorthodox1_front_01.mp4",
+     "instagram2_front_03.mp4",
+     "kohli_side_16.mp4",
+     "pro_player_front_06.mp4"
+    ],
+    "optimizer refusal \u2014 ran out of chronological candidates": [
+     "pro_player_front_10.mp4"
+    ]
+   }
+  },
+  "F4_optimized": {
+   "n_affected": 9,
+   "by_cause": {
+    "identity failure \u2014 wrong batsman selected upstream": [
+     "beginnerunorthodox1_front_01.mp4",
+     "instagram2_front_03.mp4",
+     "kohli_side_16.mp4",
+     "pro_player_front_06.mp4"
+    ],
+    "pose failure \u2014 3+ selected frames yield no landmarks": [
+     "pro_player_back_38.mp4",
+     "pro_player_front_01.mp4",
+     "pro_player_front_10.mp4",
+     "roa_front_1.mp4"
+    ],
+    "optimizer refusal \u2014 no chronological assignment satisfies min_gap=2 across 10 candidates": [
+     "pro_player_front_14.mp4"
+    ]
+   }
+  }
+ },
+ "timeline_sheets": {
+  "F4_optimized": "C:\\Users\\Suhas\\OneDrive\\Documents\\Notes\\Cricket-Stance-Analyzer\\dataset\\phase3_results\\best7_timeline_F4_optimized.png",
+  "F0_uniform": "C:\\Users\\Suhas\\OneDrive\\Documents\\Notes\\Cricket-Stance-Analyzer\\dataset\\phase3_results\\best7_timeline_F0_uniform.png"
+ }
+}

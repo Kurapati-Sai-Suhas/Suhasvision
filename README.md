@@ -392,8 +392,42 @@ passed downstream as a *soft prior, not a hard crop*. Known weaknesses: L3's fal
 invalid clips is 0.77 (worst except L0), 12 of its 20 failures are wrong-peak selection, and it
 starts a median 3 frames late. With 14 valid clips per split the ordering is trustworthy but
 the magnitudes are not — L3 scores higher on eval than dev, a variance signature. Full detail
-in [`PHASE3_SHOT_LOCALIZATION_RESULTS.md`](PHASE3_SHOT_LOCALIZATION_RESULTS.md). F0–F4 (best-7)
-not started.
+in [`PHASE3_SHOT_LOCALIZATION_RESULTS.md`](PHASE3_SHOT_LOCALIZATION_RESULTS.md).
+
+**Contact benchmark (C0–C6) — one strong signal, and a confound that must travel with it.**
+Ground truth is 28 clips with a usable contact frame (4 EXACT + 24 CONTACT_ADJACENT, dev 14 /
+eval 14); AMBIGUOUS (16) and NOT_VISIBLE (7) carry no frame and are never used as labels. **C0,
+the existing proposal, localizes contact to a median of 1.0 frame** (±3 in 86% of clips) while
+every alternative — wrist velocity, bat association, skeleton dynamics, global and local motion,
+and their equal-weight combination — lands **16–33 frames** away. Contact is better when identity
+is correct (1.0 vs 3.0 frames). **Two confounds mean the contact-anchored shot result must not be
+read as a solved localizer:** (i) the annotator was *not blind to C0* — it is drawn on the sheet
+they labelled from; (ii) the annotation places contact almost exactly mid-shot (`contact−start =
+10.7 ± 2.4`, `end−contact = 12.0 ± 2.3`), so a ±10 window around the *true* contact already scores
+mean IoU 0.815 / recall@0.5 = 1.00. L3+C0 reaches eval IoU 0.864 — but every *independent* anchor
+(C6 0.155, C5 0.268, C4 0.268) performs at or below plain L3 (0.235). Detail in
+[`PHASE3_CONTACT_RESULTS.md`](PHASE3_CONTACT_RESULTS.md).
+
+**Event search region + Best-7 (F0–F4) — F4 adopted, EXPERIMENTAL, not production.** The region
+is `pad(L3 ∪ [C0±16], 8)`, deliberately optimised for recall: it **contains the GT shot on 100%
+of 28 valid clips** at a mean width of 62.6 frames against a true 22.7. Candidate pool averages
+31.9 frames, each carrying pose quality, sharpness, occlusion, motion and contact distance as
+*separate* fields — motion is an event signal, not a synonym for image quality. **F4 (the DP
+optimizer) clearly wins the question Best-7 exists to answer:** 5.78 of 7 frames yield computable
+angles vs 4.46–4.88 for F0–F3, missing landmarks nearly halved (1.22 vs 2.13–2.54), best velocity
+stability (7.92 vs 9.52–12.58), mean pose quality 0.798 vs 0.505–0.567, **zero pose-less frames
+selected against F0's 2.1 per clip**, and the fewest failures (9 vs F0's 14 and F2's 24) — for
+0.94 ms. **Known limitation carried forward:** only **41.6%** of F4's frames fall inside the
+labelled shot, *worse* than F2 (0.571) and F3 (0.497) — F4 selects usable frames, not necessarily
+the right moments, because the region is 2.8× wider than the true event. That is a shot-localization
+limit, not a selector limit. No expert frame-selection reference exists; the human comparison is
+annotation-derived and structurally biased toward F3. Detail in
+[`PHASE3_BEST7_RESULTS.md`](PHASE3_BEST7_RESULTS.md).
+
+**Current frozen extraction architecture (all EXPERIMENTAL, none promoted to production):**
+`S2 batsman identification → L3 soft prior (+ L0 whole-clip fallback) → C0 contact anchor →
+event search region → ≤40-candidate pool → F4 best-7 → pose → (7,30)`. The scoring model is
+untouched: `SEQ_LEN = 7`, 30 features, no retraining.
 
 ## 13. Known Limitations
 
@@ -430,6 +464,8 @@ not started.
 | [`PHASE3_RTMPOSE_EVALUATION.md`](PHASE3_RTMPOSE_EVALUATION.md) | MediaPipe vs RTMPose. Corrects the "pose is the bottleneck" diagnosis, shows why RTMPose's 100% availability is an artifact, and the provisional fallback-hybrid decision |
 | [`PHASE3_HYBRID_IDENTITY_RESULTS.md`](PHASE3_HYBRID_IDENTITY_RESULTS.md) | H0 vs H1 end-to-end in the real S2 identity system. Corrected failure taxonomy, the unreachable-branch fix, and why the fallback is **not** adopted |
 | [`PHASE3_SHOT_LOCALIZATION_RESULTS.md`](PHASE3_SHOT_LOCALIZATION_RESULTS.md) | L0–L3 shot localization against the annotation benchmark: identity-conditioned results, rejection behaviour, failure mechanisms, latency, and the selected L3+L0-fallback configuration |
+| [`PHASE3_CONTACT_RESULTS.md`](PHASE3_CONTACT_RESULTS.md) | C0–C6 contact localization, the non-blind-annotation and fixed-offset confounds, and why contact-anchored shot IoU must not be reported as a localization result |
+| [`PHASE3_BEST7_RESULTS.md`](PHASE3_BEST7_RESULTS.md) | Event search region and the F0–F4 Best-7 ablation: biomechanical `(7,30)` quality, failure analysis, and the adopted F4 configuration with its event-faithfulness limitation |
 | [`docs/PHASE3_ANNOTATION_PROTOCOL.md`](docs/PHASE3_ANNOTATION_PROTOCOL.md) | Operational definitions for the Phase-3 temporal ground truth |
 | [`docs/architecture_ground_truth.md`](docs/architecture_ground_truth.md) | The dated, ground-truth engineering log — including the full wrong-person-tracking investigation |
 | [`docs/SuhasVision_SRS_v2.0.docx`](docs/SuhasVision_SRS_v2.0.docx) | Formal, IEEE-830-inspired requirements specification |
