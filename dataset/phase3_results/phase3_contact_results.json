@@ -1,0 +1,8956 @@
+{
+ "l3_params": {
+  "alpha": 0.2,
+  "tau": 1.2,
+  "min_dur": 12,
+  "max_dur": 30
+ },
+ "usable_contact_types": [
+  "EXACT",
+  "CONTACT_ADJACENT"
+ ],
+ "tolerance_note": "Schema tolerance is +/-1 frame for EXACT and +/-3 for CONTACT_ADJACENT. within_1 over CONTACT_ADJACENT clips partly measures annotation noise.",
+ "contact": {
+  "all": {
+   "C0_current_proposal": {
+    "n_clips": 28,
+    "n_estimated": 28,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 1.0,
+    "mean_abs_err": 1.68,
+    "within_1": 0.5357,
+    "within_2": 0.75,
+    "within_3": 0.8571,
+    "detail": [
+     {
+      "clip_id": "beginnerunorthodox1_front_01.mp4",
+      "gt": 58,
+      "pred": 53,
+      "err": 5,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram1_front_01.mp4",
+      "gt": 16,
+      "pred": 20,
+      "err": 4,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_03.mp4",
+      "gt": 33,
+      "pred": 35,
+      "err": 2,
+      "contact_type": "EXACT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_05.mp4",
+      "gt": 50,
+      "pred": 49,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_07.mp4",
+      "gt": 40,
+      "pred": 43,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_08.mp4",
+      "gt": 35,
+      "pred": 31,
+      "err": 4,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_10.mp4",
+      "gt": 90,
+      "pred": 90,
+      "err": 0,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_14.mp4",
+      "gt": 51,
+      "pred": 52,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_16.mp4",
+      "gt": 9,
+      "pred": 8,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_20.mp4",
+      "gt": 46,
+      "pred": 47,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_24.mp4",
+      "gt": 51,
+      "pred": 52,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_28.mp4",
+      "gt": 63,
+      "pred": 64,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_32.mp4",
+      "gt": 66,
+      "pred": 67,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_23.mp4",
+      "gt": 30,
+      "pred": 32,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_25.mp4",
+      "gt": 61,
+      "pred": 59,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_27.mp4",
+      "gt": 63,
+      "pred": 63,
+      "err": 0,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_31.mp4",
+      "gt": 56,
+      "pred": 54,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_33.mp4",
+      "gt": 31,
+      "pred": 31,
+      "err": 0,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_38.mp4",
+      "gt": 23,
+      "pred": 25,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_01.mp4",
+      "gt": 36,
+      "pred": 39,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_03.mp4",
+      "gt": 64,
+      "pred": 67,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_06.mp4",
+      "gt": 51,
+      "pred": 47,
+      "err": 4,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_10.mp4",
+      "gt": 50,
+      "pred": 48,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_12.mp4",
+      "gt": 39,
+      "pred": 39,
+      "err": 0,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_14.mp4",
+      "gt": 16,
+      "pred": 17,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_16.mp4",
+      "gt": 24,
+      "pred": 24,
+      "err": 0,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_44.mp4",
+      "gt": 31,
+      "pred": 32,
+      "err": 1,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "roa_front_1.mp4",
+      "gt": 127,
+      "pred": 127,
+      "err": 0,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     }
+    ]
+   },
+   "C1_wrist_velocity": {
+    "n_clips": 28,
+    "n_estimated": 24,
+    "n_not_found": 4,
+    "not_found_rate": 0.1429,
+    "median_abs_err": 22.5,
+    "mean_abs_err": 30.67,
+    "within_1": 0.0,
+    "within_2": 0.0357,
+    "within_3": 0.1071,
+    "detail": [
+     {
+      "clip_id": "beginnerunorthodox1_front_01.mp4",
+      "gt": 58,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "instagram1_front_01.mp4",
+      "gt": 16,
+      "pred": 77,
+      "err": 61,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_03.mp4",
+      "gt": 33,
+      "pred": null,
+      "err": null,
+      "contact_type": "EXACT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "instagram2_front_05.mp4",
+      "gt": 50,
+      "pred": 47,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_07.mp4",
+      "gt": 40,
+      "pred": 84,
+      "err": 44,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_08.mp4",
+      "gt": 35,
+      "pred": 30,
+      "err": 5,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_10.mp4",
+      "gt": 90,
+      "pred": 36,
+      "err": 54,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_14.mp4",
+      "gt": 51,
+      "pred": 172,
+      "err": 121,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_16.mp4",
+      "gt": 9,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "kohli_side_20.mp4",
+      "gt": 46,
+      "pred": 16,
+      "err": 30,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_24.mp4",
+      "gt": 51,
+      "pred": 21,
+      "err": 30,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_28.mp4",
+      "gt": 63,
+      "pred": 157,
+      "err": 94,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_32.mp4",
+      "gt": 66,
+      "pred": 75,
+      "err": 9,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_23.mp4",
+      "gt": 30,
+      "pred": 55,
+      "err": 25,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_25.mp4",
+      "gt": 61,
+      "pred": 81,
+      "err": 20,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_27.mp4",
+      "gt": 63,
+      "pred": 60,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_31.mp4",
+      "gt": 56,
+      "pred": 75,
+      "err": 19,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_33.mp4",
+      "gt": 31,
+      "pred": 13,
+      "err": 18,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_38.mp4",
+      "gt": 23,
+      "pred": 71,
+      "err": 48,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_01.mp4",
+      "gt": 36,
+      "pred": 63,
+      "err": 27,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_03.mp4",
+      "gt": 64,
+      "pred": 54,
+      "err": 10,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_06.mp4",
+      "gt": 51,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "pro_player_front_10.mp4",
+      "gt": 50,
+      "pred": 20,
+      "err": 30,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_12.mp4",
+      "gt": 39,
+      "pred": 27,
+      "err": 12,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_14.mp4",
+      "gt": 16,
+      "pred": 56,
+      "err": 40,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_16.mp4",
+      "gt": 24,
+      "pred": 36,
+      "err": 12,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_44.mp4",
+      "gt": 31,
+      "pred": 12,
+      "err": 19,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "roa_front_1.mp4",
+      "gt": 127,
+      "pred": 129,
+      "err": 2,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     }
+    ]
+   },
+   "C2_bat_association": {
+    "n_clips": 28,
+    "n_estimated": 28,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 33.5,
+    "mean_abs_err": 36.71,
+    "within_1": 0.0,
+    "within_2": 0.0,
+    "within_3": 0.0357,
+    "detail": [
+     {
+      "clip_id": "beginnerunorthodox1_front_01.mp4",
+      "gt": 58,
+      "pred": 0,
+      "err": 58,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram1_front_01.mp4",
+      "gt": 16,
+      "pred": 47,
+      "err": 31,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_03.mp4",
+      "gt": 33,
+      "pred": 0,
+      "err": 33,
+      "contact_type": "EXACT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_05.mp4",
+      "gt": 50,
+      "pred": 53,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_07.mp4",
+      "gt": 40,
+      "pred": 33,
+      "err": 7,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_08.mp4",
+      "gt": 35,
+      "pred": 81,
+      "err": 46,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_10.mp4",
+      "gt": 90,
+      "pred": 123,
+      "err": 33,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_14.mp4",
+      "gt": 51,
+      "pred": 154,
+      "err": 103,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_16.mp4",
+      "gt": 9,
+      "pred": 0,
+      "err": 9,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_20.mp4",
+      "gt": 46,
+      "pred": 9,
+      "err": 37,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_24.mp4",
+      "gt": 51,
+      "pred": 126,
+      "err": 75,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_28.mp4",
+      "gt": 63,
+      "pred": 58,
+      "err": 5,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_32.mp4",
+      "gt": 66,
+      "pred": 98,
+      "err": 32,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_23.mp4",
+      "gt": 30,
+      "pred": 76,
+      "err": 46,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_25.mp4",
+      "gt": 61,
+      "pred": 22,
+      "err": 39,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_27.mp4",
+      "gt": 63,
+      "pred": 29,
+      "err": 34,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_31.mp4",
+      "gt": 56,
+      "pred": 10,
+      "err": 46,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_33.mp4",
+      "gt": 31,
+      "pred": 77,
+      "err": 46,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_38.mp4",
+      "gt": 23,
+      "pred": 1,
+      "err": 22,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_01.mp4",
+      "gt": 36,
+      "pred": 5,
+      "err": 31,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_03.mp4",
+      "gt": 64,
+      "pred": 37,
+      "err": 27,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_06.mp4",
+      "gt": 51,
+      "pred": 0,
+      "err": 51,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_10.mp4",
+      "gt": 50,
+      "pred": 4,
+      "err": 46,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_12.mp4",
+      "gt": 39,
+      "pred": 56,
+      "err": 17,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_14.mp4",
+      "gt": 16,
+      "pred": 48,
+      "err": 32,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_16.mp4",
+      "gt": 24,
+      "pred": 76,
+      "err": 52,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_44.mp4",
+      "gt": 31,
+      "pred": 48,
+      "err": 17,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "roa_front_1.mp4",
+      "gt": 127,
+      "pred": 177,
+      "err": 50,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     }
+    ]
+   },
+   "C3_skeleton_dynamics": {
+    "n_clips": 28,
+    "n_estimated": 24,
+    "n_not_found": 4,
+    "not_found_rate": 0.1429,
+    "median_abs_err": 31.0,
+    "mean_abs_err": 32.75,
+    "within_1": 0.0357,
+    "within_2": 0.0357,
+    "within_3": 0.0714,
+    "detail": [
+     {
+      "clip_id": "beginnerunorthodox1_front_01.mp4",
+      "gt": 58,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "instagram1_front_01.mp4",
+      "gt": 16,
+      "pred": 53,
+      "err": 37,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_03.mp4",
+      "gt": 33,
+      "pred": null,
+      "err": null,
+      "contact_type": "EXACT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "instagram2_front_05.mp4",
+      "gt": 50,
+      "pred": 47,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_07.mp4",
+      "gt": 40,
+      "pred": 41,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_08.mp4",
+      "gt": 35,
+      "pred": 87,
+      "err": 52,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_10.mp4",
+      "gt": 90,
+      "pred": 48,
+      "err": 42,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_14.mp4",
+      "gt": 51,
+      "pred": 6,
+      "err": 45,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_16.mp4",
+      "gt": 9,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "kohli_side_20.mp4",
+      "gt": 46,
+      "pred": 54,
+      "err": 8,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_24.mp4",
+      "gt": 51,
+      "pred": 9,
+      "err": 42,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_28.mp4",
+      "gt": 63,
+      "pred": 148,
+      "err": 85,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_32.mp4",
+      "gt": 66,
+      "pred": 0,
+      "err": 66,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_23.mp4",
+      "gt": 30,
+      "pred": 59,
+      "err": 29,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_25.mp4",
+      "gt": 61,
+      "pred": 68,
+      "err": 7,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_27.mp4",
+      "gt": 63,
+      "pred": 67,
+      "err": 4,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_31.mp4",
+      "gt": 56,
+      "pred": 85,
+      "err": 29,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_33.mp4",
+      "gt": 31,
+      "pred": 14,
+      "err": 17,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_38.mp4",
+      "gt": 23,
+      "pred": 89,
+      "err": 66,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_01.mp4",
+      "gt": 36,
+      "pred": 89,
+      "err": 53,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_03.mp4",
+      "gt": 64,
+      "pred": 74,
+      "err": 10,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_06.mp4",
+      "gt": 51,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "pro_player_front_10.mp4",
+      "gt": 50,
+      "pred": 17,
+      "err": 33,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_12.mp4",
+      "gt": 39,
+      "pred": 12,
+      "err": 27,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_14.mp4",
+      "gt": 16,
+      "pred": 69,
+      "err": 53,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_16.mp4",
+      "gt": 24,
+      "pred": 35,
+      "err": 11,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_44.mp4",
+      "gt": 31,
+      "pred": 17,
+      "err": 14,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "roa_front_1.mp4",
+      "gt": 127,
+      "pred": 75,
+      "err": 52,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     }
+    ]
+   },
+   "C4_global_motion": {
+    "n_clips": 28,
+    "n_estimated": 28,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 30.5,
+    "mean_abs_err": 30.79,
+    "within_1": 0.0714,
+    "within_2": 0.1429,
+    "within_3": 0.1786,
+    "detail": [
+     {
+      "clip_id": "beginnerunorthodox1_front_01.mp4",
+      "gt": 58,
+      "pred": 6,
+      "err": 52,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram1_front_01.mp4",
+      "gt": 16,
+      "pred": 53,
+      "err": 37,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_03.mp4",
+      "gt": 33,
+      "pred": 53,
+      "err": 20,
+      "contact_type": "EXACT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_05.mp4",
+      "gt": 50,
+      "pred": 47,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_07.mp4",
+      "gt": 40,
+      "pred": 41,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_08.mp4",
+      "gt": 35,
+      "pred": 90,
+      "err": 55,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_10.mp4",
+      "gt": 90,
+      "pred": 149,
+      "err": 59,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_14.mp4",
+      "gt": 51,
+      "pred": 81,
+      "err": 30,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_16.mp4",
+      "gt": 9,
+      "pred": 28,
+      "err": 19,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_20.mp4",
+      "gt": 46,
+      "pred": 91,
+      "err": 45,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_24.mp4",
+      "gt": 51,
+      "pred": 47,
+      "err": 4,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_28.mp4",
+      "gt": 63,
+      "pred": 27,
+      "err": 36,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_32.mp4",
+      "gt": 66,
+      "pred": 27,
+      "err": 39,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_23.mp4",
+      "gt": 30,
+      "pred": 49,
+      "err": 19,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_25.mp4",
+      "gt": 61,
+      "pred": 15,
+      "err": 46,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_27.mp4",
+      "gt": 63,
+      "pred": 27,
+      "err": 36,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_31.mp4",
+      "gt": 56,
+      "pred": 54,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_33.mp4",
+      "gt": 31,
+      "pred": 11,
+      "err": 20,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_38.mp4",
+      "gt": 23,
+      "pred": 25,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_01.mp4",
+      "gt": 36,
+      "pred": 71,
+      "err": 35,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_03.mp4",
+      "gt": 64,
+      "pred": 88,
+      "err": 24,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_06.mp4",
+      "gt": 51,
+      "pred": 67,
+      "err": 16,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_10.mp4",
+      "gt": 50,
+      "pred": 50,
+      "err": 0,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_12.mp4",
+      "gt": 39,
+      "pred": 3,
+      "err": 36,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_14.mp4",
+      "gt": 16,
+      "pred": 35,
+      "err": 19,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_16.mp4",
+      "gt": 24,
+      "pred": 73,
+      "err": 49,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_44.mp4",
+      "gt": 31,
+      "pred": 0,
+      "err": 31,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "roa_front_1.mp4",
+      "gt": 127,
+      "pred": 0,
+      "err": 127,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     }
+    ]
+   },
+   "C5_local_motion": {
+    "n_clips": 28,
+    "n_estimated": 24,
+    "n_not_found": 4,
+    "not_found_rate": 0.1429,
+    "median_abs_err": 26.0,
+    "mean_abs_err": 28.29,
+    "within_1": 0.1429,
+    "within_2": 0.1786,
+    "within_3": 0.2143,
+    "detail": [
+     {
+      "clip_id": "beginnerunorthodox1_front_01.mp4",
+      "gt": 58,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "instagram1_front_01.mp4",
+      "gt": 16,
+      "pred": 53,
+      "err": 37,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_03.mp4",
+      "gt": 33,
+      "pred": null,
+      "err": null,
+      "contact_type": "EXACT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "instagram2_front_05.mp4",
+      "gt": 50,
+      "pred": 23,
+      "err": 27,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_07.mp4",
+      "gt": 40,
+      "pred": 41,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_08.mp4",
+      "gt": 35,
+      "pred": 134,
+      "err": 99,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_10.mp4",
+      "gt": 90,
+      "pred": 101,
+      "err": 11,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_14.mp4",
+      "gt": 51,
+      "pred": 138,
+      "err": 87,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_16.mp4",
+      "gt": 9,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "kohli_side_20.mp4",
+      "gt": 46,
+      "pred": 20,
+      "err": 26,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_24.mp4",
+      "gt": 51,
+      "pred": 12,
+      "err": 39,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_28.mp4",
+      "gt": 63,
+      "pred": 37,
+      "err": 26,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_32.mp4",
+      "gt": 66,
+      "pred": 62,
+      "err": 4,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_23.mp4",
+      "gt": 30,
+      "pred": 31,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_25.mp4",
+      "gt": 61,
+      "pred": 15,
+      "err": 46,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_27.mp4",
+      "gt": 63,
+      "pred": 27,
+      "err": 36,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_31.mp4",
+      "gt": 56,
+      "pred": 54,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_33.mp4",
+      "gt": 31,
+      "pred": 11,
+      "err": 20,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_38.mp4",
+      "gt": 23,
+      "pred": 26,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_01.mp4",
+      "gt": 36,
+      "pred": 72,
+      "err": 36,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_03.mp4",
+      "gt": 64,
+      "pred": 87,
+      "err": 23,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_06.mp4",
+      "gt": 51,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "pro_player_front_10.mp4",
+      "gt": 50,
+      "pred": 0,
+      "err": 50,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_12.mp4",
+      "gt": 39,
+      "pred": 38,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_14.mp4",
+      "gt": 16,
+      "pred": 56,
+      "err": 40,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_16.mp4",
+      "gt": 24,
+      "pred": 71,
+      "err": 47,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_44.mp4",
+      "gt": 31,
+      "pred": 32,
+      "err": 1,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "roa_front_1.mp4",
+      "gt": 127,
+      "pred": 111,
+      "err": 16,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     }
+    ]
+   },
+   "C6_combined_event": {
+    "n_clips": 28,
+    "n_estimated": 28,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 16.0,
+    "mean_abs_err": 20.11,
+    "within_1": 0.0357,
+    "within_2": 0.1071,
+    "within_3": 0.1429,
+    "detail": [
+     {
+      "clip_id": "beginnerunorthodox1_front_01.mp4",
+      "gt": 58,
+      "pred": 6,
+      "err": 52,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram1_front_01.mp4",
+      "gt": 16,
+      "pred": 54,
+      "err": 38,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_03.mp4",
+      "gt": 33,
+      "pred": 53,
+      "err": 20,
+      "contact_type": "EXACT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_05.mp4",
+      "gt": 50,
+      "pred": 47,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_07.mp4",
+      "gt": 40,
+      "pred": 41,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_08.mp4",
+      "gt": 35,
+      "pred": 118,
+      "err": 83,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_10.mp4",
+      "gt": 90,
+      "pred": 48,
+      "err": 42,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_14.mp4",
+      "gt": 51,
+      "pred": 37,
+      "err": 14,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_16.mp4",
+      "gt": 9,
+      "pred": 28,
+      "err": 19,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_20.mp4",
+      "gt": 46,
+      "pred": 55,
+      "err": 9,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_24.mp4",
+      "gt": 51,
+      "pred": 35,
+      "err": 16,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_28.mp4",
+      "gt": 63,
+      "pred": 58,
+      "err": 5,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_32.mp4",
+      "gt": 66,
+      "pred": 75,
+      "err": 9,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_23.mp4",
+      "gt": 30,
+      "pred": 60,
+      "err": 30,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_25.mp4",
+      "gt": 61,
+      "pred": 68,
+      "err": 7,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_27.mp4",
+      "gt": 63,
+      "pred": 67,
+      "err": 4,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_31.mp4",
+      "gt": 56,
+      "pred": 54,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_33.mp4",
+      "gt": 31,
+      "pred": 13,
+      "err": 18,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_38.mp4",
+      "gt": 23,
+      "pred": 25,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_01.mp4",
+      "gt": 36,
+      "pred": 71,
+      "err": 35,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_03.mp4",
+      "gt": 64,
+      "pred": 37,
+      "err": 27,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_06.mp4",
+      "gt": 51,
+      "pred": 67,
+      "err": 16,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_10.mp4",
+      "gt": 50,
+      "pred": 17,
+      "err": 33,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_12.mp4",
+      "gt": 39,
+      "pred": 32,
+      "err": 7,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_14.mp4",
+      "gt": 16,
+      "pred": 48,
+      "err": 32,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_16.mp4",
+      "gt": 24,
+      "pred": 36,
+      "err": 12,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_44.mp4",
+      "gt": 31,
+      "pred": 14,
+      "err": 17,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "roa_front_1.mp4",
+      "gt": 127,
+      "pred": 117,
+      "err": 10,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     }
+    ]
+   }
+  },
+  "identity_correct": {
+   "C0_current_proposal": {
+    "n_clips": 24,
+    "n_estimated": 24,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 1.0,
+    "mean_abs_err": 1.46,
+    "within_1": 0.5833,
+    "within_2": 0.7917,
+    "within_3": 0.9167,
+    "detail": [
+     {
+      "clip_id": "instagram1_front_01.mp4",
+      "gt": 16,
+      "pred": 20,
+      "err": 4,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_05.mp4",
+      "gt": 50,
+      "pred": 49,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_07.mp4",
+      "gt": 40,
+      "pred": 43,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_08.mp4",
+      "gt": 35,
+      "pred": 31,
+      "err": 4,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_10.mp4",
+      "gt": 90,
+      "pred": 90,
+      "err": 0,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_14.mp4",
+      "gt": 51,
+      "pred": 52,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_20.mp4",
+      "gt": 46,
+      "pred": 47,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_24.mp4",
+      "gt": 51,
+      "pred": 52,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_28.mp4",
+      "gt": 63,
+      "pred": 64,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_32.mp4",
+      "gt": 66,
+      "pred": 67,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_23.mp4",
+      "gt": 30,
+      "pred": 32,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_25.mp4",
+      "gt": 61,
+      "pred": 59,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_27.mp4",
+      "gt": 63,
+      "pred": 63,
+      "err": 0,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_31.mp4",
+      "gt": 56,
+      "pred": 54,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_33.mp4",
+      "gt": 31,
+      "pred": 31,
+      "err": 0,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_38.mp4",
+      "gt": 23,
+      "pred": 25,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_01.mp4",
+      "gt": 36,
+      "pred": 39,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_03.mp4",
+      "gt": 64,
+      "pred": 67,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_10.mp4",
+      "gt": 50,
+      "pred": 48,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_12.mp4",
+      "gt": 39,
+      "pred": 39,
+      "err": 0,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_14.mp4",
+      "gt": 16,
+      "pred": 17,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_16.mp4",
+      "gt": 24,
+      "pred": 24,
+      "err": 0,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_44.mp4",
+      "gt": 31,
+      "pred": 32,
+      "err": 1,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "roa_front_1.mp4",
+      "gt": 127,
+      "pred": 127,
+      "err": 0,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     }
+    ]
+   },
+   "C1_wrist_velocity": {
+    "n_clips": 24,
+    "n_estimated": 24,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 22.5,
+    "mean_abs_err": 30.67,
+    "within_1": 0.0,
+    "within_2": 0.0417,
+    "within_3": 0.125,
+    "detail": [
+     {
+      "clip_id": "instagram1_front_01.mp4",
+      "gt": 16,
+      "pred": 77,
+      "err": 61,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_05.mp4",
+      "gt": 50,
+      "pred": 47,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_07.mp4",
+      "gt": 40,
+      "pred": 84,
+      "err": 44,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_08.mp4",
+      "gt": 35,
+      "pred": 30,
+      "err": 5,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_10.mp4",
+      "gt": 90,
+      "pred": 36,
+      "err": 54,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_14.mp4",
+      "gt": 51,
+      "pred": 172,
+      "err": 121,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_20.mp4",
+      "gt": 46,
+      "pred": 16,
+      "err": 30,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_24.mp4",
+      "gt": 51,
+      "pred": 21,
+      "err": 30,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_28.mp4",
+      "gt": 63,
+      "pred": 157,
+      "err": 94,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_32.mp4",
+      "gt": 66,
+      "pred": 75,
+      "err": 9,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_23.mp4",
+      "gt": 30,
+      "pred": 55,
+      "err": 25,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_25.mp4",
+      "gt": 61,
+      "pred": 81,
+      "err": 20,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_27.mp4",
+      "gt": 63,
+      "pred": 60,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_31.mp4",
+      "gt": 56,
+      "pred": 75,
+      "err": 19,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_33.mp4",
+      "gt": 31,
+      "pred": 13,
+      "err": 18,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_38.mp4",
+      "gt": 23,
+      "pred": 71,
+      "err": 48,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_01.mp4",
+      "gt": 36,
+      "pred": 63,
+      "err": 27,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_03.mp4",
+      "gt": 64,
+      "pred": 54,
+      "err": 10,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_10.mp4",
+      "gt": 50,
+      "pred": 20,
+      "err": 30,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_12.mp4",
+      "gt": 39,
+      "pred": 27,
+      "err": 12,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_14.mp4",
+      "gt": 16,
+      "pred": 56,
+      "err": 40,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_16.mp4",
+      "gt": 24,
+      "pred": 36,
+      "err": 12,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_44.mp4",
+      "gt": 31,
+      "pred": 12,
+      "err": 19,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "roa_front_1.mp4",
+      "gt": 127,
+      "pred": 129,
+      "err": 2,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     }
+    ]
+   },
+   "C2_bat_association": {
+    "n_clips": 24,
+    "n_estimated": 24,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 33.5,
+    "mean_abs_err": 36.54,
+    "within_1": 0.0,
+    "within_2": 0.0,
+    "within_3": 0.0417,
+    "detail": [
+     {
+      "clip_id": "instagram1_front_01.mp4",
+      "gt": 16,
+      "pred": 47,
+      "err": 31,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_05.mp4",
+      "gt": 50,
+      "pred": 53,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_07.mp4",
+      "gt": 40,
+      "pred": 33,
+      "err": 7,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_08.mp4",
+      "gt": 35,
+      "pred": 81,
+      "err": 46,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_10.mp4",
+      "gt": 90,
+      "pred": 123,
+      "err": 33,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_14.mp4",
+      "gt": 51,
+      "pred": 154,
+      "err": 103,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_20.mp4",
+      "gt": 46,
+      "pred": 9,
+      "err": 37,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_24.mp4",
+      "gt": 51,
+      "pred": 126,
+      "err": 75,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_28.mp4",
+      "gt": 63,
+      "pred": 58,
+      "err": 5,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_32.mp4",
+      "gt": 66,
+      "pred": 98,
+      "err": 32,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_23.mp4",
+      "gt": 30,
+      "pred": 76,
+      "err": 46,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_25.mp4",
+      "gt": 61,
+      "pred": 22,
+      "err": 39,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_27.mp4",
+      "gt": 63,
+      "pred": 29,
+      "err": 34,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_31.mp4",
+      "gt": 56,
+      "pred": 10,
+      "err": 46,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_33.mp4",
+      "gt": 31,
+      "pred": 77,
+      "err": 46,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_38.mp4",
+      "gt": 23,
+      "pred": 1,
+      "err": 22,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_01.mp4",
+      "gt": 36,
+      "pred": 5,
+      "err": 31,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_03.mp4",
+      "gt": 64,
+      "pred": 37,
+      "err": 27,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_10.mp4",
+      "gt": 50,
+      "pred": 4,
+      "err": 46,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_12.mp4",
+      "gt": 39,
+      "pred": 56,
+      "err": 17,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_14.mp4",
+      "gt": 16,
+      "pred": 48,
+      "err": 32,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_16.mp4",
+      "gt": 24,
+      "pred": 76,
+      "err": 52,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_44.mp4",
+      "gt": 31,
+      "pred": 48,
+      "err": 17,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "roa_front_1.mp4",
+      "gt": 127,
+      "pred": 177,
+      "err": 50,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     }
+    ]
+   },
+   "C3_skeleton_dynamics": {
+    "n_clips": 24,
+    "n_estimated": 24,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 31.0,
+    "mean_abs_err": 32.75,
+    "within_1": 0.0417,
+    "within_2": 0.0417,
+    "within_3": 0.0833,
+    "detail": [
+     {
+      "clip_id": "instagram1_front_01.mp4",
+      "gt": 16,
+      "pred": 53,
+      "err": 37,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_05.mp4",
+      "gt": 50,
+      "pred": 47,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_07.mp4",
+      "gt": 40,
+      "pred": 41,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_08.mp4",
+      "gt": 35,
+      "pred": 87,
+      "err": 52,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_10.mp4",
+      "gt": 90,
+      "pred": 48,
+      "err": 42,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_14.mp4",
+      "gt": 51,
+      "pred": 6,
+      "err": 45,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_20.mp4",
+      "gt": 46,
+      "pred": 54,
+      "err": 8,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_24.mp4",
+      "gt": 51,
+      "pred": 9,
+      "err": 42,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_28.mp4",
+      "gt": 63,
+      "pred": 148,
+      "err": 85,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_32.mp4",
+      "gt": 66,
+      "pred": 0,
+      "err": 66,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_23.mp4",
+      "gt": 30,
+      "pred": 59,
+      "err": 29,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_25.mp4",
+      "gt": 61,
+      "pred": 68,
+      "err": 7,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_27.mp4",
+      "gt": 63,
+      "pred": 67,
+      "err": 4,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_31.mp4",
+      "gt": 56,
+      "pred": 85,
+      "err": 29,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_33.mp4",
+      "gt": 31,
+      "pred": 14,
+      "err": 17,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_38.mp4",
+      "gt": 23,
+      "pred": 89,
+      "err": 66,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_01.mp4",
+      "gt": 36,
+      "pred": 89,
+      "err": 53,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_03.mp4",
+      "gt": 64,
+      "pred": 74,
+      "err": 10,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_10.mp4",
+      "gt": 50,
+      "pred": 17,
+      "err": 33,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_12.mp4",
+      "gt": 39,
+      "pred": 12,
+      "err": 27,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_14.mp4",
+      "gt": 16,
+      "pred": 69,
+      "err": 53,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_16.mp4",
+      "gt": 24,
+      "pred": 35,
+      "err": 11,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_44.mp4",
+      "gt": 31,
+      "pred": 17,
+      "err": 14,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "roa_front_1.mp4",
+      "gt": 127,
+      "pred": 75,
+      "err": 52,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     }
+    ]
+   },
+   "C4_global_motion": {
+    "n_clips": 24,
+    "n_estimated": 24,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 33.0,
+    "mean_abs_err": 31.46,
+    "within_1": 0.0833,
+    "within_2": 0.1667,
+    "within_3": 0.2083,
+    "detail": [
+     {
+      "clip_id": "instagram1_front_01.mp4",
+      "gt": 16,
+      "pred": 53,
+      "err": 37,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_05.mp4",
+      "gt": 50,
+      "pred": 47,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_07.mp4",
+      "gt": 40,
+      "pred": 41,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_08.mp4",
+      "gt": 35,
+      "pred": 90,
+      "err": 55,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_10.mp4",
+      "gt": 90,
+      "pred": 149,
+      "err": 59,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_14.mp4",
+      "gt": 51,
+      "pred": 81,
+      "err": 30,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_20.mp4",
+      "gt": 46,
+      "pred": 91,
+      "err": 45,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_24.mp4",
+      "gt": 51,
+      "pred": 47,
+      "err": 4,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_28.mp4",
+      "gt": 63,
+      "pred": 27,
+      "err": 36,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_32.mp4",
+      "gt": 66,
+      "pred": 27,
+      "err": 39,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_23.mp4",
+      "gt": 30,
+      "pred": 49,
+      "err": 19,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_25.mp4",
+      "gt": 61,
+      "pred": 15,
+      "err": 46,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_27.mp4",
+      "gt": 63,
+      "pred": 27,
+      "err": 36,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_31.mp4",
+      "gt": 56,
+      "pred": 54,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_33.mp4",
+      "gt": 31,
+      "pred": 11,
+      "err": 20,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_38.mp4",
+      "gt": 23,
+      "pred": 25,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_01.mp4",
+      "gt": 36,
+      "pred": 71,
+      "err": 35,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_03.mp4",
+      "gt": 64,
+      "pred": 88,
+      "err": 24,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_10.mp4",
+      "gt": 50,
+      "pred": 50,
+      "err": 0,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_12.mp4",
+      "gt": 39,
+      "pred": 3,
+      "err": 36,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_14.mp4",
+      "gt": 16,
+      "pred": 35,
+      "err": 19,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_16.mp4",
+      "gt": 24,
+      "pred": 73,
+      "err": 49,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_44.mp4",
+      "gt": 31,
+      "pred": 0,
+      "err": 31,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "roa_front_1.mp4",
+      "gt": 127,
+      "pred": 0,
+      "err": 127,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     }
+    ]
+   },
+   "C5_local_motion": {
+    "n_clips": 24,
+    "n_estimated": 24,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 26.0,
+    "mean_abs_err": 28.29,
+    "within_1": 0.1667,
+    "within_2": 0.2083,
+    "within_3": 0.25,
+    "detail": [
+     {
+      "clip_id": "instagram1_front_01.mp4",
+      "gt": 16,
+      "pred": 53,
+      "err": 37,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_05.mp4",
+      "gt": 50,
+      "pred": 23,
+      "err": 27,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_07.mp4",
+      "gt": 40,
+      "pred": 41,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_08.mp4",
+      "gt": 35,
+      "pred": 134,
+      "err": 99,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_10.mp4",
+      "gt": 90,
+      "pred": 101,
+      "err": 11,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_14.mp4",
+      "gt": 51,
+      "pred": 138,
+      "err": 87,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_20.mp4",
+      "gt": 46,
+      "pred": 20,
+      "err": 26,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_24.mp4",
+      "gt": 51,
+      "pred": 12,
+      "err": 39,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_28.mp4",
+      "gt": 63,
+      "pred": 37,
+      "err": 26,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_32.mp4",
+      "gt": 66,
+      "pred": 62,
+      "err": 4,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_23.mp4",
+      "gt": 30,
+      "pred": 31,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_25.mp4",
+      "gt": 61,
+      "pred": 15,
+      "err": 46,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_27.mp4",
+      "gt": 63,
+      "pred": 27,
+      "err": 36,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_31.mp4",
+      "gt": 56,
+      "pred": 54,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_33.mp4",
+      "gt": 31,
+      "pred": 11,
+      "err": 20,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_38.mp4",
+      "gt": 23,
+      "pred": 26,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_01.mp4",
+      "gt": 36,
+      "pred": 72,
+      "err": 36,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_03.mp4",
+      "gt": 64,
+      "pred": 87,
+      "err": 23,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_10.mp4",
+      "gt": 50,
+      "pred": 0,
+      "err": 50,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_12.mp4",
+      "gt": 39,
+      "pred": 38,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_14.mp4",
+      "gt": 16,
+      "pred": 56,
+      "err": 40,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_16.mp4",
+      "gt": 24,
+      "pred": 71,
+      "err": 47,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_44.mp4",
+      "gt": 31,
+      "pred": 32,
+      "err": 1,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "roa_front_1.mp4",
+      "gt": 127,
+      "pred": 111,
+      "err": 16,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     }
+    ]
+   },
+   "C6_combined_event": {
+    "n_clips": 24,
+    "n_estimated": 24,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 13.0,
+    "mean_abs_err": 19.0,
+    "within_1": 0.0417,
+    "within_2": 0.125,
+    "within_3": 0.1667,
+    "detail": [
+     {
+      "clip_id": "instagram1_front_01.mp4",
+      "gt": 16,
+      "pred": 54,
+      "err": 38,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_05.mp4",
+      "gt": 50,
+      "pred": 47,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_07.mp4",
+      "gt": 40,
+      "pred": 41,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_08.mp4",
+      "gt": 35,
+      "pred": 118,
+      "err": 83,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_10.mp4",
+      "gt": 90,
+      "pred": 48,
+      "err": 42,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_14.mp4",
+      "gt": 51,
+      "pred": 37,
+      "err": 14,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_20.mp4",
+      "gt": 46,
+      "pred": 55,
+      "err": 9,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_24.mp4",
+      "gt": 51,
+      "pred": 35,
+      "err": 16,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_28.mp4",
+      "gt": 63,
+      "pred": 58,
+      "err": 5,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_32.mp4",
+      "gt": 66,
+      "pred": 75,
+      "err": 9,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_23.mp4",
+      "gt": 30,
+      "pred": 60,
+      "err": 30,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_25.mp4",
+      "gt": 61,
+      "pred": 68,
+      "err": 7,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_27.mp4",
+      "gt": 63,
+      "pred": 67,
+      "err": 4,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_31.mp4",
+      "gt": 56,
+      "pred": 54,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_33.mp4",
+      "gt": 31,
+      "pred": 13,
+      "err": 18,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_38.mp4",
+      "gt": 23,
+      "pred": 25,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_01.mp4",
+      "gt": 36,
+      "pred": 71,
+      "err": 35,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_03.mp4",
+      "gt": 64,
+      "pred": 37,
+      "err": 27,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_10.mp4",
+      "gt": 50,
+      "pred": 17,
+      "err": 33,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_12.mp4",
+      "gt": 39,
+      "pred": 32,
+      "err": 7,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_14.mp4",
+      "gt": 16,
+      "pred": 48,
+      "err": 32,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_16.mp4",
+      "gt": 24,
+      "pred": 36,
+      "err": 12,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_44.mp4",
+      "gt": 31,
+      "pred": 14,
+      "err": 17,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "roa_front_1.mp4",
+      "gt": 127,
+      "pred": 117,
+      "err": 10,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     }
+    ]
+   }
+  },
+  "identity_wrong": {
+   "C0_current_proposal": {
+    "n_clips": 4,
+    "n_estimated": 4,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 3.0,
+    "mean_abs_err": 3.0,
+    "within_1": 0.25,
+    "within_2": 0.5,
+    "within_3": 0.5,
+    "detail": [
+     {
+      "clip_id": "beginnerunorthodox1_front_01.mp4",
+      "gt": 58,
+      "pred": 53,
+      "err": 5,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_03.mp4",
+      "gt": 33,
+      "pred": 35,
+      "err": 2,
+      "contact_type": "EXACT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_16.mp4",
+      "gt": 9,
+      "pred": 8,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_06.mp4",
+      "gt": 51,
+      "pred": 47,
+      "err": 4,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     }
+    ]
+   },
+   "C1_wrist_velocity": {
+    "n_clips": 4,
+    "n_estimated": 0,
+    "n_not_found": 4,
+    "not_found_rate": 1.0,
+    "median_abs_err": null,
+    "mean_abs_err": null,
+    "within_1": 0.0,
+    "within_2": 0.0,
+    "within_3": 0.0,
+    "detail": [
+     {
+      "clip_id": "beginnerunorthodox1_front_01.mp4",
+      "gt": 58,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "instagram2_front_03.mp4",
+      "gt": 33,
+      "pred": null,
+      "err": null,
+      "contact_type": "EXACT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "kohli_side_16.mp4",
+      "gt": 9,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "pro_player_front_06.mp4",
+      "gt": 51,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     }
+    ]
+   },
+   "C2_bat_association": {
+    "n_clips": 4,
+    "n_estimated": 4,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 42.0,
+    "mean_abs_err": 37.75,
+    "within_1": 0.0,
+    "within_2": 0.0,
+    "within_3": 0.0,
+    "detail": [
+     {
+      "clip_id": "beginnerunorthodox1_front_01.mp4",
+      "gt": 58,
+      "pred": 0,
+      "err": 58,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_03.mp4",
+      "gt": 33,
+      "pred": 0,
+      "err": 33,
+      "contact_type": "EXACT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_16.mp4",
+      "gt": 9,
+      "pred": 0,
+      "err": 9,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_06.mp4",
+      "gt": 51,
+      "pred": 0,
+      "err": 51,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     }
+    ]
+   },
+   "C3_skeleton_dynamics": {
+    "n_clips": 4,
+    "n_estimated": 0,
+    "n_not_found": 4,
+    "not_found_rate": 1.0,
+    "median_abs_err": null,
+    "mean_abs_err": null,
+    "within_1": 0.0,
+    "within_2": 0.0,
+    "within_3": 0.0,
+    "detail": [
+     {
+      "clip_id": "beginnerunorthodox1_front_01.mp4",
+      "gt": 58,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "instagram2_front_03.mp4",
+      "gt": 33,
+      "pred": null,
+      "err": null,
+      "contact_type": "EXACT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "kohli_side_16.mp4",
+      "gt": 9,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "pro_player_front_06.mp4",
+      "gt": 51,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     }
+    ]
+   },
+   "C4_global_motion": {
+    "n_clips": 4,
+    "n_estimated": 4,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 19.5,
+    "mean_abs_err": 26.75,
+    "within_1": 0.0,
+    "within_2": 0.0,
+    "within_3": 0.0,
+    "detail": [
+     {
+      "clip_id": "beginnerunorthodox1_front_01.mp4",
+      "gt": 58,
+      "pred": 6,
+      "err": 52,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_03.mp4",
+      "gt": 33,
+      "pred": 53,
+      "err": 20,
+      "contact_type": "EXACT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_16.mp4",
+      "gt": 9,
+      "pred": 28,
+      "err": 19,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_06.mp4",
+      "gt": 51,
+      "pred": 67,
+      "err": 16,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     }
+    ]
+   },
+   "C5_local_motion": {
+    "n_clips": 4,
+    "n_estimated": 0,
+    "n_not_found": 4,
+    "not_found_rate": 1.0,
+    "median_abs_err": null,
+    "mean_abs_err": null,
+    "within_1": 0.0,
+    "within_2": 0.0,
+    "within_3": 0.0,
+    "detail": [
+     {
+      "clip_id": "beginnerunorthodox1_front_01.mp4",
+      "gt": 58,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "instagram2_front_03.mp4",
+      "gt": 33,
+      "pred": null,
+      "err": null,
+      "contact_type": "EXACT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "kohli_side_16.mp4",
+      "gt": 9,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "pro_player_front_06.mp4",
+      "gt": 51,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     }
+    ]
+   },
+   "C6_combined_event": {
+    "n_clips": 4,
+    "n_estimated": 4,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 19.5,
+    "mean_abs_err": 26.75,
+    "within_1": 0.0,
+    "within_2": 0.0,
+    "within_3": 0.0,
+    "detail": [
+     {
+      "clip_id": "beginnerunorthodox1_front_01.mp4",
+      "gt": 58,
+      "pred": 6,
+      "err": 52,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_03.mp4",
+      "gt": 33,
+      "pred": 53,
+      "err": 20,
+      "contact_type": "EXACT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_16.mp4",
+      "gt": 9,
+      "pred": 28,
+      "err": 19,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_06.mp4",
+      "gt": 51,
+      "pred": 67,
+      "err": 16,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     }
+    ]
+   }
+  },
+  "type_EXACT": {
+   "C0_current_proposal": {
+    "n_clips": 4,
+    "n_estimated": 4,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 1.5,
+    "mean_abs_err": 1.75,
+    "within_1": 0.5,
+    "within_2": 0.75,
+    "within_3": 0.75,
+    "detail": [
+     {
+      "clip_id": "instagram1_front_01.mp4",
+      "gt": 16,
+      "pred": 20,
+      "err": 4,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_03.mp4",
+      "gt": 33,
+      "pred": 35,
+      "err": 2,
+      "contact_type": "EXACT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_44.mp4",
+      "gt": 31,
+      "pred": 32,
+      "err": 1,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "roa_front_1.mp4",
+      "gt": 127,
+      "pred": 127,
+      "err": 0,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     }
+    ]
+   },
+   "C1_wrist_velocity": {
+    "n_clips": 4,
+    "n_estimated": 3,
+    "n_not_found": 1,
+    "not_found_rate": 0.25,
+    "median_abs_err": 19.0,
+    "mean_abs_err": 27.33,
+    "within_1": 0.0,
+    "within_2": 0.25,
+    "within_3": 0.25,
+    "detail": [
+     {
+      "clip_id": "instagram1_front_01.mp4",
+      "gt": 16,
+      "pred": 77,
+      "err": 61,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_03.mp4",
+      "gt": 33,
+      "pred": null,
+      "err": null,
+      "contact_type": "EXACT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "pro_player_front_44.mp4",
+      "gt": 31,
+      "pred": 12,
+      "err": 19,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "roa_front_1.mp4",
+      "gt": 127,
+      "pred": 129,
+      "err": 2,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     }
+    ]
+   },
+   "C2_bat_association": {
+    "n_clips": 4,
+    "n_estimated": 4,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 32.0,
+    "mean_abs_err": 32.75,
+    "within_1": 0.0,
+    "within_2": 0.0,
+    "within_3": 0.0,
+    "detail": [
+     {
+      "clip_id": "instagram1_front_01.mp4",
+      "gt": 16,
+      "pred": 47,
+      "err": 31,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_03.mp4",
+      "gt": 33,
+      "pred": 0,
+      "err": 33,
+      "contact_type": "EXACT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_44.mp4",
+      "gt": 31,
+      "pred": 48,
+      "err": 17,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "roa_front_1.mp4",
+      "gt": 127,
+      "pred": 177,
+      "err": 50,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     }
+    ]
+   },
+   "C3_skeleton_dynamics": {
+    "n_clips": 4,
+    "n_estimated": 3,
+    "n_not_found": 1,
+    "not_found_rate": 0.25,
+    "median_abs_err": 37.0,
+    "mean_abs_err": 34.33,
+    "within_1": 0.0,
+    "within_2": 0.0,
+    "within_3": 0.0,
+    "detail": [
+     {
+      "clip_id": "instagram1_front_01.mp4",
+      "gt": 16,
+      "pred": 53,
+      "err": 37,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_03.mp4",
+      "gt": 33,
+      "pred": null,
+      "err": null,
+      "contact_type": "EXACT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "pro_player_front_44.mp4",
+      "gt": 31,
+      "pred": 17,
+      "err": 14,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "roa_front_1.mp4",
+      "gt": 127,
+      "pred": 75,
+      "err": 52,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     }
+    ]
+   },
+   "C4_global_motion": {
+    "n_clips": 4,
+    "n_estimated": 4,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 34.0,
+    "mean_abs_err": 53.75,
+    "within_1": 0.0,
+    "within_2": 0.0,
+    "within_3": 0.0,
+    "detail": [
+     {
+      "clip_id": "instagram1_front_01.mp4",
+      "gt": 16,
+      "pred": 53,
+      "err": 37,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_03.mp4",
+      "gt": 33,
+      "pred": 53,
+      "err": 20,
+      "contact_type": "EXACT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_44.mp4",
+      "gt": 31,
+      "pred": 0,
+      "err": 31,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "roa_front_1.mp4",
+      "gt": 127,
+      "pred": 0,
+      "err": 127,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     }
+    ]
+   },
+   "C5_local_motion": {
+    "n_clips": 4,
+    "n_estimated": 3,
+    "n_not_found": 1,
+    "not_found_rate": 0.25,
+    "median_abs_err": 16.0,
+    "mean_abs_err": 18.0,
+    "within_1": 0.25,
+    "within_2": 0.25,
+    "within_3": 0.25,
+    "detail": [
+     {
+      "clip_id": "instagram1_front_01.mp4",
+      "gt": 16,
+      "pred": 53,
+      "err": 37,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_03.mp4",
+      "gt": 33,
+      "pred": null,
+      "err": null,
+      "contact_type": "EXACT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "pro_player_front_44.mp4",
+      "gt": 31,
+      "pred": 32,
+      "err": 1,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "roa_front_1.mp4",
+      "gt": 127,
+      "pred": 111,
+      "err": 16,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     }
+    ]
+   },
+   "C6_combined_event": {
+    "n_clips": 4,
+    "n_estimated": 4,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 18.5,
+    "mean_abs_err": 21.25,
+    "within_1": 0.0,
+    "within_2": 0.0,
+    "within_3": 0.0,
+    "detail": [
+     {
+      "clip_id": "instagram1_front_01.mp4",
+      "gt": 16,
+      "pred": 54,
+      "err": 38,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_03.mp4",
+      "gt": 33,
+      "pred": 53,
+      "err": 20,
+      "contact_type": "EXACT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_44.mp4",
+      "gt": 31,
+      "pred": 14,
+      "err": 17,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "roa_front_1.mp4",
+      "gt": 127,
+      "pred": 117,
+      "err": 10,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     }
+    ]
+   }
+  },
+  "type_CONTACT_ADJACENT": {
+   "C0_current_proposal": {
+    "n_clips": 24,
+    "n_estimated": 24,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 1.0,
+    "mean_abs_err": 1.67,
+    "within_1": 0.5417,
+    "within_2": 0.75,
+    "within_3": 0.875,
+    "detail": [
+     {
+      "clip_id": "beginnerunorthodox1_front_01.mp4",
+      "gt": 58,
+      "pred": 53,
+      "err": 5,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_05.mp4",
+      "gt": 50,
+      "pred": 49,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_07.mp4",
+      "gt": 40,
+      "pred": 43,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_08.mp4",
+      "gt": 35,
+      "pred": 31,
+      "err": 4,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_10.mp4",
+      "gt": 90,
+      "pred": 90,
+      "err": 0,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_14.mp4",
+      "gt": 51,
+      "pred": 52,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_16.mp4",
+      "gt": 9,
+      "pred": 8,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_20.mp4",
+      "gt": 46,
+      "pred": 47,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_24.mp4",
+      "gt": 51,
+      "pred": 52,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_28.mp4",
+      "gt": 63,
+      "pred": 64,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_32.mp4",
+      "gt": 66,
+      "pred": 67,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_23.mp4",
+      "gt": 30,
+      "pred": 32,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_25.mp4",
+      "gt": 61,
+      "pred": 59,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_27.mp4",
+      "gt": 63,
+      "pred": 63,
+      "err": 0,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_31.mp4",
+      "gt": 56,
+      "pred": 54,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_33.mp4",
+      "gt": 31,
+      "pred": 31,
+      "err": 0,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_38.mp4",
+      "gt": 23,
+      "pred": 25,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_01.mp4",
+      "gt": 36,
+      "pred": 39,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_03.mp4",
+      "gt": 64,
+      "pred": 67,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_06.mp4",
+      "gt": 51,
+      "pred": 47,
+      "err": 4,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_10.mp4",
+      "gt": 50,
+      "pred": 48,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_12.mp4",
+      "gt": 39,
+      "pred": 39,
+      "err": 0,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_14.mp4",
+      "gt": 16,
+      "pred": 17,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_16.mp4",
+      "gt": 24,
+      "pred": 24,
+      "err": 0,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     }
+    ]
+   },
+   "C1_wrist_velocity": {
+    "n_clips": 24,
+    "n_estimated": 21,
+    "n_not_found": 3,
+    "not_found_rate": 0.125,
+    "median_abs_err": 25.0,
+    "mean_abs_err": 31.14,
+    "within_1": 0.0,
+    "within_2": 0.0,
+    "within_3": 0.0833,
+    "detail": [
+     {
+      "clip_id": "beginnerunorthodox1_front_01.mp4",
+      "gt": 58,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "instagram2_front_05.mp4",
+      "gt": 50,
+      "pred": 47,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_07.mp4",
+      "gt": 40,
+      "pred": 84,
+      "err": 44,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_08.mp4",
+      "gt": 35,
+      "pred": 30,
+      "err": 5,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_10.mp4",
+      "gt": 90,
+      "pred": 36,
+      "err": 54,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_14.mp4",
+      "gt": 51,
+      "pred": 172,
+      "err": 121,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_16.mp4",
+      "gt": 9,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "kohli_side_20.mp4",
+      "gt": 46,
+      "pred": 16,
+      "err": 30,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_24.mp4",
+      "gt": 51,
+      "pred": 21,
+      "err": 30,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_28.mp4",
+      "gt": 63,
+      "pred": 157,
+      "err": 94,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_32.mp4",
+      "gt": 66,
+      "pred": 75,
+      "err": 9,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_23.mp4",
+      "gt": 30,
+      "pred": 55,
+      "err": 25,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_25.mp4",
+      "gt": 61,
+      "pred": 81,
+      "err": 20,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_27.mp4",
+      "gt": 63,
+      "pred": 60,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_31.mp4",
+      "gt": 56,
+      "pred": 75,
+      "err": 19,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_33.mp4",
+      "gt": 31,
+      "pred": 13,
+      "err": 18,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_38.mp4",
+      "gt": 23,
+      "pred": 71,
+      "err": 48,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_01.mp4",
+      "gt": 36,
+      "pred": 63,
+      "err": 27,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_03.mp4",
+      "gt": 64,
+      "pred": 54,
+      "err": 10,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_06.mp4",
+      "gt": 51,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "pro_player_front_10.mp4",
+      "gt": 50,
+      "pred": 20,
+      "err": 30,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_12.mp4",
+      "gt": 39,
+      "pred": 27,
+      "err": 12,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_14.mp4",
+      "gt": 16,
+      "pred": 56,
+      "err": 40,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_16.mp4",
+      "gt": 24,
+      "pred": 36,
+      "err": 12,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     }
+    ]
+   },
+   "C2_bat_association": {
+    "n_clips": 24,
+    "n_estimated": 24,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 35.5,
+    "mean_abs_err": 37.38,
+    "within_1": 0.0,
+    "within_2": 0.0,
+    "within_3": 0.0417,
+    "detail": [
+     {
+      "clip_id": "beginnerunorthodox1_front_01.mp4",
+      "gt": 58,
+      "pred": 0,
+      "err": 58,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_05.mp4",
+      "gt": 50,
+      "pred": 53,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_07.mp4",
+      "gt": 40,
+      "pred": 33,
+      "err": 7,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_08.mp4",
+      "gt": 35,
+      "pred": 81,
+      "err": 46,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_10.mp4",
+      "gt": 90,
+      "pred": 123,
+      "err": 33,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_14.mp4",
+      "gt": 51,
+      "pred": 154,
+      "err": 103,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_16.mp4",
+      "gt": 9,
+      "pred": 0,
+      "err": 9,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_20.mp4",
+      "gt": 46,
+      "pred": 9,
+      "err": 37,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_24.mp4",
+      "gt": 51,
+      "pred": 126,
+      "err": 75,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_28.mp4",
+      "gt": 63,
+      "pred": 58,
+      "err": 5,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_32.mp4",
+      "gt": 66,
+      "pred": 98,
+      "err": 32,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_23.mp4",
+      "gt": 30,
+      "pred": 76,
+      "err": 46,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_25.mp4",
+      "gt": 61,
+      "pred": 22,
+      "err": 39,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_27.mp4",
+      "gt": 63,
+      "pred": 29,
+      "err": 34,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_31.mp4",
+      "gt": 56,
+      "pred": 10,
+      "err": 46,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_33.mp4",
+      "gt": 31,
+      "pred": 77,
+      "err": 46,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_38.mp4",
+      "gt": 23,
+      "pred": 1,
+      "err": 22,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_01.mp4",
+      "gt": 36,
+      "pred": 5,
+      "err": 31,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_03.mp4",
+      "gt": 64,
+      "pred": 37,
+      "err": 27,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_06.mp4",
+      "gt": 51,
+      "pred": 0,
+      "err": 51,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_10.mp4",
+      "gt": 50,
+      "pred": 4,
+      "err": 46,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_12.mp4",
+      "gt": 39,
+      "pred": 56,
+      "err": 17,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_14.mp4",
+      "gt": 16,
+      "pred": 48,
+      "err": 32,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_16.mp4",
+      "gt": 24,
+      "pred": 76,
+      "err": 52,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     }
+    ]
+   },
+   "C3_skeleton_dynamics": {
+    "n_clips": 24,
+    "n_estimated": 21,
+    "n_not_found": 3,
+    "not_found_rate": 0.125,
+    "median_abs_err": 29.0,
+    "mean_abs_err": 32.52,
+    "within_1": 0.0417,
+    "within_2": 0.0417,
+    "within_3": 0.0833,
+    "detail": [
+     {
+      "clip_id": "beginnerunorthodox1_front_01.mp4",
+      "gt": 58,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "instagram2_front_05.mp4",
+      "gt": 50,
+      "pred": 47,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_07.mp4",
+      "gt": 40,
+      "pred": 41,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_08.mp4",
+      "gt": 35,
+      "pred": 87,
+      "err": 52,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_10.mp4",
+      "gt": 90,
+      "pred": 48,
+      "err": 42,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_14.mp4",
+      "gt": 51,
+      "pred": 6,
+      "err": 45,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_16.mp4",
+      "gt": 9,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "kohli_side_20.mp4",
+      "gt": 46,
+      "pred": 54,
+      "err": 8,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_24.mp4",
+      "gt": 51,
+      "pred": 9,
+      "err": 42,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_28.mp4",
+      "gt": 63,
+      "pred": 148,
+      "err": 85,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_32.mp4",
+      "gt": 66,
+      "pred": 0,
+      "err": 66,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_23.mp4",
+      "gt": 30,
+      "pred": 59,
+      "err": 29,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_25.mp4",
+      "gt": 61,
+      "pred": 68,
+      "err": 7,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_27.mp4",
+      "gt": 63,
+      "pred": 67,
+      "err": 4,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_31.mp4",
+      "gt": 56,
+      "pred": 85,
+      "err": 29,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_33.mp4",
+      "gt": 31,
+      "pred": 14,
+      "err": 17,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_38.mp4",
+      "gt": 23,
+      "pred": 89,
+      "err": 66,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_01.mp4",
+      "gt": 36,
+      "pred": 89,
+      "err": 53,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_03.mp4",
+      "gt": 64,
+      "pred": 74,
+      "err": 10,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_06.mp4",
+      "gt": 51,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "pro_player_front_10.mp4",
+      "gt": 50,
+      "pred": 17,
+      "err": 33,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_12.mp4",
+      "gt": 39,
+      "pred": 12,
+      "err": 27,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_14.mp4",
+      "gt": 16,
+      "pred": 69,
+      "err": 53,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_16.mp4",
+      "gt": 24,
+      "pred": 35,
+      "err": 11,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     }
+    ]
+   },
+   "C4_global_motion": {
+    "n_clips": 24,
+    "n_estimated": 24,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 27.0,
+    "mean_abs_err": 26.96,
+    "within_1": 0.0833,
+    "within_2": 0.1667,
+    "within_3": 0.2083,
+    "detail": [
+     {
+      "clip_id": "beginnerunorthodox1_front_01.mp4",
+      "gt": 58,
+      "pred": 6,
+      "err": 52,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_05.mp4",
+      "gt": 50,
+      "pred": 47,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_07.mp4",
+      "gt": 40,
+      "pred": 41,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_08.mp4",
+      "gt": 35,
+      "pred": 90,
+      "err": 55,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_10.mp4",
+      "gt": 90,
+      "pred": 149,
+      "err": 59,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_14.mp4",
+      "gt": 51,
+      "pred": 81,
+      "err": 30,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_16.mp4",
+      "gt": 9,
+      "pred": 28,
+      "err": 19,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_20.mp4",
+      "gt": 46,
+      "pred": 91,
+      "err": 45,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_24.mp4",
+      "gt": 51,
+      "pred": 47,
+      "err": 4,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_28.mp4",
+      "gt": 63,
+      "pred": 27,
+      "err": 36,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_32.mp4",
+      "gt": 66,
+      "pred": 27,
+      "err": 39,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_23.mp4",
+      "gt": 30,
+      "pred": 49,
+      "err": 19,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_25.mp4",
+      "gt": 61,
+      "pred": 15,
+      "err": 46,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_27.mp4",
+      "gt": 63,
+      "pred": 27,
+      "err": 36,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_31.mp4",
+      "gt": 56,
+      "pred": 54,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_33.mp4",
+      "gt": 31,
+      "pred": 11,
+      "err": 20,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_38.mp4",
+      "gt": 23,
+      "pred": 25,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_01.mp4",
+      "gt": 36,
+      "pred": 71,
+      "err": 35,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_03.mp4",
+      "gt": 64,
+      "pred": 88,
+      "err": 24,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_06.mp4",
+      "gt": 51,
+      "pred": 67,
+      "err": 16,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_10.mp4",
+      "gt": 50,
+      "pred": 50,
+      "err": 0,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_12.mp4",
+      "gt": 39,
+      "pred": 3,
+      "err": 36,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_14.mp4",
+      "gt": 16,
+      "pred": 35,
+      "err": 19,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_16.mp4",
+      "gt": 24,
+      "pred": 73,
+      "err": 49,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     }
+    ]
+   },
+   "C5_local_motion": {
+    "n_clips": 24,
+    "n_estimated": 21,
+    "n_not_found": 3,
+    "not_found_rate": 0.125,
+    "median_abs_err": 26.0,
+    "mean_abs_err": 29.76,
+    "within_1": 0.125,
+    "within_2": 0.1667,
+    "within_3": 0.2083,
+    "detail": [
+     {
+      "clip_id": "beginnerunorthodox1_front_01.mp4",
+      "gt": 58,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "instagram2_front_05.mp4",
+      "gt": 50,
+      "pred": 23,
+      "err": 27,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_07.mp4",
+      "gt": 40,
+      "pred": 41,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_08.mp4",
+      "gt": 35,
+      "pred": 134,
+      "err": 99,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_10.mp4",
+      "gt": 90,
+      "pred": 101,
+      "err": 11,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_14.mp4",
+      "gt": 51,
+      "pred": 138,
+      "err": 87,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_16.mp4",
+      "gt": 9,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "kohli_side_20.mp4",
+      "gt": 46,
+      "pred": 20,
+      "err": 26,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_24.mp4",
+      "gt": 51,
+      "pred": 12,
+      "err": 39,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_28.mp4",
+      "gt": 63,
+      "pred": 37,
+      "err": 26,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_32.mp4",
+      "gt": 66,
+      "pred": 62,
+      "err": 4,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_23.mp4",
+      "gt": 30,
+      "pred": 31,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_25.mp4",
+      "gt": 61,
+      "pred": 15,
+      "err": 46,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_27.mp4",
+      "gt": 63,
+      "pred": 27,
+      "err": 36,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_31.mp4",
+      "gt": 56,
+      "pred": 54,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_33.mp4",
+      "gt": 31,
+      "pred": 11,
+      "err": 20,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_38.mp4",
+      "gt": 23,
+      "pred": 26,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_01.mp4",
+      "gt": 36,
+      "pred": 72,
+      "err": 36,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_03.mp4",
+      "gt": 64,
+      "pred": 87,
+      "err": 23,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_06.mp4",
+      "gt": 51,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "pro_player_front_10.mp4",
+      "gt": 50,
+      "pred": 0,
+      "err": 50,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_12.mp4",
+      "gt": 39,
+      "pred": 38,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_14.mp4",
+      "gt": 16,
+      "pred": 56,
+      "err": 40,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_16.mp4",
+      "gt": 24,
+      "pred": 71,
+      "err": 47,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     }
+    ]
+   },
+   "C6_combined_event": {
+    "n_clips": 24,
+    "n_estimated": 24,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 15.0,
+    "mean_abs_err": 19.92,
+    "within_1": 0.0417,
+    "within_2": 0.125,
+    "within_3": 0.1667,
+    "detail": [
+     {
+      "clip_id": "beginnerunorthodox1_front_01.mp4",
+      "gt": 58,
+      "pred": 6,
+      "err": 52,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_05.mp4",
+      "gt": 50,
+      "pred": 47,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_07.mp4",
+      "gt": 40,
+      "pred": 41,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_08.mp4",
+      "gt": 35,
+      "pred": 118,
+      "err": 83,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_10.mp4",
+      "gt": 90,
+      "pred": 48,
+      "err": 42,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_14.mp4",
+      "gt": 51,
+      "pred": 37,
+      "err": 14,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_16.mp4",
+      "gt": 9,
+      "pred": 28,
+      "err": 19,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_20.mp4",
+      "gt": 46,
+      "pred": 55,
+      "err": 9,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_24.mp4",
+      "gt": 51,
+      "pred": 35,
+      "err": 16,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_28.mp4",
+      "gt": 63,
+      "pred": 58,
+      "err": 5,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_32.mp4",
+      "gt": 66,
+      "pred": 75,
+      "err": 9,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_23.mp4",
+      "gt": 30,
+      "pred": 60,
+      "err": 30,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_25.mp4",
+      "gt": 61,
+      "pred": 68,
+      "err": 7,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_27.mp4",
+      "gt": 63,
+      "pred": 67,
+      "err": 4,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_31.mp4",
+      "gt": 56,
+      "pred": 54,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_33.mp4",
+      "gt": 31,
+      "pred": 13,
+      "err": 18,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_38.mp4",
+      "gt": 23,
+      "pred": 25,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_01.mp4",
+      "gt": 36,
+      "pred": 71,
+      "err": 35,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_03.mp4",
+      "gt": 64,
+      "pred": 37,
+      "err": 27,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_06.mp4",
+      "gt": 51,
+      "pred": 67,
+      "err": 16,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_10.mp4",
+      "gt": 50,
+      "pred": 17,
+      "err": 33,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_12.mp4",
+      "gt": 39,
+      "pred": 32,
+      "err": 7,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_14.mp4",
+      "gt": 16,
+      "pred": 48,
+      "err": 32,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_16.mp4",
+      "gt": 24,
+      "pred": 36,
+      "err": 12,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     }
+    ]
+   }
+  },
+  "split_dev": {
+   "C0_current_proposal": {
+    "n_clips": 14,
+    "n_estimated": 14,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 1.0,
+    "mean_abs_err": 1.57,
+    "within_1": 0.6429,
+    "within_2": 0.7143,
+    "within_3": 0.8571,
+    "detail": [
+     {
+      "clip_id": "beginnerunorthodox1_front_01.mp4",
+      "gt": 58,
+      "pred": 53,
+      "err": 5,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram1_front_01.mp4",
+      "gt": 16,
+      "pred": 20,
+      "err": 4,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_07.mp4",
+      "gt": 40,
+      "pred": 43,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_14.mp4",
+      "gt": 51,
+      "pred": 52,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_20.mp4",
+      "gt": 46,
+      "pred": 47,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_24.mp4",
+      "gt": 51,
+      "pred": 52,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_28.mp4",
+      "gt": 63,
+      "pred": 64,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_25.mp4",
+      "gt": 61,
+      "pred": 59,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_27.mp4",
+      "gt": 63,
+      "pred": 63,
+      "err": 0,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_33.mp4",
+      "gt": 31,
+      "pred": 31,
+      "err": 0,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_03.mp4",
+      "gt": 64,
+      "pred": 67,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_12.mp4",
+      "gt": 39,
+      "pred": 39,
+      "err": 0,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_44.mp4",
+      "gt": 31,
+      "pred": 32,
+      "err": 1,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "roa_front_1.mp4",
+      "gt": 127,
+      "pred": 127,
+      "err": 0,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     }
+    ]
+   },
+   "C1_wrist_velocity": {
+    "n_clips": 14,
+    "n_estimated": 13,
+    "n_not_found": 1,
+    "not_found_rate": 0.0714,
+    "median_abs_err": 20.0,
+    "mean_abs_err": 35.69,
+    "within_1": 0.0,
+    "within_2": 0.0714,
+    "within_3": 0.1429,
+    "detail": [
+     {
+      "clip_id": "beginnerunorthodox1_front_01.mp4",
+      "gt": 58,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "instagram1_front_01.mp4",
+      "gt": 16,
+      "pred": 77,
+      "err": 61,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_07.mp4",
+      "gt": 40,
+      "pred": 84,
+      "err": 44,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_14.mp4",
+      "gt": 51,
+      "pred": 172,
+      "err": 121,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_20.mp4",
+      "gt": 46,
+      "pred": 16,
+      "err": 30,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_24.mp4",
+      "gt": 51,
+      "pred": 21,
+      "err": 30,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_28.mp4",
+      "gt": 63,
+      "pred": 157,
+      "err": 94,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_25.mp4",
+      "gt": 61,
+      "pred": 81,
+      "err": 20,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_27.mp4",
+      "gt": 63,
+      "pred": 60,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_33.mp4",
+      "gt": 31,
+      "pred": 13,
+      "err": 18,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_03.mp4",
+      "gt": 64,
+      "pred": 54,
+      "err": 10,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_12.mp4",
+      "gt": 39,
+      "pred": 27,
+      "err": 12,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_44.mp4",
+      "gt": 31,
+      "pred": 12,
+      "err": 19,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "roa_front_1.mp4",
+      "gt": 127,
+      "pred": 129,
+      "err": 2,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     }
+    ]
+   },
+   "C2_bat_association": {
+    "n_clips": 14,
+    "n_estimated": 14,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 35.5,
+    "mean_abs_err": 39.0,
+    "within_1": 0.0,
+    "within_2": 0.0,
+    "within_3": 0.0,
+    "detail": [
+     {
+      "clip_id": "beginnerunorthodox1_front_01.mp4",
+      "gt": 58,
+      "pred": 0,
+      "err": 58,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram1_front_01.mp4",
+      "gt": 16,
+      "pred": 47,
+      "err": 31,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_07.mp4",
+      "gt": 40,
+      "pred": 33,
+      "err": 7,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_14.mp4",
+      "gt": 51,
+      "pred": 154,
+      "err": 103,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_20.mp4",
+      "gt": 46,
+      "pred": 9,
+      "err": 37,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_24.mp4",
+      "gt": 51,
+      "pred": 126,
+      "err": 75,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_28.mp4",
+      "gt": 63,
+      "pred": 58,
+      "err": 5,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_25.mp4",
+      "gt": 61,
+      "pred": 22,
+      "err": 39,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_27.mp4",
+      "gt": 63,
+      "pred": 29,
+      "err": 34,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_33.mp4",
+      "gt": 31,
+      "pred": 77,
+      "err": 46,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_03.mp4",
+      "gt": 64,
+      "pred": 37,
+      "err": 27,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_12.mp4",
+      "gt": 39,
+      "pred": 56,
+      "err": 17,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_44.mp4",
+      "gt": 31,
+      "pred": 48,
+      "err": 17,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "roa_front_1.mp4",
+      "gt": 127,
+      "pred": 177,
+      "err": 50,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     }
+    ]
+   },
+   "C3_skeleton_dynamics": {
+    "n_clips": 14,
+    "n_estimated": 13,
+    "n_not_found": 1,
+    "not_found_rate": 0.0714,
+    "median_abs_err": 17.0,
+    "mean_abs_err": 26.85,
+    "within_1": 0.0714,
+    "within_2": 0.0714,
+    "within_3": 0.0714,
+    "detail": [
+     {
+      "clip_id": "beginnerunorthodox1_front_01.mp4",
+      "gt": 58,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "instagram1_front_01.mp4",
+      "gt": 16,
+      "pred": 53,
+      "err": 37,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_07.mp4",
+      "gt": 40,
+      "pred": 41,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_14.mp4",
+      "gt": 51,
+      "pred": 6,
+      "err": 45,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_20.mp4",
+      "gt": 46,
+      "pred": 54,
+      "err": 8,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_24.mp4",
+      "gt": 51,
+      "pred": 9,
+      "err": 42,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_28.mp4",
+      "gt": 63,
+      "pred": 148,
+      "err": 85,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_25.mp4",
+      "gt": 61,
+      "pred": 68,
+      "err": 7,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_27.mp4",
+      "gt": 63,
+      "pred": 67,
+      "err": 4,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_33.mp4",
+      "gt": 31,
+      "pred": 14,
+      "err": 17,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_03.mp4",
+      "gt": 64,
+      "pred": 74,
+      "err": 10,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_12.mp4",
+      "gt": 39,
+      "pred": 12,
+      "err": 27,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_44.mp4",
+      "gt": 31,
+      "pred": 17,
+      "err": 14,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "roa_front_1.mp4",
+      "gt": 127,
+      "pred": 75,
+      "err": 52,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     }
+    ]
+   },
+   "C4_global_motion": {
+    "n_clips": 14,
+    "n_estimated": 14,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 36.0,
+    "mean_abs_err": 37.5,
+    "within_1": 0.0714,
+    "within_2": 0.0714,
+    "within_3": 0.0714,
+    "detail": [
+     {
+      "clip_id": "beginnerunorthodox1_front_01.mp4",
+      "gt": 58,
+      "pred": 6,
+      "err": 52,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram1_front_01.mp4",
+      "gt": 16,
+      "pred": 53,
+      "err": 37,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_07.mp4",
+      "gt": 40,
+      "pred": 41,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_14.mp4",
+      "gt": 51,
+      "pred": 81,
+      "err": 30,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_20.mp4",
+      "gt": 46,
+      "pred": 91,
+      "err": 45,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_24.mp4",
+      "gt": 51,
+      "pred": 47,
+      "err": 4,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_28.mp4",
+      "gt": 63,
+      "pred": 27,
+      "err": 36,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_25.mp4",
+      "gt": 61,
+      "pred": 15,
+      "err": 46,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_27.mp4",
+      "gt": 63,
+      "pred": 27,
+      "err": 36,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_33.mp4",
+      "gt": 31,
+      "pred": 11,
+      "err": 20,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_03.mp4",
+      "gt": 64,
+      "pred": 88,
+      "err": 24,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_12.mp4",
+      "gt": 39,
+      "pred": 3,
+      "err": 36,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_44.mp4",
+      "gt": 31,
+      "pred": 0,
+      "err": 31,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "roa_front_1.mp4",
+      "gt": 127,
+      "pred": 0,
+      "err": 127,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     }
+    ]
+   },
+   "C5_local_motion": {
+    "n_clips": 14,
+    "n_estimated": 13,
+    "n_not_found": 1,
+    "not_found_rate": 0.0714,
+    "median_abs_err": 26.0,
+    "mean_abs_err": 27.62,
+    "within_1": 0.2143,
+    "within_2": 0.2143,
+    "within_3": 0.2143,
+    "detail": [
+     {
+      "clip_id": "beginnerunorthodox1_front_01.mp4",
+      "gt": 58,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "instagram1_front_01.mp4",
+      "gt": 16,
+      "pred": 53,
+      "err": 37,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_07.mp4",
+      "gt": 40,
+      "pred": 41,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_14.mp4",
+      "gt": 51,
+      "pred": 138,
+      "err": 87,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_20.mp4",
+      "gt": 46,
+      "pred": 20,
+      "err": 26,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_24.mp4",
+      "gt": 51,
+      "pred": 12,
+      "err": 39,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_28.mp4",
+      "gt": 63,
+      "pred": 37,
+      "err": 26,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_25.mp4",
+      "gt": 61,
+      "pred": 15,
+      "err": 46,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_27.mp4",
+      "gt": 63,
+      "pred": 27,
+      "err": 36,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_33.mp4",
+      "gt": 31,
+      "pred": 11,
+      "err": 20,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_03.mp4",
+      "gt": 64,
+      "pred": 87,
+      "err": 23,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_12.mp4",
+      "gt": 39,
+      "pred": 38,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_44.mp4",
+      "gt": 31,
+      "pred": 32,
+      "err": 1,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "roa_front_1.mp4",
+      "gt": 127,
+      "pred": 111,
+      "err": 16,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     }
+    ]
+   },
+   "C6_combined_event": {
+    "n_clips": 14,
+    "n_estimated": 14,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 12.0,
+    "mean_abs_err": 16.07,
+    "within_1": 0.0714,
+    "within_2": 0.0714,
+    "within_3": 0.0714,
+    "detail": [
+     {
+      "clip_id": "beginnerunorthodox1_front_01.mp4",
+      "gt": 58,
+      "pred": 6,
+      "err": 52,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram1_front_01.mp4",
+      "gt": 16,
+      "pred": 54,
+      "err": 38,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "instagram2_front_07.mp4",
+      "gt": 40,
+      "pred": 41,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_14.mp4",
+      "gt": 51,
+      "pred": 37,
+      "err": 14,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_20.mp4",
+      "gt": 46,
+      "pred": 55,
+      "err": 9,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_24.mp4",
+      "gt": 51,
+      "pred": 35,
+      "err": 16,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "kohli_side_28.mp4",
+      "gt": 63,
+      "pred": 58,
+      "err": 5,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_25.mp4",
+      "gt": 61,
+      "pred": 68,
+      "err": 7,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_27.mp4",
+      "gt": 63,
+      "pred": 67,
+      "err": 4,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_back_33.mp4",
+      "gt": 31,
+      "pred": 13,
+      "err": 18,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_03.mp4",
+      "gt": 64,
+      "pred": 37,
+      "err": 27,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_12.mp4",
+      "gt": 39,
+      "pred": 32,
+      "err": 7,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "pro_player_front_44.mp4",
+      "gt": 31,
+      "pred": 14,
+      "err": 17,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     },
+     {
+      "clip_id": "roa_front_1.mp4",
+      "gt": 127,
+      "pred": 117,
+      "err": 10,
+      "contact_type": "EXACT",
+      "identity_correct": true,
+      "split": "dev"
+     }
+    ]
+   }
+  },
+  "split_eval": {
+   "C0_current_proposal": {
+    "n_clips": 14,
+    "n_estimated": 14,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 2.0,
+    "mean_abs_err": 1.79,
+    "within_1": 0.4286,
+    "within_2": 0.7857,
+    "within_3": 0.8571,
+    "detail": [
+     {
+      "clip_id": "instagram2_front_03.mp4",
+      "gt": 33,
+      "pred": 35,
+      "err": 2,
+      "contact_type": "EXACT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_05.mp4",
+      "gt": 50,
+      "pred": 49,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_08.mp4",
+      "gt": 35,
+      "pred": 31,
+      "err": 4,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_10.mp4",
+      "gt": 90,
+      "pred": 90,
+      "err": 0,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_16.mp4",
+      "gt": 9,
+      "pred": 8,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_32.mp4",
+      "gt": 66,
+      "pred": 67,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_23.mp4",
+      "gt": 30,
+      "pred": 32,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_31.mp4",
+      "gt": 56,
+      "pred": 54,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_38.mp4",
+      "gt": 23,
+      "pred": 25,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_01.mp4",
+      "gt": 36,
+      "pred": 39,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_06.mp4",
+      "gt": 51,
+      "pred": 47,
+      "err": 4,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_10.mp4",
+      "gt": 50,
+      "pred": 48,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_14.mp4",
+      "gt": 16,
+      "pred": 17,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_16.mp4",
+      "gt": 24,
+      "pred": 24,
+      "err": 0,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     }
+    ]
+   },
+   "C1_wrist_velocity": {
+    "n_clips": 14,
+    "n_estimated": 11,
+    "n_not_found": 3,
+    "not_found_rate": 0.2143,
+    "median_abs_err": 25.0,
+    "mean_abs_err": 24.73,
+    "within_1": 0.0,
+    "within_2": 0.0,
+    "within_3": 0.0714,
+    "detail": [
+     {
+      "clip_id": "instagram2_front_03.mp4",
+      "gt": 33,
+      "pred": null,
+      "err": null,
+      "contact_type": "EXACT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "instagram2_front_05.mp4",
+      "gt": 50,
+      "pred": 47,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_08.mp4",
+      "gt": 35,
+      "pred": 30,
+      "err": 5,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_10.mp4",
+      "gt": 90,
+      "pred": 36,
+      "err": 54,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_16.mp4",
+      "gt": 9,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "kohli_side_32.mp4",
+      "gt": 66,
+      "pred": 75,
+      "err": 9,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_23.mp4",
+      "gt": 30,
+      "pred": 55,
+      "err": 25,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_31.mp4",
+      "gt": 56,
+      "pred": 75,
+      "err": 19,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_38.mp4",
+      "gt": 23,
+      "pred": 71,
+      "err": 48,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_01.mp4",
+      "gt": 36,
+      "pred": 63,
+      "err": 27,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_06.mp4",
+      "gt": 51,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "pro_player_front_10.mp4",
+      "gt": 50,
+      "pred": 20,
+      "err": 30,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_14.mp4",
+      "gt": 16,
+      "pred": 56,
+      "err": 40,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_16.mp4",
+      "gt": 24,
+      "pred": 36,
+      "err": 12,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     }
+    ]
+   },
+   "C2_bat_association": {
+    "n_clips": 14,
+    "n_estimated": 14,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 33.0,
+    "mean_abs_err": 34.43,
+    "within_1": 0.0,
+    "within_2": 0.0,
+    "within_3": 0.0714,
+    "detail": [
+     {
+      "clip_id": "instagram2_front_03.mp4",
+      "gt": 33,
+      "pred": 0,
+      "err": 33,
+      "contact_type": "EXACT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_05.mp4",
+      "gt": 50,
+      "pred": 53,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_08.mp4",
+      "gt": 35,
+      "pred": 81,
+      "err": 46,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_10.mp4",
+      "gt": 90,
+      "pred": 123,
+      "err": 33,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_16.mp4",
+      "gt": 9,
+      "pred": 0,
+      "err": 9,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_32.mp4",
+      "gt": 66,
+      "pred": 98,
+      "err": 32,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_23.mp4",
+      "gt": 30,
+      "pred": 76,
+      "err": 46,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_31.mp4",
+      "gt": 56,
+      "pred": 10,
+      "err": 46,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_38.mp4",
+      "gt": 23,
+      "pred": 1,
+      "err": 22,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_01.mp4",
+      "gt": 36,
+      "pred": 5,
+      "err": 31,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_06.mp4",
+      "gt": 51,
+      "pred": 0,
+      "err": 51,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_10.mp4",
+      "gt": 50,
+      "pred": 4,
+      "err": 46,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_14.mp4",
+      "gt": 16,
+      "pred": 48,
+      "err": 32,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_16.mp4",
+      "gt": 24,
+      "pred": 76,
+      "err": 52,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     }
+    ]
+   },
+   "C3_skeleton_dynamics": {
+    "n_clips": 14,
+    "n_estimated": 11,
+    "n_not_found": 3,
+    "not_found_rate": 0.2143,
+    "median_abs_err": 42.0,
+    "mean_abs_err": 39.73,
+    "within_1": 0.0,
+    "within_2": 0.0,
+    "within_3": 0.0714,
+    "detail": [
+     {
+      "clip_id": "instagram2_front_03.mp4",
+      "gt": 33,
+      "pred": null,
+      "err": null,
+      "contact_type": "EXACT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "instagram2_front_05.mp4",
+      "gt": 50,
+      "pred": 47,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_08.mp4",
+      "gt": 35,
+      "pred": 87,
+      "err": 52,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_10.mp4",
+      "gt": 90,
+      "pred": 48,
+      "err": 42,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_16.mp4",
+      "gt": 9,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "kohli_side_32.mp4",
+      "gt": 66,
+      "pred": 0,
+      "err": 66,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_23.mp4",
+      "gt": 30,
+      "pred": 59,
+      "err": 29,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_31.mp4",
+      "gt": 56,
+      "pred": 85,
+      "err": 29,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_38.mp4",
+      "gt": 23,
+      "pred": 89,
+      "err": 66,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_01.mp4",
+      "gt": 36,
+      "pred": 89,
+      "err": 53,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_06.mp4",
+      "gt": 51,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "pro_player_front_10.mp4",
+      "gt": 50,
+      "pred": 17,
+      "err": 33,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_14.mp4",
+      "gt": 16,
+      "pred": 69,
+      "err": 53,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_16.mp4",
+      "gt": 24,
+      "pred": 35,
+      "err": 11,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     }
+    ]
+   },
+   "C4_global_motion": {
+    "n_clips": 14,
+    "n_estimated": 14,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 19.0,
+    "mean_abs_err": 24.07,
+    "within_1": 0.0714,
+    "within_2": 0.2143,
+    "within_3": 0.2857,
+    "detail": [
+     {
+      "clip_id": "instagram2_front_03.mp4",
+      "gt": 33,
+      "pred": 53,
+      "err": 20,
+      "contact_type": "EXACT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_05.mp4",
+      "gt": 50,
+      "pred": 47,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_08.mp4",
+      "gt": 35,
+      "pred": 90,
+      "err": 55,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_10.mp4",
+      "gt": 90,
+      "pred": 149,
+      "err": 59,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_16.mp4",
+      "gt": 9,
+      "pred": 28,
+      "err": 19,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_32.mp4",
+      "gt": 66,
+      "pred": 27,
+      "err": 39,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_23.mp4",
+      "gt": 30,
+      "pred": 49,
+      "err": 19,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_31.mp4",
+      "gt": 56,
+      "pred": 54,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_38.mp4",
+      "gt": 23,
+      "pred": 25,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_01.mp4",
+      "gt": 36,
+      "pred": 71,
+      "err": 35,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_06.mp4",
+      "gt": 51,
+      "pred": 67,
+      "err": 16,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_10.mp4",
+      "gt": 50,
+      "pred": 50,
+      "err": 0,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_14.mp4",
+      "gt": 16,
+      "pred": 35,
+      "err": 19,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_16.mp4",
+      "gt": 24,
+      "pred": 73,
+      "err": 49,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     }
+    ]
+   },
+   "C5_local_motion": {
+    "n_clips": 14,
+    "n_estimated": 11,
+    "n_not_found": 3,
+    "not_found_rate": 0.2143,
+    "median_abs_err": 27.0,
+    "mean_abs_err": 29.09,
+    "within_1": 0.0714,
+    "within_2": 0.1429,
+    "within_3": 0.2143,
+    "detail": [
+     {
+      "clip_id": "instagram2_front_03.mp4",
+      "gt": 33,
+      "pred": null,
+      "err": null,
+      "contact_type": "EXACT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "instagram2_front_05.mp4",
+      "gt": 50,
+      "pred": 23,
+      "err": 27,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_08.mp4",
+      "gt": 35,
+      "pred": 134,
+      "err": 99,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_10.mp4",
+      "gt": 90,
+      "pred": 101,
+      "err": 11,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_16.mp4",
+      "gt": 9,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "kohli_side_32.mp4",
+      "gt": 66,
+      "pred": 62,
+      "err": 4,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_23.mp4",
+      "gt": 30,
+      "pred": 31,
+      "err": 1,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_31.mp4",
+      "gt": 56,
+      "pred": 54,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_38.mp4",
+      "gt": 23,
+      "pred": 26,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_01.mp4",
+      "gt": 36,
+      "pred": 72,
+      "err": 36,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_06.mp4",
+      "gt": 51,
+      "pred": null,
+      "err": null,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false
+     },
+     {
+      "clip_id": "pro_player_front_10.mp4",
+      "gt": 50,
+      "pred": 0,
+      "err": 50,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_14.mp4",
+      "gt": 16,
+      "pred": 56,
+      "err": 40,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_16.mp4",
+      "gt": 24,
+      "pred": 71,
+      "err": 47,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     }
+    ]
+   },
+   "C6_combined_event": {
+    "n_clips": 14,
+    "n_estimated": 14,
+    "n_not_found": 0,
+    "not_found_rate": 0.0,
+    "median_abs_err": 19.5,
+    "mean_abs_err": 24.14,
+    "within_1": 0.0,
+    "within_2": 0.1429,
+    "within_3": 0.2143,
+    "detail": [
+     {
+      "clip_id": "instagram2_front_03.mp4",
+      "gt": 33,
+      "pred": 53,
+      "err": 20,
+      "contact_type": "EXACT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "instagram2_front_05.mp4",
+      "gt": 50,
+      "pred": 47,
+      "err": 3,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_08.mp4",
+      "gt": 35,
+      "pred": 118,
+      "err": 83,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_10.mp4",
+      "gt": 90,
+      "pred": 48,
+      "err": 42,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_16.mp4",
+      "gt": 9,
+      "pred": 28,
+      "err": 19,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "kohli_side_32.mp4",
+      "gt": 66,
+      "pred": 75,
+      "err": 9,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_23.mp4",
+      "gt": 30,
+      "pred": 60,
+      "err": 30,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_31.mp4",
+      "gt": 56,
+      "pred": 54,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_back_38.mp4",
+      "gt": 23,
+      "pred": 25,
+      "err": 2,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_01.mp4",
+      "gt": 36,
+      "pred": 71,
+      "err": 35,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_06.mp4",
+      "gt": 51,
+      "pred": 67,
+      "err": 16,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": false,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_10.mp4",
+      "gt": 50,
+      "pred": 17,
+      "err": 33,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_14.mp4",
+      "gt": 16,
+      "pred": 48,
+      "err": 32,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     },
+     {
+      "clip_id": "pro_player_front_16.mp4",
+      "gt": 24,
+      "pred": 36,
+      "err": 12,
+      "contact_type": "CONTACT_ADJACENT",
+      "identity_correct": true,
+      "split": "eval"
+     }
+    ]
+   }
+  }
+ },
+ "best_contact_signal_chosen_on_dev": "C0_current_proposal",
+ "dev_ranking": [
+  {
+   "signal": "C0_current_proposal",
+   "median_abs_err": 1.0
+  },
+  {
+   "signal": "C6_combined_event",
+   "median_abs_err": 12.0
+  },
+  {
+   "signal": "C3_skeleton_dynamics",
+   "median_abs_err": 17.0
+  },
+  {
+   "signal": "C1_wrist_velocity",
+   "median_abs_err": 20.0
+  },
+  {
+   "signal": "C5_local_motion",
+   "median_abs_err": 26.0
+  },
+  {
+   "signal": "C2_bat_association",
+   "median_abs_err": 35.5
+  },
+  {
+   "signal": "C4_global_motion",
+   "median_abs_err": 36.0
+  }
+ ],
+ "corrector_fit_on_dev": {
+  "kind": "recenter",
+  "pre": 10,
+  "post": 10,
+  "margin": 4,
+  "dev_mean_iou": 0.816
+ },
+ "shot": {
+  "L0_dev": {
+   "n_valid": 14,
+   "rejected": 0,
+   "mean_iou": 0.2112,
+   "median_iou": 0.236,
+   "recall@0.3": 0.0714,
+   "recall@0.5": 0.0,
+   "recall@0.7": 0.0,
+   "median_start_err": 42.5,
+   "median_end_err": 41.5,
+   "detail": [
+    {
+     "clip_id": "beginnerunorthodox1_front_01.mp4",
+     "gt": [
+      48,
+      70
+     ],
+     "pred": [
+      0,
+      89
+     ],
+     "iou": 0.2472,
+     "split": "dev",
+     "identity_correct": false
+    },
+    {
+     "clip_id": "instagram1_front_01.mp4",
+     "gt": [
+      5,
+      28
+     ],
+     "pred": [
+      0,
+      89
+     ],
+     "iou": 0.2584,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "instagram2_front_07.mp4",
+     "gt": [
+      34,
+      52
+     ],
+     "pred": [
+      0,
+      89
+     ],
+     "iou": 0.2022,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "kohli_side_14.mp4",
+     "gt": [
+      43,
+      62
+     ],
+     "pred": [
+      0,
+      179
+     ],
+     "iou": 0.1061,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "kohli_side_20.mp4",
+     "gt": [
+      35,
+      58
+     ],
+     "pred": [
+      0,
+      179
+     ],
+     "iou": 0.1285,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "kohli_side_24.mp4",
+     "gt": [
+      42,
+      62
+     ],
+     "pred": [
+      0,
+      179
+     ],
+     "iou": 0.1117,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "kohli_side_28.mp4",
+     "gt": [
+      52,
+      76
+     ],
+     "pred": [
+      0,
+      179
+     ],
+     "iou": 0.1341,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_back_25.mp4",
+     "gt": [
+      48,
+      70
+     ],
+     "pred": [
+      0,
+      89
+     ],
+     "iou": 0.2472,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_back_27.mp4",
+     "gt": [
+      50,
+      78
+     ],
+     "pred": [
+      0,
+      89
+     ],
+     "iou": 0.3146,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_back_33.mp4",
+     "gt": [
+      20,
+      45
+     ],
+     "pred": [
+      0,
+      89
+     ],
+     "iou": 0.2809,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_front_03.mp4",
+     "gt": [
+      55,
+      78
+     ],
+     "pred": [
+      0,
+      89
+     ],
+     "iou": 0.2584,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_front_12.mp4",
+     "gt": [
+      30,
+      50
+     ],
+     "pred": [
+      0,
+      89
+     ],
+     "iou": 0.2247,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_front_44.mp4",
+     "gt": [
+      23,
+      45
+     ],
+     "pred": [
+      0,
+      89
+     ],
+     "iou": 0.2472,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "roa_front_1.mp4",
+     "gt": [
+      110,
+      145
+     ],
+     "pred": [
+      0,
+      179
+     ],
+     "iou": 0.1955,
+     "split": "dev",
+     "identity_correct": true
+    }
+   ]
+  },
+  "L0_eval": {
+   "n_valid": 14,
+   "rejected": 0,
+   "mean_iou": 0.2125,
+   "median_iou": 0.2247,
+   "recall@0.3": 0.0714,
+   "recall@0.5": 0.0,
+   "recall@0.7": 0.0,
+   "median_start_err": 27.0,
+   "median_end_err": 47.5,
+   "detail": [
+    {
+     "clip_id": "instagram2_front_03.mp4",
+     "gt": [
+      26,
+      45
+     ],
+     "pred": [
+      0,
+      89
+     ],
+     "iou": 0.2135,
+     "split": "eval",
+     "identity_correct": false
+    },
+    {
+     "clip_id": "instagram2_front_05.mp4",
+     "gt": [
+      38,
+      58
+     ],
+     "pred": [
+      0,
+      89
+     ],
+     "iou": 0.2247,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "kohli_side_08.mp4",
+     "gt": [
+      20,
+      45
+     ],
+     "pred": [
+      0,
+      179
+     ],
+     "iou": 0.1397,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "kohli_side_10.mp4",
+     "gt": [
+      78,
+      102
+     ],
+     "pred": [
+      0,
+      179
+     ],
+     "iou": 0.1341,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "kohli_side_16.mp4",
+     "gt": [
+      0,
+      20
+     ],
+     "pred": [
+      0,
+      179
+     ],
+     "iou": 0.1117,
+     "split": "eval",
+     "identity_correct": false
+    },
+    {
+     "clip_id": "kohli_side_32.mp4",
+     "gt": [
+      55,
+      78
+     ],
+     "pred": [
+      0,
+      179
+     ],
+     "iou": 0.1285,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_back_23.mp4",
+     "gt": [
+      18,
+      45
+     ],
+     "pred": [
+      0,
+      89
+     ],
+     "iou": 0.3034,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_back_31.mp4",
+     "gt": [
+      42,
+      68
+     ],
+     "pred": [
+      0,
+      89
+     ],
+     "iou": 0.2921,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_back_38.mp4",
+     "gt": [
+      13,
+      38
+     ],
+     "pred": [
+      0,
+      89
+     ],
+     "iou": 0.2809,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_front_01.mp4",
+     "gt": [
+      28,
+      48
+     ],
+     "pred": [
+      0,
+      89
+     ],
+     "iou": 0.2247,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_front_06.mp4",
+     "gt": [
+      38,
+      58
+     ],
+     "pred": [
+      0,
+      89
+     ],
+     "iou": 0.2247,
+     "split": "eval",
+     "identity_correct": false
+    },
+    {
+     "clip_id": "pro_player_front_10.mp4",
+     "gt": [
+      39,
+      58
+     ],
+     "pred": [
+      0,
+      89
+     ],
+     "iou": 0.2135,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_front_14.mp4",
+     "gt": [
+      5,
+      28
+     ],
+     "pred": [
+      0,
+      89
+     ],
+     "iou": 0.2584,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_front_16.mp4",
+     "gt": [
+      15,
+      35
+     ],
+     "pred": [
+      0,
+      89
+     ],
+     "iou": 0.2247,
+     "split": "eval",
+     "identity_correct": true
+    }
+   ]
+  },
+  "L3_dev": {
+   "n_valid": 14,
+   "rejected": 1,
+   "mean_iou": 0.1404,
+   "median_iou": 0.0,
+   "recall@0.3": 0.2143,
+   "recall@0.5": 0.1429,
+   "recall@0.7": 0.0,
+   "median_start_err": 27.0,
+   "median_end_err": 33.0,
+   "detail": [
+    {
+     "clip_id": "beginnerunorthodox1_front_01.mp4",
+     "gt": [
+      48,
+      70
+     ],
+     "pred": null,
+     "iou": 0.0,
+     "split": "dev",
+     "identity_correct": false
+    },
+    {
+     "clip_id": "instagram1_front_01.mp4",
+     "gt": [
+      5,
+      28
+     ],
+     "pred": [
+      49,
+      61
+     ],
+     "iou": 0.0,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "instagram2_front_07.mp4",
+     "gt": [
+      34,
+      52
+     ],
+     "pred": [
+      37,
+      49
+     ],
+     "iou": 0.6667,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "kohli_side_14.mp4",
+     "gt": [
+      43,
+      62
+     ],
+     "pred": [
+      76,
+      88
+     ],
+     "iou": 0.0,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "kohli_side_20.mp4",
+     "gt": [
+      35,
+      58
+     ],
+     "pred": [
+      76,
+      106
+     ],
+     "iou": 0.0,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "kohli_side_24.mp4",
+     "gt": [
+      42,
+      62
+     ],
+     "pred": [
+      34,
+      64
+     ],
+     "iou": 0.6667,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "kohli_side_28.mp4",
+     "gt": [
+      52,
+      76
+     ],
+     "pred": [
+      1,
+      31
+     ],
+     "iou": 0.0,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_back_25.mp4",
+     "gt": [
+      48,
+      70
+     ],
+     "pred": [
+      11,
+      23
+     ],
+     "iou": 0.0,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_back_27.mp4",
+     "gt": [
+      50,
+      78
+     ],
+     "pred": [
+      23,
+      35
+     ],
+     "iou": 0.0,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_back_33.mp4",
+     "gt": [
+      20,
+      45
+     ],
+     "pred": [
+      7,
+      19
+     ],
+     "iou": 0.0,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_front_03.mp4",
+     "gt": [
+      55,
+      78
+     ],
+     "pred": [
+      10,
+      22
+     ],
+     "iou": 0.0,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_front_12.mp4",
+     "gt": [
+      30,
+      50
+     ],
+     "pred": [
+      20,
+      42
+     ],
+     "iou": 0.4,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_front_44.mp4",
+     "gt": [
+      23,
+      45
+     ],
+     "pred": [
+      0,
+      12
+     ],
+     "iou": 0.0,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "roa_front_1.mp4",
+     "gt": [
+      110,
+      145
+     ],
+     "pred": [
+      102,
+      120
+     ],
+     "iou": 0.2326,
+     "split": "dev",
+     "identity_correct": true
+    }
+   ]
+  },
+  "L3_eval": {
+   "n_valid": 14,
+   "rejected": 3,
+   "mean_iou": 0.2354,
+   "median_iou": 0.0,
+   "recall@0.3": 0.3571,
+   "recall@0.5": 0.2857,
+   "recall@0.7": 0.1429,
+   "median_start_err": 21.0,
+   "median_end_err": 16.0,
+   "detail": [
+    {
+     "clip_id": "instagram2_front_03.mp4",
+     "gt": [
+      26,
+      45
+     ],
+     "pred": null,
+     "iou": 0.0,
+     "split": "eval",
+     "identity_correct": false
+    },
+    {
+     "clip_id": "instagram2_front_05.mp4",
+     "gt": [
+      38,
+      58
+     ],
+     "pred": [
+      43,
+      55
+     ],
+     "iou": 0.6,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "kohli_side_08.mp4",
+     "gt": [
+      20,
+      45
+     ],
+     "pred": [
+      78,
+      108
+     ],
+     "iou": 0.0,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "kohli_side_10.mp4",
+     "gt": [
+      78,
+      102
+     ],
+     "pred": [
+      88,
+      118
+     ],
+     "iou": 0.35,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "kohli_side_16.mp4",
+     "gt": [
+      0,
+      20
+     ],
+     "pred": null,
+     "iou": 0.0,
+     "split": "eval",
+     "identity_correct": false
+    },
+    {
+     "clip_id": "kohli_side_32.mp4",
+     "gt": [
+      55,
+      78
+     ],
+     "pred": [
+      46,
+      76
+     ],
+     "iou": 0.6562,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_back_23.mp4",
+     "gt": [
+      18,
+      45
+     ],
+     "pred": [
+      46,
+      63
+     ],
+     "iou": 0.0,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_back_31.mp4",
+     "gt": [
+      42,
+      68
+     ],
+     "pred": [
+      44,
+      65
+     ],
+     "iou": 0.8077,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_back_38.mp4",
+     "gt": [
+      13,
+      38
+     ],
+     "pred": [
+      15,
+      41
+     ],
+     "iou": 0.8214,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_front_01.mp4",
+     "gt": [
+      28,
+      48
+     ],
+     "pred": [
+      66,
+      78
+     ],
+     "iou": 0.0,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_front_06.mp4",
+     "gt": [
+      38,
+      58
+     ],
+     "pred": null,
+     "iou": 0.0,
+     "split": "eval",
+     "identity_correct": false
+    },
+    {
+     "clip_id": "pro_player_front_10.mp4",
+     "gt": [
+      39,
+      58
+     ],
+     "pred": [
+      0,
+      12
+     ],
+     "iou": 0.0,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_front_14.mp4",
+     "gt": [
+      5,
+      28
+     ],
+     "pred": [
+      26,
+      38
+     ],
+     "iou": 0.0606,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_front_16.mp4",
+     "gt": [
+      15,
+      35
+     ],
+     "pred": [
+      67,
+      79
+     ],
+     "iou": 0.0,
+     "split": "eval",
+     "identity_correct": true
+    }
+   ]
+  },
+  "L3_plus_contact_dev": {
+   "n_valid": 14,
+   "rejected": 0,
+   "mean_iou": 0.816,
+   "median_iou": 0.8514,
+   "recall@0.3": 1.0,
+   "recall@0.5": 1.0,
+   "recall@0.7": 0.8571,
+   "median_start_err": 1.5,
+   "median_end_err": 1.5,
+   "detail": [
+    {
+     "clip_id": "beginnerunorthodox1_front_01.mp4",
+     "gt": [
+      48,
+      70
+     ],
+     "pred": [
+      43,
+      63
+     ],
+     "iou": 0.5556,
+     "split": "dev",
+     "identity_correct": false
+    },
+    {
+     "clip_id": "instagram1_front_01.mp4",
+     "gt": [
+      5,
+      28
+     ],
+     "pred": [
+      10,
+      30
+     ],
+     "iou": 0.72,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "instagram2_front_07.mp4",
+     "gt": [
+      34,
+      52
+     ],
+     "pred": [
+      33,
+      53
+     ],
+     "iou": 0.9,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "kohli_side_14.mp4",
+     "gt": [
+      43,
+      62
+     ],
+     "pred": [
+      42,
+      62
+     ],
+     "iou": 0.95,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "kohli_side_20.mp4",
+     "gt": [
+      35,
+      58
+     ],
+     "pred": [
+      37,
+      57
+     ],
+     "iou": 0.8696,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "kohli_side_24.mp4",
+     "gt": [
+      42,
+      62
+     ],
+     "pred": [
+      42,
+      62
+     ],
+     "iou": 1.0,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "kohli_side_28.mp4",
+     "gt": [
+      52,
+      76
+     ],
+     "pred": [
+      54,
+      74
+     ],
+     "iou": 0.8333,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_back_25.mp4",
+     "gt": [
+      48,
+      70
+     ],
+     "pred": [
+      49,
+      69
+     ],
+     "iou": 0.9091,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_back_27.mp4",
+     "gt": [
+      50,
+      78
+     ],
+     "pred": [
+      53,
+      73
+     ],
+     "iou": 0.7143,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_back_33.mp4",
+     "gt": [
+      20,
+      45
+     ],
+     "pred": [
+      21,
+      41
+     ],
+     "iou": 0.8,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_front_03.mp4",
+     "gt": [
+      55,
+      78
+     ],
+     "pred": [
+      57,
+      77
+     ],
+     "iou": 0.8696,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_front_12.mp4",
+     "gt": [
+      30,
+      50
+     ],
+     "pred": [
+      29,
+      49
+     ],
+     "iou": 0.9048,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_front_44.mp4",
+     "gt": [
+      23,
+      45
+     ],
+     "pred": [
+      22,
+      42
+     ],
+     "iou": 0.8261,
+     "split": "dev",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "roa_front_1.mp4",
+     "gt": [
+      110,
+      145
+     ],
+     "pred": [
+      117,
+      137
+     ],
+     "iou": 0.5714,
+     "split": "dev",
+     "identity_correct": true
+    }
+   ]
+  },
+  "L3_plus_contact_eval": {
+   "n_valid": 14,
+   "rejected": 0,
+   "mean_iou": 0.8644,
+   "median_iou": 0.8848,
+   "recall@0.3": 1.0,
+   "recall@0.5": 1.0,
+   "recall@0.7": 1.0,
+   "median_start_err": 1.0,
+   "median_end_err": 1.0,
+   "detail": [
+    {
+     "clip_id": "instagram2_front_03.mp4",
+     "gt": [
+      26,
+      45
+     ],
+     "pred": [
+      25,
+      45
+     ],
+     "iou": 0.95,
+     "split": "eval",
+     "identity_correct": false
+    },
+    {
+     "clip_id": "instagram2_front_05.mp4",
+     "gt": [
+      38,
+      58
+     ],
+     "pred": [
+      39,
+      59
+     ],
+     "iou": 0.9048,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "kohli_side_08.mp4",
+     "gt": [
+      20,
+      45
+     ],
+     "pred": [
+      21,
+      41
+     ],
+     "iou": 0.8,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "kohli_side_10.mp4",
+     "gt": [
+      78,
+      102
+     ],
+     "pred": [
+      80,
+      100
+     ],
+     "iou": 0.8333,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "kohli_side_16.mp4",
+     "gt": [
+      0,
+      20
+     ],
+     "pred": [
+      0,
+      18
+     ],
+     "iou": 0.9,
+     "split": "eval",
+     "identity_correct": false
+    },
+    {
+     "clip_id": "kohli_side_32.mp4",
+     "gt": [
+      55,
+      78
+     ],
+     "pred": [
+      57,
+      77
+     ],
+     "iou": 0.8696,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_back_23.mp4",
+     "gt": [
+      18,
+      45
+     ],
+     "pred": [
+      22,
+      42
+     ],
+     "iou": 0.7407,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_back_31.mp4",
+     "gt": [
+      42,
+      68
+     ],
+     "pred": [
+      44,
+      64
+     ],
+     "iou": 0.7692,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_back_38.mp4",
+     "gt": [
+      13,
+      38
+     ],
+     "pred": [
+      15,
+      35
+     ],
+     "iou": 0.8,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_front_01.mp4",
+     "gt": [
+      28,
+      48
+     ],
+     "pred": [
+      29,
+      49
+     ],
+     "iou": 0.9048,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_front_06.mp4",
+     "gt": [
+      38,
+      58
+     ],
+     "pred": [
+      37,
+      57
+     ],
+     "iou": 0.9048,
+     "split": "eval",
+     "identity_correct": false
+    },
+    {
+     "clip_id": "pro_player_front_10.mp4",
+     "gt": [
+      39,
+      58
+     ],
+     "pred": [
+      38,
+      58
+     ],
+     "iou": 0.95,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_front_14.mp4",
+     "gt": [
+      5,
+      28
+     ],
+     "pred": [
+      7,
+      27
+     ],
+     "iou": 0.8696,
+     "split": "eval",
+     "identity_correct": true
+    },
+    {
+     "clip_id": "pro_player_front_16.mp4",
+     "gt": [
+      15,
+      35
+     ],
+     "pred": [
+      14,
+      34
+     ],
+     "iou": 0.9048,
+     "split": "eval",
+     "identity_correct": true
+    }
+   ]
+  }
+ }
+}

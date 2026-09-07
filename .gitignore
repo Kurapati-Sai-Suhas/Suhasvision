@@ -60,3 +60,10 @@ dataset/phase3_results/pose_audit_sheets/
 
 # Shot-localization timeline diagrams: regenerable from phase3_shot_analysis.py.
 dataset/phase3_results/shot_timeline_*.png
+
+# Best-7 / shot audit timelines: regenerable from the phase3 audit scripts.
+dataset/phase3_results/best7_timeline_*.png
+
+# Per-frame event cache (~2.3MB): regenerable from phase3_event_cache.py, and
+# an intermediate rather than evidence - the results JSONs carry the findings.
+dataset/phase3_results/phase3_event_cache.json
