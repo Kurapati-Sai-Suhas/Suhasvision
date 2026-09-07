@@ -52,10 +52,25 @@ METHODS = ("L0_whole_clip", "L1_global_motion", "L2_batsman_motion", "L3_hybrid"
 
 
 def _smooth(x, w=SMOOTH_WIDTH):
+    """Moving average with EDGE padding.
+
+    CORRECTED IN PHASE 3E. This previously used
+    `np.convolve(..., mode="same")`, which zero-pads: the smoothed signal
+    therefore decayed toward both ends of every clip, artificially suppressing
+    motion energy in the opening and closing frames. For a peak-picking
+    localizer that biases the detected peak away from clip boundaries and
+    shrinks intervals that legitimately run to an edge.
+
+    The pre-fix L0-L3 results are preserved verbatim in
+    `phase3_results/phase3_shot_localization_original.json`; the corrected run
+    is reported alongside them rather than replacing them silently.
+    """
+    x = np.asarray(x, float)
     if w <= 1 or len(x) < w:
-        return np.asarray(x, float)
-    k = np.ones(w, float) / w
-    return np.convolve(np.asarray(x, float), k, mode="same")
+        return x
+    pad = w // 2
+    return np.convolve(np.pad(x, pad, mode="edge"),
+                       np.ones(w, float) / w, mode="valid")[:len(x)]
 
 
 def motion_signals(video_path, track_by_frame=None, max_frames=400):
