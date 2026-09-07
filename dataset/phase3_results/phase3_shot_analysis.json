@@ -1,0 +1,1047 @@
+{
+ "latency": {
+  "n_clips_timed": 12,
+  "signal_build_per_clip_ms": {
+   "median": 208.2,
+   "mean": 230.6
+  },
+  "signal_build_note": "One decode per clip, shared by L1/L2/L3. Global and batsman-local energy are computed in the same pass, so L2 costs no extra decode.",
+  "methods": {
+   "L0_whole_clip": {
+    "windowing_per_clip_ms": 0.0005,
+    "windowing_per_frame_us": 0.004,
+    "total_per_clip_ms": 0.0
+   },
+   "L1_global_motion": {
+    "windowing_per_clip_ms": 0.0317,
+    "windowing_per_frame_us": 0.228,
+    "total_per_clip_ms": 208.3
+   },
+   "L2_batsman_motion": {
+    "windowing_per_clip_ms": 0.0358,
+    "windowing_per_frame_us": 0.227,
+    "total_per_clip_ms": 208.3
+   },
+   "L3_hybrid": {
+    "windowing_per_clip_ms": 0.0481,
+    "windowing_per_frame_us": 0.298,
+    "total_per_clip_ms": 208.3
+   }
+  }
+ },
+ "robustness": {
+  "L1_global_motion": {
+   "n_clips": 28,
+   "median_self_iou_across_windows": 1.0,
+   "mean_self_iou_across_windows": 0.9497,
+   "reject_flips": 10,
+   "note": "Crop is centred on the GT shot, so this measures STABILITY under added irrelevant context, not accuracy.",
+   "per_clip": {
+    "instagram1_front_01.mp4": {
+     "30": null,
+     "45": [
+      48,
+      60
+     ],
+     "None": [
+      48,
+      60
+     ]
+    },
+    "instagram2_front_03.mp4": {
+     "30": [
+      48,
+      60
+     ],
+     "45": [
+      48,
+      60
+     ],
+     "None": [
+      48,
+      60
+     ]
+    },
+    "pro_player_front_44.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "roa_front_1.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "instagram2_front_05.mp4": {
+     "30": [
+      42,
+      54
+     ],
+     "45": [
+      42,
+      54
+     ],
+     "None": [
+      42,
+      54
+     ]
+    },
+    "instagram2_front_07.mp4": {
+     "30": [
+      34,
+      46
+     ],
+     "45": [
+      35,
+      47
+     ],
+     "None": [
+      35,
+      47
+     ]
+    },
+    "beginnerunorthodox1_front_01.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "kohli_side_08.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "kohli_side_10.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "kohli_side_14.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "kohli_side_16.mp4": {
+     "30": null,
+     "45": null,
+     "None": [
+      12,
+      42
+     ]
+    },
+    "kohli_side_20.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "kohli_side_24.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "kohli_side_28.mp4": {
+     "30": null,
+     "45": null,
+     "None": [
+      11,
+      41
+     ]
+    },
+    "kohli_side_32.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "pro_player_back_23.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "pro_player_back_25.mp4": {
+     "30": null,
+     "45": [
+      14,
+      26
+     ],
+     "None": [
+      10,
+      22
+     ]
+    },
+    "pro_player_back_27.mp4": {
+     "30": null,
+     "45": [
+      22,
+      34
+     ],
+     "None": [
+      22,
+      34
+     ]
+    },
+    "pro_player_back_31.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "pro_player_back_33.mp4": {
+     "30": [
+      3,
+      15
+     ],
+     "45": [
+      3,
+      15
+     ],
+     "None": [
+      3,
+      15
+     ]
+    },
+    "pro_player_back_38.mp4": {
+     "30": null,
+     "45": null,
+     "None": [
+      13,
+      41
+     ]
+    },
+    "pro_player_front_01.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "pro_player_front_03.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "pro_player_front_06.mp4": {
+     "30": [
+      64,
+      76
+     ],
+     "45": null,
+     "None": null
+    },
+    "pro_player_front_10.mp4": {
+     "30": [
+      43,
+      55
+     ],
+     "45": [
+      43,
+      55
+     ],
+     "None": [
+      43,
+      55
+     ]
+    },
+    "pro_player_front_12.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "pro_player_front_14.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "pro_player_front_16.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    }
+   }
+  },
+  "L2_batsman_motion": {
+   "n_clips": 28,
+   "median_self_iou_across_windows": 1.0,
+   "mean_self_iou_across_windows": 0.7106,
+   "reject_flips": 15,
+   "note": "Crop is centred on the GT shot, so this measures STABILITY under added irrelevant context, not accuracy.",
+   "per_clip": {
+    "instagram1_front_01.mp4": {
+     "30": [
+      9,
+      27
+     ],
+     "45": [
+      48,
+      60
+     ],
+     "None": null
+    },
+    "instagram2_front_03.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "pro_player_front_44.mp4": {
+     "30": null,
+     "45": [
+      21,
+      43
+     ],
+     "None": [
+      21,
+      43
+     ]
+    },
+    "roa_front_1.mp4": {
+     "30": null,
+     "45": null,
+     "None": [
+      102,
+      141
+     ]
+    },
+    "instagram2_front_05.mp4": {
+     "30": [
+      20,
+      33
+     ],
+     "45": null,
+     "None": null
+    },
+    "instagram2_front_07.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "beginnerunorthodox1_front_01.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "kohli_side_08.mp4": {
+     "30": [
+      26,
+      38
+     ],
+     "45": [
+      26,
+      38
+     ],
+     "None": null
+    },
+    "kohli_side_10.mp4": {
+     "30": null,
+     "45": null,
+     "None": [
+      82,
+      122
+     ]
+    },
+    "kohli_side_14.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "kohli_side_16.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "kohli_side_20.mp4": {
+     "30": null,
+     "45": [
+      16,
+      28
+     ],
+     "None": [
+      17,
+      29
+     ]
+    },
+    "kohli_side_24.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "kohli_side_28.mp4": {
+     "30": null,
+     "45": null,
+     "None": [
+      33,
+      46
+     ]
+    },
+    "kohli_side_32.mp4": {
+     "30": null,
+     "45": null,
+     "None": [
+      56,
+      94
+     ]
+    },
+    "pro_player_back_23.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "pro_player_back_25.mp4": {
+     "30": [
+      60,
+      73
+     ],
+     "45": [
+      60,
+      73
+     ],
+     "None": [
+      60,
+      73
+     ]
+    },
+    "pro_player_back_27.mp4": {
+     "30": [
+      56,
+      70
+     ],
+     "45": [
+      20,
+      32
+     ],
+     "None": [
+      20,
+      32
+     ]
+    },
+    "pro_player_back_31.mp4": {
+     "30": [
+      46,
+      58
+     ],
+     "45": [
+      46,
+      58
+     ],
+     "None": [
+      44,
+      60
+     ]
+    },
+    "pro_player_back_33.mp4": {
+     "30": [
+      6,
+      18
+     ],
+     "45": [
+      6,
+      18
+     ],
+     "None": [
+      6,
+      18
+     ]
+    },
+    "pro_player_back_38.mp4": {
+     "30": [
+      17,
+      30
+     ],
+     "45": [
+      16,
+      31
+     ],
+     "None": [
+      16,
+      31
+     ]
+    },
+    "pro_player_front_01.mp4": {
+     "30": [
+      23,
+      37
+     ],
+     "45": [
+      65,
+      77
+     ],
+     "None": [
+      65,
+      77
+     ]
+    },
+    "pro_player_front_03.mp4": {
+     "30": [
+      82,
+      88
+     ],
+     "45": [
+      82,
+      88
+     ],
+     "None": [
+      82,
+      88
+     ]
+    },
+    "pro_player_front_06.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "pro_player_front_10.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "pro_player_front_12.mp4": {
+     "30": [
+      19,
+      41
+     ],
+     "45": [
+      0,
+      12
+     ],
+     "None": [
+      0,
+      12
+     ]
+    },
+    "pro_player_front_14.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "pro_player_front_16.mp4": {
+     "30": [
+      15,
+      27
+     ],
+     "45": [
+      15,
+      27
+     ],
+     "None": [
+      63,
+      75
+     ]
+    }
+   }
+  },
+  "L3_hybrid": {
+   "n_clips": 28,
+   "median_self_iou_across_windows": 0.7556,
+   "mean_self_iou_across_windows": 0.6216,
+   "reject_flips": 0,
+   "note": "Crop is centred on the GT shot, so this measures STABILITY under added irrelevant context, not accuracy.",
+   "per_clip": {
+    "instagram1_front_01.mp4": {
+     "30": [
+      10,
+      27
+     ],
+     "45": [
+      48,
+      60
+     ],
+     "None": [
+      48,
+      60
+     ]
+    },
+    "instagram2_front_03.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "pro_player_front_44.mp4": {
+     "30": [
+      26,
+      38
+     ],
+     "45": [
+      26,
+      38
+     ],
+     "None": [
+      21,
+      42
+     ]
+    },
+    "roa_front_1.mp4": {
+     "30": [
+      102,
+      116
+     ],
+     "45": [
+      101,
+      116
+     ],
+     "None": [
+      101,
+      119
+     ]
+    },
+    "instagram2_front_05.mp4": {
+     "30": [
+      42,
+      54
+     ],
+     "45": [
+      42,
+      54
+     ],
+     "None": [
+      42,
+      54
+     ]
+    },
+    "instagram2_front_07.mp4": {
+     "30": [
+      36,
+      48
+     ],
+     "45": [
+      36,
+      48
+     ],
+     "None": [
+      36,
+      48
+     ]
+    },
+    "beginnerunorthodox1_front_01.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "kohli_side_08.mp4": {
+     "30": [
+      26,
+      38
+     ],
+     "45": [
+      26,
+      38
+     ],
+     "None": [
+      98,
+      128
+     ]
+    },
+    "kohli_side_10.mp4": {
+     "30": [
+      96,
+      108
+     ],
+     "45": [
+      93,
+      105
+     ],
+     "None": [
+      87,
+      117
+     ]
+    },
+    "kohli_side_14.mp4": {
+     "30": [
+      74,
+      81
+     ],
+     "45": [
+      75,
+      87
+     ],
+     "None": [
+      131,
+      143
+     ]
+    },
+    "kohli_side_16.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "kohli_side_20.mp4": {
+     "30": [
+      53,
+      65
+     ],
+     "45": [
+      53,
+      65
+     ],
+     "None": [
+      53,
+      66
+     ]
+    },
+    "kohli_side_24.mp4": {
+     "30": [
+      43,
+      55
+     ],
+     "45": [
+      44,
+      56
+     ],
+     "None": [
+      30,
+      60
+     ]
+    },
+    "kohli_side_28.mp4": {
+     "30": [
+      35,
+      47
+     ],
+     "45": [
+      33,
+      46
+     ],
+     "None": [
+      32,
+      46
+     ]
+    },
+    "kohli_side_32.mp4": {
+     "30": [
+      55,
+      67
+     ],
+     "45": [
+      55,
+      67
+     ],
+     "None": [
+      45,
+      75
+     ]
+    },
+    "pro_player_back_23.mp4": {
+     "30": [
+      46,
+      59
+     ],
+     "45": [
+      46,
+      61
+     ],
+     "None": [
+      46,
+      61
+     ]
+    },
+    "pro_player_back_25.mp4": {
+     "30": [
+      59,
+      73
+     ],
+     "45": [
+      14,
+      26
+     ],
+     "None": [
+      10,
+      22
+     ]
+    },
+    "pro_player_back_27.mp4": {
+     "30": [
+      56,
+      70
+     ],
+     "45": [
+      22,
+      34
+     ],
+     "None": [
+      22,
+      34
+     ]
+    },
+    "pro_player_back_31.mp4": {
+     "30": [
+      46,
+      58
+     ],
+     "45": [
+      45,
+      58
+     ],
+     "None": [
+      43,
+      64
+     ]
+    },
+    "pro_player_back_33.mp4": {
+     "30": [
+      6,
+      18
+     ],
+     "45": [
+      6,
+      18
+     ],
+     "None": [
+      6,
+      18
+     ]
+    },
+    "pro_player_back_38.mp4": {
+     "30": [
+      15,
+      31
+     ],
+     "45": [
+      14,
+      40
+     ],
+     "None": [
+      14,
+      40
+     ]
+    },
+    "pro_player_front_01.mp4": {
+     "30": [
+      24,
+      37
+     ],
+     "45": [
+      65,
+      77
+     ],
+     "None": [
+      65,
+      77
+     ]
+    },
+    "pro_player_front_03.mp4": {
+     "30": [
+      82,
+      88
+     ],
+     "45": [
+      82,
+      88
+     ],
+     "None": [
+      82,
+      88
+     ]
+    },
+    "pro_player_front_06.mp4": {
+     "30": null,
+     "45": null,
+     "None": null
+    },
+    "pro_player_front_10.mp4": {
+     "30": [
+      43,
+      55
+     ],
+     "45": [
+      43,
+      55
+     ],
+     "None": [
+      43,
+      55
+     ]
+    },
+    "pro_player_front_12.mp4": {
+     "30": [
+      15,
+      41
+     ],
+     "45": [
+      0,
+      12
+     ],
+     "None": [
+      0,
+      12
+     ]
+    },
+    "pro_player_front_14.mp4": {
+     "30": [
+      24,
+      36
+     ],
+     "45": [
+      24,
+      36
+     ],
+     "None": [
+      24,
+      36
+     ]
+    },
+    "pro_player_front_16.mp4": {
+     "30": [
+      6,
+      26
+     ],
+     "45": [
+      1,
+      27
+     ],
+     "None": [
+      66,
+      78
+     ]
+    }
+   }
+  }
+ },
+ "failure_modes": {
+  "L0_whole_clip": {
+   "n_below_iou_0.5": 28,
+   "by_cause": {
+    "proposal window \u2014 interval over-extended beyond the true shot": [
+     "instagram1_front_01.mp4",
+     "instagram2_front_05.mp4",
+     "instagram2_front_07.mp4",
+     "kohli_side_08.mp4",
+     "kohli_side_10.mp4",
+     "kohli_side_14.mp4",
+     "kohli_side_20.mp4",
+     "kohli_side_24.mp4",
+     "kohli_side_28.mp4",
+     "kohli_side_32.mp4",
+     "pro_player_back_25.mp4",
+     "pro_player_back_31.mp4",
+     "pro_player_back_33.mp4",
+     "pro_player_back_38.mp4",
+     "pro_player_front_01.mp4",
+     "pro_player_front_03.mp4",
+     "pro_player_front_10.mp4",
+     "pro_player_front_12.mp4",
+     "pro_player_front_14.mp4",
+     "pro_player_front_16.mp4",
+     "pro_player_front_44.mp4",
+     "roa_front_1.mp4"
+    ],
+    "wrong batsman \u2014 identity error upstream of localization": [
+     "beginnerunorthodox1_front_01.mp4",
+     "instagram2_front_03.mp4",
+     "kohli_side_16.mp4",
+     "pro_player_front_06.mp4"
+    ],
+    "partial overlap \u2014 boundary error only": [
+     "pro_player_back_23.mp4",
+     "pro_player_back_27.mp4"
+    ]
+   }
+  },
+  "L1_global_motion": {
+   "n_below_iou_0.5": 24,
+   "by_cause": {
+    "insufficient movement \u2014 peak prominence below rejection threshold": [
+     "kohli_side_08.mp4",
+     "kohli_side_10.mp4",
+     "kohli_side_14.mp4",
+     "kohli_side_20.mp4",
+     "kohli_side_24.mp4",
+     "kohli_side_32.mp4",
+     "pro_player_back_23.mp4",
+     "pro_player_back_31.mp4",
+     "pro_player_front_01.mp4",
+     "pro_player_front_03.mp4",
+     "pro_player_front_12.mp4",
+     "pro_player_front_14.mp4",
+     "pro_player_front_16.mp4",
+     "pro_player_front_44.mp4",
+     "roa_front_1.mp4"
+    ],
+    "wrong batsman \u2014 identity error upstream of localization": [
+     "beginnerunorthodox1_front_01.mp4",
+     "instagram2_front_03.mp4",
+     "kohli_side_16.mp4",
+     "pro_player_front_06.mp4"
+    ],
+    "motion ambiguity \u2014 locked onto an earlier motion peak entirely before the shot": [
+     "kohli_side_28.mp4",
+     "pro_player_back_25.mp4",
+     "pro_player_back_27.mp4",
+     "pro_player_back_33.mp4"
+    ],
+    "motion ambiguity \u2014 locked onto a later motion peak entirely after the shot": [
+     "instagram1_front_01.mp4"
+    ]
+   }
+  },
+  "L2_batsman_motion": {
+   "n_below_iou_0.5": 23,
+   "by_cause": {
+    "insufficient movement \u2014 peak prominence below rejection threshold": [
+     "instagram1_front_01.mp4",
+     "instagram2_front_05.mp4",
+     "instagram2_front_07.mp4",
+     "kohli_side_08.mp4",
+     "kohli_side_14.mp4",
+     "kohli_side_24.mp4",
+     "pro_player_back_23.mp4",
+     "pro_player_front_10.mp4",
+     "pro_player_front_14.mp4"
+    ],
+    "motion ambiguity \u2014 locked onto an earlier motion peak entirely before the shot": [
+     "kohli_side_20.mp4",
+     "kohli_side_28.mp4",
+     "pro_player_back_27.mp4",
+     "pro_player_back_33.mp4",
+     "pro_player_front_12.mp4"
+    ],
+    "wrong batsman \u2014 identity error upstream of localization": [
+     "beginnerunorthodox1_front_01.mp4",
+     "instagram2_front_03.mp4",
+     "kohli_side_16.mp4",
+     "pro_player_front_06.mp4"
+    ],
+    "motion ambiguity \u2014 locked onto a later motion peak entirely after the shot": [
+     "pro_player_front_01.mp4",
+     "pro_player_front_03.mp4",
+     "pro_player_front_16.mp4"
+    ],
+    "partial overlap \u2014 boundary error only": [
+     "kohli_side_10.mp4",
+     "pro_player_back_25.mp4"
+    ]
+   }
+  },
+  "L3_hybrid": {
+   "n_below_iou_0.5": 20,
+   "by_cause": {
+    "motion ambiguity \u2014 locked onto a later motion peak entirely after the shot": [
+     "instagram1_front_01.mp4",
+     "kohli_side_08.mp4",
+     "kohli_side_14.mp4",
+     "pro_player_back_23.mp4",
+     "pro_player_front_01.mp4",
+     "pro_player_front_03.mp4",
+     "pro_player_front_16.mp4"
+    ],
+    "motion ambiguity \u2014 locked onto an earlier motion peak entirely before the shot": [
+     "kohli_side_28.mp4",
+     "pro_player_back_25.mp4",
+     "pro_player_back_27.mp4",
+     "pro_player_back_33.mp4",
+     "pro_player_front_12.mp4"
+    ],
+    "wrong batsman \u2014 identity error upstream of localization": [
+     "beginnerunorthodox1_front_01.mp4",
+     "instagram2_front_03.mp4",
+     "kohli_side_16.mp4",
+     "pro_player_front_06.mp4"
+    ],
+    "boundary error \u2014 overlapping but poorly aligned": [
+     "kohli_side_20.mp4",
+     "pro_player_front_14.mp4",
+     "roa_front_1.mp4"
+    ],
+    "partial overlap \u2014 boundary error only": [
+     "kohli_side_10.mp4"
+    ]
+   }
+  }
+ },
+ "timeline_sheets": {
+  "L3_hybrid": "C:\\Users\\Suhas\\OneDrive\\Documents\\Notes\\Cricket-Stance-Analyzer\\dataset\\phase3_results\\shot_timeline_L3_hybrid.png",
+  "L0_whole_clip": "C:\\Users\\Suhas\\OneDrive\\Documents\\Notes\\Cricket-Stance-Analyzer\\dataset\\phase3_results\\shot_timeline_L0_whole_clip.png"
+ }
+}

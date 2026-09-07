@@ -57,3 +57,6 @@ dataset/experiment_results/sheets_A3/
 dataset/extraction_diagnostics.jsonl
 dataset/phase3_results/batsman_audit_sheets/
 dataset/phase3_results/pose_audit_sheets/
+
+# Shot-localization timeline diagrams: regenerable from phase3_shot_analysis.py.
+dataset/phase3_results/shot_timeline_*.png

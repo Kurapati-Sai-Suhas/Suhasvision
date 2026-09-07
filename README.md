@@ -369,6 +369,32 @@ old seven-clip "pose failure" list was wrong in both directions — 4 of 7 were 
 and 2 genuine pose failures (`pro_player_front_12`, `pro_player_front_44`) were never flagged.
 **Do not reuse the old seven-clip list.**
 
+**Shot localization, L0–L3 — benchmarked, configuration selected, EXPERIMENTAL.** Ground truth
+is the Phase-3 annotation benchmark: 51 clips, **28 VALID_SINGLE_SHOT** (dev 14 / eval 14) all
+carrying `shot_start`/`shot_end`, and 23 invalid (12 multi-shot, 3 scene-cut, 3
+excessive-duration, 3 ambiguous, 1 no-shot, 1 insufficient-action) which are scored on
+*rejection* rather than being given fake intervals. **L0 is the whole clip** — worth stating
+plainly: the production pipeline has **no intra-clip shot localizer**, `select_phase_frames()`
+is handed `start`/`end` from the external ingestion step, and the annotated shot occupies a
+median 22% of its clip. L1 = global frame-difference energy, L2 = the same inside the batsman
+box, L3 = their normalised product; L1–L3 share one windowing rule so only the *signal* differs,
+and `α`/`τ`/duration are grid-searched on **dev only**.
+
+Eval (14 valid): L0 mean IoU 0.212, L1 0.165, L2 0.160, **L3 0.289** (recall@0.3 0.43, @0.5
+0.36). **Conditioned on correct batsman identity (n=11) — the measurement that isolates
+localization — L3 reaches mean IoU 0.368, median 0.385, recall@0.3 0.55 with zero rejected
+valid clips, against L0's 0.220 / 0.225 / 0.09.** L3's advantage is *contingent on identity*:
+across all eval clips its median IoU (0.065) is worse than L0's (0.225). Note also that the
+earlier hypothesis "batsman-local motion beats global motion" is **still not supported** — L2
+alone does not beat L1; only the product helps. Selected configuration: **L3 when S2 commits to
+a batsman and L3 finds a prominent peak, else fall back to L0 whole-clip**, with the interval
+passed downstream as a *soft prior, not a hard crop*. Known weaknesses: L3's false-shot rate on
+invalid clips is 0.77 (worst except L0), 12 of its 20 failures are wrong-peak selection, and it
+starts a median 3 frames late. With 14 valid clips per split the ordering is trustworthy but
+the magnitudes are not — L3 scores higher on eval than dev, a variance signature. Full detail
+in [`PHASE3_SHOT_LOCALIZATION_RESULTS.md`](PHASE3_SHOT_LOCALIZATION_RESULTS.md). F0–F4 (best-7)
+not started.
+
 ## 13. Known Limitations
 
 - **42 unique identities** is the real ceiling on generalization claims — not architecture. See §12 for concrete growth targets.
@@ -403,6 +429,7 @@ and 2 genuine pose failures (`pro_player_front_12`, `pro_player_front_44`) were 
 | [`PHASE3_BATSMAN_ABLATION.md`](PHASE3_BATSMAN_ABLATION.md) | S0–S4 semantic batsman ablation: results, bat-signal specificity, stationary-feeder case study, latency |
 | [`PHASE3_RTMPOSE_EVALUATION.md`](PHASE3_RTMPOSE_EVALUATION.md) | MediaPipe vs RTMPose. Corrects the "pose is the bottleneck" diagnosis, shows why RTMPose's 100% availability is an artifact, and the provisional fallback-hybrid decision |
 | [`PHASE3_HYBRID_IDENTITY_RESULTS.md`](PHASE3_HYBRID_IDENTITY_RESULTS.md) | H0 vs H1 end-to-end in the real S2 identity system. Corrected failure taxonomy, the unreachable-branch fix, and why the fallback is **not** adopted |
+| [`PHASE3_SHOT_LOCALIZATION_RESULTS.md`](PHASE3_SHOT_LOCALIZATION_RESULTS.md) | L0–L3 shot localization against the annotation benchmark: identity-conditioned results, rejection behaviour, failure mechanisms, latency, and the selected L3+L0-fallback configuration |
 | [`docs/PHASE3_ANNOTATION_PROTOCOL.md`](docs/PHASE3_ANNOTATION_PROTOCOL.md) | Operational definitions for the Phase-3 temporal ground truth |
 | [`docs/architecture_ground_truth.md`](docs/architecture_ground_truth.md) | The dated, ground-truth engineering log — including the full wrong-person-tracking investigation |
 | [`docs/SuhasVision_SRS_v2.0.docx`](docs/SuhasVision_SRS_v2.0.docx) | Formal, IEEE-830-inspired requirements specification |
